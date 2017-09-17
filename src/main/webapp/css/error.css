@@ -1,0 +1,29 @@
+/*noinspection ALL*/
+.container {
+    margin-top: 500px;
+    margin: 0 auto;
+    width: 310px;
+    text-align: center;
+    font-family: "微软雅黑";
+    color: #757575;
+}
+
+/*noinspection ALL*/
+.btn {
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    font-family: "微软雅黑";
+    display: inline-block;
+    padding: 6px 10px;
+    background-color: #00868B;
+    border-radius: 2px;
+    color: #EBEBEB;
+    transition: 0.2s;
+}
+
+.btn:hover {
+    background-color: #20B2AA;
+    color: #FFF;
+    padding: 8px 15px;
+}

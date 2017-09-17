@@ -1,0 +1,39 @@
+<!-- HTML5文档头 -->
+<!DOCTYPE html>
+<!-- lang="zh-cn"，此网页基本是中文内容 -->
+<html lang="zh-cn" style="font-size: 16px;">
+<head>
+    <title>错误提示！</title>
+    <meta charset="UTF-8" />
+    <meta name="description" content="error" />
+    <meta name="content-type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" href="css/common.css" />
+    <link rel="shortcut icon" type="text/css" href="img/error-icon.ico" />
+    <link rel="stylesheet" type="text/css" href="css/error.css" />
+    <!-- 让IE9以下的浏览器支持HTML5标签 -->
+    <!--[if lt IE 9]>
+    <script src="http://cdn.bootcss.com/html5shiv/r29/html5.js"></script>
+    <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<script src="js/jquery.min.js"></script>
+<script>
+    $(function() {
+        $('#header').load('header.html');
+        $('#footer').load('footer.html');
+    })
+</script>
+
+<body>
+<header id="header"></header>
+<section id="error" class="container" style="height: 250px;padding-top: 150px">
+    <h1>404,访问资源不存在</h1><br/>
+    <p>您正在寻找的页面不存在或发生其他错误。</p><br/>
+    <a class="btn" href="/ylcx/index.html">回到页面首页</a>
+</section>
+<!--网页底部-->
+<footer id="footer"></footer>
+<!--网页底部  结束-->
+</body>
+
+</html>

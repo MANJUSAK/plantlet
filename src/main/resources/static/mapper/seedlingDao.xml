@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--@author 严彬荣，version v1.0-->
+<!--mapper 查询苗木数据 start -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--suppress ALL -->
+<mapper namespace="com.goodsoft.plantlet.domain.dao.SeedlingDao">
+    <!--数据查询sql start-->
+    <!--苗木数据查询结果映射 start-->
+    <resultMap id="seedlingInfo" type="com.goodsoft.plantlet.domain.entity.seedlinginfo.SeedlingOffer">
+        <result property="id" column="id"/>
+        <result property="province" column="province"/>
+        <result property="city" column="city"/>
+        <result property="company" column="company_name"/>
+        <result property="tel" column="tel"/>
+        <result property="types" column="seedling_type"/>
+        <result property="seedlingName" column="seedling_name"/>
+        <result property="specification" column="specification"/>
+        <result property="unit" column="unit"/>
+        <result property="num" column="quantity"/>
+        <result property="price" column="price"/>
+        <result property="comment" column="comments"/>
+        <result property="date" column="acquisition_time"/>
+    </resultMap>
+    <!--苗木数据查询结果映射 end-->
+    <!--苗木数据查询sql start-->
+    <select id="querySeedlingDao" parameterType="com.goodsoft.plantlet.util.result.SeedlingParm"
+            resultMap="seedlingInfo">
+        SELECT id, province, city, company_name, tel, seedling_type,
+        seedling_name, specification, unit, quantity, price, comments,
+        acquisition_time
+        FROM gs_seedling_info
+        <where>
+            <if test="keyWord != null and keyWord != ''">
+                AND seedling_name LIKE '%${keyWord}%'
+            </if>
+            <if test="tp != null and tp != ''">
+                AND seedling_type = #{tp}
+            </if>
+            <if test="comp != null and comp != ''">
+                AND company_name LIKE '%${comp}%'
+            </if>
+            <if test="province !=null and province != ''">
+                AND province = #{province}
+            </if>
+            <if test="city != null and city != ''">
+                AND city = #{city}
+            </if>
+            <if test="address != null and address != ''">
+                AND address = #{address}
+            </if>
+            <if test="spec != null and spec != ''">
+                AND specification LIKE '%${spec}%'
+            </if>
+            <if test="maxPrice != null and maxPrice != ''">
+                AND price &lt;= #{maxPrice}
+            </if>
+            <if test="maxPrice != null and maxPrice != ''">
+                AND price &lt;= #{maxPrice}
+            </if>
+        </where>
+        ORDER BY sid DESC limit #{num},20;
+    </select>
+    <!--苗木数据查询sql end-->
+    <!--数据查询sql end-->
+    <!--数据录入sql start-->
+    <!--苗木信息数据录入sql start-->
+    <!--多数据录入 start-->
+    <insert id="addSeedlingDao" parameterType="java.util.List">
+        INSERT INTO gs_seedling_info
+        (id, province, city, company_name, tel, seedling_type,
+        seedling_name, specification, unit, quantity, price, comments, acquisition_time)
+        VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.id}, #{item.province}, #{item.city}, #{item.company}, #{item.tel}, #{item.types},
+            #{item.seedlingName}, #{item.specification}, #{item.unit}, #{item.num}, #{item.price}, #{item.comment},
+            #{item.date})
+        </foreach>
+    </insert>
+    <!--多数据录入 end-->
+    <!--单条数据录入 start-->
+    <insert id="addSeedlingOneDao" parameterType="com.goodsoft.plantlet.domain.entity.seedlinginfo.SeedlingOffer">
+        INSERT INTO gs_seedling_info
+        (id, province, city, company_name, tel, seedling_type,
+        seedling_name, specification, unit, quantity, price, comments, acquisition_time)
+        VALUES
+        (#{id}, #{province}, #{city}, #{company}, #{tel}, #{types},#{seedlingName}, #{specification},
+        #{unit}, #{num}, #{price}, #{comment}, #{date})
+    </insert>
+    <!--单条数据录入 end-->
+    <!--苗木信息数据录入sql end-->
+    <!--数据录入sql end-->
+</mapper>
+        <!--mapper 查询苗木数据 end -->

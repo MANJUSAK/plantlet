@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--suppress ALL -->
+<!--@author 严彬荣，version v1.0-->
+<!--文件管理mapper start-->
+<mapper namespace="com.goodsoft.plantlet.domain.dao.FileDao">
+    <!--文件查询结果映射 start-->
+    <resultMap id="fileData" type="com.goodsoft.plantlet.domain.entity.file.FileData">
+        <result property="path" column="path"/>
+        <result property="bases" column="bases"/>
+    </resultMap>
+    <!--文件查询结果映射 end-->
+    <!--文件查询sql start-->
+    <select id="queryFileDao" parameterType="java.lang.String" resultMap="fileData">
+        SELECT path,bases FROM gs_fileData WHERE fileId=#{fileId}
+    </select>
+    <!--文件查询sql end-->
+    <!--单文件查询sql start-->
+    <select id="queryFileOneDao" parameterType="java.lang.String" resultMap="fileData">
+        SELECT path,bases FROM gs_fileData WHERE fileId=#{fileId}
+    </select>
+    <!--单文件查询sql end-->
+    <!--文件信息保存sql start-->
+    <insert id="saveFileDao" parameterType="com.goodsoft.plantlet.domain.entity.file.FileData">
+        insert into gs_fileData (fileId,path,bases,sort,fileName,newFileName,suffix)
+        values
+        (#{fileId},#{path},#{bases},#{sort},#{fileName},#{newFileName},#{suffix})
+    </insert>
+    <!--文件信息保存sql end-->
+    <!--文件删除sql start-->
+    <delete id="deleteFileDao" parameterType="java.util.Arrays">
+        DELETE FROM gs_fileData WHERE fileId IN
+        <foreach collection="fileId" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+    <!--文件删除sql end-->
+</mapper>
+        <!--文件管理mapper end-->

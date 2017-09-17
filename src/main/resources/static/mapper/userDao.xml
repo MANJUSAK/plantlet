@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--@author 严彬荣，version v1.0-->
+<!--mapper 用户管理 start -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--suppress ALL -->
+<mapper namespace="com.goodsoft.plantlet.domain.dao.UserDao">
+    <!--用户授权结果映射 start-->
+    <resultMap id="userMap" type="com.goodsoft.plantlet.domain.entity.user.User">
+        <result property="uid" column="id"/>
+        <result property="userName" column="user_name"/>
+        <result property="tel" column="tel"/>
+    </resultMap>
+    <!--用户授权结果映射 end-->
+    <!--用户授权sql start-->
+    <select id="loginDao" resultMap="userMap" parameterType="java.lang.String">
+        SELECT id,user_name,tel FROM gs_user
+        where (binary user_name=#{uName} or tel=#{uName}) and password=#{pwd}
+    </select>
+    <!--用户授权sql end-->
+    <!--查询用户名sql start-->
+    <select id="queryUnameDao" parameterType="java.lang.String" resultType="java.lang.String">
+        SELECT uid FROM gs_user
+        where binary user_name=#{uName}
+    </select>
+    <!--查询用户名sql end-->
+    <!--查询手机号sql start-->
+    <select id="queryTelDao" parameterType="java.lang.Long" resultType="java.lang.String">
+        SELECT uid FROM gs_user
+        where tel=#{tel}
+    </select>
+    <!--查询手机号sql end-->
+    <!--用户注册sql start-->
+    <insert id="registerDao" parameterType="com.goodsoft.plantlet.domain.entity.user.User">
+        INSERT INTO gs_user (id,user_name,password,tel) VALUES (#{uid},#{userName},#{passWord},#{tel})
+    </insert>
+    <!--用户注册sql end-->
+</mapper>
+        <!--mapper 用户管理 end -->
