@@ -1,4 +1,4 @@
-package com.goodsoft.plantlet.domain.entity.seedlinginfo;
+package com.goodsoft.plantlet.domain.entity.nursery;
 
 import java.util.List;
 import java.util.Objects;

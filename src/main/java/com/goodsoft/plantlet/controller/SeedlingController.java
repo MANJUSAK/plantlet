@@ -1,12 +1,14 @@
 package com.goodsoft.plantlet.controller;
 
-import com.goodsoft.plantlet.domain.entity.seedlinginfo.SeedlingOffer;
+import com.goodsoft.plantlet.domain.entity.seedlinginfo.SeedlingInfo;
 import com.goodsoft.plantlet.service.SeedlingService;
 import com.goodsoft.plantlet.util.result.SeedlingParam;
+import com.goodsoft.plantlet.util.result.Status;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * function 苗木管理访问入口类
@@ -21,12 +23,12 @@ public class SeedlingController {
 
     @CrossOrigin(origins = "*", maxAge = 3600, methods = RequestMethod.GET)
     @RequestMapping("/find/seedling.action.do")
-    public Object querySeedlingController(SeedlingParam msg) {
-        return this.service.querySeedlingService(msg);
+    public Object querySeedlingDao(HttpServletRequest request, SeedlingParam msg) {
+        return this.service.querySeedlingService(request, msg);
     }
 
     @RequestMapping(value = "/add/seedling.action.do", method = RequestMethod.POST)
-    public Object addSeedlingController(@RequestParam("files") MultipartFile[] files, SeedlingOffer msg) {
+    public Status addSeedlingDao(@RequestParam("files") MultipartFile[] files, SeedlingInfo msg) {
         return this.service.addSeedlingService(files, msg);
     }
 }

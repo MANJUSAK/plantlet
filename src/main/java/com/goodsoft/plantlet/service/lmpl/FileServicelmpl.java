@@ -135,6 +135,9 @@ public class FileServicelmpl implements FileService {
                 case "seedling":
                     file.setSort("苗木");
                     break;
+                case "nursery":
+                    file.setSort("苗圃");
+                    break;
                 case "user":
                     file.setSort("用户");
                     break;

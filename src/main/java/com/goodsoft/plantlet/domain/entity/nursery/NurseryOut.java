@@ -1,4 +1,4 @@
-package com.goodsoft.plantlet.domain.entity.seedlinginfo;
+package com.goodsoft.plantlet.domain.entity.nursery;
 
 import java.util.Objects;
 
@@ -7,7 +7,7 @@ import java.util.Objects;
  * Created by 严彬荣 on 2017/9/4.
  * version v1.0
  */
-public class SeedlingOffer implements java.io.Serializable {
+public class NurseryOut implements java.io.Serializable {
     private String id;//数据id
     private String seedlingName;//苗木名称
     private long tel;//联系电话
@@ -193,8 +193,8 @@ public class SeedlingOffer implements java.io.Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof SeedlingOffer)) return false;
-        SeedlingOffer that = (SeedlingOffer) o;
+        if (!(o instanceof NurseryOut)) return false;
+        NurseryOut that = (NurseryOut) o;
         return tel == that.tel &&
                 Double.compare(that.specMin, specMin) == 0 &&
                 Double.compare(that.specMax, specMax) == 0 &&

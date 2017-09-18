@@ -5,8 +5,8 @@
 <!--suppress ALL -->
 <mapper namespace="com.goodsoft.plantlet.domain.dao.NurseryDao">
     <!--数据查询 start-->
-    <!--苗圃数据查询结果映射 start-->
-    <resultMap id="nurseryMap" type="com.goodsoft.plantlet.domain.entity.seedlinginfo.Nursery">
+    <!--省内苗圃数据查询结果映射 start-->
+    <resultMap id="nurseryMap" type="com.goodsoft.plantlet.domain.entity.nursery.Nursery">
         <result property="id" column="id"/>
         <result property="plantName" column="plant_name"/>
         <result property="types" column="plant_type"/>
@@ -30,13 +30,13 @@
         <result property="num" column="quantity"/>
         <result property="postCode" column="post_code"/>
     </resultMap>
-    <!--苗圃数据查询结果映射 end-->
-    <!--苗圃数据查询sql start-->
+    <!--省内苗圃数据查询结果映射 end-->
+    <!--省内苗圃数据查询sql start-->
     <select id="queryNurseryDao" parameterType="com.goodsoft.plantlet.util.result.NurseryParam" resultMap="nurseryMap">
         SELECT `id`,`nursery_name`,`contacts`,`tel`,`nursery_intro`,`fax_num`,`email`,`nursery_add`,
         `province`,`districts`,`nursery_area`,`fileId`,`pro_license_num`,`oper_license_num`,`spec`,
         `spec_min`,`spec_max`,`price`,`quantity`,`post_code`,`plant_name`,`plant_type`
-        FROM `gs_nursery_info`
+        FROM `gs_nursery_province_info`
         <where>
             <if test="keyWord !=null and keyWord != ''">
                 AND nursery_name LIKE '%${keyWord}%'
@@ -71,13 +71,81 @@
         </where>
         ORDER BY sid DESC limit #{num},20;
     </select>
-    <!--苗圃数据查询sql end-->
+    <!--省内苗圃数据查询sql end-->
+    <!--省外苗圃数据查询结果映射 start-->
+    <resultMap id="NurseryOutMap" type="com.goodsoft.plantlet.domain.entity.nursery.NurseryOut">
+        <result property="id" column="id"/>
+        <result property="province" column="province"/>
+        <result property="city" column="city"/>
+        <result property="company" column="company_name"/>
+        <result property="tel" column="tel"/>
+        <result property="types" column="seedling_type"/>
+        <result property="seedlingName" column="seedling_name"/>
+        <result property="spec" column="spec"/>
+        <result property="specMin" column="spec_min"/>
+        <result property="specMax" column="spec_max"/>
+        <result property="unit" column="unit"/>
+        <result property="num" column="quantity"/>
+        <result property="price" column="price"/>
+        <result property="comment" column="comments"/>
+        <result property="date" column="acquisition_time"/>
+        <result property="address" column="address"/>
+        <result property="fileId" column="fileId"/>
+        <result property="fax" column="fax_num"/>
+        <result property="webSite" column="web_site"/>
+        <result property="email" column="email"/>
+        <result property="specMin" column="spec_min"/>
+        <result property="specMax" column="spec_max"/>
+    </resultMap>
+    <!--省外苗圃数据查询结果映射 end-->
+    <!--省外苗圃数据查询sql start-->
+    <select id="queryNurseryOutDao" parameterType="com.goodsoft.plantlet.util.result.NurseryOutParam"
+            resultMap="NurseryOutMap">
+        SELECT `id`,`province`,`city`,`company_name`,`tel`,`seedling_type`,`seedling_name`,`spec`,`unit`,
+        `quantity`,`price`,`comments`,`acquisition_time`,`address`,`fileId`,`fax_num`,`web_site`,`email`,
+        `spec_min`,`spec_max`
+        FROM `gs_nursery_outside_info`
+        <where>
+            <if test="keyWord != null and keyWord != ''">
+                AND seedling_name LIKE '%${keyWord}%'
+            </if>
+            <if test="tp != null and tp != ''">
+                AND seedling_type = #{tp}
+            </if>
+            <if test="comp != null and comp != ''">
+                AND company_name LIKE '%${comp}%'
+            </if>
+            <if test="province !=null and province != ''">
+                AND province = #{province}
+            </if>
+            <if test="city != null and city != ''">
+                AND city = #{city}
+            </if>
+            <if test="address != null and address != ''">
+                AND address = #{address}
+            </if>
+            <if test="specMin != null and specMin != ''">
+                AND spec_min &gt;= #{specMin}
+            </if>
+            <if test="specMax != null and specMax != ''">
+                AND spec_max &lt;= #{specMax}
+            </if>
+            <if test="minPrice != null and minPrice != ''">
+                AND price &gt;= #{minPrice}
+            </if>
+            <if test="maxPrice != null and maxPrice != ''">
+                AND price &lt;= #{maxPrice}
+            </if>
+        </where>
+        ORDER BY sid DESC limit #{num},20;
+    </select>
+    <!--省外苗圃数据查询sql end-->
     <!--数据查询 end-->
     <!--数据添加 start-->
-    <!--苗圃数据添加sql start-->
-    <!--苗圃数据多数据添加sql start-->
+    <!--省内苗圃数据添加sql start-->
+    <!--省内苗圃数据多数据添加sql start-->
     <insert id="addNurseryDao" parameterType="java.util.List">
-        INSERT INTO `gs_nursery_info`
+        INSERT INTO `gs_nursery_province_info`
         (`id`,`nursery_name`,`contacts`,`tel`,`nursery_intro`,`fax_num`,`email`,`nursery_add`,`province`,`districts`,`nursery_area`,
         `fileId`,`pro_license_num`,`oper_license_num`,`spec`,`spec_min`,`spec_max`,`price`,`quantity`,`post_code`,`plant_name`,`plant_type`)
         VALUES
@@ -87,18 +155,44 @@
             #{item.operLicenseNum},#{item.spec},#{item.specMin},#{item.specMax},#{item.price},#{item.num},#{item.postCode},#{item.plantName},#{item.types})
         </foreach>
     </insert>
-    <!--苗圃数据多数据添加sql end-->
-    <!--苗圃数据单条数据添加sql start-->
-    <insert id="addNurseryOneDao" parameterType="com.goodsoft.plantlet.domain.entity.seedlinginfo.Nursery">
-    INSERT INTO `gs_nursery_info`
+    <!--省内苗圃数据多数据添加sql end-->
+    <!--省内苗圃数据单条数据添加sql start-->
+    <insert id="addNurseryOneDao" parameterType="com.goodsoft.plantlet.domain.entity.nursery.Nursery">
+    INSERT INTO `gs_nursery_province_info`
     (`id`,`nursery_name`,`contacts`,`tel`,`nursery_intro`,`fax_num`,`email`,`nursery_add`,`province`,`districts`,`nursery_area`,
     `fileId`,`pro_license_num`,`oper_license_num`,`spec`,`spec_min`,`spec_max`,`price`,`quantity`,`post_code`,`plant_name`,`plant_type`)
     VALUES
     (#{id},#{nurseryName},#{contact},#{tel},#{nurseryIntro},#{fax},#{email},#{nurseryAdd},#{province},#{districts},#{area},
     #{fileId},#{proLicenseNum},#{operLicenseNum},#{spec},#{specMin},#{specMax},#{price},#{num},#{postCode},#{plantName},#{types})
     </insert>
-    <!--苗圃数据单条数据添加sql end-->
-    <!--苗圃数据添加sql end-->
+    <!--省内苗圃数据单条数据添加sql end-->
+    <!--省内苗圃数据添加sql end-->
+    <!--省外苗圃信息数据录入sql start-->
+    <!--省外苗圃多数据录入 start-->
+    <insert id="addNurseryOutDao" parameterType="java.util.List">
+        INSERT INTO `gs_nursery_outside_info`
+        (`id`,`province`,`city`,`company_name`,`tel`,`seedling_type`,`seedling_name`,`spec`,`unit`,`quantity`,`price`,
+        `comments`,`acquisition_time`,`address`,`fileId`,`fax_num`,`web_site`,`email`,`spec_min`,`spec_max`)
+        VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.id}, #{item.province}, #{item.city}, #{item.company}, #{item.tel}, #{item.types},
+            #{item.seedlingName}, #{item.spec},#{item.unit}, #{item.num}, #{item.price}, #{item.comment},
+            #{item.date},#{item.address},#{item.fileId},#{item.fax},#{item.webSite},#{item.email},#{item.specMin},#{item.specMax})
+        </foreach>
+    </insert>
+    <!--省外苗圃多数据录入 end-->
+    <!--省外苗圃单条数据录入 start-->
+    <insert id="addNurseryOutOneDao" parameterType="com.goodsoft.plantlet.domain.entity.nursery.NurseryOut">
+        INSERT INTO `gs_nursery_outside_info`
+        (`id`,`province`,`city`,`company_name`,`tel`,`seedling_type`,`seedling_name`,`spec`,`unit`,`quantity`,`price`,
+        `comments`,`acquisition_time`,`address`,`fileId`,`fax_num`,`web_site`,`email`,`spec_min`,`spec_max`)
+        VALUES
+        (#{id}, #{province}, #{city}, #{company}, #{tel}, #{types},
+        #{seedlingName}, #{spec},#{unit}, #{num}, #{price}, #{comment},
+        #{date},#{address},#{fileId},#{fax},#{webSite},#{email},#{specMin},#{specMax})
+    </insert>
+    <!--省外苗圃单条数据录入 end-->
+    <!--省外苗圃信息数据录入sql end-->
     <!--数据添加 end-->
 </mapper>
         <!--mapper 苗圃管理 end -->
