@@ -86,7 +86,7 @@ public class Excel2007 {
         //读取表格中的数据 start
         int rowCount = sheet.getLastRowNum();
         //遍历行
-        for (int i = sheet.getFirstRowNum() + 2; i <= rowCount; ++i) {
+        for (int i = sheet.getFirstRowNum() + 2; i < rowCount; ++i) {
             temp = new ArrayList<Object>();
             row = sheet.getRow(i);
             //判断读取行是否为空且是否为最后一行

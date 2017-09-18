@@ -2,7 +2,7 @@ package com.goodsoft.plantlet.controller;
 
 import com.goodsoft.plantlet.domain.entity.seedlinginfo.SeedlingOffer;
 import com.goodsoft.plantlet.service.SeedlingService;
-import com.goodsoft.plantlet.util.result.SeedlingParm;
+import com.goodsoft.plantlet.util.result.SeedlingParam;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -21,7 +21,7 @@ public class SeedlingController {
 
     @CrossOrigin(origins = "*", maxAge = 3600, methods = RequestMethod.GET)
     @RequestMapping("/find/seedling.action.do")
-    public Object querySeedlingController(SeedlingParm msg) {
+    public Object querySeedlingController(SeedlingParam msg) {
         return this.service.querySeedlingService(msg);
     }
 

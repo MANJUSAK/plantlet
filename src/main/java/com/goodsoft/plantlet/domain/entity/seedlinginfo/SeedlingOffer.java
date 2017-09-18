@@ -13,7 +13,12 @@ public class SeedlingOffer implements java.io.Serializable {
     private long tel;//联系电话
     private String province;//省份
     private String city;//市
-    private String specification;//规格
+    private String spec;//规格前缀
+    private double specMin;//规格范围第一位
+    private double specMax;//规格范围第二位
+    private String fax;//传真
+    private String webSite;//网址
+    private String email;//邮箱
     private String unit;//单位
     private String address;//地址
     private double price;//价格
@@ -23,6 +28,7 @@ public class SeedlingOffer implements java.io.Serializable {
     private String company;//企业
     private int num;//数量
     private String fileId;//文件编号
+
 
     public String getId() {
         return id;
@@ -72,12 +78,52 @@ public class SeedlingOffer implements java.io.Serializable {
         this.city = city;
     }
 
-    public String getSpecification() {
-        return specification;
+    public String getSpec() {
+        return spec;
     }
 
-    public void setSpecification(String specification) {
-        this.specification = specification;
+    public void setSpec(String spec) {
+        this.spec = spec;
+    }
+
+    public double getSpecMin() {
+        return specMin;
+    }
+
+    public void setSpecMin(double specMin) {
+        this.specMin = specMin;
+    }
+
+    public double getSpecMax() {
+        return specMax;
+    }
+
+    public void setSpecMax(double specMax) {
+        this.specMax = specMax;
+    }
+
+    public String getFax() {
+        return fax;
+    }
+
+    public void setFax(String fax) {
+        this.fax = fax;
+    }
+
+    public String getWebSite() {
+        return webSite;
+    }
+
+    public void setWebSite(String webSite) {
+        this.webSite = webSite;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getUnit() {
@@ -149,15 +195,21 @@ public class SeedlingOffer implements java.io.Serializable {
         if (this == o) return true;
         if (!(o instanceof SeedlingOffer)) return false;
         SeedlingOffer that = (SeedlingOffer) o;
-        return tel == that.tel && Objects.equals(address, that.address) &&
+        return tel == that.tel &&
+                Double.compare(that.specMin, specMin) == 0 &&
+                Double.compare(that.specMax, specMax) == 0 &&
                 Double.compare(that.price, price) == 0 &&
                 num == that.num &&
                 Objects.equals(id, that.id) &&
                 Objects.equals(seedlingName, that.seedlingName) &&
                 Objects.equals(province, that.province) &&
                 Objects.equals(city, that.city) &&
-                Objects.equals(specification, that.specification) &&
+                Objects.equals(spec, that.spec) &&
+                Objects.equals(fax, that.fax) &&
+                Objects.equals(webSite, that.webSite) &&
+                Objects.equals(email, that.email) &&
                 Objects.equals(unit, that.unit) &&
+                Objects.equals(address, that.address) &&
                 Objects.equals(types, that.types) &&
                 Objects.equals(comment, that.comment) &&
                 Objects.equals(date, that.date) &&
@@ -167,6 +219,6 @@ public class SeedlingOffer implements java.io.Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, seedlingName, tel, address, province, city, specification, unit, price, types, comment, date, company, num, fileId);
+        return Objects.hash(id, seedlingName, tel, province, city, spec, specMin, specMax, fax, webSite, email, unit, address, price, types, comment, date, company, num, fileId);
     }
 }

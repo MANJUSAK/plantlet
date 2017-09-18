@@ -7,7 +7,7 @@ import java.util.Objects;
  * Created by 严彬荣 on 2017/9/17.
  * version v1.0
  */
-public class SeedlingParm implements java.io.Serializable {
+public class SeedlingParam implements java.io.Serializable {
     private String keyWord;//苗木名称
     private String tp;//种类
     private String comp;//企业名称
@@ -17,7 +17,8 @@ public class SeedlingParm implements java.io.Serializable {
     private String minPrice;//价格起始范围
     private String maxPrice;//价格终止范围
     private int num;//页码
-    private String spec;//规格
+    private String specMin;//规格范围第一位
+    private String specMax;//规格范围第二位
 
     public String getKeyWord() {
         return keyWord;
@@ -91,19 +92,27 @@ public class SeedlingParm implements java.io.Serializable {
         this.num = num;
     }
 
-    public String getSpec() {
-        return spec;
+    public String getSpecMin() {
+        return specMin;
     }
 
-    public void setSpec(String spec) {
-        this.spec = spec;
+    public void setSpecMin(String specMin) {
+        this.specMin = specMin;
+    }
+
+    public String getSpecMax() {
+        return specMax;
+    }
+
+    public void setSpecMax(String specMax) {
+        this.specMax = specMax;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof SeedlingParm)) return false;
-        SeedlingParm that = (SeedlingParm) o;
+        if (!(o instanceof SeedlingParam)) return false;
+        SeedlingParam that = (SeedlingParam) o;
         return num == that.num &&
                 Objects.equals(keyWord, that.keyWord) &&
                 Objects.equals(tp, that.tp) &&
@@ -113,11 +122,12 @@ public class SeedlingParm implements java.io.Serializable {
                 Objects.equals(address, that.address) &&
                 Objects.equals(minPrice, that.minPrice) &&
                 Objects.equals(maxPrice, that.maxPrice) &&
-                Objects.equals(spec, that.spec);
+                Objects.equals(specMin, that.specMin) &&
+                Objects.equals(specMax, that.specMax);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(keyWord, tp, comp, province, city, address, minPrice, maxPrice, num, spec);
+        return Objects.hash(keyWord, tp, comp, province, city, address, minPrice, maxPrice, num, specMin, specMax);
     }
 }

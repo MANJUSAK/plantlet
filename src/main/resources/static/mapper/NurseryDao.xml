@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--@author 严彬荣，version v1.0-->
+<!--mapper 苗圃管理 start -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--suppress ALL -->
+<mapper namespace="com.goodsoft.plantlet.domain.dao.NurseryDao">
+    <!--数据查询 start-->
+    <!--苗圃数据查询结果映射 start-->
+    <resultMap id="nurseryMap" type="com.goodsoft.plantlet.domain.entity.seedlinginfo.Nursery">
+        <result property="id" column="id"/>
+        <result property="plantName" column="plant_name"/>
+        <result property="types" column="plant_type"/>
+        <result property="nurseryName" column="nursery_name"/>
+        <result property="contact" column="contacts"/>
+        <result property="tel" column="tel"/>
+        <result property="nurseryIntro" column="nursery_intro"/>
+        <result property="fax" column="fax_num"/>
+        <result property="email" column="email"/>
+        <result property="nurseryAdd" column="nursery_add"/>
+        <result property="province" column="province"/>
+        <result property="districts" column="districts"/>
+        <result property="area" column="nursery_area"/>
+        <result property="fileId" column="fileId"/>
+        <result property="proLicenseNum" column="pro_license_num"/>
+        <result property="operLicenseNum" column="oper_license_num"/>
+        <result property="spec" column="spec"/>
+        <result property="specMin" column="spec_min"/>
+        <result property="specMax" column="spec_max"/>
+        <result property="price" column="price"/>
+        <result property="num" column="quantity"/>
+        <result property="postCode" column="post_code"/>
+    </resultMap>
+    <!--苗圃数据查询结果映射 end-->
+    <!--苗圃数据查询sql start-->
+    <select id="queryNurseryDao" parameterType="com.goodsoft.plantlet.util.result.NurseryParam" resultMap="nurseryMap">
+        SELECT `id`,`nursery_name`,`contacts`,`tel`,`nursery_intro`,`fax_num`,`email`,`nursery_add`,
+        `province`,`districts`,`nursery_area`,`fileId`,`pro_license_num`,`oper_license_num`,`spec`,
+        `spec_min`,`spec_max`,`price`,`quantity`,`post_code`,`plant_name`,`plant_type`
+        FROM `gs_nursery_info`
+        <where>
+            <if test="keyWord !=null and keyWord != ''">
+                AND nursery_name LIKE '%${keyWord}%'
+            </if>
+            <if test="name !=null and name != ''">
+                AND name LIKE '%${keyWord}%'
+            </if>
+            <if test="tp !=null and tp != ''">
+                AND plant_type = #{tp}
+            </if>
+            <if test="province !=null and province != ''">
+                AND province = #{province}
+            </if>
+            <if test="city !=null and city != ''">
+                AND districts LIKE #{city}
+            </if>
+            <if test="specMin !=null and specMin != ''">
+                AND spec_min &lt;= #{specMin}
+            </if>
+            <if test="specMax !=null and specMax != ''">
+                AND spec_max &gt;= #{specMax}
+            </if>
+            <if test="minPrice !=null and minPrice != ''">
+                AND price &gt;= #{minPrice}
+            </if>
+            <if test="maxPrice !=null and maxPrice != ''">
+                AND price &gt;= #{maxPrice}
+            </if>
+            <if test="area !=null and area != ''">
+                AND nursery_area = #{area}
+            </if>
+        </where>
+        ORDER BY sid DESC limit #{num},20;
+    </select>
+    <!--苗圃数据查询sql end-->
+    <!--数据查询 end-->
+    <!--数据添加 start-->
+    <!--苗圃数据添加sql start-->
+    <!--苗圃数据多数据添加sql start-->
+    <insert id="addNurseryDao" parameterType="java.util.List">
+        INSERT INTO `gs_nursery_info`
+        (`id`,`nursery_name`,`contacts`,`tel`,`nursery_intro`,`fax_num`,`email`,`nursery_add`,`province`,`districts`,`nursery_area`,
+        `fileId`,`pro_license_num`,`oper_license_num`,`spec`,`spec_min`,`spec_max`,`price`,`quantity`,`post_code`,`plant_name`,`plant_type`)
+        VALUES
+        <foreach collection="list" index="index" item="item" separator=",">
+            (#{item.id},#{item.nurseryName},#{item.contact},#{item.tel},#{item.nurseryIntro},#{item.fax},#{item.email},
+            #{item.nurseryAdd},#{item.province},#{item.districts},#{item.area},#{item.fileId},#{item.proLicenseNum},
+            #{item.operLicenseNum},#{item.spec},#{item.specMin},#{item.specMax},#{item.price},#{item.num},#{item.postCode},#{item.plantName},#{item.types})
+        </foreach>
+    </insert>
+    <!--苗圃数据多数据添加sql end-->
+    <!--苗圃数据单条数据添加sql start-->
+    <insert id="addNurseryOneDao" parameterType="com.goodsoft.plantlet.domain.entity.seedlinginfo.Nursery">
+    INSERT INTO `gs_nursery_info`
+    (`id`,`nursery_name`,`contacts`,`tel`,`nursery_intro`,`fax_num`,`email`,`nursery_add`,`province`,`districts`,`nursery_area`,
+    `fileId`,`pro_license_num`,`oper_license_num`,`spec`,`spec_min`,`spec_max`,`price`,`quantity`,`post_code`,`plant_name`,`plant_type`)
+    VALUES
+    (#{id},#{nurseryName},#{contact},#{tel},#{nurseryIntro},#{fax},#{email},#{nurseryAdd},#{province},#{districts},#{area},
+    #{fileId},#{proLicenseNum},#{operLicenseNum},#{spec},#{specMin},#{specMax},#{price},#{num},#{postCode},#{plantName},#{types})
+    </insert>
+    <!--苗圃数据单条数据添加sql end-->
+    <!--苗圃数据添加sql end-->
+    <!--数据添加 end-->
+</mapper>
+        <!--mapper 苗圃管理 end -->

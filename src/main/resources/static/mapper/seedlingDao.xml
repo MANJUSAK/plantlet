@@ -14,20 +14,29 @@
         <result property="tel" column="tel"/>
         <result property="types" column="seedling_type"/>
         <result property="seedlingName" column="seedling_name"/>
-        <result property="specification" column="specification"/>
+        <result property="spec" column="spec"/>
+        <result property="specMin" column="spec_min"/>
+        <result property="specMax" column="spec_max"/>
         <result property="unit" column="unit"/>
         <result property="num" column="quantity"/>
         <result property="price" column="price"/>
         <result property="comment" column="comments"/>
         <result property="date" column="acquisition_time"/>
+        <result property="address" column="address"/>
+        <result property="fileId" column="fileId"/>
+        <result property="fax" column="fax_num"/>
+        <result property="webSite" column="web_site"/>
+        <result property="email" column="email"/>
+        <result property="specMin" column="spec_min"/>
+        <result property="specMax" column="spec_max"/>
     </resultMap>
     <!--苗木数据查询结果映射 end-->
     <!--苗木数据查询sql start-->
-    <select id="querySeedlingDao" parameterType="com.goodsoft.plantlet.util.result.SeedlingParm"
+    <select id="querySeedlingDao" parameterType="com.goodsoft.plantlet.util.result.SeedlingParam"
             resultMap="seedlingInfo">
-        SELECT id, province, city, company_name, tel, seedling_type,
-        seedling_name, specification, unit, quantity, price, comments,
-        acquisition_time
+        SELECT `id`,`province`,`city`,`company_name`,`tel`,`seedling_type`,`seedling_name`,`spec`,`unit`,
+        `quantity`,`price`,`comments`,`acquisition_time`,`address`,`fileId`,`fax_num`,`web_site`,`email`,
+        `spec_min`,`spec_max`
         FROM gs_seedling_info
         <where>
             <if test="keyWord != null and keyWord != ''">
@@ -48,11 +57,14 @@
             <if test="address != null and address != ''">
                 AND address = #{address}
             </if>
-            <if test="spec != null and spec != ''">
-                AND specification LIKE '%${spec}%'
+            <if test="specMin != null and specMin != ''">
+                AND spec_min &gt;= #{specMin}
             </if>
-            <if test="maxPrice != null and maxPrice != ''">
-                AND price &lt;= #{maxPrice}
+            <if test="specMax != null and specMax != ''">
+                AND spec_max &lt;= #{specMax}
+            </if>
+            <if test="minPrice != null and minPrice != ''">
+                AND price &gt;= #{minPrice}
             </if>
             <if test="maxPrice != null and maxPrice != ''">
                 AND price &lt;= #{maxPrice}
@@ -67,24 +79,25 @@
     <!--多数据录入 start-->
     <insert id="addSeedlingDao" parameterType="java.util.List">
         INSERT INTO gs_seedling_info
-        (id, province, city, company_name, tel, seedling_type,
-        seedling_name, specification, unit, quantity, price, comments, acquisition_time)
+        (`id`,`province`,`city`,`company_name`,`tel`,`seedling_type`,`seedling_name`,`spec`,`unit`,`quantity`,`price`,
+        `comments`,`acquisition_time`,`address`,`fileId`,`fax_num`,`web_site`,`email`,`spec_min`,`spec_max`)
         VALUES
         <foreach collection="list" item="item" index="index" separator=",">
             (#{item.id}, #{item.province}, #{item.city}, #{item.company}, #{item.tel}, #{item.types},
-            #{item.seedlingName}, #{item.specification}, #{item.unit}, #{item.num}, #{item.price}, #{item.comment},
-            #{item.date})
+            #{item.seedlingName}, #{item.spec},#{item.unit}, #{item.num}, #{item.price}, #{item.comment},
+            #{item.date},#{item.address},#{item.fileId},#{item.fax},#{item.webSite},#{item.email},#{item.specMin},#{item.specMax})
         </foreach>
     </insert>
     <!--多数据录入 end-->
     <!--单条数据录入 start-->
     <insert id="addSeedlingOneDao" parameterType="com.goodsoft.plantlet.domain.entity.seedlinginfo.SeedlingOffer">
         INSERT INTO gs_seedling_info
-        (id, province, city, company_name, tel, seedling_type,
-        seedling_name, specification, unit, quantity, price, comments, acquisition_time)
+        (`id`,`province`,`city`,`company_name`,`tel`,`seedling_type`,`seedling_name`,`spec`,`unit`,`quantity`,`price`,
+        `comments`,`acquisition_time`,`address`,`fileId`,`fax_num`,`web_site`,`email`,`spec_min`,`spec_max`)
         VALUES
-        (#{id}, #{province}, #{city}, #{company}, #{tel}, #{types},#{seedlingName}, #{specification},
-        #{unit}, #{num}, #{price}, #{comment}, #{date})
+        (#{id}, #{province}, #{city}, #{company}, #{tel}, #{types},
+        #{seedlingName}, #{spec},#{unit}, #{num}, #{price}, #{comment},
+        #{date},#{address},#{fileId},#{fax},#{webSite},#{email},#{specMin},#{specMax})
     </insert>
     <!--单条数据录入 end-->
     <!--苗木信息数据录入sql end-->

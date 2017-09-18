@@ -8,16 +8,14 @@ package com.goodsoft.plantlet.util.result;
  */
 public enum StatusEnum implements java.io.Serializable {
     SUCCESS(0, "成功"),
-    SERVER_ERROR(500, "服务器繁忙"),
+    SERVER_ERROR(500, "发生不可预知的错误"),
+    EXCEL_ERROR(500, "未解析到正确的excel表格，请上传正确excel表格"),
     DEFEAT(500, "失败"),
     UNKONW_ERROR(501, "未知错误"),
     ERROR(502, "错误操作"),
     NO_DATA(404, "无数据"),
     NO_URL(404, "无效请求"),
     NO_RIGHTS(401, "该用户无法操作此功能"),
-    NO_ADD(401, "信息不能重复录入"),
-    NO_ADDMAINANCE(405, "本植株已经养护过，请明天再来吧！"),
-    NO_ADDMABAGEMENT(405, "本植株已经管护过，请明天再来吧！"),
     CHECKUSER(404, "用户名与密码不匹配"),
     USERNAME(402, "用户名已被注册"),
     USERTEL(402, "手机号已被注册"),
