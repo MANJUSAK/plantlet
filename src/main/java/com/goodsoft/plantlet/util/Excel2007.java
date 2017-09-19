@@ -40,7 +40,7 @@ public class Excel2007 {
     //实例化UUID工具类
     private UUIDUtil uuid = UUIDUtil.getInstance();
     // 默认单元格格式化日期字符串
-    private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    /*private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");*/
     // 格式化数字
     private DecimalFormat nf = new DecimalFormat("0");
 
@@ -109,6 +109,9 @@ public class Excel2007 {
                                 temp.add(cell.getNumericCellValue());
                                 break;
                             case XSSFCell.CELL_TYPE_NUMERIC:
+                                if (cell.getCellStyle().getDataFormatString() == null) {
+                                    continue;
+                                }
                                 switch (cell.getCellStyle().getDataFormatString()) {
                                     case "General":
                                         temp.add(this.nf.format(cell.getNumericCellValue()));
@@ -116,13 +119,20 @@ public class Excel2007 {
                                     case "@":
                                         temp.add(this.nf.format(cell.getNumericCellValue()));
                                         break;
+                                    case "0;[Red]0":
+                                        temp.add(this.nf.format(cell.getNumericCellValue()));
+                                        break;
+                                    case "0.00_);\\(0.00\\)":
+                                        temp.add(this.nf.format(cell.getNumericCellValue()));
+                                        break;
+                                    case "0.00;[Red]0.00":
+                                        temp.add(this.nf.format(cell.getNumericCellValue()));
+                                        break;
+                                    case "0.00_);[Red]\\(0.00\\)":
+                                        temp.add(this.nf.format(cell.getNumericCellValue()));
+                                        break;
                                     default:
-                                        String len = String.valueOf(cell.getNumericCellValue());
-                                        if (len.length() > 10) {
-                                            temp.add(this.sdf.format(HSSFDateUtil.getJavaDate(cell.getNumericCellValue())));
-                                        } else {
-                                            temp.add(this.nf.format(cell.getNumericCellValue()));
-                                        }
+                                        temp.add(HSSFDateUtil.getJavaDate(cell.getNumericCellValue()));
                                         break;
                                 }
                                 break;
@@ -199,7 +209,7 @@ public class Excel2007 {
      * 获取单元格的值
      *
      * @param cell
-     * @return
+     * @return object
      */
     public Object getCellValue(XSSFCell cell) {
         if (cell == null) return "";
@@ -211,7 +221,25 @@ public class Excel2007 {
             case Cell.CELL_TYPE_FORMULA:
                 return cell.getCellFormula();
             case Cell.CELL_TYPE_NUMERIC:
-                return this.nf.format(cell.getNumericCellValue());
+                if (cell.getCellStyle().getDataFormatString() == null) {
+                    return "";
+                }
+                switch (cell.getCellStyle().getDataFormatString()) {
+                    case "General":
+                        return cell.getNumericCellValue();
+                    case "@":
+                        return this.nf.format(cell.getNumericCellValue());
+                    case "0;[Red]0":
+                        return this.nf.format(cell.getNumericCellValue());
+                    case "0.00_);\\(0.00\\)":
+                        return this.nf.format(cell.getNumericCellValue());
+                    case "0.00;[Red]0.00":
+                        return this.nf.format(cell.getNumericCellValue());
+                    case "0.00_);[Red]\\(0.00\\)":
+                        return this.nf.format(cell.getNumericCellValue());
+                    default:
+                        return HSSFDateUtil.getJavaDate(cell.getNumericCellValue());
+                }
             default:
                 return "";
         }

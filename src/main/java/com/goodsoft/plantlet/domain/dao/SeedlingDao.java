@@ -5,7 +5,7 @@ import com.goodsoft.plantlet.domain.entity.seedlinginfo.SeedlingOffer;
 import com.goodsoft.plantlet.domain.entity.seedlinginfo.SeedlingStatistics;
 import com.goodsoft.plantlet.util.result.SeedlingOfferParam;
 import com.goodsoft.plantlet.util.result.SeedlingParam;
-import org.apache.ibatis.annotations.Param;
+import com.goodsoft.plantlet.util.result.SeedlingStatisticsParam;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -25,7 +25,10 @@ public interface SeedlingDao {
     public List<SeedlingOffer> querySeedlingOfferDao(SeedlingOfferParam msg) throws Exception;
 
     //苗木统计数据查询dao方法
-    public List<SeedlingStatistics> querySeedlingStatisticsDao(@Param("keyWord") String keyWord) throws Exception;
+    public List<SeedlingStatistics> querySeedlingStatisticsDao(SeedlingStatisticsParam msg) throws Exception;
+
+    //苗木统计数据详情查询dao方法
+    public List<SeedlingStatistics> querySeedlingStatisticsDetailDao(SeedlingStatisticsParam msg) throws Exception;
 
     //查询苗木统计所有苗木名称dao方法
     public List<String> querySeedlingAllNameDao() throws Exception;
@@ -33,7 +36,10 @@ public interface SeedlingDao {
     //苗木信息数据添加dao方法
     public void addSeedlingDao(SeedlingInfo msg) throws Exception;
 
-    //苗木造价数据添加dao方法
-    public void addSeedlingOfferDao(SeedlingOffer msg) throws Exception;
+    //苗木造价单条数据添加dao方法
+    public void addSeedlingOfferOneDao(SeedlingOffer msg) throws Exception;
+
+    //苗木造价多条数据添加dao方法
+    public void addSeedlingOfferDao(List<SeedlingOffer> msg) throws Exception;
 
 }

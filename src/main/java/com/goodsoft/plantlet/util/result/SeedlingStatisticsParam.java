@@ -3,17 +3,15 @@ package com.goodsoft.plantlet.util.result;
 import java.util.Objects;
 
 /**
- * function 苗木信息参数辅助类
- * Created by 严彬荣 on 2017/9/18.
+ * function 苗木统计条件检索参数辅助类
+ * Created by 严彬荣 on 2017/9/19.
  * version v1.0
  */
-public class SeedlingParam implements java.io.Serializable {
-
+public class SeedlingStatisticsParam implements java.io.Serializable {
     private String keyWord;//关键字
-    private String tp;//种类
+    private String spec;//规格
     private String specMin;//规格范围第一位
     private String specMax;//规格范围第二位
-    private String sdAdd;//供货地址
     private int num;//页码
 
     public String getKeyWord() {
@@ -24,12 +22,12 @@ public class SeedlingParam implements java.io.Serializable {
         this.keyWord = keyWord;
     }
 
-    public String getTp() {
-        return tp;
+    public String getSpec() {
+        return spec;
     }
 
-    public void setTp(String tp) {
-        this.tp = tp;
+    public void setSpec(String spec) {
+        this.spec = spec;
     }
 
     public String getSpecMin() {
@@ -48,14 +46,6 @@ public class SeedlingParam implements java.io.Serializable {
         this.specMax = specMax;
     }
 
-    public String getSdAdd() {
-        return sdAdd;
-    }
-
-    public void setSdAdd(String sdAdd) {
-        this.sdAdd = sdAdd;
-    }
-
     public int getNum() {
         return num;
     }
@@ -67,18 +57,17 @@ public class SeedlingParam implements java.io.Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof SeedlingParam)) return false;
-        SeedlingParam that = (SeedlingParam) o;
+        if (!(o instanceof SeedlingStatisticsParam)) return false;
+        SeedlingStatisticsParam that = (SeedlingStatisticsParam) o;
         return num == that.num &&
                 Objects.equals(keyWord, that.keyWord) &&
-                Objects.equals(tp, that.tp) &&
+                Objects.equals(spec, that.spec) &&
                 Objects.equals(specMin, that.specMin) &&
-                Objects.equals(specMax, that.specMax) &&
-                Objects.equals(sdAdd, that.sdAdd);
+                Objects.equals(specMax, that.specMax);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(keyWord, tp, specMin, specMax, sdAdd, num);
+        return Objects.hash(keyWord, spec, specMin, specMax, num);
     }
 }

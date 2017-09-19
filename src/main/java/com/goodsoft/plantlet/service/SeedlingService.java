@@ -4,6 +4,7 @@ import com.goodsoft.plantlet.domain.entity.seedlinginfo.SeedlingInfo;
 import com.goodsoft.plantlet.domain.entity.seedlinginfo.SeedlingOffer;
 import com.goodsoft.plantlet.util.result.SeedlingOfferParam;
 import com.goodsoft.plantlet.util.result.SeedlingParam;
+import com.goodsoft.plantlet.util.result.SeedlingStatisticsParam;
 import com.goodsoft.plantlet.util.result.Status;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -22,7 +23,10 @@ public interface SeedlingService {
     public <T> T querySeedlingService(SeedlingOfferParam msg);
 
     //苗木统计数据查询
-    public <T> T querySeedlingStatisticsDao(String keyWord);
+    public <T> T querySeedlingStatisticsService(SeedlingStatisticsParam msg);
+
+    //苗木统计数据详情查询dao方法
+    public <T> T querySeedlingStatisticsDetailService(SeedlingStatisticsParam msg);
 
     //查询苗木统计所有苗木名称
     public <T> T querySeedlingAllNameService();
@@ -31,5 +35,6 @@ public interface SeedlingService {
     public Status addSeedlingService(MultipartFile[] files, SeedlingInfo msg);
 
     //苗木造价数据添加
-    public Status addSeedlingService(SeedlingOffer msg);
+    public Status addSeedlingService(MultipartFile[] files, SeedlingOffer msg);
+
 }

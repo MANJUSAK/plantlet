@@ -34,7 +34,7 @@ public class DruidConfiguration {
         servletRegistrationBean.addInitParameter("loginUsername", "admin");
         servletRegistrationBean.addInitParameter("loginPassword", "goodsoft");
         //备用地址
-        servletRegistrationBean.addUrlMappings("/backups/ylcxpt/*");
+        servletRegistrationBean.addUrlMappings("/backups/plantlet/*");
         //是否重置数据.
         servletRegistrationBean.addInitParameter("resetEnable", "true");
         return servletRegistrationBean;

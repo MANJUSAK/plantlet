@@ -17,6 +17,8 @@ public class SeedlingStatistics implements java.io.Serializable {
     private double priceOut;
     private double price;
     private String unit;
+    private String comp;
+    private String compOut;
 
     public String getSpec() {
         return spec;
@@ -90,6 +92,22 @@ public class SeedlingStatistics implements java.io.Serializable {
         this.unit = unit;
     }
 
+    public String getComp() {
+        return comp;
+    }
+
+    public void setComp(String comp) {
+        this.comp = comp;
+    }
+
+    public String getCompOut() {
+        return compOut;
+    }
+
+    public void setCompOut(String compOut) {
+        this.compOut = compOut;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -103,11 +121,13 @@ public class SeedlingStatistics implements java.io.Serializable {
                 Double.compare(that.price, price) == 0 &&
                 Objects.equals(spec, that.spec) &&
                 Objects.equals(sdName, that.sdName) &&
-                Objects.equals(unit, that.unit);
+                Objects.equals(unit, that.unit) &&
+                Objects.equals(comp, that.comp) &&
+                Objects.equals(compOut, that.compOut);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(spec, offer, marketPrice, sdName, numOut, num, priceOut, price, unit);
+        return Objects.hash(spec, offer, marketPrice, sdName, numOut, num, priceOut, price, unit, comp, compOut);
     }
 }

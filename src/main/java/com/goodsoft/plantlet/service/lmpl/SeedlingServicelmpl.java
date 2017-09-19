@@ -8,7 +8,9 @@ import com.goodsoft.plantlet.domain.entity.seedlinginfo.SeedlingOffer;
 import com.goodsoft.plantlet.domain.entity.seedlinginfo.SeedlingStatistics;
 import com.goodsoft.plantlet.service.FileService;
 import com.goodsoft.plantlet.service.SeedlingService;
+import com.goodsoft.plantlet.util.DeleteFileUtil;
 import com.goodsoft.plantlet.util.DomainNameUtil;
+import com.goodsoft.plantlet.util.ExcelUtil;
 import com.goodsoft.plantlet.util.UUIDUtil;
 import com.goodsoft.plantlet.util.result.*;
 import org.apache.log4j.Logger;
@@ -18,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,8 +42,12 @@ public class SeedlingServicelmpl implements SeedlingService {
     private Logger logger = Logger.getLogger(SeedlingServicelmpl.class);
     //实例化UUID工具类
     private UUIDUtil uuid = UUIDUtil.getInstance();
+    //实例化excel工具类
+    private ExcelUtil excelUtil = ExcelUtil.getInstance();
     //实例化服务器域名地址工具类
     private DomainNameUtil domainName = DomainNameUtil.getInstance();
+    //实例化文件删除工具类
+    private DeleteFileUtil deleteFile = DeleteFileUtil.getInstance();
 
     /**
      * 苗木数据检索业务处理方法
@@ -136,7 +143,7 @@ public class SeedlingServicelmpl implements SeedlingService {
     }
 
     /**
-     * 苗木造价数据检索业务处理方法
+     * 苗木数据统计检索业务处理方法
      *
      * @param keyWord 检索条件
      * @param <T>     泛型
@@ -144,18 +151,51 @@ public class SeedlingServicelmpl implements SeedlingService {
      * @throws Exception
      */
     @Override
-    public <T> T querySeedlingStatisticsDao(String keyWord) {
+    public <T> T querySeedlingStatisticsService(SeedlingStatisticsParam param) {
         //初始化msg.getNum() start
-       /* int page = msg.getNum();
+        int page = param.getNum();
         if (page < 0) {
             page = 0;
         }
         page *= 20;
-        msg.setNum(page);*/
+        param.setNum(page);
         //初始化msg.getNum() end
         List<SeedlingStatistics> data = null;
         try {
-            data = this.dao.querySeedlingStatisticsDao(keyWord);
+            data = this.dao.querySeedlingStatisticsDao(param);
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            this.logger.error(e);
+            return (T) new Status(StatusEnum.SERVER_ERROR.getCODE(), StatusEnum.SERVER_ERROR.getEXPLAIN());
+        }
+        if (data.size() > 0) {
+            return (T) new Result(0, data);
+        } else {
+            return (T) new Status(StatusEnum.NO_DATA.getCODE(), StatusEnum.NO_DATA.getEXPLAIN());
+        }
+    }
+
+    /**
+     * 苗木造价数据检索详情业务处理方法
+     *
+     * @param keyWord 检索条件
+     * @param <T>     泛型
+     * @return 查询结果
+     * @throws Exception
+     */
+    @Override
+    public <T> T querySeedlingStatisticsDetailService(SeedlingStatisticsParam param) {
+        //初始化msg.getNum() start
+        int page = param.getNum();
+        if (page < 0) {
+            page = 0;
+        }
+        page *= 20;
+        param.setNum(page);
+        //初始化msg.getNum() end
+        List<SeedlingStatistics> data = null;
+        try {
+            data = this.dao.querySeedlingStatisticsDetailDao(param);
         } catch (Exception e) {
             System.out.println(e.toString());
             this.logger.error(e);
@@ -267,45 +307,213 @@ public class SeedlingServicelmpl implements SeedlingService {
      * @throws Exception
      */
     @Override
-    public Status addSeedlingService(SeedlingOffer msg) {
-        msg.setId(this.uuid.getUUID().toString());
-        try {
-            //获取植物规格
-            String specStr = msg.getSpec();
-            //去掉空格
-            String str = specStr.replaceAll(" ", "");
-            //获取规格前缀
-            String specStr1 = str.substring(1, 2);
-            if ("≤".equals(specStr1) || "≥".equals(specStr1) || "<".equals(specStr1)
-                    || ">".equals(specStr1) || "=".equals(specStr1)) {
-                //含有特殊字符则获取特殊字符
-                msg.setSpec(specStr.substring(0, 2));
-                double min = Double.parseDouble(specStr.substring(2));
-                msg.setSpecMin(min);
-            } else {
-                //将获取植物规格以“-”进行拆分
-                String[] spec = str.split("-");
-                //判断是否满足拆分条件
-                if (spec.length > 1) {
-                    double min = Double.parseDouble(spec[0].substring(1));
-                    double max = Double.parseDouble(spec[1]);
-                    //获取前缀
-                    msg.setSpec(spec[0].substring(0, 1));
-                    //获取规格范围
-                    msg.setSpecMin(min);
-                    msg.setSpecMax(max);
-                } else {
-                    double min = Double.parseDouble(spec[0].substring(1));
-                    msg.setSpecMin(min);
-                    msg.setSpec(spec[0].substring(0, 1));
+    public Status addSeedlingService(MultipartFile[] files, SeedlingOffer msg) {
+        //设置文件编号
+        String uuid = this.uuid.getUUID().toString();
+        //文件上传
+        int arg = this.fileService.fileUploadService(files, "excel", uuid);
+        switch (arg) {
+            case 604:
+                msg.setId(this.uuid.getUUID().toString());
+                try {
+                    //获取植物规格
+                    String specStr = msg.getSpec();
+                    //去掉空格
+                    String str = specStr.replaceAll(" ", "");
+                    //获取规格前缀
+                    String specStr1 = str.substring(1, 2);
+                    if ("≤".equals(specStr1) || "≥".equals(specStr1) || "<".equals(specStr1)
+                            || ">".equals(specStr1) || "=".equals(specStr1)) {
+                        //含有特殊字符则获取特殊字符
+                        msg.setSpec(specStr.substring(0, 2));
+                        double min = Double.parseDouble(specStr.substring(2));
+                        msg.setSpecMin(min);
+                    } else {
+                        //将获取植物规格以“-”进行拆分
+                        String[] spec = str.split("-");
+                        //判断是否满足拆分条件
+                        if (spec.length > 1) {
+                            double min = Double.parseDouble(spec[0].substring(1));
+                            double max = Double.parseDouble(spec[1]);
+                            //获取前缀
+                            msg.setSpec(spec[0].substring(0, 1));
+                            //获取规格范围
+                            msg.setSpecMin(min);
+                            msg.setSpecMax(max);
+                        } else {
+                            double min = Double.parseDouble(spec[0].substring(1));
+                            msg.setSpecMin(min);
+                            msg.setSpec(spec[0].substring(0, 1));
+                        }
+                    }
+                    this.dao.addSeedlingOfferOneDao(msg);
+                    return new Status(StatusEnum.SUCCESS.getCODE(), StatusEnum.SUCCESS.getEXPLAIN());
+                } catch (Exception e) {
+                    System.out.println(e.toString());
+                    this.logger.error(e);
+                    return new Status(StatusEnum.SERVER_ERROR.getCODE(), StatusEnum.SERVER_ERROR.getEXPLAIN());
                 }
+            case 603:
+                return new Status(StatusEnum.FILE_FORMAT.getCODE(), StatusEnum.FILE_FORMAT.getEXPLAIN());
+            case 601:
+                return new Status(StatusEnum.FILE_SIZE.getCODE(), StatusEnum.FILE_SIZE.getEXPLAIN());
+            case 600:
+                return new Status(StatusEnum.FILE_UPLOAD.getCODE(), StatusEnum.FILE_UPLOAD.getEXPLAIN());
+        }
+        try {
+            //获取上传文件路径
+            FileData file = this.fileDao.queryFileOneDao(uuid);
+            StringBuilder sb = new StringBuilder(file.getBases());
+            sb.append(file.getPath());
+            //获取上传excel文件数据
+            List<List<Object>> list = this.excelUtil.readExcel(sb.toString(), uuid);
+            if (list == null) {
+                return new Status(StatusEnum.NO_EXCEL.getCODE(), StatusEnum.NO_EXCEL.getEXPLAIN());
             }
-            this.dao.addSeedlingOfferDao(msg);
-            return new Status(StatusEnum.SUCCESS.getCODE(), StatusEnum.SUCCESS.getEXPLAIN());
+            //实例化数据保存集合类
+            List<SeedlingOffer> sdData = sdData = new ArrayList<SeedlingOffer>();
+            for (int i = 0, len = list.size(); i < len; ++i) {
+                List<Object> data = list.get(i);
+                int d = data.size();
+                SeedlingOffer sd = new SeedlingOffer();
+                for (int j = 0; j < d; ++j) {
+                    //判断读取字段是否为空字符串
+                    if ("".equals(data.get(j))) {
+                        continue;
+                    }
+                    switch (j) {
+                        case 0:
+                            sd.setId((String) data.get(j));
+                            break;
+                        case 1:
+                            sd.setSdName((String) data.get(j));
+                            break;
+                        case 2:
+                            //获取植物规格
+                            String specStr = (String) data.get(j);
+                            //去掉空格
+                            String str = specStr.replaceAll(" ", "");
+                            //获取规格前缀
+                            String specStr1 = str.substring(1, 2);
+                            if ("≤".equals(specStr1) || "≥".equals(specStr1) || "<".equals(specStr1)
+                                    || ">".equals(specStr1) || "=".equals(specStr1)) {
+                                //含有特殊字符则获取特殊字符
+                                sd.setSpec(specStr.substring(0, 2));
+                                double min = 0;
+                                try {
+                                    min = Double.parseDouble(specStr.substring(2));
+                                    sd.setSpecMin(min);
+                                } catch (NumberFormatException e) {
+                                    sd.setSpecMin(min);
+                                    System.out.println(e.toString());
+                                    this.logger.error(e);
+                                }
+                            } else {
+                                //将获取植物规格以“-”进行拆分
+                                String[] spec = str.split("-");
+                                //判断是否满足拆分条件
+                                if (spec.length > 1) {
+                                    double min = 0;
+                                    double max = 0;
+                                    try {
+                                        //获取前缀
+                                        sd.setSpec(spec[0].substring(0, 1));
+                                        //获取规格范围
+                                        min = Double.parseDouble(spec[0].substring(1));
+                                        max = Double.parseDouble(spec[1]);
+                                        sd.setSpecMin(min);
+                                        sd.setSpecMax(max);
+                                    } catch (NumberFormatException e) {
+                                        this.logger.error(e);
+                                        sd.setSpecMin(min);
+                                        sd.setSpecMax(max);
+                                    }
+                                } else {
+                                    double min = 0;
+                                    sd.setSpec(spec[0].substring(0, 1));
+                                    try {
+                                        min = Double.parseDouble(spec[0].substring(1));
+                                        sd.setSpecMin(min);
+                                    } catch (NumberFormatException e) {
+                                        sd.setSpecMin(min);
+                                        System.out.println(e.toString());
+                                        this.logger.error(e);
+                                    }
+                                }
+                            }
+                            break;
+                        case 3:
+                            sd.setUnit((String) data.get(j));
+                            break;
+                        case 4:
+                            try {
+                                double price = Double.parseDouble((String) data.get(j));
+                                sd.setSdOffer(price);
+                            } catch (NumberFormatException e) {
+                                sd.setSdOffer(0);
+                                this.logger.error(e);
+                                System.out.println(e.toString());
+                            }
+                            break;
+                        case 5:
+                            String yera = null;
+                            String month = null;
+                            try {
+                                yera = new SimpleDateFormat("yyyy").format(data.get(j));
+                                month = new SimpleDateFormat("MM").format(data.get(j));
+                            } catch (Exception e) {
+                                this.logger.error(e);
+                                System.out.println(e.toString());
+                            }
+                            sd.setYear(yera);
+                            sd.setMonth(month);
+                            break;
+                        case 6:
+                            sd.setComment((String) data.get(j));
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                sdData.add(sd);
+            }
+            //判断保存数据是否有null值，是移除空值
+            int len = sdData.size();
+            for (int i = 0; i < len; ++i) {
+                if (sdData.get(i).getSdName() == null || sdData.get(i).getSdOffer() == 0 || sdData.get(i).getUnit() == null ||
+                        sdData.get(i).getYear() == null || sdData.get(i).getMonth() == null) {
+                    sdData.remove(i);
+                    --i;
+                    len = sdData.size();
+                }
+            }//判断读取数据是否满足正确格式数据，是存库，否删除原始文件
+            if (len > 0) {
+                this.dao.addSeedlingOfferDao(sdData);
+                return new Status(StatusEnum.SUCCESS.getCODE(), StatusEnum.SUCCESS.getEXPLAIN());
+            } else {
+                List<FileData> fileData = this.fileDao.queryFileDao(uuid);
+                //删除硬盘上的文件
+                this.deleteFile.deleteFile(fileData);
+                //删除数据库文件数据
+                this.fileDao.deleteFileDao(uuid);
+                return new Status(StatusEnum.EXCEL_NO_DATA.getCODE(), StatusEnum.EXCEL_NO_DATA.getEXPLAIN());
+            }
         } catch (Exception e) {
+            //代码异常删除原始文件，避免数据冗余
+            List<FileData> fileData = null;
+            try {
+                fileData = this.fileDao.queryFileDao(uuid);
+                //删除硬盘上的文件
+                this.deleteFile.deleteFile(fileData);
+                //删除数据库文件数据
+                this.fileDao.deleteFileDao(uuid);
+            } catch (Exception e1) {
+                System.out.println(e.toString());
+                this.logger.error(e);
+            }
             System.out.println(e.toString());
             this.logger.error(e);
-            return new Status(StatusEnum.SERVER_ERROR.getCODE(), StatusEnum.SERVER_ERROR.getEXPLAIN());
+            return new Status(StatusEnum.EXCEL_ERROR.getCODE(), StatusEnum.EXCEL_ERROR.getEXPLAIN());
         }
     }
 }
