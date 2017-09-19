@@ -9,7 +9,9 @@ package com.goodsoft.plantlet.util.result;
 public enum StatusEnum implements java.io.Serializable {
     SUCCESS(0, "成功"),
     SERVER_ERROR(500, "发生不可预知的错误"),
-    EXCEL_ERROR(500, "未解析到正确的excel表格，请上传正确excel表格"),
+    EXCEL_ERROR(500, "未解析到正确的excel表格，请上传正确的excel表格"),
+    EXCEL_NO_DATA(404, "解析excel表格成功，但未解析到正确的数据"),
+    NO_EXCEL(606, "excel表格文件数据为空"),
     DEFEAT(500, "失败"),
     UNKONW_ERROR(501, "未知错误"),
     ERROR(502, "错误操作"),
@@ -25,8 +27,6 @@ public enum StatusEnum implements java.io.Serializable {
     FILE_FORMAT(603, "文件格式不正确"),
     NO_FILE(604, "文件不能为空"),
     CHECKCODE(402, "验证码不正确"),
-    NO_EXCEL(605, "excel文件无sheet表"),
-    NO_EXCEL_DATA(606, "excel文件无内容"),
     NO_PRAM(400, "参数错误");
 
 

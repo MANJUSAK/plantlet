@@ -4,16 +4,16 @@ import com.goodsoft.plantlet.domain.dao.FileDao;
 import com.goodsoft.plantlet.domain.dao.SeedlingDao;
 import com.goodsoft.plantlet.domain.entity.file.FileData;
 import com.goodsoft.plantlet.domain.entity.seedlinginfo.SeedlingInfo;
+import com.goodsoft.plantlet.domain.entity.seedlinginfo.SeedlingOffer;
+import com.goodsoft.plantlet.domain.entity.seedlinginfo.SeedlingStatistics;
 import com.goodsoft.plantlet.service.FileService;
 import com.goodsoft.plantlet.service.SeedlingService;
 import com.goodsoft.plantlet.util.DomainNameUtil;
 import com.goodsoft.plantlet.util.UUIDUtil;
-import com.goodsoft.plantlet.util.result.Result;
-import com.goodsoft.plantlet.util.result.SeedlingParam;
-import com.goodsoft.plantlet.util.result.Status;
-import com.goodsoft.plantlet.util.result.StatusEnum;
+import com.goodsoft.plantlet.util.result.*;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
@@ -42,7 +42,15 @@ public class SeedlingServicelmpl implements SeedlingService {
     //实例化服务器域名地址工具类
     private DomainNameUtil domainName = DomainNameUtil.getInstance();
 
-
+    /**
+     * 苗木数据检索业务处理方法
+     *
+     * @param request 请求
+     * @param msg     检索条件
+     * @param <T>     泛型
+     * @return 查询结果
+     * @throws Exception
+     */
     @Override
     public <T> T querySeedlingService(HttpServletRequest request, SeedlingParam msg) {
         //初始化msg.getNum() start
@@ -94,7 +102,106 @@ public class SeedlingServicelmpl implements SeedlingService {
         }
     }
 
+    /**
+     * 苗木造价数据检索业务处理方法
+     *
+     * @param msg 检索条件
+     * @param <T> 泛型
+     * @return 查询结果
+     * @throws Exception
+     */
     @Override
+    public <T> T querySeedlingService(SeedlingOfferParam msg) {
+        //初始化msg.getNum() start
+        int page = msg.getNum();
+        if (page < 0) {
+            page = 0;
+        }
+        page *= 20;
+        msg.setNum(page);
+        //初始化msg.getNum() end
+        List<SeedlingOffer> data = null;
+        try {
+            data = this.dao.querySeedlingOfferDao(msg);
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            this.logger.error(e);
+            return (T) new Status(StatusEnum.SERVER_ERROR.getCODE(), StatusEnum.SERVER_ERROR.getEXPLAIN());
+        }
+        if (data.size() > 0) {
+            return (T) new Result(0, data);
+        } else {
+            return (T) new Status(StatusEnum.NO_DATA.getCODE(), StatusEnum.NO_DATA.getEXPLAIN());
+        }
+    }
+
+    /**
+     * 苗木造价数据检索业务处理方法
+     *
+     * @param keyWord 检索条件
+     * @param <T>     泛型
+     * @return 查询结果
+     * @throws Exception
+     */
+    @Override
+    public <T> T querySeedlingStatisticsDao(String keyWord) {
+        //初始化msg.getNum() start
+       /* int page = msg.getNum();
+        if (page < 0) {
+            page = 0;
+        }
+        page *= 20;
+        msg.setNum(page);*/
+        //初始化msg.getNum() end
+        List<SeedlingStatistics> data = null;
+        try {
+            data = this.dao.querySeedlingStatisticsDao(keyWord);
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            this.logger.error(e);
+            return (T) new Status(StatusEnum.SERVER_ERROR.getCODE(), StatusEnum.SERVER_ERROR.getEXPLAIN());
+        }
+        if (data.size() > 0) {
+            return (T) new Result(0, data);
+        } else {
+            return (T) new Status(StatusEnum.NO_DATA.getCODE(), StatusEnum.NO_DATA.getEXPLAIN());
+        }
+    }
+
+    /**
+     * 查询苗木信息统计数据所有植物名称业务处理方法
+     *
+     * @param <T> 泛型
+     * @return 查询结果
+     * @throws Exception
+     */
+    @Override
+    public <T> T querySeedlingAllNameService() {
+        List<String> data = null;
+        try {
+            data = this.dao.querySeedlingAllNameDao();
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            this.logger.error(e);
+            return (T) new Status(StatusEnum.SERVER_ERROR.getCODE(), StatusEnum.SERVER_ERROR.getEXPLAIN());
+        }
+        if (data.size() > 0) {
+            return (T) new Result(0, data);
+        } else {
+            return (T) new Status(StatusEnum.NO_DATA.getCODE(), StatusEnum.NO_DATA.getEXPLAIN());
+        }
+    }
+
+    /**
+     * 苗木信息发布业务处理方法
+     *
+     * @param files   数据文件
+     * @param msg发布数据
+     * @return 发布结果
+     * @throws Exception
+     */
+    @Override
+    @Transactional
     public Status addSeedlingService(MultipartFile[] files, SeedlingInfo msg) {
         //设置文件编号
         String uuid = this.uuid.getUUID().toString();
@@ -119,7 +226,8 @@ public class SeedlingServicelmpl implements SeedlingService {
             String str = specStr.replaceAll(" ", "");
             //获取规格前缀
             String specStr1 = str.substring(1, 2);
-            if ("≤".equals(specStr1) || "≥".equals(specStr1) || "<".equals(specStr1) || ">".equals(specStr1)) {
+            if ("≤".equals(specStr1) || "≥".equals(specStr1) || "<".equals(specStr1)
+                    || ">".equals(specStr1) || "=".equals(specStr1)) {
                 //含有特殊字符则获取特殊字符
                 msg.setSpec(specStr.substring(0, 2));
                 double min = Double.parseDouble(specStr.substring(2));
@@ -143,6 +251,56 @@ public class SeedlingServicelmpl implements SeedlingService {
                 }
             }
             this.dao.addSeedlingDao(msg);
+            return new Status(StatusEnum.SUCCESS.getCODE(), StatusEnum.SUCCESS.getEXPLAIN());
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            this.logger.error(e);
+            return new Status(StatusEnum.SERVER_ERROR.getCODE(), StatusEnum.SERVER_ERROR.getEXPLAIN());
+        }
+    }
+
+    /**
+     * 苗木造价数据添加业务处理方法
+     *
+     * @param msg发布数据
+     * @return 发布结果
+     * @throws Exception
+     */
+    @Override
+    public Status addSeedlingService(SeedlingOffer msg) {
+        msg.setId(this.uuid.getUUID().toString());
+        try {
+            //获取植物规格
+            String specStr = msg.getSpec();
+            //去掉空格
+            String str = specStr.replaceAll(" ", "");
+            //获取规格前缀
+            String specStr1 = str.substring(1, 2);
+            if ("≤".equals(specStr1) || "≥".equals(specStr1) || "<".equals(specStr1)
+                    || ">".equals(specStr1) || "=".equals(specStr1)) {
+                //含有特殊字符则获取特殊字符
+                msg.setSpec(specStr.substring(0, 2));
+                double min = Double.parseDouble(specStr.substring(2));
+                msg.setSpecMin(min);
+            } else {
+                //将获取植物规格以“-”进行拆分
+                String[] spec = str.split("-");
+                //判断是否满足拆分条件
+                if (spec.length > 1) {
+                    double min = Double.parseDouble(spec[0].substring(1));
+                    double max = Double.parseDouble(spec[1]);
+                    //获取前缀
+                    msg.setSpec(spec[0].substring(0, 1));
+                    //获取规格范围
+                    msg.setSpecMin(min);
+                    msg.setSpecMax(max);
+                } else {
+                    double min = Double.parseDouble(spec[0].substring(1));
+                    msg.setSpecMin(min);
+                    msg.setSpec(spec[0].substring(0, 1));
+                }
+            }
+            this.dao.addSeedlingOfferDao(msg);
             return new Status(StatusEnum.SUCCESS.getCODE(), StatusEnum.SUCCESS.getEXPLAIN());
         } catch (Exception e) {
             System.out.println(e.toString());

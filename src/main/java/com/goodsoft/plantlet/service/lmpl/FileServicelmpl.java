@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -124,36 +125,42 @@ public class FileServicelmpl implements FileService {
         }
         //文件保存 start
         try {
-            //初始化文件实体类
-            FileData file = new FileData();
-            //设置文件编号
-            file.setFileId(fileId);
+            //初始化文件保存集合
+            List<FileData> list = new ArrayList<FileData>();
+            //保存文件到服务器并获取文件相对路径
             List<String> fileList = this.fileUpload.fileUpload(files, fileType, var1);
-            file.setBases(var1);
+            String sort = null;
             //获取文件类型 start
             switch (fileType) {
                 case "seedling":
-                    file.setSort("苗木");
+                    sort = "苗木";
                     break;
                 case "nursery":
-                    file.setSort("苗圃");
+                    sort = "苗圃";
                     break;
                 case "user":
-                    file.setSort("用户");
+                    sort = "用户";
                     break;
                 case "document":
-                    file.setSort("文档文件");
+                    sort = "文档文件";
                     break;
                 case "excel":
-                    file.setSort("表格文档");
+                    sort = "表格文档";
                     break;
                 default:
-                    file.setSort("未知分类");
+                    sort = "未知分类";
                     break;
             }
             //获取文件类型 end
             //文件信息保存 start
             for (int i = 0, length = fileList.size(); i < length; ++i) {
+                FileData file = new FileData();
+                //设置文件编号
+                file.setFileId(fileId);
+                //设置根目录
+                file.setBases(var1);
+                //设置文件类别
+                file.setSort(sort);
                 //截取新文件名字符位置
                 int j = fileList.get(i).lastIndexOf("/") + 1;
                 //截取文件后缀字符位置
@@ -166,8 +173,9 @@ public class FileServicelmpl implements FileService {
                 file.setSuffix(files[i].getOriginalFilename().substring(s, files[i].getOriginalFilename().length()));
                 //设置文件路径
                 file.setPath(fileList.get(i));
-                this.dao.saveFileDao(file);
+                list.add(file);
             }
+            this.dao.saveFileDao(list);
             //文件信息保存 end
             //清除集合里的内容  避免数据混乱
             fileList.clear();

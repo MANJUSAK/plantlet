@@ -21,10 +21,12 @@
     </select>
     <!--单文件查询sql end-->
     <!--文件信息保存sql start-->
-    <insert id="saveFileDao" parameterType="com.goodsoft.plantlet.domain.entity.file.FileData">
+    <insert id="saveFileDao" parameterType="java.util.List">
         insert into gs_fileData (fileId,path,bases,sort,fileName,newFileName,suffix)
         values
-        (#{fileId},#{path},#{bases},#{sort},#{fileName},#{newFileName},#{suffix})
+        <foreach collection="list" index="index" item="item" separator=",">
+            (#{item.fileId},#{item.path},#{item.bases},#{item.sort},#{item.fileName},#{item.newFileName},#{item.suffix})
+        </foreach>
     </insert>
     <!--文件信息保存sql end-->
     <!--文件删除sql start-->

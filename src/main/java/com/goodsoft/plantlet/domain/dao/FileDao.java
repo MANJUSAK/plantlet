@@ -21,7 +21,7 @@ public interface FileDao {
     public FileData queryFileOneDao(@Param("fileId") String fileId) throws Exception;
 
     //文件保存
-    public void saveFileDao(FileData msg) throws Exception;
+    public void saveFileDao(List<FileData> msg) throws Exception;
 
     //文件删除
     public void deleteFileDao(@Param("fileId") String... fileId) throws Exception;

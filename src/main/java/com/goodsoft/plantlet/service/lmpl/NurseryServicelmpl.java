@@ -7,6 +7,7 @@ import com.goodsoft.plantlet.domain.entity.nursery.Nursery;
 import com.goodsoft.plantlet.domain.entity.nursery.NurseryOut;
 import com.goodsoft.plantlet.service.FileService;
 import com.goodsoft.plantlet.service.NurseryService;
+import com.goodsoft.plantlet.util.DeleteFileUtil;
 import com.goodsoft.plantlet.util.DomainNameUtil;
 import com.goodsoft.plantlet.util.ExcelUtil;
 import com.goodsoft.plantlet.util.UUIDUtil;
@@ -43,6 +44,8 @@ public class NurseryServicelmpl implements NurseryService {
     private ExcelUtil excelUtil = ExcelUtil.getInstance();
     //实例化服务器域名地址工具类
     private DomainNameUtil domainName = DomainNameUtil.getInstance();
+    //实例化文件删除工具类
+    private DeleteFileUtil deleteFile = DeleteFileUtil.getInstance();
 
 
     /**
@@ -138,7 +141,7 @@ public class NurseryServicelmpl implements NurseryService {
             //获取上传excel文件数据
             List<List<Object>> list = this.excelUtil.readExcel(sb.toString(), uuid);
             if (list == null) {
-                return new Status(StatusEnum.NO_EXCEL_DATA.getCODE(), StatusEnum.NO_EXCEL_DATA.getEXPLAIN());
+                return new Status(StatusEnum.NO_EXCEL.getCODE(), StatusEnum.NO_EXCEL.getEXPLAIN());
             }
             //实例化数据保存集合类
             List<Nursery> sdData = sdData = new ArrayList<Nursery>();
@@ -206,7 +209,8 @@ public class NurseryServicelmpl implements NurseryService {
                             String str = specStr.replaceAll(" ", "");
                             //获取规格前缀
                             String specStr1 = str.substring(1, 2);
-                            if ("≤".equals(specStr1) || "≥".equals(specStr1)) {
+                            if ("≤".equals(specStr1) || "≥".equals(specStr1) || "<".equals(specStr1)
+                                    || ">".equals(specStr1) || "=".equals(specStr1)) {
                                 //含有特殊字符则获取特殊字符
                                 sd.setSpec(specStr.substring(0, 2));
                                 double min = 0;
@@ -309,18 +313,34 @@ public class NurseryServicelmpl implements NurseryService {
                     --i;
                     len = sdData.size();
                 }
-            }//判断读取数据是否满足正确格式数据
+            }//判断读取数据是否满足正确格式数据，是存库，否删除原始文件
             if (len > 0) {
                 this.dao.addNurseryDao(sdData);
-                sdData.clear();
                 return new Status(StatusEnum.SUCCESS.getCODE(), StatusEnum.SUCCESS.getEXPLAIN());
             } else {
-                return new Status(StatusEnum.EXCEL_ERROR.getCODE(), StatusEnum.EXCEL_ERROR.getEXPLAIN());
+                List<FileData> fileData = this.fileDao.queryFileDao(uuid);
+                //删除硬盘上的文件
+                this.deleteFile.deleteFile(fileData);
+                //删除数据库文件数据
+                this.fileDao.deleteFileDao(uuid);
+                return new Status(StatusEnum.EXCEL_NO_DATA.getCODE(), StatusEnum.EXCEL_NO_DATA.getEXPLAIN());
             }
         } catch (Exception e) {
+            //代码异常删除原始文件，避免数据冗余
+            List<FileData> fileData = null;
+            try {
+                fileData = this.fileDao.queryFileDao(uuid);
+                //删除硬盘上的文件
+                this.deleteFile.deleteFile(fileData);
+                //删除数据库文件数据
+                this.fileDao.deleteFileDao(uuid);
+            } catch (Exception e1) {
+                System.out.println(e.toString());
+                this.logger.error(e);
+            }
             System.out.println(e.toString());
             this.logger.error(e);
-            return new Status(StatusEnum.SERVER_ERROR.getCODE(), StatusEnum.SERVER_ERROR.getEXPLAIN());
+            return new Status(StatusEnum.EXCEL_ERROR.getCODE(), StatusEnum.EXCEL_ERROR.getEXPLAIN());
         }
     }
 
@@ -434,7 +454,7 @@ public class NurseryServicelmpl implements NurseryService {
                     //获取上传excel文件数据
                     List<List<Object>> list = this.excelUtil.readExcel(sb.toString(), uuid);
                     if (list == null) {
-                        return new Status(StatusEnum.NO_EXCEL_DATA.getCODE(), StatusEnum.NO_EXCEL_DATA.getEXPLAIN());
+                        return new Status(StatusEnum.NO_EXCEL.getCODE(), StatusEnum.NO_EXCEL.getEXPLAIN());
                     }
                     //实例化数据保存集合类
                     List<NurseryOut> sdData = sdData = new ArrayList<NurseryOut>();
@@ -488,7 +508,8 @@ public class NurseryServicelmpl implements NurseryService {
                                     String str = specStr.replaceAll(" ", "");
                                     //获取规格前缀
                                     String specStr1 = str.substring(1, 2);
-                                    if ("≤".equals(specStr1) || "≥".equals(specStr1)) {
+                                    if ("≤".equals(specStr1) || "≥".equals(specStr1) || "<".equals(specStr1)
+                                            || ">".equals(specStr1) || "=".equals(specStr1)) {
                                         //含有特殊字符则获取特殊字符
                                         sd.setSpec(specStr.substring(0, 2));
                                         double min = 0;
@@ -578,18 +599,34 @@ public class NurseryServicelmpl implements NurseryService {
                             len = sdData.size();
                         }
                     }
-                    //判断读取数据是否满足正确格式数据
+                    //判断读取数据是否满足正确格式数据，是存库，否删除原始文件
                     if (len > 0) {
                         this.dao.addNurseryOutDao(sdData);
-                        sdData.clear();
                         return new Status(StatusEnum.SUCCESS.getCODE(), StatusEnum.SUCCESS.getEXPLAIN());
                     } else {
-                        return new Status(StatusEnum.EXCEL_ERROR.getCODE(), StatusEnum.EXCEL_ERROR.getEXPLAIN());
+                        List<FileData> fileData = this.fileDao.queryFileDao(uuid);
+                        //删除硬盘上的文件
+                        this.deleteFile.deleteFile(fileData);
+                        //删除数据库文件数据
+                        this.fileDao.deleteFileDao(uuid);
+                        return new Status(StatusEnum.EXCEL_NO_DATA.getCODE(), StatusEnum.EXCEL_NO_DATA.getEXPLAIN());
                     }
                 } catch (Exception e) {
+                    //代码异常删除文件，避免数据冗余
+                    List<FileData> fileData = null;
+                    try {
+                        fileData = this.fileDao.queryFileDao(uuid);
+                        //删除硬盘上的文件
+                        this.deleteFile.deleteFile(fileData);
+                        //删除数据库文件数据
+                        this.fileDao.deleteFileDao(uuid);
+                    } catch (Exception e1) {
+                        System.out.println(e.toString());
+                        this.logger.error(e);
+                    }
                     System.out.println(e.toString());
                     this.logger.error(e);
-                    return new Status(StatusEnum.SERVER_ERROR.getCODE(), StatusEnum.SERVER_ERROR.getEXPLAIN());
+                    return new Status(StatusEnum.EXCEL_ERROR.getCODE(), StatusEnum.EXCEL_ERROR.getEXPLAIN());
                 }
         }
     }

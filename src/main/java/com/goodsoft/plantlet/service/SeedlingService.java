@@ -1,6 +1,8 @@
 package com.goodsoft.plantlet.service;
 
 import com.goodsoft.plantlet.domain.entity.seedlinginfo.SeedlingInfo;
+import com.goodsoft.plantlet.domain.entity.seedlinginfo.SeedlingOffer;
+import com.goodsoft.plantlet.util.result.SeedlingOfferParam;
 import com.goodsoft.plantlet.util.result.SeedlingParam;
 import com.goodsoft.plantlet.util.result.Status;
 import org.springframework.web.multipart.MultipartFile;
@@ -16,6 +18,18 @@ public interface SeedlingService {
     //苗木信息数据查询
     public <T> T querySeedlingService(HttpServletRequest request, SeedlingParam msg);
 
+    //苗木造价数据查询
+    public <T> T querySeedlingService(SeedlingOfferParam msg);
+
+    //苗木统计数据查询
+    public <T> T querySeedlingStatisticsDao(String keyWord);
+
+    //查询苗木统计所有苗木名称
+    public <T> T querySeedlingAllNameService();
+
     //苗木信息数据添加
     public Status addSeedlingService(MultipartFile[] files, SeedlingInfo msg);
+
+    //苗木造价数据添加
+    public Status addSeedlingService(SeedlingOffer msg);
 }

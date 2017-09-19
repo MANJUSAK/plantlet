@@ -10,6 +10,8 @@ import java.util.Objects;
  */
 public class SeedlingInfo implements java.io.Serializable {
     private String id;//数据id
+    private String seedlingComp;//苗木企业
+    private String seedlingIntro;//苗木简介
     private String sdName;//植物名称
     private String sdType;//种类
     private String spec;//规格前缀
@@ -17,7 +19,6 @@ public class SeedlingInfo implements java.io.Serializable {
     private double specMax;//规格范围第二位
     private String unit;//单位
     private double num;//数量
-    private String content;//内容
     private String fileId;//文件编号
     private String contact;//联系人
     private String tel;//手机号
@@ -30,6 +31,22 @@ public class SeedlingInfo implements java.io.Serializable {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getSeedlingComp() {
+        return seedlingComp;
+    }
+
+    public void setSeedlingComp(String seedlingComp) {
+        this.seedlingComp = seedlingComp;
+    }
+
+    public String getSeedlingIntro() {
+        return seedlingIntro;
+    }
+
+    public void setSeedlingIntro(String seedlingIntro) {
+        this.seedlingIntro = seedlingIntro;
     }
 
     public String getSdName() {
@@ -88,14 +105,6 @@ public class SeedlingInfo implements java.io.Serializable {
         this.num = num;
     }
 
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
     public String getFileId() {
         return fileId;
     }
@@ -145,11 +154,12 @@ public class SeedlingInfo implements java.io.Serializable {
                 Double.compare(that.specMax, specMax) == 0 &&
                 Double.compare(that.num, num) == 0 &&
                 Objects.equals(id, that.id) &&
+                Objects.equals(seedlingComp, that.seedlingComp) &&
+                Objects.equals(seedlingIntro, that.seedlingIntro) &&
                 Objects.equals(sdName, that.sdName) &&
                 Objects.equals(sdType, that.sdType) &&
                 Objects.equals(spec, that.spec) &&
                 Objects.equals(unit, that.unit) &&
-                Objects.equals(content, that.content) &&
                 Objects.equals(fileId, that.fileId) &&
                 Objects.equals(contact, that.contact) &&
                 Objects.equals(tel, that.tel) &&
@@ -159,7 +169,7 @@ public class SeedlingInfo implements java.io.Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, sdName, sdType, spec, specMin, specMax, unit, num, content, fileId, contact, tel, sdAdd, picture);
+        return Objects.hash(id, seedlingComp, seedlingIntro, sdName, sdType, spec, specMin, specMax, unit, num, fileId, contact, tel, sdAdd, picture);
     }
 }
 

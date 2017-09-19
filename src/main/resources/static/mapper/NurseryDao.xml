@@ -69,7 +69,7 @@
                 AND nursery_area = #{area}
             </if>
         </where>
-        ORDER BY sid DESC limit #{num},20;
+        ORDER BY nid DESC limit #{num},20;
     </select>
     <!--省内苗圃数据查询sql end-->
     <!--省外苗圃数据查询结果映射 start-->
@@ -137,7 +137,7 @@
                 AND price &lt;= #{maxPrice}
             </if>
         </where>
-        ORDER BY sid DESC limit #{num},20;
+        ORDER BY nid DESC limit #{num},20;
     </select>
     <!--省外苗圃数据查询sql end-->
     <!--数据查询 end-->

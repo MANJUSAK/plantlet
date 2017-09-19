@@ -15,19 +15,20 @@
         <result property="specMax" column="spec_max"/>
         <result property="unit" column="unit"/>
         <result property="num" column="quantity"/>
-        <result property="content" column="content"/>
         <result property="fileId" column="fileId"/>
         <result property="contact" column="contact"/>
         <result property="tel" column="tel"/>
         <result property="sdAdd" column="seedling_add"/>
+        <result property="seedlingComp" column="seedling_comp"/>
+        <result property="seedlingIntro" column="seedling_intro"/>
     </resultMap>
     <!--苗木信息数据结果映射 end-->
     <!--苗木信息数据sql start-->
     <select id="querySeedlingDao" parameterType="com.goodsoft.plantlet.util.result.SeedlingParam"
             resultMap="seedlingMap">
         SELECT `id`,`seedling_name`,`seedling_type`,`spec`,
-        `spec_min`,`spec_max`,`unit`,`quantity`,`content`,`fileId`,
-        `contact`, `tel`,`seedling_add`
+        `spec_min`,`spec_max`,`unit`,`quantity`,`fileId`,
+        `contact`, `tel`,`seedling_add`,`seedling_comp`,`seedling_intro`
         FROM `gs_seedling_info`
         <where>
             <if test="keyWord !=null and keyWord !=''">
@@ -49,18 +50,130 @@
         ORDER BY sid DESC limit #{num},20;
     </select>
     <!--苗木信息数据sql end-->
+    <!--苗木造价查询结果映射 start-->
+    <resultMap id="seedlingOfferMap" type="com.goodsoft.plantlet.domain.entity.seedlinginfo.SeedlingOffer">
+        <result property="id" column="id"/>
+        <result property="sdName" column="seedling_name"/>
+        <result property="spec" column="spec"/>
+        <result property="specMin" column="spec_min"/>
+        <result property="specMax" column="spec_max"/>
+        <result property="unit" column="unit"/>
+        <result property="sdOffer" column="seedling_offer"/>
+        <result property="comment" column="comment"/>
+        <result property="year" column="year"/>
+        <result property="month" column="month"/>
+    </resultMap>
+    <!--苗木造价查询结果映射 end-->
+    <!--苗木造价查询sql start-->
+    <select id="querySeedlingOfferDao" parameterType="com.goodsoft.plantlet.util.result.SeedlingOfferParam"
+            resultMap="seedlingOfferMap">
+        SELECT `id`,`seedling_name`,`spec`,`spec_min`,`spec_max`,`unit`,`seedling_offer`,`comment`,`year`,`month`
+        FROM `gs_seedling_offer`
+        <where>
+            <if test="keyWord != null and keyWord != ''">
+                AND seedling_name LIKE '%${keyWord}%'
+            </if>
+            <if test="specMin != null and specMin != ''">
+                AND spec_min &gt;= #{specMin}
+            </if>
+            <if test="specMax != null and specMax != ''">
+                AND spec_max &lt;= #{specMax}
+            </if>
+            <if test="minPrice != null and minPrice != ''">
+                AND seedling_offer &lt;= #{minPrice}
+            </if>
+            <if test="maxPrice != null and maxPrice != ''">
+                AND seedling_offer &lt;= #{maxPrice}
+            </if>
+            <if test="year != null and year != ''">
+                AND `year` = #{year}
+            </if>
+            <if test="month != null and month != ''">
+                AND `month` = #{month}
+            </if>
+        </where>
+        ORDER BY sid limit #{num},20;
+    </select>
+    <!--苗木造价查询sql end-->
+    <!--苗木信息统计结果映射 start-->
+    <resultMap id="SeedlingStatisticsMap" type="com.goodsoft.plantlet.domain.entity.seedlinginfo.SeedlingStatistics">
+        <result property="spec" column="spec"/>
+        <result property="offer" column="offer"/>
+        <result property="marketPrice" column="market_price"/>
+        <result property="sdName" column="seedling_name"/>
+        <result property="numOut" column="num_out"/>
+        <result property="num" column="num"/>
+        <result property="priceOut" column="price_out"/>
+        <result property="price" column="price"/>
+        <result property="unit" column="unit"/>
+    </resultMap>
+    <!--苗木信息统计结果映射 end-->
+    <!--苗木信息统计数据分析sql start-->
+    <select id="querySeedlingStatisticsDao" parameterType="java.lang.String" resultMap="SeedlingStatisticsMap">
+        SELECT DISTINCT
+        AVG(a.seedling_offer) offer,
+        CONCAT(a.spec, a.spec_min, - a.spec_max) spec,
+        b.*,
+        (price_out + price) / 2 market_price
+        FROM
+        gs_seedling_offer a
+        RIGHT JOIN
+        (SELECT DISTINCT
+        a.seedling_name,
+        SUM(a.quantity) num_out,
+        AVG(a.price) price_out,
+        a.unit,
+        SUM(b.quantity) num,
+        AVG(b.price) price
+        FROM
+        gs_nursery_outside_info a
+        RIGHT JOIN gs_nursery_province_info b ON a.seedling_name = b.plant_name
+        WHERE
+        a.seedling_name IS NOT NULL
+        GROUP BY a.seedling_name , a.unit) b ON a.seedling_name = b.seedling_name
+        WHERE
+        a.seedling_offer IS NOT NULL
+        <if test="keyWord !=null and keyWord != ''">
+            AND b.seedling_name = #{keyWord}
+        </if>
+        GROUP BY a.spec , a.spec_min , a.spec_max , b.seedling_name , b.unit limit 0,20;
+    </select>
+    <!--苗木信息统计数据分析sql end-->
+    <!--查询苗木信息统计数据所有植物名称sql start-->
+    <select id="querySeedlingAllNameDao" resultType="java.lang.String">
+    SELECT DISTINCT
+    b.seedling_name
+    FROM
+    gs_seedling_offer a
+    RIGHT JOIN
+    (SELECT DISTINCT
+        a.seedling_name
+    FROM
+        gs_nursery_outside_info a
+    RIGHT JOIN gs_nursery_province_info b ON a.seedling_name = b.plant_name) b ON a.seedling_name = b.seedling_name
+    where b.seedling_name is not null;
+    </select>
+    <!--查询苗木信息统计数据所有植物名称sql end-->
     <!--数据查询sql end-->
     <!--数据录入sql start-->
     <!--苗木信息数据录入sql start-->
     <insert id="addSeedlingDao" parameterType="com.goodsoft.plantlet.domain.entity.seedlinginfo.SeedlingInfo">
     INSERT INTO `gs_seedling_info`
-    (`id`,`seedling_name`,`seedling_type`,`spec`,`spec_min`,`spec_max`,
-    `unit`,`quantity`,`content`,`fileId`,`contact`,`tel`,`seedling_add`)
+    (`id`,`seedling_name`,`seedling_type`,`spec`,`spec_min`,`spec_max`,`unit`,`quantity`,
+    `fileId`,`contact`,`tel`,`seedling_add`,`seedling_comp`,`seedling_intro`)
     VALUES
     (#{id},#{sdName},#{sdType},#{spec},#{specMin},#{specMax},
-    #{unit},#{num},#{content},#{fileId},#{contact},#{tel},#{sdAdd});
+    #{unit},#{num},#{fileId},#{contact},#{tel},#{sdAdd},#{seedlingComp},#{seedlingIntro});
     </insert>
     <!--苗木信息数据录入sql end-->
+    <!--苗木造价数据添加sql start-->
+    <insert id="addSeedlingOfferDao" parameterType="com.goodsoft.plantlet.domain.entity.seedlinginfo.SeedlingOffer">
+    INSERT INTO `gs_seedling_offer`
+    (`id`,`seedling_name`,`spec`,`spec_min`,`spec_max`,`unit`,`seedling_offer`,`comment`,`year`,`month`)
+    VALUES
+    (#{id},#{sdName},#{spec},#{specMin},#{specMax},#{unit},#{sdOffer},#{comment},#{year},#{month});
+    </insert>
+    <!--苗木造价数据添加sql end-->
     <!--数据录入sql end-->
 </mapper>
         <!--mapper 查询苗木数据 end -->
