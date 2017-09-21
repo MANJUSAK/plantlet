@@ -9,6 +9,9 @@ import java.util.Objects;
  */
 public class SeedlingStatisticsParam implements java.io.Serializable {
     private String keyWord;//关键字
+    private String provincOut;//外省
+    private String city;//省内市
+    private String county;//省内区县
     private String spec;//规格
     private String specMin;//规格范围第一位
     private String specMax;//规格范围第二位
@@ -28,6 +31,30 @@ public class SeedlingStatisticsParam implements java.io.Serializable {
 
     public void setSpec(String spec) {
         this.spec = spec;
+    }
+
+    public String getProvincOut() {
+        return provincOut;
+    }
+
+    public void setProvincOut(String provincOut) {
+        this.provincOut = provincOut;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getCounty() {
+        return county;
+    }
+
+    public void setCounty(String county) {
+        this.county = county;
     }
 
     public String getSpecMin() {
@@ -61,6 +88,9 @@ public class SeedlingStatisticsParam implements java.io.Serializable {
         SeedlingStatisticsParam that = (SeedlingStatisticsParam) o;
         return num == that.num &&
                 Objects.equals(keyWord, that.keyWord) &&
+                Objects.equals(provincOut, that.provincOut) &&
+                Objects.equals(city, that.city) &&
+                Objects.equals(county, that.county) &&
                 Objects.equals(spec, that.spec) &&
                 Objects.equals(specMin, that.specMin) &&
                 Objects.equals(specMax, that.specMax);
@@ -68,6 +98,6 @@ public class SeedlingStatisticsParam implements java.io.Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(keyWord, spec, specMin, specMax, num);
+        return Objects.hash(keyWord, provincOut, city, county, spec, specMin, specMax, num);
     }
 }

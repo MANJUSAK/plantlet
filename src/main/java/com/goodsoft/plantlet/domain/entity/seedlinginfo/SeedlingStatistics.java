@@ -22,6 +22,10 @@ public class SeedlingStatistics implements java.io.Serializable {
     private String unit;//单位
     private String comp;//省内来源
     private String compOut;//省外来源
+    private String province;//省份
+    private String city;//市
+    private String county;//区县
+    private String provinceOut;//外省
     private String comment;//备注
 
     public String getId() {
@@ -144,6 +148,38 @@ public class SeedlingStatistics implements java.io.Serializable {
         this.comment = comment;
     }
 
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getCounty() {
+        return county;
+    }
+
+    public void setCounty(String county) {
+        this.county = county;
+    }
+
+    public String getProvinceOut() {
+        return provinceOut;
+    }
+
+    public void setProvinceOut(String provinceOut) {
+        this.provinceOut = provinceOut;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -163,11 +199,15 @@ public class SeedlingStatistics implements java.io.Serializable {
                 Objects.equals(unit, that.unit) &&
                 Objects.equals(comp, that.comp) &&
                 Objects.equals(compOut, that.compOut) &&
+                Objects.equals(province, that.province) &&
+                Objects.equals(city, that.city) &&
+                Objects.equals(county, that.county) &&
+                Objects.equals(provinceOut, that.provinceOut) &&
                 Objects.equals(comment, that.comment);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, spec, specMin, specMax, offer, marketPrice, sdName, numOut, num, priceOut, price, unit, comp, compOut, comment);
+        return Objects.hash(id, spec, specMin, specMax, offer, marketPrice, sdName, numOut, num, priceOut, price, unit, comp, compOut, province, city, county, provinceOut, comment);
     }
 }

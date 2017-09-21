@@ -249,6 +249,9 @@
         <result property="unit" column="unit"/>
         <result property="compOut" column="company_out"/>
         <result property="comp" column="company"/>
+        <result property="provinceOut" column="province_out"/>
+        <result property="county" column="county"/>
+        <result property="city" column="districts"/>
     </resultMap>
     <!--苗木信息统计数据分析详细数据结果映射 end-->
     <!--苗木信息统计数据分析详细数据sql start-->
@@ -256,12 +259,21 @@
             parameterType="com.goodsoft.plantlet.util.result.SeedlingStatisticsParam"
             resultMap="seedlingStatisticsDetailMap">
         SELECT
-        `offer`,`spec`,`spec_min`,`spec_max`,`seedling_name`,`company_out`,
-        `num_out`,`price_out`,`company`,`unit`,`num`,`price`,`market_price`
+        `offer`,`province_out`,`spec`,`spec_min`,`spec_max`,`seedling_name`,`company_out`,
+        `num_out`,`price_out`,`company`,`county`,`districts`,`unit`,`num`,`price`,`market_price`
         FROM `gs_seedling_statistics_detail`
         <where>
             <if test="keyWord !=null and keyWord != ''">
                 AND seedling_name = #{keyWord}
+            </if>
+            <if test="city != null and city != ''">
+                AND districts= #{city}
+            </if>
+            <if test="county != null and county != ''">
+                AND county= #{county}
+            </if>
+            <if test="spec != null and spec != ''">
+                AND province_out= #{provincOut}
             </if>
             <if test="spec != null and spec != ''">
                 AND spec= #{spec}

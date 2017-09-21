@@ -40,10 +40,7 @@
         FROM `gs_nursery_province_info`
         <where>
             <if test="keyWord !=null and keyWord != ''">
-                AND nursery_name LIKE '%${keyWord}%'
-            </if>
-            <if test="name !=null and name != ''">
-                AND name LIKE '%${keyWord}%'
+                AND nursery_name = #{keyWord}
             </if>
             <if test="tp !=null and tp != ''">
                 AND plant_type = #{tp}
@@ -52,10 +49,10 @@
                 AND province = #{province}
             </if>
             <if test="city !=null and city != ''">
-                AND districts LIKE #{city}
+                AND districts = #{city}
             </if>
             <if test="county !=null and county != ''">
-                AND county LIKE #{county}
+                AND county = #{county}
             </if>
             <if test="specMin !=null and specMin != ''">
                 AND spec_min &lt;= #{specMin}
