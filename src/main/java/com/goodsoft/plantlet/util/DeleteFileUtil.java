@@ -33,12 +33,12 @@ public class DeleteFileUtil {
     }
 
     /**
-     * 文件删除方法
+     * 多文件文件删除方法
      *
      * @param list 文件数据
      * @return boolean
      */
-    public boolean deleteFile(List<FileData> list) {
+    public boolean deleteAllFile(List<FileData> list) {
         int len = list.size();
         if (len > 0) {
             StringBuilder sb = new StringBuilder();
@@ -53,4 +53,25 @@ public class DeleteFileUtil {
         }
         return false;
     }
+
+    /**
+     * 单文件文件删除方法
+     *
+     * @param list 文件数据
+     * @return boolean
+     */
+    public boolean deleteFile(FileData fileData) {
+
+        if (fileData != null) {
+            StringBuilder sb = new StringBuilder();
+            sb.append(fileData.getBases());
+            sb.append(fileData.getPath());
+            File file = new File(sb.toString());
+            file.delete();
+            sb.delete(0, sb.length());
+            return true;
+        }
+        return false;
+    }
+
 }

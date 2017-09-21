@@ -382,9 +382,10 @@ public class SeedlingServicelmpl implements SeedlingService {
             case 600:
                 return new Status(StatusEnum.FILE_UPLOAD.getCODE(), StatusEnum.FILE_UPLOAD.getEXPLAIN());
         }
+        FileData file = null;
         try {
             //获取上传文件路径
-            FileData file = this.fileDao.queryFileOneDao(uuid);
+            file = this.fileDao.queryFileOneDao(uuid);
             StringBuilder sb = new StringBuilder(file.getBases());
             sb.append(file.getPath());
             /*获取上传excel文件数据 start*/
@@ -401,25 +402,22 @@ public class SeedlingServicelmpl implements SeedlingService {
                 this.dao.addSeedlingOfferDao(sdData);
                 return new Status(StatusEnum.SUCCESS.getCODE(), StatusEnum.SUCCESS.getEXPLAIN());
             } else {
-                List<FileData> fileData = this.fileDao.queryFileDao(uuid);
                 //删除硬盘上的文件
-                this.deleteFile.deleteFile(fileData);
+                this.deleteFile.deleteFile(file);
                 //删除数据库文件数据
                 this.fileDao.deleteFileDao(uuid);
                 return new Status(StatusEnum.EXCEL_NO_DATA.getCODE(), StatusEnum.EXCEL_NO_DATA.getEXPLAIN());
             }
         } catch (Exception e) {
             //代码异常删除原始文件，避免数据冗余
-            List<FileData> fileData = null;
             try {
-                fileData = this.fileDao.queryFileDao(uuid);
                 //删除硬盘上的文件
-                this.deleteFile.deleteFile(fileData);
+                this.deleteFile.deleteFile(file);
                 //删除数据库文件数据
                 this.fileDao.deleteFileDao(uuid);
             } catch (Exception e1) {
                 System.out.println(e.toString());
-                this.logger.error(e);
+                this.logger.error(e1);
             }
             System.out.println(e.toString());
             this.logger.error(e);
