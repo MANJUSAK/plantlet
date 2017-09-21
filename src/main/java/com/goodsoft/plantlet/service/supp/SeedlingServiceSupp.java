@@ -50,38 +50,42 @@ public class SeedlingServiceSupp {
                         break;
                     case 2:
                         if (this.str != "") {
-                            AnalysisParam var = this.analysisUtil.getSpecAnalysis((String) this.str);
-                            sd.setSpec(var.getStr());
-                            sd.setSpecMin(var.getNum());
-                            sd.setSpecMax(var.getNum_1());
+                            AnalysisParam var = null;
+                            try {
+                                var = this.analysisUtil.getSpecAnalysis((String) this.str);
+                                sd.setSpec(var.getStr());
+                                sd.setSpecMin(var.getNum());
+                                sd.setSpecMax(var.getNum_1());
+                            } catch (Exception e) {
+                                System.out.println(e.toString());
+                            }
                         }
                         break;
                     case 3:
                         sd.setUnit((String) this.str);
                         break;
                     case 4:
-                        try {
-                            if (this.str != "") {
+                        if (this.str != "") {
+                            try {
                                 double price = Double.parseDouble((String) this.str);
                                 sd.setSdOffer(price);
+                            } catch (Exception e) {
+                                this.logger.error(e);
+                                System.out.println(e.toString());
                             }
-                        } catch (NumberFormatException e) {
-                            sd.setSdOffer(0);
-                            this.logger.error(e);
-                            System.out.println(e.toString());
                         }
                         break;
                     case 5:
-                        try {
-                            if (this.str != "") {
+                        if (this.str != "") {
+                            try {
                                 int yera = Integer.parseInt(new SimpleDateFormat("yyyy").format(this.str));
                                 int month = Integer.parseInt(new SimpleDateFormat("MM").format(this.str));
                                 sd.setYear(yera);
                                 sd.setMonth(month);
+                            } catch (Exception e) {
+                                System.out.println(e.toString());
+                                this.logger.error(e);
                             }
-                        } catch (Exception e) {
-                            this.logger.error(e);
-                            System.out.println(e.toString());
                         }
                         break;
                     case 6:

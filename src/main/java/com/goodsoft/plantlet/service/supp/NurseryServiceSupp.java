@@ -66,7 +66,7 @@ public class NurseryServiceSupp {
                                 int code = Integer.parseInt((String) this.str);
                                 sd.setPostCode(code);
                             }
-                        } catch (NumberFormatException e) {
+                        } catch (Exception e) {
                             this.logger.error(e);
                             System.out.println(e.toString());
                         }
@@ -77,7 +77,7 @@ public class NurseryServiceSupp {
                                 long tel = Long.parseLong((String) this.str);
                                 sd.setTel(tel);
                             }
-                        } catch (NumberFormatException e) {
+                        } catch (Exception e) {
                             this.logger.error(e);
                             System.out.println(e.toString());
                         }
@@ -96,10 +96,15 @@ public class NurseryServiceSupp {
                         break;
                     case 12:
                         if (this.str != "") {
-                            AnalysisParam var = this.analysisUtil.getSpecAnalysis((String) this.str);
-                            sd.setSpec(var.getStr());
-                            sd.setSpecMin(var.getNum());
-                            sd.setSpecMax(var.getNum_1());
+                            try {
+                                AnalysisParam var = this.analysisUtil.getSpecAnalysis((String) this.str);
+                                sd.setSpec(var.getStr());
+                                sd.setSpecMin(var.getNum());
+                                sd.setSpecMax(var.getNum_1());
+                            } catch (Exception e) {
+                                System.out.println(e.toString());
+                                this.logger.error(e);
+                            }
                         }
                         break;
                     case 13:
@@ -108,7 +113,7 @@ public class NurseryServiceSupp {
                                 int num = Integer.parseInt((String) this.str);
                                 sd.setNum(num);
                             }
-                        } catch (NumberFormatException e) {
+                        } catch (Exception e) {
                             this.logger.error(e);
                             System.out.println(e.toString());
                         }
@@ -119,7 +124,7 @@ public class NurseryServiceSupp {
                                 double price = Double.parseDouble((String) this.str);
                                 sd.setPrice(price);
                             }
-                        } catch (NumberFormatException e) {
+                        } catch (Exception e) {
                             this.logger.error(e);
                             System.out.println(e.toString());
                         }
@@ -133,7 +138,7 @@ public class NurseryServiceSupp {
                                 double area = Double.parseDouble((String) this.str);
                                 sd.setArea(area);
                             }
-                        } catch (NumberFormatException e) {
+                        } catch (Exception e) {
                             this.logger.error(e);
                             System.out.println(e.toString());
                         }
@@ -210,7 +215,7 @@ public class NurseryServiceSupp {
                                 long tel = Long.parseLong((String) this.str);
                                 sd.setTel(tel);
                             }
-                        } catch (NumberFormatException e) {
+                        } catch (Exception e) {
                             this.logger.error(e);
                             System.out.println(e.toString());
                         }
@@ -245,7 +250,7 @@ public class NurseryServiceSupp {
                                 num = Integer.parseInt((String) this.str);
                                 sd.setNum(num);
                             }
-                        } catch (NumberFormatException e) {
+                        } catch (Exception e) {
                             this.logger.error(e);
                             System.out.println(e.toString());
                         }
@@ -256,7 +261,7 @@ public class NurseryServiceSupp {
                                 double price = Double.parseDouble((String) this.str);
                                 sd.setPrice(price);
                             }
-                        } catch (NumberFormatException e) {
+                        } catch (Exception e) {
                             sd.setPrice(0);
                             this.logger.error(e);
                             System.out.println(e.toString());

@@ -112,6 +112,7 @@ public class Excel2007 {
                                 if (cell.getCellStyle().getDataFormatString() == null) {
                                     continue;
                                 }
+                                System.out.println(cell.getCellStyle().getDataFormatString());
                                 switch (cell.getCellStyle().getDataFormatString()) {
                                     case "General":
                                         temp.add(this.nf.format(cell.getNumericCellValue()));
