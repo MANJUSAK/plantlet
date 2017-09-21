@@ -8,7 +8,7 @@ import java.util.Objects;
  * Created by 严彬荣 on 2017/9/18.
  * version v1.0
  */
-public class SeedlingInfo implements java.io.Serializable {
+public class SupplyInfo implements java.io.Serializable {
     private String id;//数据id
     private String seedlingComp;//苗木企业
     private String seedlingIntro;//苗木简介
@@ -148,8 +148,8 @@ public class SeedlingInfo implements java.io.Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof SeedlingInfo)) return false;
-        SeedlingInfo that = (SeedlingInfo) o;
+        if (!(o instanceof SupplyInfo)) return false;
+        SupplyInfo that = (SupplyInfo) o;
         return Double.compare(that.specMin, specMin) == 0 &&
                 Double.compare(that.specMax, specMax) == 0 &&
                 Double.compare(that.num, num) == 0 &&

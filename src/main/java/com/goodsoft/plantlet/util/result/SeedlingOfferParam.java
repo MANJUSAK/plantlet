@@ -8,6 +8,7 @@ import java.util.Objects;
  */
 public class SeedlingOfferParam implements java.io.Serializable {
     private String keyWord;//关键字
+    private String spec;//规格前缀
     private String specMin;//规格范围第一位
     private String specMax;//规格范围第二位
     private String minPrice;//最小价格
@@ -22,6 +23,14 @@ public class SeedlingOfferParam implements java.io.Serializable {
 
     public void setKeyWord(String keyWord) {
         this.keyWord = keyWord;
+    }
+
+    public String getSpec() {
+        return spec;
+    }
+
+    public void setSpec(String spec) {
+        this.spec = spec;
     }
 
     public String getSpecMin() {
@@ -87,6 +96,7 @@ public class SeedlingOfferParam implements java.io.Serializable {
         SeedlingOfferParam that = (SeedlingOfferParam) o;
         return num == that.num &&
                 Objects.equals(keyWord, that.keyWord) &&
+                Objects.equals(spec, that.spec) &&
                 Objects.equals(specMin, that.specMin) &&
                 Objects.equals(specMax, that.specMax) &&
                 Objects.equals(minPrice, that.minPrice) &&
@@ -97,6 +107,6 @@ public class SeedlingOfferParam implements java.io.Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(keyWord, specMin, specMax, minPrice, maxPrice, year, month, num);
+        return Objects.hash(keyWord, spec, specMin, specMax, minPrice, maxPrice, year, month, num);
     }
 }

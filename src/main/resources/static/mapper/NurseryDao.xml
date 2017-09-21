@@ -29,13 +29,14 @@
         <result property="price" column="price"/>
         <result property="num" column="quantity"/>
         <result property="postCode" column="post_code"/>
+        <result property="county" column="county"/>
     </resultMap>
     <!--省内苗圃数据查询结果映射 end-->
     <!--省内苗圃数据查询sql start-->
     <select id="queryNurseryDao" parameterType="com.goodsoft.plantlet.util.result.NurseryParam" resultMap="nurseryMap">
         SELECT `id`,`nursery_name`,`contacts`,`tel`,`nursery_intro`,`fax_num`,`email`,`nursery_add`,
         `province`,`districts`,`nursery_area`,`fileId`,`pro_license_num`,`oper_license_num`,`spec`,
-        `spec_min`,`spec_max`,`price`,`quantity`,`post_code`,`plant_name`,`plant_type`
+        `spec_min`,`spec_max`,`price`,`quantity`,`post_code`,`plant_name`,`plant_type`,`county`
         FROM `gs_nursery_province_info`
         <where>
             <if test="keyWord !=null and keyWord != ''">
@@ -52,6 +53,9 @@
             </if>
             <if test="city !=null and city != ''">
                 AND districts LIKE #{city}
+            </if>
+            <if test="county !=null and county != ''">
+                AND county LIKE #{county}
             </if>
             <if test="specMin !=null and specMin != ''">
                 AND spec_min &lt;= #{specMin}
@@ -99,7 +103,7 @@
     </resultMap>
     <!--省外苗圃数据查询结果映射 end-->
     <!--省外苗圃数据查询sql start-->
-    <select id="queryNurseryOutDao" parameterType="com.goodsoft.plantlet.util.result.NurseryOutParam"
+    <select id="queryNurseryOutDao" parameterType="com.goodsoft.plantlet.util.result.NurseryParam"
             resultMap="NurseryOutMap">
         SELECT `id`,`province`,`city`,`company_name`,`tel`,`seedling_type`,`seedling_name`,`spec`,`unit`,
         `quantity`,`price`,`comments`,`acquisition_time`,`address`,`fileId`,`fax_num`,`web_site`,`email`,
@@ -120,9 +124,6 @@
             </if>
             <if test="city != null and city != ''">
                 AND city = #{city}
-            </if>
-            <if test="address != null and address != ''">
-                AND address = #{address}
             </if>
             <if test="specMin != null and specMin != ''">
                 AND spec_min &gt;= #{specMin}
@@ -147,12 +148,13 @@
     <insert id="addNurseryDao" parameterType="java.util.List">
         INSERT INTO `gs_nursery_province_info`
         (`id`,`nursery_name`,`contacts`,`tel`,`nursery_intro`,`fax_num`,`email`,`nursery_add`,`province`,`districts`,`nursery_area`,
-        `fileId`,`pro_license_num`,`oper_license_num`,`spec`,`spec_min`,`spec_max`,`price`,`quantity`,`post_code`,`plant_name`,`plant_type`)
+        `fileId`,`pro_license_num`,`oper_license_num`,`spec`,`spec_min`,`spec_max`,`price`,`quantity`,`post_code`,`plant_name`,`plant_type`,`county`)
         VALUES
         <foreach collection="list" index="index" item="item" separator=",">
             (#{item.id},#{item.nurseryName},#{item.contact},#{item.tel},#{item.nurseryIntro},#{item.fax},#{item.email},
             #{item.nurseryAdd},#{item.province},#{item.districts},#{item.area},#{item.fileId},#{item.proLicenseNum},
-            #{item.operLicenseNum},#{item.spec},#{item.specMin},#{item.specMax},#{item.price},#{item.num},#{item.postCode},#{item.plantName},#{item.types})
+            #{item.operLicenseNum},#{item.spec},#{item.specMin},#{item.specMax},#{item.price},#{item.num},#{item.postCode},#{item.plantName},
+            #{item.types},#{item.county})
         </foreach>
     </insert>
     <!--省内苗圃数据多数据添加sql end-->
@@ -160,10 +162,10 @@
     <insert id="addNurseryOneDao" parameterType="com.goodsoft.plantlet.domain.entity.nursery.Nursery">
     INSERT INTO `gs_nursery_province_info`
     (`id`,`nursery_name`,`contacts`,`tel`,`nursery_intro`,`fax_num`,`email`,`nursery_add`,`province`,`districts`,`nursery_area`,
-    `fileId`,`pro_license_num`,`oper_license_num`,`spec`,`spec_min`,`spec_max`,`price`,`quantity`,`post_code`,`plant_name`,`plant_type`)
+    `fileId`,`pro_license_num`,`oper_license_num`,`spec`,`spec_min`,`spec_max`,`price`,`quantity`,`post_code`,`plant_name`,`plant_type`,`county`)
     VALUES
     (#{id},#{nurseryName},#{contact},#{tel},#{nurseryIntro},#{fax},#{email},#{nurseryAdd},#{province},#{districts},#{area},
-    #{fileId},#{proLicenseNum},#{operLicenseNum},#{spec},#{specMin},#{specMax},#{price},#{num},#{postCode},#{plantName},#{types})
+    #{fileId},#{proLicenseNum},#{operLicenseNum},#{spec},#{specMin},#{specMax},#{price},#{num},#{postCode},#{plantName},#{types},#{county})
     </insert>
     <!--省内苗圃数据单条数据添加sql end-->
     <!--省内苗圃数据添加sql end-->
@@ -171,11 +173,11 @@
     <!--省外苗圃多数据录入 start-->
     <insert id="addNurseryOutDao" parameterType="java.util.List">
         INSERT INTO `gs_nursery_outside_info`
-        (`id`,`province`,`city`,`company_name`,`tel`,`seedling_type`,`seedling_name`,`spec`,`unit`,`quantity`,`price`,
+        (`id`,`province`,`company_name`,`tel`,`seedling_type`,`seedling_name`,`spec`,`unit`,`quantity`,`price`,
         `comments`,`acquisition_time`,`address`,`fileId`,`fax_num`,`web_site`,`email`,`spec_min`,`spec_max`)
         VALUES
         <foreach collection="list" item="item" index="index" separator=",">
-            (#{item.id}, #{item.province}, #{item.city}, #{item.company}, #{item.tel}, #{item.types},
+            (#{item.id}, #{item.province}, #{item.company}, #{item.tel}, #{item.types},
             #{item.seedlingName}, #{item.spec},#{item.unit}, #{item.num}, #{item.price}, #{item.comment},
             #{item.date},#{item.address},#{item.fileId},#{item.fax},#{item.webSite},#{item.email},#{item.specMin},#{item.specMax})
         </foreach>
@@ -184,10 +186,10 @@
     <!--省外苗圃单条数据录入 start-->
     <insert id="addNurseryOutOneDao" parameterType="com.goodsoft.plantlet.domain.entity.nursery.NurseryOut">
         INSERT INTO `gs_nursery_outside_info`
-        (`id`,`province`,`city`,`company_name`,`tel`,`seedling_type`,`seedling_name`,`spec`,`unit`,`quantity`,`price`,
+        (`id`,`province`,`company_name`,`tel`,`seedling_type`,`seedling_name`,`spec`,`unit`,`quantity`,`price`,
         `comments`,`acquisition_time`,`address`,`fileId`,`fax_num`,`web_site`,`email`,`spec_min`,`spec_max`)
         VALUES
-        (#{id}, #{province}, #{city}, #{company}, #{tel}, #{types},
+        (#{id}, #{province}, #{company}, #{tel}, #{types},
         #{seedlingName}, #{spec},#{unit}, #{num}, #{price}, #{comment},
         #{date},#{address},#{fileId},#{fax},#{webSite},#{email},#{specMin},#{specMax})
     </insert>

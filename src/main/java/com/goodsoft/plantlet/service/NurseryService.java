@@ -3,7 +3,6 @@ package com.goodsoft.plantlet.service;
 import com.goodsoft.plantlet.domain.entity.nursery.Nursery;
 import com.goodsoft.plantlet.domain.entity.nursery.NurseryOut;
 import com.goodsoft.plantlet.util.result.NurseryParam;
-import com.goodsoft.plantlet.util.result.NurseryOutParam;
 import com.goodsoft.plantlet.util.result.Status;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -26,7 +25,7 @@ public interface NurseryService {
     public Status addNurseryOneService(MultipartFile[] files, Nursery msg);
 
     //省外苗圃数据查询
-    public <T> T queryNurseryOutService(NurseryOutParam msg);
+    public <T> T queryNurseryOutService(NurseryParam msg);
 
     //省外苗圃数据多数据添加
     public Status addNurseryOutService(MultipartFile[] files, NurseryOut msg);

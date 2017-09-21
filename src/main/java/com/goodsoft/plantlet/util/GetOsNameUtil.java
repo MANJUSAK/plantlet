@@ -5,20 +5,20 @@ package com.goodsoft.plantlet.util;
  * Created by 严彬荣 on 2017/9/8.
  */
 @SuppressWarnings("ALL")
-public class GetOsName {
+public class GetOsNameUtil {
     /**
      * 创建本类的单例模式（具体说明参见本包下的UUIDUtil类） start
      */
-    private volatile static GetOsName instance;
+    private volatile static GetOsNameUtil instance;
 
-    private GetOsName() {
+    private GetOsNameUtil() {
     }
 
-    public static GetOsName getInstance() {
+    public static GetOsNameUtil getInstance() {
         if (instance == null) {
-            synchronized (GetOsName.class) {
+            synchronized (GetOsNameUtil.class) {
                 if (instance == null) {
-                    instance = new GetOsName();
+                    instance = new GetOsNameUtil();
                 }
             }
         }

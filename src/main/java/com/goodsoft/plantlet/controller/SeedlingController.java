@@ -1,12 +1,13 @@
 package com.goodsoft.plantlet.controller;
 
-import com.goodsoft.plantlet.domain.entity.seedlinginfo.SeedlingInfo;
 import com.goodsoft.plantlet.domain.entity.seedlinginfo.SeedlingOffer;
+import com.goodsoft.plantlet.domain.entity.seedlinginfo.SeedlingStatistics;
+import com.goodsoft.plantlet.domain.entity.seedlinginfo.SupplyInfo;
 import com.goodsoft.plantlet.service.SeedlingService;
 import com.goodsoft.plantlet.util.result.SeedlingOfferParam;
-import com.goodsoft.plantlet.util.result.SeedlingParam;
 import com.goodsoft.plantlet.util.result.SeedlingStatisticsParam;
 import com.goodsoft.plantlet.util.result.Status;
+import com.goodsoft.plantlet.util.result.SupplyParam;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -25,15 +26,27 @@ public class SeedlingController {
     private SeedlingService service;
 
     /**
-     * 苗木信息发布数据查询接口
+     * 苗木信息数据查询接口
+     *
+     * @param msg 查询条件
+     * @return 响应结果
+     */
+    @CrossOrigin(origins = "*", maxAge = 3600, methods = RequestMethod.GET)
+    @RequestMapping("/find/info/seedling.action.do")
+    public Object querySeedlingInfoController(SeedlingStatisticsParam msg) {
+        return this.service.querySeedlingService(msg);
+    }
+
+    /**
+     * 供需信息发布数据查询接口
      *
      * @param request 请求
      * @param msg     查询条件
      * @return 响应结果
      */
     @CrossOrigin(origins = "*", maxAge = 3600, methods = RequestMethod.GET)
-    @RequestMapping("/find/seedling.action.do")
-    public Object querySeedlingController(HttpServletRequest request, SeedlingParam msg) {
+    @RequestMapping("/find/supply/seedling.action.do")
+    public Object querySeedlingController(HttpServletRequest request, SupplyParam msg) {
         return this.service.querySeedlingService(request, msg);
     }
 
@@ -47,6 +60,18 @@ public class SeedlingController {
     @RequestMapping("/find/offer/seedling.action.do")
     public Object querySeedlingController(SeedlingOfferParam msg) {
         return this.service.querySeedlingService(msg);
+    }
+
+    /**
+     * 苗木造价统计年月日数据查询接口
+     *
+     * @param msg 查询条件
+     * @return 响应结果
+     */
+    @CrossOrigin(origins = "*", maxAge = 3600, methods = RequestMethod.GET)
+    @RequestMapping("/find/offer/statistics/seedling.action.do")
+    public Object querySeedlingOfferController(SeedlingOfferParam msg) {
+        return this.service.querySeedlingOfferStatisticsService(msg);
     }
 
     /**
@@ -74,7 +99,7 @@ public class SeedlingController {
     }
 
     /**
-     * 苗木统计数据查询接口
+     * 苗木统计数据查询苗木名称接口
      *
      * @return 响应结果
      */
@@ -85,14 +110,25 @@ public class SeedlingController {
     }
 
     /**
-     * 苗木信息发布接口
+     * 苗木信息添加接口
+     *
+     * @param msg 添加数据
+     * @return 响应结果
+     */
+    @RequestMapping(value = "/add/info/seedling.action.do", method = RequestMethod.POST)
+    public Status addSeedlingController(SeedlingStatistics msg) {
+        return this.service.addSeedlingService(msg);
+    }
+
+    /**
+     * 供需信息发布接口
      *
      * @param files 发布文件
      * @param msg   发布数据
      * @return 响应结果
      */
-    @RequestMapping(value = "/add/seedling.action.do", method = RequestMethod.POST)
-    public Status addSeedlingController(@RequestParam("files") MultipartFile[] files, SeedlingInfo msg) {
+    @RequestMapping(value = "/add/supply/seedling.action.do", method = RequestMethod.POST)
+    public Status addSeedlingController(@RequestParam("files") MultipartFile[] files, SupplyInfo msg) {
         return this.service.addSeedlingService(files, msg);
     }
 

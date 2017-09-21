@@ -15,7 +15,7 @@ import java.util.List;
  */
 @SuppressWarnings("ALL")
 @Service
-public class FileUpload {
+public class FileUploadUtil {
 
     //实例化公共集合类用以存储文件相对路径
     private List<String> fileList = new ArrayList<String>();

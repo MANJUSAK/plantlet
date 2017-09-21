@@ -16,8 +16,8 @@ public class SeedlingOffer implements java.io.Serializable {
     private double specMax;//规格范围第二位
     private String unit;//单位
     private double sdOffer;//造价
-    private String year;//年
-    private String month;//月
+    private int year;//年
+    private int month;//月
     private String comment;//备注
 
     public String getId() {
@@ -84,19 +84,19 @@ public class SeedlingOffer implements java.io.Serializable {
         this.comment = comment;
     }
 
-    public String getYear() {
+    public int getYear() {
         return year;
     }
 
-    public void setYear(String year) {
+    public void setYear(int year) {
         this.year = year;
     }
 
-    public String getMonth() {
+    public int getMonth() {
         return month;
     }
 
-    public void setMonth(String month) {
+    public void setMonth(int month) {
         this.month = month;
     }
 
@@ -108,12 +108,12 @@ public class SeedlingOffer implements java.io.Serializable {
         return Double.compare(that.specMin, specMin) == 0 &&
                 Double.compare(that.specMax, specMax) == 0 &&
                 Double.compare(that.sdOffer, sdOffer) == 0 &&
+                year == that.year &&
+                month == that.month &&
                 Objects.equals(id, that.id) &&
                 Objects.equals(sdName, that.sdName) &&
                 Objects.equals(spec, that.spec) &&
                 Objects.equals(unit, that.unit) &&
-                Objects.equals(year, that.year) &&
-                Objects.equals(month, that.month) &&
                 Objects.equals(comment, that.comment);
     }
 

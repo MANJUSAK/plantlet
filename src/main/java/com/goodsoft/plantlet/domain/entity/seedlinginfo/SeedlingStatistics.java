@@ -8,17 +8,29 @@ import java.util.Objects;
  * version v1.0
  */
 public class SeedlingStatistics implements java.io.Serializable {
-    private String spec;
-    private double offer;
-    private double marketPrice;
-    private String sdName;
-    private int numOut;
-    private int num;
-    private double priceOut;
-    private double price;
-    private String unit;
-    private String comp;
-    private String compOut;
+    private String id;//数据id
+    private String spec;//规格
+    private double specMin;//规格范围第一位
+    private double specMax;//规格范围第二位
+    private double offer;//造价
+    private double marketPrice;//市场
+    private String sdName;//苗木名称
+    private int numOut;//省外数量
+    private int num;//省内数量
+    private double priceOut;//省外价格
+    private double price;//省内价格
+    private String unit;//单位
+    private String comp;//省内来源
+    private String compOut;//省外来源
+    private String comment;//备注
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getSpec() {
         return spec;
@@ -26,6 +38,22 @@ public class SeedlingStatistics implements java.io.Serializable {
 
     public void setSpec(String spec) {
         this.spec = spec;
+    }
+
+    public double getSpecMin() {
+        return specMin;
+    }
+
+    public void setSpecMin(double specMin) {
+        this.specMin = specMin;
+    }
+
+    public double getSpecMax() {
+        return specMax;
+    }
+
+    public void setSpecMax(double specMax) {
+        this.specMax = specMax;
     }
 
     public double getOffer() {
@@ -108,26 +136,38 @@ public class SeedlingStatistics implements java.io.Serializable {
         this.compOut = compOut;
     }
 
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof SeedlingStatistics)) return false;
         SeedlingStatistics that = (SeedlingStatistics) o;
-        return Double.compare(that.offer, offer) == 0 &&
+        return Double.compare(that.specMin, specMin) == 0 &&
+                Double.compare(that.specMax, specMax) == 0 &&
+                Double.compare(that.offer, offer) == 0 &&
                 Double.compare(that.marketPrice, marketPrice) == 0 &&
                 numOut == that.numOut &&
                 num == that.num &&
                 Double.compare(that.priceOut, priceOut) == 0 &&
                 Double.compare(that.price, price) == 0 &&
+                Objects.equals(id, that.id) &&
                 Objects.equals(spec, that.spec) &&
                 Objects.equals(sdName, that.sdName) &&
                 Objects.equals(unit, that.unit) &&
                 Objects.equals(comp, that.comp) &&
-                Objects.equals(compOut, that.compOut);
+                Objects.equals(compOut, that.compOut) &&
+                Objects.equals(comment, that.comment);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(spec, offer, marketPrice, sdName, numOut, num, priceOut, price, unit, comp, compOut);
+        return Objects.hash(id, spec, specMin, specMax, offer, marketPrice, sdName, numOut, num, priceOut, price, unit, comp, compOut, comment);
     }
 }

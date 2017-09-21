@@ -7,8 +7,10 @@ import com.goodsoft.plantlet.domain.entity.nursery.Nursery;
 import com.goodsoft.plantlet.domain.entity.nursery.NurseryOut;
 import com.goodsoft.plantlet.service.FileService;
 import com.goodsoft.plantlet.service.NurseryService;
+import com.goodsoft.plantlet.service.supp.NurseryServiceSupp;
+import com.goodsoft.plantlet.service.supp.ServicelmplGetFileSupp;
+import com.goodsoft.plantlet.util.DataAnalysisUtil;
 import com.goodsoft.plantlet.util.DeleteFileUtil;
-import com.goodsoft.plantlet.util.DomainNameUtil;
 import com.goodsoft.plantlet.util.ExcelUtil;
 import com.goodsoft.plantlet.util.UUIDUtil;
 import com.goodsoft.plantlet.util.result.*;
@@ -19,7 +21,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -36,16 +37,20 @@ public class NurseryServicelmpl implements NurseryService {
     private FileService fileService;
     @Resource
     private FileDao fileDao;
+    @Resource
+    private NurseryServiceSupp serviceSupp;
+    @Resource
+    ServicelmplGetFileSupp getFileSupp;
     //实例化日志管理工具类
     private Logger logger = Logger.getLogger(SeedlingServicelmpl.class);
     //实例化UUID工具类
     private UUIDUtil uuid = UUIDUtil.getInstance();
     //实例化excel工具类
     private ExcelUtil excelUtil = ExcelUtil.getInstance();
-    //实例化服务器域名地址工具类
-    private DomainNameUtil domainName = DomainNameUtil.getInstance();
     //实例化文件删除工具类
     private DeleteFileUtil deleteFile = DeleteFileUtil.getInstance();
+    //实例化数据解析工具类
+    private DataAnalysisUtil analysisUtil = DataAnalysisUtil.getInstance();
 
 
     /**
@@ -58,54 +63,35 @@ public class NurseryServicelmpl implements NurseryService {
      * @throws Exception
      */
     @Override
-    public <T> T queryNurseryService(HttpServletRequest request, NurseryParam msg) {
+    public <T> T queryNurseryService(HttpServletRequest request, NurseryParam param) {
         //初始化msg.getNum() start
-        int page = msg.getNum();
+        int page = param.getNum();
         if (page < 0) {
             page = 0;
         }
         page *= 20;
-        msg.setNum(page);
+        param.setNum(page);
         //初始化msg.getNum() end
         List<Nursery> data = null;
         try {
-            data = this.dao.queryNurseryDao(msg);
+            data = this.dao.queryNurseryDao(param);
+            int sd = data.size();
+            if (sd > 0) {
+                for (int i = 0; i < sd; ++i) {
+                    //获取文件数据
+                    List<String> url = this.getFileSupp.getFileData(request, data.get(i).getFileId());
+                    data.get(i).setPicture(url);
+                }
+                return (T) new Result(0, data);
+            } else {
+                return (T) new Status(StatusEnum.NO_DATA.getCODE(), StatusEnum.NO_DATA.getEXPLAIN());
+            }
         } catch (Exception e) {
             System.out.println(e.toString());
             this.logger.error(e);
             return (T) new Status(StatusEnum.SERVER_ERROR.getCODE(), StatusEnum.SERVER_ERROR.getEXPLAIN());
         }
-        int sd = data.size();
-        if (sd > 0) {
-            //获取服务器域名地址
-            String var = this.domainName.getServerDomainName(request).toString();
-            StringBuilder sb = new StringBuilder();
-            try {
-                for (int i = 0; i < sd; ++i) {
-                    //查询数据对应的图片信息
-                    List<FileData> path = this.fileDao.queryFileDao(data.get(i).getFileId());
-                    int p = path.size();
-                    if (p > 0) {
-                        //封装域名地址以及图片相对路径
-                        List url = new ArrayList();
-                        for (int j = 0; j < p; ++j) {
-                            sb.append(var);
-                            sb.append(path.get(j).getPath());
-                            url.add(sb.toString());
-                            sb.delete(0, sb.length());
-                        }
-                        //将图片完整地址封装到数据中
-                        data.get(i).setPicture(url);
-                    }
-                }
-            } catch (Exception e) {
-                System.out.println(e.toString());
-                this.logger.error(e);
-            }
-            return (T) new Result(0, data);
-        } else {
-            return (T) new Status(StatusEnum.NO_DATA.getCODE(), StatusEnum.NO_DATA.getEXPLAIN());
-        }
+
     }
 
     /**
@@ -138,182 +124,16 @@ public class NurseryServicelmpl implements NurseryService {
             FileData file = this.fileDao.queryFileOneDao(uuid);
             StringBuilder sb = new StringBuilder(file.getBases());
             sb.append(file.getPath());
-            //获取上传excel文件数据
+            /*获取上传excel文件数据 start*/
             List<List<Object>> list = this.excelUtil.readExcel(sb.toString(), uuid);
             if (list == null) {
                 return new Status(StatusEnum.NO_EXCEL.getCODE(), StatusEnum.NO_EXCEL.getEXPLAIN());
             }
-            //实例化数据保存集合类
-            List<Nursery> sdData = sdData = new ArrayList<Nursery>();
-            for (int i = 0, len = list.size(); i < len; ++i) {
-                List<Object> data = list.get(i);
-                int d = data.size();
-                Nursery sd = new Nursery();
-                for (int j = 0; j < d; ++j) {
-                    //判断读取字段是否为空字符串
-                    if ("".equals(data.get(j))) {
-                        continue;
-                    }
-                    switch (j) {
-                        case 0:
-                            sd.setId((String) data.get(j));
-                            break;
-                        case 1:
-                            sd.setProvince((String) data.get(j));
-                            break;
-                        case 2:
-                            sd.setDistricts((String) data.get(j));
-                            break;
-                        case 3:
-                            sd.setNurseryName((String) data.get(j));
-                            break;
-                        case 4:
-                            sd.setNurseryAdd((String) data.get(j));
-                            break;
-                        case 5:
-                            try {
-                                int code = Integer.parseInt((String) data.get(j));
-                                sd.setPostCode(code);
-                            } catch (NumberFormatException e) {
-                                this.logger.error(e);
-                                System.out.println(e.toString());
-                                sd.setPostCode(0);
-                            }
-                            break;
-                        case 6:
-                            try {
-                                long tel = Long.parseLong((String) data.get(j));
-                                sd.setTel(tel);
-                            } catch (NumberFormatException e) {
-                                this.logger.error(e);
-                                System.out.println(e.toString());
-                                sd.setTel(0);
-                            }
-                            break;
-                        case 7:
-                            sd.setFax((String) data.get(j));
-                            break;
-                        case 8:
-                            sd.setContact((String) data.get(j));
-                            break;
-                        case 9:
-                            sd.setEmail((String) data.get(j));
-                            break;
-                        case 10:
-                            sd.setPlantName((String) data.get(j));
-                            break;
-                        case 11:
-                            //获取植物规格
-                            String specStr = (String) data.get(j);
-                            //去掉空格
-                            String str = specStr.replaceAll(" ", "");
-                            //获取规格前缀
-                            String specStr1 = str.substring(1, 2);
-                            if ("≤".equals(specStr1) || "≥".equals(specStr1) || "<".equals(specStr1)
-                                    || ">".equals(specStr1) || "=".equals(specStr1)) {
-                                //含有特殊字符则获取特殊字符
-                                sd.setSpec(specStr.substring(0, 2));
-                                double min = 0;
-                                try {
-                                    min = Double.parseDouble(specStr.substring(2));
-                                    sd.setSpecMin(min);
-                                } catch (NumberFormatException e) {
-                                    sd.setSpecMin(min);
-                                    System.out.println(e.toString());
-                                    this.logger.error(e);
-                                }
-                            } else {
-                                //将获取植物规格以“-”进行拆分
-                                String[] spec = str.split("-");
-                                //判断是否满足拆分条件
-                                if (spec.length > 1) {
-                                    double min = 0;
-                                    double max = 0;
-                                    try {
-                                        //获取前缀
-                                        sd.setSpec(spec[0].substring(0, 1));
-                                        //获取规格范围
-                                        min = Double.parseDouble(spec[0].substring(1));
-                                        max = Double.parseDouble(spec[1]);
-                                        sd.setSpecMin(min);
-                                        sd.setSpecMax(max);
-                                    } catch (NumberFormatException e) {
-                                        this.logger.error(e);
-                                        sd.setSpecMin(min);
-                                        sd.setSpecMax(max);
-                                    }
-                                } else {
-                                    double min = 0;
-                                    sd.setSpec(spec[0].substring(0, 1));
-                                    try {
-                                        min = Double.parseDouble(spec[0].substring(1));
-                                        sd.setSpecMin(min);
-                                    } catch (NumberFormatException e) {
-                                        sd.setSpecMin(min);
-                                        System.out.println(e.toString());
-                                        this.logger.error(e);
-                                    }
-                                }
-                            }
-                            break;
-                        case 12:
-                            int num = 0;
-                            try {
-                                num = Integer.parseInt((String) data.get(j));
-                                sd.setNum(num);
-                            } catch (NumberFormatException e) {
-                                sd.setNum(num);
-                                this.logger.error(e);
-                                System.out.println(e.toString());
-                            }
-                            break;
-                        case 13:
-                            try {
-                                double price = Double.parseDouble((String) data.get(j));
-                                sd.setPrice(price);
-                            } catch (NumberFormatException e) {
-                                sd.setPrice(0);
-                                this.logger.error(e);
-                                System.out.println(e.toString());
-                            }
-                            break;
-                        case 14:
-                            sd.setTypes((String) data.get(j));
-                            break;
-                        case 15:
-                            try {
-                                double area = Double.parseDouble((String) data.get(j));
-                                sd.setArea(area);
-                            } catch (NumberFormatException e) {
-                                this.logger.error(e);
-                                System.out.println(e.toString());
-                                sd.setArea(0);
-                            }
-                            break;
-                        case 16:
-                            sd.setProLicenseNum((String) data.get(j));
-                            break;
-                        case 17:
-                            sd.setOperLicenseNum((String) data.get(j));
-                            break;
-                        default:
-                            break;
-                    }
-                }
-                sdData.add(sd);
-            }
-            //判断保存数据是否有null值，是移除空值
-            int len = sdData.size();
-            for (int i = 0; i < len; ++i) {
-                if (sdData.get(i).getProvince() == null || sdData.get(i).getNurseryName() == null || sdData.get(i).getArea() == 0 ||
-                        sdData.get(i).getPostCode() == 0 || sdData.get(i).getTel() == 0 || sdData.get(i).getPlantName() == null
-                        || sdData.get(i).getSpec() == null || sdData.get(i).getPrice() == 0 ||
-                        sdData.get(i).getNum() == 0 || sdData.get(i).getTypes() == null) {
-                    sdData.remove(i);
-                    --i;
-                    len = sdData.size();
-                }
-            }//判断读取数据是否满足正确格式数据，是存库，否删除原始文件
+            List<Nursery> sdData = this.serviceSupp.getNurseryExcelData(list);
+            /*获取上传excel文件数据 end*/
+            //解析excel数据有效性
+            int len = this.serviceSupp.getNurseryExcelDataAnalysis(sdData);
+            //判断解析数据是否满足正确格式数据，是存库，否删除原始文件
             if (len > 0) {
                 this.dao.addNurseryDao(sdData);
                 return new Status(StatusEnum.SUCCESS.getCODE(), StatusEnum.SUCCESS.getEXPLAIN());
@@ -371,6 +191,13 @@ public class NurseryServicelmpl implements NurseryService {
         }
         msg.setFileId(uuid);
         msg.setId(this.uuid.getUUID().toString());
+        //获取规格数据并进行解析
+        if (null != msg.getSpec()) {
+            AnalysisParam var = this.analysisUtil.getSpecAnalysis(msg.getSpec());
+            msg.setSpec(var.getStr());
+            msg.setSpecMin(var.getNum());
+            msg.setSpecMax(var.getNum_1());
+        }
         try {
             this.dao.addNurseryOneDao(msg);
             return new Status(StatusEnum.SUCCESS.getCODE(), StatusEnum.SUCCESS.getEXPLAIN());
@@ -390,18 +217,18 @@ public class NurseryServicelmpl implements NurseryService {
      * @throws Exception
      */
     @Override
-    public <T> T queryNurseryOutService(NurseryOutParam msg) {
+    public <T> T queryNurseryOutService(NurseryParam param) {
         //初始化msg.getNum() start
-        int page = msg.getNum();
+        int page = param.getNum();
         if (page < 0) {
             page = 0;
         }
         page *= 20;
-        msg.setNum(page);
+        param.setNum(page);
         //初始化msg.getNum() end
         List<NurseryOut> data = null;
         try {
-            data = this.dao.queryNurseryOutDao(msg);
+            data = this.dao.queryNurseryOutDao(param);
         } catch (Exception e) {
             System.out.println(e.toString());
             this.logger.error(e);
@@ -431,6 +258,13 @@ public class NurseryServicelmpl implements NurseryService {
         switch (arg) {
             case 604:
                 msg.setId(this.uuid.getUUID().toString());
+                //获取规格数据并进行解析
+                if (null != msg.getSpec()) {
+                    AnalysisParam var = this.analysisUtil.getSpecAnalysis(msg.getSpec());
+                    msg.setSpec(var.getStr());
+                    msg.setSpecMin(var.getNum());
+                    msg.setSpecMax(var.getNum_1());
+                }
                 try {
                     this.dao.addNurseryOutOneDao(msg);
                     return new Status(StatusEnum.SUCCESS.getCODE(), StatusEnum.SUCCESS.getEXPLAIN());
@@ -451,155 +285,16 @@ public class NurseryServicelmpl implements NurseryService {
                     FileData file = this.fileDao.queryFileOneDao(uuid);
                     StringBuilder sb = new StringBuilder(file.getBases());
                     sb.append(file.getPath());
-                    //获取上传excel文件数据
+                    /*获取上传excel文件数据 start*/
                     List<List<Object>> list = this.excelUtil.readExcel(sb.toString(), uuid);
                     if (list == null) {
                         return new Status(StatusEnum.NO_EXCEL.getCODE(), StatusEnum.NO_EXCEL.getEXPLAIN());
                     }
-                    //实例化数据保存集合类
-                    List<NurseryOut> sdData = sdData = new ArrayList<NurseryOut>();
-                    for (int i = 0, len = list.size(); i < len; ++i) {
-                        List<Object> data = list.get(i);
-                        int d = data.size();
-                        NurseryOut sd = new NurseryOut();
-                        for (int j = 0; j < d; ++j) {
-                            //判断读取字段是否为空字符串
-                            if ("".equals(data.get(j))) {
-                                continue;
-                            }
-                            switch (j) {
-                                case 0:
-                                    sd.setId((String) data.get(j));
-                                    break;
-                                case 1:
-                                    sd.setProvince((String) data.get(j));
-                                    break;
-                                case 2:
-                                    sd.setCompany((String) data.get(j));
-                                    break;
-                                case 3:
-                                    sd.setAddress((String) data.get(j));
-                                    break;
-                                case 4:
-                                    try {
-                                        long tel = Long.parseLong((String) data.get(j));
-                                        sd.setTel(tel);
-                                    } catch (NumberFormatException e) {
-                                        this.logger.error(e);
-                                        System.out.println(e.toString());
-                                        sd.setTel(0);
-                                    }
-                                    break;
-                                case 5:
-                                    sd.setFax((String) data.get(j));
-                                    break;
-                                case 6:
-                                    sd.setWebSite((String) data.get(j));
-                                    break;
-                                case 7:
-                                    sd.setEmail((String) data.get(j));
-                                case 8:
-                                    sd.setSeedlingName((String) data.get(j));
-                                    break;
-                                case 9:
-                                    //获取植物规格
-                                    String specStr = (String) data.get(j);
-                                    //去掉空格
-                                    String str = specStr.replaceAll(" ", "");
-                                    //获取规格前缀
-                                    String specStr1 = str.substring(1, 2);
-                                    if ("≤".equals(specStr1) || "≥".equals(specStr1) || "<".equals(specStr1)
-                                            || ">".equals(specStr1) || "=".equals(specStr1)) {
-                                        //含有特殊字符则获取特殊字符
-                                        sd.setSpec(specStr.substring(0, 2));
-                                        double min = 0;
-                                        try {
-                                            min = Double.parseDouble(specStr.substring(2));
-                                            sd.setSpecMin(min);
-                                        } catch (NumberFormatException e) {
-                                            sd.setSpecMin(min);
-                                            System.out.println(e.toString());
-                                            this.logger.error(e);
-                                        }
-                                    } else {
-                                        //将获取植物规格以“-”进行拆分
-                                        String[] spec = str.split("-");
-                                        //判断是否满足拆分条件
-                                        if (spec.length > 1) {
-                                            double min = 0;
-                                            double max = 0;
-                                            try {
-                                                //获取前缀
-                                                sd.setSpec(spec[0].substring(0, 1));
-                                                //获取规格范围
-                                                min = Double.parseDouble(spec[0].substring(1));
-                                                max = Double.parseDouble(spec[1]);
-                                                sd.setSpecMin(min);
-                                                sd.setSpecMax(max);
-                                            } catch (NumberFormatException e) {
-                                                this.logger.error(e);
-                                                sd.setSpecMin(min);
-                                                sd.setSpecMax(max);
-                                            }
-                                        } else {
-                                            double min = 0;
-                                            try {
-                                                min = Double.parseDouble(spec[0].substring(1));
-                                                sd.setSpecMin(min);
-                                            } catch (NumberFormatException e) {
-                                                sd.setSpecMin(min);
-                                                System.out.println(e.toString());
-                                                this.logger.error(e);
-                                            }
-                                            sd.setSpec(spec[0].substring(0, 1));
-                                        }
-                                    }
-                                    break;
-                                case 10:
-                                    sd.setUnit((String) data.get(j));
-                                    break;
-                                case 11:
-                                    int num = 0;
-                                    try {
-                                        num = Integer.parseInt((String) data.get(j));
-                                        sd.setNum(num);
-                                    } catch (NumberFormatException e) {
-                                        sd.setNum(num);
-                                        this.logger.error(e);
-                                        System.out.println(e.toString());
-                                    }
-                                    break;
-                                case 12:
-                                    try {
-                                        double price = Double.parseDouble((String) data.get(j));
-                                        sd.setPrice(price);
-                                    } catch (NumberFormatException e) {
-                                        sd.setPrice(0);
-                                        this.logger.error(e);
-                                        System.out.println(e.toString());
-                                    }
-                                    break;
-                                case 13:
-                                    sd.setComment((String) data.get(j));
-                                    break;
-                                default:
-                                    break;
-                            }
-                        }
-                        sdData.add(sd);
-                    }
-                    //判断保存数据是否有null值，是移除空值
-                    int len = sdData.size();
-                    for (int i = 0; i < len; ++i) {
-                        if (0 == sdData.get(i).getPrice() || sdData.get(i).getNum() == 0 || sdData.get(i).getSeedlingName() == null
-                                || sdData.get(i).getCompany() == null || sdData.get(i).getUnit() == null ||
-                                sdData.get(i).getSpec() == null || sdData.get(i).getSpecMin() == 0) {
-                            sdData.remove(i);
-                            --i;
-                            len = sdData.size();
-                        }
-                    }
-                    //判断读取数据是否满足正确格式数据，是存库，否删除原始文件
+                    List<NurseryOut> sdData = this.serviceSupp.getNurseryOutExcelData(list);
+                    /*获取上传excel文件数据 end*/
+                    //解析excel数据有效性
+                    int len = this.serviceSupp.getNurseryOutExcelDataAnalysis(sdData);
+                    //判断解析数据是否满足正确格式数据，是存库，否删除原始文件
                     if (len > 0) {
                         this.dao.addNurseryOutDao(sdData);
                         return new Status(StatusEnum.SUCCESS.getCODE(), StatusEnum.SUCCESS.getEXPLAIN());

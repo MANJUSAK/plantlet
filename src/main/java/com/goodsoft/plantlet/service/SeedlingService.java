@@ -1,11 +1,12 @@
 package com.goodsoft.plantlet.service;
 
-import com.goodsoft.plantlet.domain.entity.seedlinginfo.SeedlingInfo;
 import com.goodsoft.plantlet.domain.entity.seedlinginfo.SeedlingOffer;
+import com.goodsoft.plantlet.domain.entity.seedlinginfo.SeedlingStatistics;
+import com.goodsoft.plantlet.domain.entity.seedlinginfo.SupplyInfo;
 import com.goodsoft.plantlet.util.result.SeedlingOfferParam;
-import com.goodsoft.plantlet.util.result.SeedlingParam;
 import com.goodsoft.plantlet.util.result.SeedlingStatisticsParam;
 import com.goodsoft.plantlet.util.result.Status;
+import com.goodsoft.plantlet.util.result.SupplyParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,10 +18,16 @@ import javax.servlet.http.HttpServletRequest;
  */
 public interface SeedlingService {
     //苗木信息数据查询
-    public <T> T querySeedlingService(HttpServletRequest request, SeedlingParam msg);
+    public <T> T querySeedlingService(SeedlingStatisticsParam msg);
+
+    //供需信息数据查询
+    public <T> T querySeedlingService(HttpServletRequest request, SupplyParam msg);
 
     //苗木造价数据查询
     public <T> T querySeedlingService(SeedlingOfferParam msg);
+
+    //苗木造价统计年月份数据查询
+    public <T> T querySeedlingOfferStatisticsService(SeedlingOfferParam msg);
 
     //苗木统计数据查询
     public <T> T querySeedlingStatisticsService(SeedlingStatisticsParam msg);
@@ -32,7 +39,10 @@ public interface SeedlingService {
     public <T> T querySeedlingAllNameService();
 
     //苗木信息数据添加
-    public Status addSeedlingService(MultipartFile[] files, SeedlingInfo msg);
+    public Status addSeedlingService(SeedlingStatistics msg);
+
+    //供需信息数据添加
+    public Status addSeedlingService(MultipartFile[] files, SupplyInfo msg);
 
     //苗木造价数据添加
     public Status addSeedlingService(MultipartFile[] files, SeedlingOffer msg);

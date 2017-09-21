@@ -3,7 +3,6 @@ package com.goodsoft.plantlet.domain.dao;
 import com.goodsoft.plantlet.domain.entity.nursery.Nursery;
 import com.goodsoft.plantlet.domain.entity.nursery.NurseryOut;
 import com.goodsoft.plantlet.util.result.NurseryParam;
-import com.goodsoft.plantlet.util.result.NurseryOutParam;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -26,7 +25,7 @@ public interface NurseryDao {
     public void addNurseryOneDao(Nursery msg) throws Exception;
 
     //省外苗圃数据查询dao方法
-    public List<NurseryOut> queryNurseryOutDao(NurseryOutParam msg) throws Exception;
+    public List<NurseryOut> queryNurseryOutDao(NurseryParam msg) throws Exception;
 
     //省外苗圃多数据添加dao方法
     public void addNurseryOutDao(List<NurseryOut> msg) throws Exception;

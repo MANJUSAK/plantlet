@@ -20,7 +20,8 @@ public class Nursery implements java.io.Serializable {
     private String email;//邮箱
     private String nurseryAdd;//苗圃地址
     private String province;//省
-    private String districts;//区县市
+    private String districts;//区市
+    private String county;//县
     private String spec;//规格前缀
     private double specMin;//规格范围第一位
     private double specMax;//规格范围第二位
@@ -127,6 +128,14 @@ public class Nursery implements java.io.Serializable {
 
     public void setDistricts(String districts) {
         this.districts = districts;
+    }
+
+    public String getCounty() {
+        return county;
+    }
+
+    public void setCounty(String county) {
+        this.county = county;
     }
 
     public String getSpec() {
@@ -241,6 +250,7 @@ public class Nursery implements java.io.Serializable {
                 Objects.equals(nurseryAdd, nursery.nurseryAdd) &&
                 Objects.equals(province, nursery.province) &&
                 Objects.equals(districts, nursery.districts) &&
+                Objects.equals(county, nursery.county) &&
                 Objects.equals(spec, nursery.spec) &&
                 Objects.equals(fileId, nursery.fileId) &&
                 Objects.equals(proLicenseNum, nursery.proLicenseNum) &&
@@ -250,6 +260,6 @@ public class Nursery implements java.io.Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, plantName, types, nurseryName, contact, tel, nurseryIntro, fax, email, nurseryAdd, province, districts, spec, specMin, specMax, num, price, area, fileId, proLicenseNum, operLicenseNum, postCode, picture);
+        return Objects.hash(id, plantName, types, nurseryName, contact, tel, nurseryIntro, fax, email, nurseryAdd, province, districts, county, spec, specMin, specMax, num, price, area, fileId, proLicenseNum, operLicenseNum, postCode, picture);
     }
 }

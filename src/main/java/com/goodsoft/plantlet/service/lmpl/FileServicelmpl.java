@@ -3,8 +3,8 @@ package com.goodsoft.plantlet.service.lmpl;
 import com.goodsoft.plantlet.domain.dao.FileDao;
 import com.goodsoft.plantlet.domain.entity.file.FileData;
 import com.goodsoft.plantlet.service.FileService;
-import com.goodsoft.plantlet.util.FileUpload;
-import com.goodsoft.plantlet.util.GetOsName;
+import com.goodsoft.plantlet.util.FileUploadUtil;
+import com.goodsoft.plantlet.util.GetOsNameUtil;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,11 +24,11 @@ import java.util.List;
 public class FileServicelmpl implements FileService {
 
     @Resource
-    private FileUpload fileUpload;
+    private FileUploadUtil fileUploadUtil;
     @Resource
     private FileDao dao;
     //实例化获取操作系统类型工具类
-    private GetOsName getOsName = GetOsName.getInstance();
+    private GetOsNameUtil getOsNameUtil = GetOsNameUtil.getInstance();
     //实例化日志管理
     private Logger logger = Logger.getLogger(FileServicelmpl.class);
 
@@ -116,7 +116,7 @@ public class FileServicelmpl implements FileService {
         }
         //文件保存根目录
         String var1 = null;
-        if (this.getOsName.getOsName()) {
+        if (this.getOsNameUtil.getOsName()) {
             //Linux文件路径
             var1 = "/usr/plantlet";
         } else {
@@ -128,7 +128,7 @@ public class FileServicelmpl implements FileService {
             //初始化文件保存集合
             List<FileData> list = new ArrayList<FileData>();
             //保存文件到服务器并获取文件相对路径
-            List<String> fileList = this.fileUpload.fileUpload(files, fileType, var1);
+            List<String> fileList = this.fileUploadUtil.fileUpload(files, fileType, var1);
             String sort = null;
             //获取文件类型 start
             switch (fileType) {

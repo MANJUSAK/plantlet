@@ -3,7 +3,6 @@ package com.goodsoft.plantlet.controller;
 import com.goodsoft.plantlet.domain.entity.nursery.Nursery;
 import com.goodsoft.plantlet.domain.entity.nursery.NurseryOut;
 import com.goodsoft.plantlet.service.NurseryService;
-import com.goodsoft.plantlet.util.result.NurseryOutParam;
 import com.goodsoft.plantlet.util.result.NurseryParam;
 import com.goodsoft.plantlet.util.result.Status;
 import org.springframework.web.bind.annotation.*;
@@ -69,7 +68,7 @@ public class NurseryController {
      */
     @CrossOrigin(origins = "*", maxAge = 3600, methods = RequestMethod.GET)
     @RequestMapping("/outside/find/seedling.action.do")
-    public Object queryNurseryOutController(NurseryOutParam msg) {
+    public Object queryNurseryOutController(NurseryParam msg) {
         return this.service.queryNurseryOutService(msg);
     }
 

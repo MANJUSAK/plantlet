@@ -7,7 +7,7 @@ import java.util.Objects;
  * Created by 严彬荣 on 2017/9/18.
  * version v1.0
  */
-public class SeedlingParam implements java.io.Serializable {
+public class SupplyParam implements java.io.Serializable {
 
     private String keyWord;//关键字
     private String tp;//种类
@@ -67,8 +67,8 @@ public class SeedlingParam implements java.io.Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof SeedlingParam)) return false;
-        SeedlingParam that = (SeedlingParam) o;
+        if (!(o instanceof SupplyParam)) return false;
+        SupplyParam that = (SupplyParam) o;
         return num == that.num &&
                 Objects.equals(keyWord, that.keyWord) &&
                 Objects.equals(tp, that.tp) &&

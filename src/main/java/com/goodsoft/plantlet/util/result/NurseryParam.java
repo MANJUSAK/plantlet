@@ -11,6 +11,8 @@ public class NurseryParam implements java.io.Serializable {
     private String keyWord;//关键字
     private String province;//省份
     private String city;//区县市
+    private String county;//县
+    private String comp;//企业
     private String specMin;//规格范围第一位
     private String specMax;//规格范围第二位
     private String minPrice;//起始价格
@@ -108,6 +110,22 @@ public class NurseryParam implements java.io.Serializable {
         this.num = num;
     }
 
+    public String getCounty() {
+        return county;
+    }
+
+    public void setCounty(String county) {
+        this.county = county;
+    }
+
+    public String getComp() {
+        return comp;
+    }
+
+    public void setComp(String comp) {
+        this.comp = comp;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -117,6 +135,8 @@ public class NurseryParam implements java.io.Serializable {
                 Objects.equals(keyWord, that.keyWord) &&
                 Objects.equals(province, that.province) &&
                 Objects.equals(city, that.city) &&
+                Objects.equals(county, that.county) &&
+                Objects.equals(comp, that.comp) &&
                 Objects.equals(specMin, that.specMin) &&
                 Objects.equals(specMax, that.specMax) &&
                 Objects.equals(minPrice, that.minPrice) &&
@@ -128,6 +148,6 @@ public class NurseryParam implements java.io.Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(keyWord, province, city, specMin, specMax, minPrice, maxPrice, area, tp, name, num);
+        return Objects.hash(keyWord, province, city, county, comp, specMin, specMax, minPrice, maxPrice, area, tp, name, num);
     }
 }
