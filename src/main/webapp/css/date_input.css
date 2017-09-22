@@ -1,0 +1,219 @@
+/*
+ * 描述：该css为贵阳市园林绿化苗木信息网下所有的数据录入样式
+ * */
+body,td,th {font-family: "新宋体";color: #000;}
+body,div,span,a,img,ol,ul,li {margin:0; padding:0; border:0;}
+input{padding:0;margin:0; outline: none;}
+img{border:none;background:none;vertical-align:middle;}
+ul,ol,li{list-style-type:none;}
+a,span,p {color: #000; }
+a:link { text-decoration: none;}
+a:visited { text-decoration: none; color: #000; }
+a:hover {  text-decoration: none; color: #000; }
+a:active { text-decoration: none; color: #000; }
+img { border: none; }
+
+/*------------------------- 企业信息数据添加页面 -----------------------*/
+.IE_content{
+	width: 100%;
+	height: auto;
+	background: #FAFAFA;
+	padding: 40px 0 30px;
+}
+.IE_center{
+	width: 800px;
+	height: auto;
+	margin: 0 auto;
+	background-color: white;
+	padding-bottom: 40px;
+}
+.IE_title{
+	width: 92%;
+	height: auto;
+	padding: 30px 0 20px;
+	text-align: center;
+	margin: 0 auto;
+	border-bottom: 1px dashed #CCCCCC;
+}
+.IE_title span {
+	font-size: 28px;
+	font-weight: bold;
+}
+/****标题之下****/
+.myform{
+	padding-top: 30px;
+}
+.IE_container{
+	width: 90%;
+	height: auto;
+	margin: 0 auto;
+}
+.IE_line{
+	width: 100%;
+	height: auto;
+	clear: both;
+	overflow: hidden;
+	padding-top: 2px;
+}
+.IE_line_L{
+	width: 30%;
+	height: auto;
+	float: left;
+	text-align: right;
+}
+.IE_line_L span{
+	line-height: 36px;
+	color: #525252;
+	font-weight: bold;
+}
+.IE_line_R{
+	width: 70%;
+	height: auto;
+	float: right;
+}
+#IE_line_R_img{
+	max-width: 200px;
+	max-height: 135px;
+}
+.IE_line_Rfile2{
+	width: 200px;
+	height: 138px;
+	vertical-align: middle;
+	float: left;
+	border: 1px solid #DDDDDD;
+}
+.IE_line_R_select1{
+	width: 20%;
+	height: 34px;
+	border-radius: 3px;
+	outline: none;
+	border: 1px solid #C1C1C1;
+}
+.IE_line_R_select2{/*单位的select*/
+	width: 79%;
+	height: 34px;
+	border-radius: 3px;
+	outline: none;
+	border: 1px solid #C1C1C1;
+}
+.IE_line_Rfile2_nofloat{
+	width: 200px;
+    height: 138px;
+    padding: 1px;
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+}
+.IE_line_Rfile1{
+	float: left;
+	width: 150px;
+	height: 135px;
+	border: 1px solid #DDDDDD;
+	margin-left: 30px;
+	background-image: url(../images/add_img2.png);
+	background-position: center;
+	background-repeat: no-repeat;
+	background-color: #FCFCFC;
+}
+.IE_line_Rfile{
+	width: 150px;
+	height: 135px;
+	cursor: pointer;
+	opacity: 0;
+}
+.IE_line_R_text{
+	width: 78%;
+	height: 34px;
+	border: 1px solid #C1C1C1;
+	border-radius: 4px;
+	padding: 0 2px;
+}
+/*规格*/
+.IE_line_R_textGG{
+	width: 53%;
+	margin-left: 3%;
+}
+
+.IE_line_R_text_IE2S{
+	width: 50%;
+}
+.IE_line_R_text_IE2Slect{
+	width: 20%;
+	height: 34px;
+	border: 1px solid #C1C1C1;
+	border-radius: 4px;
+	margin-left: 1%;
+	outline: none;
+}
+.IE_line_R_textarea{
+	width: 78%;
+	height: 120px;
+	line-height: 20px;
+	border: 1px solid #C1C1C1;
+	border-radius: 4px;
+	padding: 0 2px;
+	resize: none;
+	outline: none;
+}
+.IE_line_err{
+	padding-left: 30.3%;
+	font-size: 14px;
+	color: red;
+	height: 30px;
+	line-height: 30px;
+	visibility: hidden;
+}
+.IE_line_err img{
+	vertical-align: middle;
+	margin-top: -4px;
+	padding-right: 3px;
+}
+.IE_center_err{
+	display: inline-block;
+	width: 100%;
+	color: red;
+	text-align: center;
+	padding: 0px 0 15px;
+	font-size: 16px;
+	font-weight: bold;
+}
+
+.IE_line_spanCenter{
+	width: 100%;
+	padding: 3px 0;
+	text-align: center;
+	display: block;
+}
+.IE_line_spanCenter span{
+	color: red;
+}
+
+.IE_line_submit{
+	width: 80%;
+	height: auto;
+	margin: 0 auto;
+	text-align: center;
+}
+.IE_line_submit input{
+	width: 100px;
+	height: 34px;
+	border-radius: 4px;
+	color: white;
+	cursor: pointer;
+}
+.IE_line_submit1{
+	margin-right: 10px;
+	border: 1px solid #028C3C;
+	background-color: #028C3C;
+}
+.IE_line_submit2{
+	border: 1px solid #1F9952;
+	background-color: #1F9952;
+}
+
+
+/*------------------------- 企业信息数据添加页面  结束 -----------------------*/
+
+.clearBoth{
+	clear: both;
+}

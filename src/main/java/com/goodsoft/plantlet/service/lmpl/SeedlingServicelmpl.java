@@ -75,8 +75,7 @@ public class SeedlingServicelmpl implements SeedlingService {
         try {
             data = this.dao.querySeedlingInfoDao(param);
         } catch (Exception e) {
-            System.out.println(e.toString());
-            this.logger.error(e);
+            this.logger.error(e.toString());
             return (T) new Status(StatusEnum.SERVER_ERROR.getCODE(), StatusEnum.SERVER_ERROR.getEXPLAIN());
         }
         if (data.size() > 0) {
@@ -119,8 +118,7 @@ public class SeedlingServicelmpl implements SeedlingService {
                 return (T) new Status(StatusEnum.NO_DATA.getCODE(), StatusEnum.NO_DATA.getEXPLAIN());
             }
         } catch (Exception e) {
-            System.out.println(e.toString());
-            this.logger.error(e);
+            this.logger.error(e.toString());
             return (T) new Status(StatusEnum.SERVER_ERROR.getCODE(), StatusEnum.SERVER_ERROR.getEXPLAIN());
         }
     }
@@ -147,8 +145,7 @@ public class SeedlingServicelmpl implements SeedlingService {
         try {
             data = this.dao.querySeedlingOfferDao(msg);
         } catch (Exception e) {
-            System.out.println(e.toString());
-            this.logger.error(e);
+            this.logger.error(e.toString());
             return (T) new Status(StatusEnum.SERVER_ERROR.getCODE(), StatusEnum.SERVER_ERROR.getEXPLAIN());
         }
         if (data.size() > 0) {
@@ -180,8 +177,7 @@ public class SeedlingServicelmpl implements SeedlingService {
         try {
             data = this.dao.querySeedlingOfferStatisticsDetailDao(msg);
         } catch (Exception e) {
-            System.out.println(e.toString());
-            this.logger.error(e);
+            this.logger.error(e.toString());
             return (T) new Status(StatusEnum.SERVER_ERROR.getCODE(), StatusEnum.SERVER_ERROR.getEXPLAIN());
         }
         if (data.size() > 0) {
@@ -213,8 +209,7 @@ public class SeedlingServicelmpl implements SeedlingService {
         try {
             data = this.dao.querySeedlingStatisticsDao(param);
         } catch (Exception e) {
-            System.out.println(e.toString());
-            this.logger.error(e);
+            this.logger.error(e.toString());
             return (T) new Status(StatusEnum.SERVER_ERROR.getCODE(), StatusEnum.SERVER_ERROR.getEXPLAIN());
         }
         if (data.size() > 0) {
@@ -246,8 +241,7 @@ public class SeedlingServicelmpl implements SeedlingService {
         try {
             data = this.dao.querySeedlingStatisticsDetailDao(param);
         } catch (Exception e) {
-            System.out.println(e.toString());
-            this.logger.error(e);
+            this.logger.error(e.toString());
             return (T) new Status(StatusEnum.SERVER_ERROR.getCODE(), StatusEnum.SERVER_ERROR.getEXPLAIN());
         }
         if (data.size() > 0) {
@@ -270,8 +264,7 @@ public class SeedlingServicelmpl implements SeedlingService {
         try {
             data = this.dao.querySeedlingAllNameDao();
         } catch (Exception e) {
-            System.out.println(e.toString());
-            this.logger.error(e);
+            this.logger.error(e.toString());
             return (T) new Status(StatusEnum.SERVER_ERROR.getCODE(), StatusEnum.SERVER_ERROR.getEXPLAIN());
         }
         if (data.size() > 0) {
@@ -300,8 +293,7 @@ public class SeedlingServicelmpl implements SeedlingService {
             this.dao.addSeedlingInfoDao(msg);
             return new Status(StatusEnum.SUCCESS.getCODE(), StatusEnum.SUCCESS.getEXPLAIN());
         } catch (Exception e) {
-            System.out.println(e.toString());
-            this.logger.error(e);
+            this.logger.error(e.toString());
             return new Status(StatusEnum.SERVER_ERROR.getCODE(), StatusEnum.SERVER_ERROR.getEXPLAIN());
         }
     }
@@ -341,8 +333,7 @@ public class SeedlingServicelmpl implements SeedlingService {
             this.dao.addSeedlingSupplyDao(msg);
             return new Status(StatusEnum.SUCCESS.getCODE(), StatusEnum.SUCCESS.getEXPLAIN());
         } catch (Exception e) {
-            System.out.println(e.toString());
-            this.logger.error(e);
+            this.logger.error(e.toString());
             return new Status(StatusEnum.SERVER_ERROR.getCODE(), StatusEnum.SERVER_ERROR.getEXPLAIN());
         }
     }
@@ -371,8 +362,7 @@ public class SeedlingServicelmpl implements SeedlingService {
                     this.dao.addSeedlingOfferOneDao(msg);
                     return new Status(StatusEnum.SUCCESS.getCODE(), StatusEnum.SUCCESS.getEXPLAIN());
                 } catch (Exception e) {
-                    System.out.println(e.toString());
-                    this.logger.error(e);
+                    this.logger.error(e.toString());
                     return new Status(StatusEnum.SERVER_ERROR.getCODE(), StatusEnum.SERVER_ERROR.getEXPLAIN());
                 }
             case 603:
@@ -416,11 +406,9 @@ public class SeedlingServicelmpl implements SeedlingService {
                 //删除数据库文件数据
                 this.fileDao.deleteFileDao(uuid);
             } catch (Exception e1) {
-                System.out.println(e.toString());
                 this.logger.error(e1);
             }
-            System.out.println(e.toString());
-            this.logger.error(e);
+            this.logger.error(e.toString());
             return new Status(StatusEnum.EXCEL_ERROR.getCODE(), StatusEnum.EXCEL_ERROR.getEXPLAIN());
         }
     }

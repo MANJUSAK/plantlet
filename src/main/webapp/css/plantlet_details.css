@@ -1,0 +1,651 @@
+/*
+ * 说明：该css为苗木信息详情页（包括苗圃信息、供需信息）的样式
+ * */
+
+body,
+td,
+th {
+	color: #555;
+}
+
+body,
+div,
+span,
+a,
+img,
+ol,
+ul,
+li {
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+input {
+	padding: 0;
+	margin: 0;
+	outline: none;
+}
+
+img {
+	border: none;
+	background: none;
+	vertical-align: middle;
+}
+
+ul,
+ol,
+li {
+	list-style-type: none;
+}
+
+a,
+span,
+p {
+	color: #000;
+}
+
+a:link {
+	text-decoration: none;
+}
+
+a:visited {
+	text-decoration: none;
+	color: #000;
+}
+
+a:hover {
+	text-decoration: none;
+	color: #000;
+}
+
+a:active {
+	text-decoration: none;
+	color: #000;
+}
+
+img {
+	border: none;
+}
+
+
+/**---------------------- 苗圃信息-详情页 ---------------------------**/
+
+.MX_content {
+	width: 100%;
+	height: auto;
+}
+.Mx-inner {
+	width: 100%;
+	height: auto;
+	margin: 0 auto;
+}
+.Mx-inner a {
+	padding: 6px 18px;
+	font-size: 14px;
+    color: white;
+    background: #81B97C;
+}
+.MXcenter {
+	width: 1250px;
+	height: auto;
+	margin: 0 auto;
+	margin-top: 30px;
+	border-top: 1px dashed #ccc;
+	padding-top: 15px;
+	padding-bottom: 20px;
+}
+
+
+/*图片和名称*/
+
+.MX_imgName {
+	width: 100%;
+	height: auto;
+	overflow: hidden;
+	padding-bottom: 10px;
+	min-height: 250px;
+	margin-top: 20px;
+}
+
+.MXi_L {
+	width: 32%;
+	height: auto;
+	float: left;
+}
+
+.MXi_L_img {
+	max-width: 100%;
+}
+
+.MXi_R {
+	width: 64%;
+	height: auto;
+	padding-right: 0.5%;
+	float: right;
+}
+
+.MXi_R_title {
+	width: 100%;
+	border: 1px solid #81b97c;
+	height: auto;
+	padding: 15px 0;
+	background-color: #def7db;
+	box-sizing: border-box;
+	overflow: hidden;
+}
+
+.MXiR_titleName {
+	width: 98%;
+	font-size: 22px;
+	font-weight: bold;
+	padding-left: 2%;
+	display: block;
+	float: left;
+}
+
+.MXi_R_content {
+	width: 100%;
+	height: auto;
+	border: 1px dashed #CCC;
+	box-sizing: border-box;
+}
+
+.MXi_Rc_center {
+	width: 96%;
+	padding: 15px 0;
+	padding-left: 2%;
+}
+
+.MXi_Rcc_line {
+	width: 100%;
+	height: auto;
+	padding: 5px 0;
+	text-indent: 5%;
+}
+
+.MXi_Rcc_line {
+	line-height: 22px;
+}
+
+
+/*苗圃图片*/
+
+.MX_mpimg {
+	width: 100%;
+	height: auto;
+	border: 1px solid #CCC;
+	border-top: 2px solid #81b97c;
+	box-sizing: border-box;
+	border-radius: 5px;
+}
+
+.MX_mpimg_top {
+	width: 100%;
+	height: 35px;
+	background-image: url(../images/ba_10.png);
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+}
+
+.MX_mpimg_top span {
+	width: 135px;
+	height: 34px;
+	line-height: 34px;
+	display: block;
+	border-right: 1px solid #d3d3d3;
+	border-left: 1px solid #d3d3d3;
+	background-color: white;
+	text-align: center;
+	margin-left: 25px;
+	font-weight: bold;
+	cursor: default;
+	box-sizing: border-box;
+}
+
+.MX_mpimg_content {
+	width: 100%;
+	height: auto;
+}
+
+.MX_mpimg_content2 {
+	width: 100%;
+	height: auto;
+	padding: 10px;
+}
+
+.MX_mc_ul {
+	width: 100%;
+	height: auto;
+	overflow: hidden;
+	padding: 10px 15px;
+	box-sizing: border-box;
+}
+
+.MX_mc_li {
+	width: 200px;
+	height: auto;
+	float: left;
+	margin-right: 10px;
+	padding: 2px;
+	border: 1px solid #CCC;
+}
+
+.MX_mc_li img {
+	width: 100%;
+	height: auto;
+}
+
+.MX_mpimg2 {
+	margin-top: 40px;
+}
+
+.MX_mpimg_content2 span {
+	width: 98%;
+	height: auto;
+	line-height: 24px;
+	text-indent: 30px;
+	display: block;
+}
+
+.MX_mc_one {
+	width: 100%;
+	height: auto;
+	border-bottom: 1px solid #7b7f7b;
+}
+
+.MX_mc_oneUl {
+	width: 100%;
+	height: auto;
+	overflow: hidden;
+}
+
+.MX_mc_oneUl li {
+	float: left;
+	padding: 8px 0;
+	display: block;
+	text-align: center;
+	box-sizing: border-box;
+	    min-height: 38px;
+}
+
+.MX_mc_oneLi1 {
+	width: 20%;
+	border-right: 1px solid #7b7f7b;
+}
+
+.MX_mc_oneLi2 {
+	width: 40%;
+	border-right: 1px solid #7b7f7b;
+}
+
+.MX_mc_oneLi3 {
+	width: 20%;
+	border-right: 1px solid #7b7f7b;
+}
+
+.MX_mc_oneLi4 {
+	width: 20%;
+}
+
+.MX_mc_oneLi21 {
+	width: 30%;
+	border-right: 1px solid #7b7f7b;
+}
+
+.MX_mc_oneLi31 {
+	width: 20%;
+	border-right: 1px solid #7b7f7b;
+}
+
+.MX_mc_oneLi41 {
+	width: 30%;
+}
+.province-tab {
+	width: 100%;
+	height: auto;
+}
+.pt-item {
+	width: 100%;
+	height: auto;
+	float: left;
+	display: none;
+}
+.pt-item:first-child {
+	display: block;
+}
+/*数据展示*/
+.MX_mc{
+	width: 100%;
+	height: auto;
+	padding-top: 5px;
+	margin: 0 auto;
+}
+.MX_mc_line1{
+	width: 100%;
+	height: 36px;
+	border: 1px solid #7b7f7b;
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
+	background-color: #def7db;
+}
+.MX_mc_line1 div{
+	width: 33.3%;
+	height: 36px;
+	line-height: 36px;
+	float: left;
+	text-align: center;
+	font-weight: bold;
+}
+.MX_mc_line1_one{
+	border-right: 1px solid #7b7f7b;
+	box-sizing: border-box;
+}
+.MX_mc_line1_two{
+	border-right: 1px solid #7b7f7b;
+	box-sizing: border-box;
+}
+.MX_mpimg3 {
+	width: 100%;
+	height: auto;
+	box-sizing: border-box;
+	padding-top: 20px;
+}
+.MX_mpimg_top3 {
+	width: 100%;
+	height: 35px;
+}
+
+.MX_mpimg_top3 span {
+	width: 100px;
+	height: 28px;
+	line-height: 30px;
+	display: block;
+	border-left: 3px solid #81b97c;
+	background-color: white;
+	text-align: center;
+	font-weight: bold;
+	cursor: default;
+}
+
+/*引用MX_mc_line1的样式*/
+.MX_mc_line{
+	width: 100%;
+	height: 36px;
+	border: 1px solid #7b7f7b;
+}
+.MX_mc_line div{
+	width: 33.3%;
+	height: 36px;
+	line-height: 36px;
+	float: left;
+	text-align: center;
+}
+.MX_mc_line_one{
+	border-right: 1px solid #7b7f7b;
+	box-sizing: border-box;
+}
+.MX_mc_line_two{
+	border-right: 1px solid #7b7f7b;
+	box-sizing: border-box;
+}
+
+/**---------------------- 苗圃信息-详情页  结束 ---------------------------**/
+
+
+/**---------------------- 苗木信息-详情页 ---------------------------**/
+.MMc{
+	width: 100%;
+	height: auto;
+}
+.MMc_title{
+	width: 100%;
+	height: auto;
+	padding: 30px 0;
+	text-align: center;
+}
+.MMc_title span{
+	font-size: 24px;
+	font-weight: bold;	
+}
+
+/*切换卡*/
+.MMc_tb{
+	width: 100%;
+	height: 36px;
+	background-color: #eee;
+	border-top: 1px solid #ccc;
+	overflow: hidden;
+	margin-top: 20px;
+}
+.mt-province {
+  width: 100%;
+  height: 40px;
+  border-bottom: 1px solid #DEDEDE;
+}
+.mt-province ul {
+	text-align: center;
+}
+.mt-province li {
+	display: inline-block;
+  font-size: 14px;
+  color: #555;
+  line-height: 3px;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+.mt-province .ci-active {
+  color: #4CD242;
+}
+.mt-city {
+  width: 100%;
+  height: auto;
+}
+.mt-city .city-item {
+  width: 100%;
+  height: 40px;
+  border-bottom: 1px solid #DEDEDE;
+  display: none;
+  float: left;
+}
+.mt-city .city-item ul li  {
+	display: inline-block;
+  font-size: 14px;
+  color: #555;
+  line-height: 25px;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+.ct-li {
+	color: red;
+}
+.MMc_tbL{
+	width: 120px;
+	height: 36px;
+	float: left;
+	margin-left: 50px;
+	line-height: 36px;
+	background-color: white;
+	border-top: 2px solid #81b97c;
+	text-align: center;
+	margin-top: 0px;
+	cursor: pointer;
+}
+.MMc_tbR{
+	width: 120px;
+	height: 36px;
+	float: left;
+	margin-left: 5px;
+	line-height: 36px;
+	text-align: center;
+	cursor: pointer;
+}
+
+.MMc_tbL:hover{
+	height: 34px !important;
+	background-color: white !important;
+	border-top: 2px solid #81b97c !important;
+}
+.MMc_tbR:hover{
+	height: 34px !important;
+	background-color: white !important;
+	border-top: 2px solid #81b97c !important;
+}
+
+.MMc_title1{
+	width: 100%;
+	height: 40px;
+	margin-top: 70px;
+}
+.MMc_title1 span{
+	width: 60%;
+	height: 22px;
+	line-height: 23px;
+	padding-left: 15px;
+	border-left: 3px solid #81b97c;
+}
+/*省内数据、title*/
+.MMc_Province{
+	width: 100%;
+	height: auto;
+	padding-top: 20px;
+}
+
+.MMcP_content{
+	width: 100%;
+	height: auto;
+}
+.MMcP_c_table1{
+	width: 100%;
+	height: auto;
+	border: 1px solid #7b7f7b;
+}
+.MMcPc_table1_tr1{
+	width: 100%;
+	height: auto;
+	background-color: #def7db;
+}
+.MMcPc_table1_tr1 th{
+	padding: 10px 0;
+	min-height: 36px;
+	font-size: 17px;
+}
+.MMcPc_teb1_th1{
+	width: 40%;
+	height: auto;
+}
+.MMcPc_teb1_th2, .MMcPc_teb1_th3, .MMcPc_teb1_th4{
+	width: 20%;
+	height: auto;
+}
+/*控制数据内容*/
+.MMcPc_table1_tr2{
+	width: 100%;
+	height: auto;
+}
+.MMcPc_table1_tr2 td{
+	padding: 10px 0;
+	min-height: 36px;
+	font-size: 17px;
+	text-align: center;
+}
+.MMcPc_teb1_td1{
+	width: 40%;
+	height: auto;
+}
+.MMcPc_teb1_td2, .MMcPc_teb1_td3, .MMcPc_teb1_td4{
+	width: 20%;
+	height: auto;
+}
+
+/*省外数据*/
+.MMc_Outside{
+	width: 100%;
+	height: auto;
+	padding-top: 20px;
+	display: none;
+	min-height: 500px;
+}
+
+/*点击加载更多*/
+.ni-pages{
+	width: 100%;
+    height: 40px;
+    margin-top: 40px;
+    overflow: hidden;
+}
+.more_whole {
+    width: 100%;
+    height: 40px;
+}
+.more_L {
+    width: 25%;
+    height: 1px;
+    line-height: 40px;
+    background-color: #EDEDED;
+    float: left;
+    overflow: hidden;
+    margin-top: 20px;
+}
+.more {
+    width: 40%;
+    height: 40px;
+    float: left;
+    text-align: center;
+    line-height: 40px;
+    background-color: #EDEDED;
+    margin: 0 3%;
+    color: #999;
+    cursor: pointer;
+    border-radius: 2px;
+}
+.more:hover {
+	 background-color: #d4d2d2;
+	 color: #747373;
+}
+.more_R {
+    width: 25%;
+    height: 1px;
+    background-color: #EDEDED;
+    float: left;
+    overflow: hidden;
+    margin-top: 20px;
+}
+
+/**---------------------- 苗木信息-详情页  结束 ---------------------------**/
+
+/****底部*****/
+
+.footer{
+	width: 100%;
+	height: auto;
+	background-color: #189845;
+	margin-top: 15px;
+	font-family: "新宋体";
+	display: none;
+}
+.ft_center{
+	width: 1000px;
+	height: auto;
+	padding: 20px 0;
+	text-align: center;
+	margin: 0 auto;
+	color: white;
+}
+.ft_center p{
+	margin: 0;
+	line-height: 26px;
+	color: white;
+}
+.ft_center p a{
+	color: white;
+}
+
+/****底部  结束*****/
+
+
+
+
+
+
+

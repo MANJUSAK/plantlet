@@ -1,0 +1,25 @@
+$(function(){
+	//http://172.16.13.113/plantlet/plant/find/supply/seedling.action.do
+	$('#sbumit').click(function(){
+		var formx  = new FormData(document.getElementById("myform"));
+		$.ajax({
+			type:"post",
+			url:window.sessionStorage.getItem("host")+'/plantlet/plant/add/supply/seedling.action.do',
+			data:formx,
+			async:true,
+			processData:false,
+			contentType:false,
+			success:function(result){
+				if(result.errorCode==0){
+					window.location.href="Seeding-information/gongxu-information.html";
+				}else{
+					alert(result.msg)
+					console.log(result)
+				}
+			},
+			error:function(e){
+				console.log(e.status)
+			}
+		});
+	})
+})

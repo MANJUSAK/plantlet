@@ -8,7 +8,8 @@ import com.goodsoft.plantlet.util.result.Result;
 import com.goodsoft.plantlet.util.result.Status;
 import com.goodsoft.plantlet.util.result.StatusEnum;
 import com.horizon.util.encrypt.DESEDE;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,7 +27,7 @@ public class UserServcielmpl implements UserService {
     @Resource
     private UserDao dao;
     //实例化日志管理类
-    private Logger logger = Logger.getLogger(UserServcielmpl.class);
+    private Logger logger = LoggerFactory.getLogger(UserServcielmpl.class);
     //实例化UUID工具类
     private UUIDUtil uuid = UUIDUtil.getInstance();
 
@@ -48,8 +49,7 @@ public class UserServcielmpl implements UserService {
         try {
             data = this.dao.loginDao(uName, passWord);
         } catch (Exception e) {
-            System.out.println(e.toString());
-            this.logger.error(e);
+            this.logger.error(e.toString());
             return (T) new Status(StatusEnum.SERVER_ERROR.getCODE(), StatusEnum.SERVER_ERROR.getEXPLAIN());
         }
         if (data != null) {
@@ -84,8 +84,7 @@ public class UserServcielmpl implements UserService {
             this.dao.registerDao(msg);
             return new Status(StatusEnum.SUCCESS.getCODE(), StatusEnum.SUCCESS.getEXPLAIN());
         } catch (Exception e) {
-            System.out.println(e.toString());
-            this.logger.error(e);
+            this.logger.error(e.toString());
             return new Status(StatusEnum.DEFEAT.getCODE(), StatusEnum.DEFEAT.getEXPLAIN());
         }
     }

@@ -1,0 +1,817 @@
+@border: 1px solid #dedede;
+@border1: 1px dashed #4CD242;
+section {
+    width: 100%;
+    height: auto;
+    padding-top: 30px;
+    .Si-box {
+        width: 1500px;
+        height: auto;
+        margin: 0 auto;
+        .Si-nav {
+            width: 200px;
+            height: auto;
+            float: left;
+            .Sin-topbar {
+                width: 100%;
+                height: 50px;
+                img {
+                    width: 100%;
+                    height: 50px;
+                }
+            }
+            .Sin-li {
+                width: 190px;
+                height: 300px;
+                margin: 0 auto;
+                background: linear-gradient(#DFFFCB, #EAFCDE);
+                border-left: 1px solid #4CD242;
+                border-right: 1px solid #4CD242;
+                margin-top: 5px;
+                ul {
+                    width: 100%;
+                    height: auto;
+                    padding-top: 10px;
+                    li {
+                        width: 100%;
+                        height: 40px;
+                        line-height: 40px;
+                        font-size: 14px;
+                        text-align: center;
+                        cursor: pointer;
+                        a {
+                            display: block;
+                            color: #4CD242;
+                        }
+                        &:hover {
+                            background: linear-gradient(#399D34, #4CD242, #399D34);
+                            a {
+                                color: white;
+                            }
+                        }
+                    }
+                    .Sin-active {
+                        background: linear-gradient(#399D34, #4CD242, #399D34);
+                        a {
+                            color: white;
+                        }
+                    }
+                    li:not(:first-child) {
+                        margin-top: 10px;
+                    }
+                }
+            }
+        }
+        .Si-container {
+            width: 1258px;
+            height: auto;
+            float: left;
+            margin-left: 40px;
+            margin-top: 30px;
+            border: 1px solid #4CD242;
+            .Sic-content {
+                width: 100%;
+                height: auto;
+                .Sic-item {
+                    width: 100%;
+                    height: auto;
+                    float: left;
+                    display: none;
+                    .Sic-search {
+                        width: 100%;
+                        height: 50px;
+                        border-bottom: @border1;
+                        ul li {
+                            float: left;
+                            height: 50px;
+                            margin-left: 15px;
+                            font-size: 14px;
+                            color: #555;
+                            span {
+                                line-height: 47px;
+                                input {
+                                    height: 25px;
+                                    padding: 0 5px;
+                                    border: none;
+                                    border: @border;
+                                    outline: none;
+                                }
+                                select {
+                                    width: 60px;
+                                    height: 25px;
+                                    border: none;
+                                    border: @border;
+                                    outline: none;
+                                }
+                                .span-input {
+                                    width: 50px;
+                                    height: 25px;
+                                    padding: 0 5px;
+                                }
+                            }
+                            a {
+                                padding: 3px 8px;
+                                border: @border;
+                                line-height: 50px;
+                                i {
+                                    color: #555;
+                                    &:hover {
+                                        color: red;
+                                    }
+                                }
+                            }
+                        }
+                        ul li:last-child {
+                            .last-a {
+                                padding: 4px 12px;
+                                font-size: 14px;
+                                color: #555;
+                                &:hover {
+                                    color: red;
+                                }
+                            }
+                            float: right;
+                            padding-right: 10px;
+                        }
+                    }
+                    .Sici-title {
+                        width: 100%;
+                        height: 79px;
+                        border-bottom: 1px solid #DEDEDE;
+                        ul .normal {
+                            float: left;
+                            width: 10.9%;
+                            height: 80px;
+                            line-height: 79px;
+                            color: #555;
+                            text-align: center;
+                            border-right: 1px solid #DEDEDE;
+                        }
+                        .jiage {
+                            float: left;
+                            width: 43.6%;
+                            height: 79px;
+                            border-right: 1px solid #DEDEDE;
+                            font-size: 14px;
+                            line-height: 39px;
+                            text-align: center;
+                            color: #555;
+                            .jiage-li {
+                                width: 100%;
+                                height: 39px;
+                                ul li {
+                                    float: left;
+                                    height: 39px;
+                                    width: 24.8%;
+                                    border-right: 1px solid #DEDEDE;
+                                }
+                                ul li:last-child {
+                                    border-right: none;
+                                }
+                            }
+                            .jiage-li:first-child {
+                                border-bottom: 1px solid #DEDEDE;
+                            }
+                        }
+                        .shuliang {
+                            float: left;
+                            width: 21.8%;
+                            height: 79px;
+                            border-right: 1px solid #DEDEDE;
+                            font-size: 14px;
+                            line-height: 39px;
+                            text-align: center;
+                            color: #555;
+                            .shuliang-li {
+                                width: 100%;
+                                height: 39px;
+                                ul li {
+                                    float: left;
+                                    height: 39px;
+                                    width: 49.8%;
+                                    border-right: 1px solid #DEDEDE;
+                                }
+                                ul li:last-child {
+                                    border-right: none;
+                                }
+                            }
+                            .shuliang-li:first-child {
+                                border-bottom: 1px solid #DEDEDE;
+                            }
+                        }
+                        .normal:last-child {
+                            border-right: none;
+                        }
+                    }
+                    .Sici-shuxing {
+                        width: 100%;
+                        height: auto;
+                        .sx-fors {
+                            width: 100%;
+                            height: auto;
+                            ul {
+                                border-bottom: 1px dashed #4CD242;
+                                overflow: hidden;
+                                cursor: pointer;
+                            }
+                            ul .sx-mc {
+                                float: left;
+                                width: 10.9%;
+                                height: 40px;
+                                border-right: 1px solid #DEDEDE;
+                                text-align: center;
+                                overflow: hidden;
+                                text-overflow: ellipsis;
+                                white-space: nowrap;
+                                font-size: 14px;
+                                line-height: 40px;
+                                color: #555;
+                                a {
+                                    color: #555;
+                                }
+                            }
+                            .sx-mc:last-child {
+                                border-right: none;
+                            }
+                            .sx-jg {
+                                width: 43.6%;
+                                height: 40px;
+                                float: left;
+                                border-right: 1px solid #DEDEDE;
+                                .jg-li {
+                                    width: 24.8%;
+                                    height: 40px;
+                                    float: left;
+                                    border-right: 1px solid #DEDEDE;
+                                    text-align: center;
+                                    overflow: hidden;
+                                    text-overflow: ellipsis;
+                                    white-space: nowrap;
+                                    font-size: 14px;
+                                    line-height: 40px;
+                                    color: #555;
+                                }
+                                .jg-li:last-child {
+                                    border-right: none;
+                                }
+                            }
+                            .sx-sl {
+                                width: 21.8%;
+                                height: 40px;
+                                float: left;
+                                border-right: 1px solid #DEDEDE;
+                                .sl-li {
+                                    width: 49.8%;
+                                    height: 40px;
+                                    float: left;
+                                    border-right: 1px solid #DEDEDE;
+                                    text-align: center;
+                                    overflow: hidden;
+                                    text-overflow: ellipsis;
+                                    white-space: nowrap;
+                                    font-size: 14px;
+                                    line-height: 40px;
+                                    color: #555;
+                                }
+                                .sl-li:last-child {
+                                    border-right: none;
+                                }
+                            }
+                        }
+                    }
+                    .miaopu-title {
+                        width: 100%;
+                        height: 34px;
+                        padding-top: 6px;
+                        border-bottom: 1px solid #DEDEDE;
+                        ul {
+                            text-align: center;
+                            li {
+                                display: inline-block;
+                                font-size: 14px;
+                                color: #555;
+                                padding: 4px 18px;
+                                cursor: pointer;
+                                &:hover {
+                                    background: #4CD242;
+                                    color: white;
+                                }
+                            }
+                            .mt-active {
+                                background: #4CD242;
+                                color: white;
+                            }
+                        }
+                    }
+                    .miaopu-content {
+                        width: 100%;
+                        height: auto;
+                        .mc-item {
+                            width: 100%;
+                            height: auto;
+                            display: none;
+                            .mt-province {
+                                width: 100%;
+                                height: 40px;
+                                border-bottom: 1px solid #DEDEDE;
+                                a {
+                                    font-size: 14px;
+                                    color: #555;
+                                    line-height: 40px;
+                                    padding: 6px 12px;
+                                }
+                                .ci-active {
+                                    color: #4CD242;
+                                }
+                                span {
+                                    font-size: 12px;
+                                    line-height: 40px;
+                                    color: #Ddd;
+                                }
+                            }
+                            .mt-city {
+                                width: 100%;
+                                height: auto;
+                                overflow: hidden;
+                                .city-item {
+                                    width: 100%;
+                                    height: 40px;
+                                    border-bottom: 1px solid #DEDEDE;
+                                    float: left;
+                                    display: none;
+                                    a {
+                                        font-size: 14px;
+                                        color: #555;
+                                        line-height: 40px;
+                                        padding: 6px 12px;
+                                    }
+                                    .ci-active {
+                                        color: #4CD242;
+                                    }
+                                    span {
+                                        font-size: 12px;
+                                        line-height: 40px;
+                                        color: #Ddd;
+                                    }
+                                }
+                            }
+                            .mt-content {
+                                width: 100%;
+                                height: auto;
+                                .mt-item {
+                                    width: 100%;
+                                    height: auto;
+                                    ul li {
+                                        width: 100%;
+                                        height: 140px;
+                                        border-bottom: 1px solid #DEDEDE;
+                                        margin-top: 10px;
+                                        .mt-imgs {
+                                            width: 179px;
+                                            height: 120px;
+                                            padding: 10px;
+                                            border-right: 1px solid #DEDEDE;
+                                            float: left;
+                                            .mti-content {
+                                                width: 178px;
+                                                height: 118px;
+                                                border: 1px solid #DEDEDE;
+                                                img {
+                                                    width: 100%;
+                                                    height: 118px;
+                                                }
+                                            }
+                                        }
+                                        .mt-right {
+                                            width: 1038px;
+                                            height: 140px;
+                                            float: left;
+                                            margin-left: 10px;
+                                            .mtr-title {
+                                                width: 100%;
+                                                height: 39px;
+                                                border-bottom: 1px dashed #DEDEDE;
+                                                a {
+                                                    line-height: 39px;
+                                                    padding-left: 20px;
+                                                    color: #555;
+                                                    &:hover {
+                                                        color: red;
+                                                    }
+                                                }
+                                            }
+                                            .mtr-jianjie {
+                                                width: 100%;
+                                                height: 100px;
+                                                p {
+                                                    font-size: 12px;
+                                                    line-height: 25px;
+                                                    text-indent: 24px;
+                                                    color: #555;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        .mc-item:first-child {
+                            display: block;
+                        }
+                    }
+                    .gx-title {
+                        width: 100%;
+                        height: 40px;
+                        border-bottom: 1px dashed #4CD242;
+                        i {
+                            line-height: 40px;
+                            color: #4CD242;
+                            padding-left: 20px;
+                            font-size: 14px;
+                            cursor: pointer;
+                        }
+                    }
+                    .gx-content {
+                        width: 100%;
+                        height: auto;
+                        padding-top: 10px;
+                        .gxc-text {
+                            width: 100%;
+                            height: 160px;
+                            margin-bottom: 10px;
+                            .gxc-left {
+                                width: 198px;
+                                height: 158px;
+                                float: left;
+                                border: 1px solid #DEDEDE;
+                                margin-left: 10px;
+                                img {
+                                    width: 100%;
+                                    height: 160px;
+                                }
+                            }
+                            .gxc-right {
+                                width: 1030px;
+                                height: 160px;
+                                float: left;
+                                margin-left: 18px;
+                                .gr-title {
+                                    width: 100%;
+                                    height: 39px;
+                                    border-bottom: 1px dashed #DEDEDE;
+                                    a {
+                                        font-size: 14px;
+                                        color: #333;
+                                        line-height: 39px;
+                                        padding-left: 15px;
+                                    }
+                                }
+                                .gr-text {
+                                    width: 100%;
+                                    height: 119px;
+                                    border-bottom: 1px dashed #DEDEDE;
+                                    overflow: hidden;
+                                    text-overflow: ellipsis;
+                                    white-space: nowrap;
+                                    p {
+                                        font-size: 12px;
+                                        color: #555;
+                                        line-height: 25px;
+                                        text-indent: 24px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .zaojia-topbar {
+                        width: 100%;
+                        height: 35px;
+                        border-bottom: 1px solid #DEDEDE;
+                        padding-top: 5px;
+                        span {
+                            margin-left: 20px;
+                            select {
+                                width: 100px;
+                                height: 30px;
+                                outline: none;
+                                border: none;
+                                color: #555;
+                                border: 1px solid #DEDEDE;
+                            }
+                        }
+                        .chakan-all {
+                            float: right;
+                            padding-right: 10px;
+                            a {
+                                font-size: 14px;
+                                color: #555;
+                                line-height: 30px;
+                                padding: 5px 15px;
+                                border: @border;
+                                &:hover {
+                                    color: red;
+                                }
+                            }
+                        }
+                    }
+                    .zj-box {
+                        width: 100%;
+                        height: auto;
+                        .zj-bitem {
+                            width: 100%;
+                            height: auto;
+                            float: left;
+                            display: none;
+                            .zaojia-title {
+                                width: 100%;
+                                height: 45px;
+                                padding-top: 5px;
+                                border-bottom: 1px solid #DEDEDE;
+                                ul {
+                                    width: 98%;
+                                    margin: 0 auto;
+                                    li {
+                                        float: left;
+                                        width: 16.1%;
+                                        height: 40px;
+                                        background: #4CD242;
+                                        font-size: 14px;
+                                        color: white;
+                                        line-height: 40px;
+                                        text-align: center;
+                                        margin-left: 8px;
+                                    }
+                                    li:first-child {
+                                        margin-left: 0;
+                                    }
+                                }
+                            }
+                            .zj-container {
+                                width: 100%;
+                                height: auto;
+                                margin-top: 5px;
+                                ul li {
+                                    width: 98%;
+                                    height: 40px;
+                                    margin: 0 auto;
+                                    .zj-item {
+                                        width: 16.1%;
+                                        height: 40px;
+                                        border-bottom: 1px solid #DEDEDE;
+                                        float: left;
+                                        margin-left: 8px;
+                                        font-size: 14px;
+                                        line-height: 40px;
+                                        color: #555;
+                                        text-align: center;
+                                        overflow: hidden;
+                                        text-overflow: ellipsis;
+                                        white-space: nowrap;
+                                    }
+                                    .zj-item:first-child {
+                                        margin-left: 0;
+                                    }
+                                }
+                            }
+                        }
+                        .zj-bitem:first-child {
+                            display: block;
+                        }
+                    }
+                }
+                .Sic-item:nth-child(1) {
+                    display: block;
+                }
+            }
+            .jzmore {
+                width: 100%;
+                height: 60px;
+                margin-top: 100px;
+                margin-bottom: 20px;
+                .jzm-box {
+                    width: 60%;
+                    height: 60px;
+                    margin: 0 auto;
+                    .jzm-aisde {
+                        width: 28%;
+                        height: 60px;
+                        float: left;
+                        ul li {
+                            width: 100%;
+                        }
+                        ul li:first-child {
+                            height: 29px;
+                            border-bottom: 1px solid #4CD242;
+                        }
+                    }
+                    .jzm-center {
+                        width: 250px;
+                        height: 58px;
+                        float: left;
+                        border: 1px solid #4CD242;
+                        cursor: pointer;
+                        margin-left: 2%;
+                        margin-right: 2%;
+                        span {
+                            display: block;
+                            line-height: 58px;
+                            text-align: center;
+                            color: #DEDEDE;
+                            font-size: 30px;
+                            transition: 0.5s;
+                            &:hover {
+                                color: #4CD242;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .Si-yaler {
+            width: 100%;
+            position: absolute;
+            background: rgba(0, 0, 0, 0.4);
+            top: 0;
+            left: 0;
+            min-height: 1400px;
+            display: none;
+            .Siy-title {
+                width: 100%;
+                height: 30px;
+                .Siy-cloose {
+                    width: 30px;
+                    height: 30px;
+                    float: right;
+                    cursor: pointer;
+                    i {
+                        display: block;
+                        text-align: center;
+                        line-height: 30px;
+                        font-size: 20px;
+                        color: white;
+                    }
+                }
+            }
+            .Siy-container {
+                width: 800px;
+                height: auto;
+                margin: 80px auto 0;
+                .Siyc-biaoti {
+                    width: 100%;
+                    height: 60px;
+                    background: #E3FED1;
+                    color: #333;
+                    font-size: 14px;
+                    line-height: 60px;
+                    text-align: center;
+                }
+                .Siyc-form {
+                    width: 100%;
+                    height: auto;
+                    background: white;
+                    margin-bottom: 20px;
+                    padding-bottom: 30px;
+                    .form-container {
+                        width: 70%;
+                        height: auto;
+                        margin: 0 auto;
+                        padding-top: 30px;
+                        .form-item {
+                            width: 100%;
+                            height: 40px;
+                            .fi-left {
+                                width: 100px;
+                                height: 40px;
+                                float: left;
+                                p {
+                                    font-size: 14px;
+                                    color: #555;
+                                    line-height: 40px;
+                                    text-align: right;
+                                }
+                            }
+                            .fi-right {
+                                width: 440px;
+                                height: 40px;
+                                float: left;
+                                span {
+                                    line-height: 36px;
+                                    input {
+                                        width: 97%;
+                                        height: 30px;
+                                        outline: none;
+                                        border: none;
+                                        padding-left: 10px;
+                                        border: 1px solid #DEDEDE;
+                                        border-radius: 4px;
+                                    }
+                                    select {
+                                        width: 100%;
+                                        height: 30px;
+                                        outline: none;
+                                        border: none;
+                                        border: 1px solid #DEDEDE;
+                                        border-radius: 4px;
+                                        color: #555;
+                                    }
+                                    textarea {
+                                        width: 97%;
+                                        outline: none;
+                                        border: none;
+                                        border: 1px solid #DEDEDE;
+                                        padding-left: 10px;
+                                        border-radius: 4px;
+                                    }
+                                }
+                                .siImg2 {
+                                    width: 190px;
+                                    height: 118px;
+                                    border: 1px solid #DEDEDE;
+                                    float: left;
+                                    padding-left: 20px;
+                                    img {
+                                        width: 170px;
+                                        height: 118px;
+                                    }
+                                }
+                                .siImg1 {
+                                    width: 100px;
+                                    height: 98px;
+                                    margin-left: 10px;
+                                    border: 1px solid #DEDEDE;
+                                    float: left;
+                                    padding-top: 20px;
+                                    background: #FCFCFC;
+                                    position: relative;
+                                    img {
+                                        width: 100%;
+                                        height: 78px;
+                                    }
+                                    .input-img {
+                                        width: 100px;
+                                        height: 118px;
+                                        position: absolute;
+                                        top: 0;
+                                        left: 0;
+                                        opacity: 0;
+                                        cursor: pointer;
+                                    }
+                                }
+                            }
+                        }
+                        .textarea {
+                            height: 150px;
+                            .right-textarea {
+                                height: 150px;
+                            }
+                        }
+                        .picture {
+                            height: 120px;
+                            .right-img {
+                                height: 120px;
+                            }
+                        }
+                        .fi-tip {
+                            width: 460px;
+                            height: 30px;
+                            padding-left: 100px;
+                            line-height: 30px;
+                            font-size: 12px;
+                            color: red;
+                            img {
+                                vertical-align: middle;
+                                margin-top: -3px;
+                                margin-right: 5px;
+                            }
+                        }
+                        .form-buttom {
+                            width: 200px;
+                            height: 50px;
+                            margin: 0 auto;
+                            background: #40B239;
+                            margin-top: 50px;
+                            border-radius: 8px;
+                            transition: 1s;
+                            &:hover input {
+                                background: #4CD242;
+                                font-size: 22px;
+                            }
+                            input {
+                                width: 100%;
+                                height: 50px;
+                                background: none;
+                                border: none;
+                                font-size: 18px;
+                                color: white;
+                                cursor: pointer;
+                                transition: 0.5s;
+                                border-radius: 8px;
+                                outline: none;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

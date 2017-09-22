@@ -1,0 +1,273 @@
+<!-- HTML5文档头 -->
+<!DOCTYPE html>
+<!-- lang="zh-cn"，此网页基本是中文内容 -->
+<html lang="zh-cn">
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<!-- 使用最新的IE兼容模式渲染此网页 -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<!-- 在双核浏览器下，默认使用webkit内核，由360浏览器提出 -->
+		<meta name="renderer" content="webkit">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>greening-management</title>
+		<!--<link rel="shortcut icon" href=""/>-->
+		<link rel="stylesheet" type="text/css" href="../css/common.css" />
+		<link rel="stylesheet" type="text/css" href="../css/Seeding-information.css" />
+		<link rel="stylesheet" type="text/css" href="../vendor/font-awesome-4.6.3/css/font-awesome.css" />
+		<!-- 让IE9以下的浏览器支持HTML5标签 -->
+		<!--[if lt IE 9]>
+        	<script src="http://cdn.bootcss.com/html5shiv/r29/html5.js"></script>
+        	<script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+	</head>
+	<!--作者：蒋茸茸
+	描述：人员办公管理系统--个人信息页面
+	时间：2017-6-22-->
+
+	<body>
+		<!--系统头部-->
+		<header>
+			<div class="header-left">
+				<img src="../images/Office-bg2.png" />
+			</div>
+			<div class="header-right">
+				<div class="Hr-item">
+					<img src="../images/Office-user.jpg" />
+				</div>
+				<!--用户信息-->
+				<div class="Hr-item">
+					<ul>
+						<li>当前时间：<span id="Span"></span></li>
+						<li>姓名：xxx</li>
+						<li>部门：xx部</li>
+					</ul>
+				</div>
+				<!--退出按钮-->
+				<div class="Hr-item">
+					<a href="../home.html" class="Hr-item_home">
+						<img src="../images/returnHome.png" />首页
+					</a>
+				</div>
+			</div>
+		</header>
+		<section>
+			<div class="Si-box">
+				<div class="Si-nav">
+					<div class="Sin-topbar">
+						<img src="../images/Gc-nav_2.png" />
+					</div>
+					<div class="Sin-li">
+						<ul>
+							<li><a href="Seeding-information.html">苗木信息</a></li>
+							<li><a href="miaopu-information.html">苗圃信息</a></li>
+							<li><a href="zaojia-information.html">造价信息</a></li>
+							<li class="Sin-active"><a href="#">供需信息</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="Si-container">
+					<div class="Sic-content">
+						<div class="Sic-item">
+							<div class="gx-title">
+								<i class="fa fa-file-text-o" id="showLayer">&nbsp;添加苗木数据</i>
+							</div>
+							<div class="gx-content">
+								<div class="gxc-text">
+									<div class="gxc-left"></div>
+									<div class="gxc-right">
+										<div class="gr-title">
+											<a href="gongxu-details.html"></a>
+										</div>
+										<div class="gr-text">
+											<p></p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div style="clear: both;"></div>
+					<div class="jzmore">
+						<div class="jzm-box">
+							<div class="jzm-aisde">
+								<ul>
+									<li></li>
+									<li></li>
+								</ul>
+							</div>	
+							<div class="jzm-center">
+								<span>加载更多</span>
+							</div>
+							<div class="jzm-aisde">
+								<ul>
+									<li></li>
+									<li></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="Si-yaler" id="SiLayer">
+					<div class="Siy-title">
+						<div class="Siy-cloose" id="clooseLayer">
+							<i class="fa fa-compress"></i>
+						</div>
+					</div>
+					<div class="Siy-container">
+						<div class="Siyc-biaoti">
+							苗木信息发布
+						</div>
+						<div class="Siyc-form">
+							<div class="form-container">
+								<form id="myform">
+									<div class="form-item">
+										<div class="fi-left">
+											<p>苗木名称：</p>
+										</div>
+										<div class="fi-right">
+											<span><input type="text" name="sdName" id="mmName" /></span>
+										</div>
+									</div>
+									<div class="fi-tip" id="mmnameTip"></div>
+									<div class="form-item">
+										<div class="fi-left">
+											<p>分类名称：</p>
+										</div>
+										<div class="fi-right">
+											<span><select name="sdType">
+												<option value="">分类名称</option>
+												<option value="">普通乔木</option>
+												<option value="">造型乔木</option>
+												<option value="">地栽灌木</option>
+												<option value="">藤</option>
+												<option value="">竹</option>
+												<option value="">草本植物</option>
+												<option value="">棕榈植物</option>
+												<option value="">水生植物</option>
+											</select></span>
+										</div>
+									</div>
+									<div class="fi-tip" id="flnameTip"></div>
+									<div class="form-item">
+										<div class="fi-left">
+											<p>苗木企业：</p>
+										</div>
+										<div class="fi-right">
+											<span><input type="text" name="seedlingComp" id="mmQiye" /></span>
+										</div>
+									</div>
+									<div class="fi-tip" id="mmqiyeTip"></div>
+									<div class="form-item">
+										<div class="fi-left">
+											<p>规&nbsp;格(cm)：</p>
+										</div>
+										<div class="fi-right">
+											<span><input type="text" name="spec" id="guiGe" /></span>
+										</div>
+									</div>
+									<div class="fi-tip" id="guigeTip"></div>
+									<div class="form-item">
+										<div class="fi-left">
+											<p>单&nbsp;位：</p>
+										</div>
+										<div class="fi-right">
+											<span><select name="unit">
+								<option value="">单位</option>
+								<option value="">千克</option>
+								<option value="">株</option>
+								<option value="">丛</option>
+								<option value="">㎡</option>
+							</select></span>
+										</div>
+									</div>
+									<div class="fi-tip" id="danweiTip"></div>
+									<div class="form-item">
+										<div class="fi-left">
+											<p>价&nbsp;格(元)：</p>
+										</div>
+										<div class="fi-right">
+											<span><input type="text" name="price" id="money" /></span>
+										</div>
+									</div>
+									<div class="fi-tip" id="moneyTip"></div>
+									<div class="form-item">
+										<div class="fi-left">
+											<p>数&nbsp;量：</p>
+										</div>
+										<div class="fi-right">
+											<span><input type="text" name="num" id="shuLiang" /></span>
+										</div>
+									</div>
+									<div class="fi-tip" id="shuliangTip"></div>
+									<div class="form-item textarea">
+										<div class="fi-left">
+											<p>苗木简介：</p>
+										</div>
+										<div class="fi-right right-textarea">
+											<span><textarea id="mmJianjie" name="seedlingIntro" rows="10" cols=""></textarea></span>
+										</div>
+									</div>
+									<div class="fi-tip" id="mmjianjieTip"></div>
+									<div class="form-item picture">
+										<div class="fi-left">
+											<p>图&nbsp;片：</p>
+										</div>
+										<div class="fi-right right-img">
+											<div class="siImg2"><img src="../images/si-img2.jpg" id="siImg" /></div>
+											<div class="siImg1">
+												<img src="../images/si-img1.png" />
+												<input id="img" class="input-img" type="file" name="files" onchange="uploadImg(this,'siImg')" />
+											</div>
+
+										</div>
+									</div>
+									<div class="fi-tip" id="imgTip"></div>
+									<div class="form-item">
+										<div class="fi-left">
+											<p>联系人：</p>
+										</div>
+										<div class="fi-right">
+											<span><input type="text" id="lxPerson" name="contact" /></span>
+										</div>
+									</div>
+									<div class="fi-tip" id="lxpersonTip"></div>
+									<div class="form-item">
+										<div class="fi-left">
+											<p>联系方式：</p>
+										</div>
+										<div class="fi-right">
+											<span><input type="text"  id="lxFangshi" name="tel"/></span>
+										</div>
+									</div>
+									<div class="fi-tip" id="lxfangshiTip"></div>
+									<div class="form-item">
+										<div class="fi-left">
+											<p>供货地址：</p>
+										</div>
+										<div class="fi-right">
+											<span><input type="text" id="ghDizhi" name="sdAdd" /></span>
+										</div>
+									</div>
+									<div class="fi-tip" id="ghdizhiTip"></div>
+									<div class="form-buttom"><input type="button" id="sbumit" value="添&nbsp;加" /></div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<div style="clear: both; height: 20px;"></div>
+		<!--系统内容-->
+		<script src="../js/jquery.min.js"></script>
+		<script src="../js/common.js"></script>
+		<script src="../js/Seeding-information.js"></script>
+		<script type="text/javascript" src="../js/host.js" ></script>
+		<script type="text/javascript" src="../js/gongxu-information-list.js" ></script>
+		<script type="text/javascript" src="../js/gongxu-add.js" ></script>
+	</body>
+
+</html>

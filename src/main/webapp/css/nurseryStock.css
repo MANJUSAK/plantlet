@@ -1,0 +1,74 @@
+/*
+ * 描述：css样式为苗木信息的css页
+ * */
+body,td,th {font-family: "新宋体";color: #000;}
+body,div,span,a,img,ol,ul,li {margin:0; padding:0; border:0;}
+input{padding:0;margin:0; outline: none;}
+img{border:none;background:none;vertical-align:middle;}
+ul,ol,li{list-style-type:none;}
+a,span,p {color: #000; }
+a:link { text-decoration: none;}
+a:visited { text-decoration: none; color: #000; }
+a:hover {  text-decoration: none; color: #000; }
+a:active { text-decoration: none; color: #000; }
+img { border: none; }
+
+/**--------------------- 苗木信息的数据展示界面 --------------------**/
+
+.NS_contert{
+	width: 98%;
+	height: auto;
+	margin: 0 auto;
+}
+.NS_center{
+	min-width: 1200px;
+	max-width: 1350px;
+	height: auto;
+	margin: 0 auto;
+	padding: 20px 0;
+}
+.Ns-inner {
+	width: 100%;
+	height: auto;
+}
+.Ns-inner a {
+	padding: 6px 18px;
+	font-size: 14px;
+    color: white;
+    background: #81B97C;
+}
+/*表格*/
+.NS_tab{
+	width: 100%;
+	height: auto;
+	border: none;
+	border: 1px solid #4CD242;
+	margin-top: 20px;
+}
+.NS_tr_title{
+	width: 100%;
+	height: auto;
+	
+}
+.NS_tr_title th {
+	padding: 10px 0;
+	border-color: #DEDEDE;
+}
+.NS_th_title2{
+	max-width: 20%;
+}
+
+.NS_tr_content{
+	width: 100%;
+	height: auto;
+	text-align: center;
+}
+.NS_tr_content td {
+	padding: 10px 0;
+	border-color: #DEDEDE;
+}
+
+
+/**--------------------- 苗木信息的数据展示界面 结束 --------------------**/
+
+

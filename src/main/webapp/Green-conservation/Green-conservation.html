@@ -1,0 +1,286 @@
+<!-- HTML5文档头 -->
+<!DOCTYPE html>
+<!-- lang="zh-cn"，此网页基本是中文内容 -->
+<html lang="zh-cn">
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<!-- 使用最新的IE兼容模式渲染此网页 -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<!-- 在双核浏览器下，默认使用webkit内核，由360浏览器提出 -->
+		<meta name="renderer" content="webkit">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>greening-management</title>
+		<!--<link rel="shortcut icon" href=""/>-->
+		<link rel="stylesheet" type="text/css" href="../css/common.css" />
+		<link rel="stylesheet" type="text/css" href="../css/Personal-information.css" />
+		<link rel="stylesheet" type="text/css" href="../vendor/font-awesome-4.6.3/css/font-awesome.css" />
+		<link rel="stylesheet" type="text/css" href="../css/Green-conservation.css"/>
+		<!-- 让IE9以下的浏览器支持HTML5标签 -->
+		<!--[if lt IE 9]>
+        	<script src="http://cdn.bootcss.com/html5shiv/r29/html5.js"></script>
+        	<script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+	</head>
+	<!--作者：蒋茸茸
+	描述：绿化养护管理管理系统--公司概况及养护业绩-->
+
+	<body>
+		<!--系统头部-->
+		<header>
+			<div class="header-left">
+				<img src="../images/Office-bg2.png" />
+			</div>
+			<div class="header-right">
+				<div class="Hr-item">
+					<img src="../images/Office-user.jpg" />
+				</div>
+				<!--用户信息-->
+				<div class="Hr-item">
+					<ul>
+						<li>当前时间：<span id="Span"></span></li>
+						<li>姓名：xxx</li>
+						<li>部门：xx部</li>
+					</ul>
+				</div>
+				<!--退出按钮-->
+				<div class="Hr-item">
+					<!--<i class="fa fa-power-off"></i>-->
+					<a href="../home.html" class="Hr-item_home">
+						<img src="../images/returnHome.png" />首页
+					</a>
+				</div>
+			</div>
+		</header>
+		<!--系统内容-->
+		<section class="Office-section">
+			<div class="Os-boxs">
+				<!--系统导航-->
+				<div class="Osb-navs">
+					<div class="Osbn-title">
+						<img src="../images/Gc-nav.png" />
+					</div>
+					<div class="Osbn-content">
+						<!--养护管理类型-->
+						<ul class="Osbn-one Gc-nav">
+							<li>
+								<span><i class="fa fa-circle"></i></span>
+								<span><a href="">养护管理类型</a></span>
+								<span><i class="fa fa-angle-double-down"></i></span>
+							</li>
+							<li>
+								<a href="" class="Osbn-a">草坪养护</a>
+							</li>
+							<li>
+								<a>绿篱养护</a>
+							</li>
+							<li>
+								<a>树木（花冠）养护</a>
+							</li>
+						</ul>
+						<!--养护管理等级-->
+						<ul class="Osbn-one Gc-nav">
+							<li>
+								<span><i class="fa fa-circle"></i></span>
+								<span><a href="">养护管理等级</a></span>
+								<span><i class="fa fa-angle-double-down"></i></span>
+							</li>
+							<li>
+								<a href="" class="Osbn-a">一级</a>
+							</li>
+							<li>
+								<a>二级</a>
+							</li>
+							<li>
+								<a>特级</a>
+							</li>
+						</ul>
+						<!--实时信息-->
+						<ul class="Osbn-one Gc-nav">
+							<li>
+								<span><i class="fa fa-circle"></i></span>
+								<span><a>实时信息</a></span>
+								<span><i class="fa fa-angle-double-down"></i></span>
+							</li>
+							<li>
+								<a>广场</a>
+							</li>
+							<li>
+								<a>中温带</a>
+							</li>
+							<li>
+								<a>公园</a>
+							</li>
+							<li>
+								<a>暂管项目</a>
+							</li>
+						</ul>
+						<!--人员管理-->
+						<ul class="Osbn-one Gc-nav">
+							<li>
+								<span><i class="fa fa-circle"></i></span>
+								<span><a>人员管理</a></span>
+								<span><i class="fa fa-angle-double-down"></i></span>
+							</li>
+						</ul>
+						<!--合同管理-->
+						<ul class="Osbn-one Gc-nav">
+							<li>
+								<span><i class="fa fa-circle"></i></span>
+								<span><a>合同管理</a></span>
+								<span><i class="fa fa-angle-double-down"></i></span>
+							</li>
+						</ul>
+						<!--日志-->
+						<ul class="Osbn-one Gc-nav">
+							<li>
+								<span><i class="fa fa-circle"></i></span>
+								<span><a>日志</a></span>
+								<span><i class="fa fa-angle-double-down"></i></span>
+							</li>
+						</ul>
+						<!--信誉管理-->
+						<ul class="Osbn-one Gc-nav">
+							<li>
+								<span><i class="fa fa-circle"></i></span>
+								<span><a>信誉管理</a></span>
+								<span><i class="fa fa-angle-double-down"></i></span>
+							</li>
+							<li>
+								<a>公司概况及养护业绩</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<!--页面内容-->
+				<div class="Osb-container">
+					<!--面包屑导航-->
+					<div class="Osbc-content">
+						<div class="Osbc-center">
+							<!--位置显示-->
+							<div class="Osbc-title">
+								<span>当前位置：</span>
+								<span>绿化养护管理系统</span>
+								<span>></span>
+								<span>实时信息</span>
+								<span>></span>
+								<span>公司概况及养护业绩</span>
+							</div>
+							<div class="Gc-box"></div>
+							
+							<!--面包屑导航下面的内容-公司简介-->
+							<div class="Osbc_intro">
+								<div class="Osbc_intro_title">
+									<span class="Osbc_intro_span">公司简介</span>
+								</div>
+								<div class="Osbc_intro_center">
+									<span class="Osbc_itro_contentSpan">浙江百慕生物科技有限公司隶属浙江丽珀集团，成立于2011年3月，注册资本1000万元，是一家从事海洋生物开发销售的公司，主要从事保健品（海参）产品的销售。</span>
+									<span class="Osbc_itro_contentSpan">旗下的优参堂海参品牌源自于卢炜翎先生创立的优参号参堂，经过一百多年的发展，现已成为最具规模化，现代化，专业化的海参加工生产企业之一。</span>
+									<span class="Osbc_itro_contentSpan">公司特与世纪浙江百慕生物科技有限公司隶属浙江丽珀集团，成立于2011年3月，注册资本1000万元，是一家从事海洋生物开发销售的公司，主要从事保健品（海参）产品的销售。</span>
+									<span class="Osbc_itro_contentSpan">旗下的优参堂海参品牌源自于卢炜翎先生创立的优参号参堂，经过一百多年的发展，现已成为最具规模化，现代化，专业化的海参加工生产企业之一。</span>
+									<span class="Osbc_itro_contentSpan">旗下的优参堂海参品牌源自于卢炜翎先生创立的优参号参堂，经过一百多年的发展，现已成为最具规模化，现代化，专业化的海参加工生产企业之一。</span>
+									<span class="Osbc_itro_contentSpan">公司特与世纪浙江百慕生物科技有限公司隶属浙江丽珀集团，成立于2011年3月，注册资本1000万元，是一家从事海洋生物开发销售的公司，主要从事保健品（海参）产品的销售。</span>
+								</div>
+							</div>
+							<!--面包屑导航下面的内容-公司简介 结束-->
+							<!--面包屑导航下面的内容-养护业绩-->
+							<div class="Osbc_performance">
+								<div class="Osbc_performance_title">
+									<span class="Osbc_performance_span">公司简介</span>
+								</div>
+								<div class="Osbc_echarts">
+									<span class="Osbc_echarts_Span">展示近三年养护业绩</span>
+									<div id="echarts_2" style="width: 100%;height:100%;" style="opacity: 0.2;"></div>
+								</div>
+								
+								
+							</div>
+							<!--面包屑导航下面的内容-养护业绩  结束-->
+						</div>
+					</div>
+					<!--面包屑导航  结束-->
+				</div>
+			</div>
+		</section>
+	</body>
+	<script src="../js/jquery.min.js"></script>
+	<script src="../js/common.js"></script>
+	
+	<script type="text/javascript" src="../js/echarts.js" ></script>
+    <script>
+//  个人考勤表格切换
+    	$(".Osbcf-left > ul > li").click(function(){
+    		var i = $(this).index();
+    		$(this).addClass("Osbcf-active").siblings().removeClass("Osbcf-active");
+    		$(".Osbcf-right > .Osbcf-item").eq(i).show().siblings().hide();
+    	});
+    </script>
+    <!--echarts的js-->
+    <script>
+    	// 基于准备好的dom，初始化echarts实例
+		var myChart = echarts.init(document.getElementById('echarts_2'));
+		option = {
+			//color: ['red'], //柱子的颜色
+			itemStyle: {
+				normal: {
+					color: function(params) {　 //首先定义一个数组
+						var colorList = [
+							'yellow', 'orange', 'red', '#000000', '#EE9201', '#29AAE3',
+							'#B74AE5', '#0AAF9F', '#E89589', '#EFE42A',
+						];
+						return colorList[params.dataIndex]
+					},
+					　　　　　 //以下为是否显示
+					label: {
+						show: false
+					}
+				}
+			},
+			tooltip: {
+				trigger: 'axis',
+				axisPointer: { // 坐标轴指示器，坐标轴触发有效
+					type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+				}
+			},
+
+			legend: {
+				data: ['流量'],
+				x: 'left'
+			},
+
+			calculable: true,
+			xAxis: [{
+				name: '次数',
+				type: 'value'
+			}],
+			yAxis: [{
+				name: '（年）',
+				type: 'category',
+				data: ['2015年', '2016年', '2017年']
+			}],
+			series: [{
+				name: '次数',
+				type: 'bar',
+				stack: '总量',
+				itemStyle: {
+					normal: {
+						label: {
+							show: true,
+							position: 'insideRight'
+						}
+					}
+				},
+				barWidth: '40%',
+				data: [320, 302, 301]
+			}]
+		};
+
+		//		option.series[0].data = [250,540,120,20];
+		// 使用刚指定的配置项和数据显示图表。
+		myChart.setOption(option, true);
+		
+    </script>
+    <!--echarts的js  结束-->
+</html>

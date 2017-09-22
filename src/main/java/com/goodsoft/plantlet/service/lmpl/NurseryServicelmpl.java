@@ -14,7 +14,8 @@ import com.goodsoft.plantlet.util.DeleteFileUtil;
 import com.goodsoft.plantlet.util.ExcelUtil;
 import com.goodsoft.plantlet.util.UUIDUtil;
 import com.goodsoft.plantlet.util.result.*;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -42,7 +43,7 @@ public class NurseryServicelmpl implements NurseryService {
     @Resource
     ServicelmplGetFileSupp getFileSupp;
     //实例化日志管理工具类
-    private Logger logger = Logger.getLogger(SeedlingServicelmpl.class);
+    private Logger logger = LoggerFactory.getLogger(SeedlingServicelmpl.class);
     //实例化UUID工具类
     private UUIDUtil uuid = UUIDUtil.getInstance();
     //实例化excel工具类
@@ -87,8 +88,7 @@ public class NurseryServicelmpl implements NurseryService {
                 return (T) new Status(StatusEnum.NO_DATA.getCODE(), StatusEnum.NO_DATA.getEXPLAIN());
             }
         } catch (Exception e) {
-            System.out.println(e.toString());
-            this.logger.error(e);
+            this.logger.error(e.toString());
             return (T) new Status(StatusEnum.SERVER_ERROR.getCODE(), StatusEnum.SERVER_ERROR.getEXPLAIN());
         }
 
@@ -153,11 +153,10 @@ public class NurseryServicelmpl implements NurseryService {
                 //删除数据库文件数据
                 this.fileDao.deleteFileDao(uuid);
             } catch (Exception e1) {
-                System.out.println(e.toString());
-                this.logger.error(e);
+
+                this.logger.error(e.toString());
             }
-            System.out.println(e.toString());
-            this.logger.error(e);
+            this.logger.error(e.toString());
             return new Status(StatusEnum.EXCEL_ERROR.getCODE(), StatusEnum.EXCEL_ERROR.getEXPLAIN());
         }
     }
@@ -200,8 +199,7 @@ public class NurseryServicelmpl implements NurseryService {
             this.dao.addNurseryOneDao(msg);
             return new Status(StatusEnum.SUCCESS.getCODE(), StatusEnum.SUCCESS.getEXPLAIN());
         } catch (Exception e) {
-            System.out.println(e.toString());
-            this.logger.error(e);
+            this.logger.error(e.toString());
             return new Status(StatusEnum.SERVER_ERROR.getCODE(), StatusEnum.SERVER_ERROR.getEXPLAIN());
         }
     }
@@ -228,8 +226,8 @@ public class NurseryServicelmpl implements NurseryService {
         try {
             data = this.dao.queryNurseryOutDao(param);
         } catch (Exception e) {
-            System.out.println(e.toString());
-            this.logger.error(e);
+
+            this.logger.error(e.toString());
             return (T) new Status(StatusEnum.SERVER_ERROR.getCODE(), StatusEnum.SERVER_ERROR.getEXPLAIN());
         }
         if (data.size() > 0) {
@@ -267,8 +265,8 @@ public class NurseryServicelmpl implements NurseryService {
                     this.dao.addNurseryOutOneDao(msg);
                     return new Status(StatusEnum.SUCCESS.getCODE(), StatusEnum.SUCCESS.getEXPLAIN());
                 } catch (Exception e) {
-                    System.out.println(e.toString());
-                    this.logger.error(e);
+
+                    this.logger.error(e.toString());
                     return new Status(StatusEnum.SERVER_ERROR.getCODE(), StatusEnum.SERVER_ERROR.getEXPLAIN());
                 }
             case 603:
@@ -312,11 +310,10 @@ public class NurseryServicelmpl implements NurseryService {
                         //删除数据库文件数据
                         this.fileDao.deleteFileDao(uuid);
                     } catch (Exception e1) {
-                        System.out.println(e.toString());
-                        this.logger.error(e);
+
+                        this.logger.error(e.toString());
                     }
-                    System.out.println(e.toString());
-                    this.logger.error(e);
+                    this.logger.error(e.toString());
                     return new Status(StatusEnum.EXCEL_ERROR.getCODE(), StatusEnum.EXCEL_ERROR.getEXPLAIN());
                 }
         }

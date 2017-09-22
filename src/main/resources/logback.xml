@@ -87,7 +87,7 @@
     </appender>
     <!-- 按照每天生成错误日志文件 end-->
     <!-- 日志输出级别 start-->
-    <root level="INFO">
+    <root level="WARN">
         <!-- 控制台输出 -->
         <appender-ref ref="STDOUT"/>
         <!-- 日子文件输出 -->

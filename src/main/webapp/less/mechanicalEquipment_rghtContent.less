@@ -1,0 +1,870 @@
+/*
+ *描述： 该css样式为“机械设备管理系统”的样式，“机械设备管理系统”数据展示页面的样式
+ * ME为mechanicalEquipment.html的简称
+ * */
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+img{border:none;background:none;vertical-align:middle;}
+.ul_clearB{
+    clear: both;
+}
+//右边的内容
+.ME_center_R {
+//  font-family: "新宋体";color: #000;
+    input{padding:0;margin:0; outline: none;}
+    img{border:none;background:none;vertical-align:middle;}
+    ul,ol,li{list-style-type:none;}
+    a,span,p {font-size: 16px; color: #000; }
+    a:link { text-decoration: none;}
+    a:visited { text-decoration: none; color: #000; }
+    a:hover {  text-decoration: none; color: #000; }
+    a:active { text-decoration: none; color: #000; }
+    img { border: none; }
+    width: 80%;
+    height: auto;
+    float: right;
+    margin-top: 2.7%;
+    border: 2px solid #028c3c;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 25px;
+    //有灰色边框
+    .MEC_R_conter {
+        width: 100%;
+        height: 100%;
+        border: 2px solid #d2d2d2;
+        border-top: 1px solid #d2d2d2;
+        border-radius: 8px;
+        overflow: hidden;
+        box-sizing: border-box;
+        //面包屑导航
+        .MEC_RC_title {
+            width: 100%;
+            height: 39px;
+            background-color: #dedede;
+            border-radius: 6px 6px 0 0;
+            border-bottom: 1px solid #d0d0d0;
+            .MEC_RC_titleSpan {
+                margin-left: 12px;
+                line-height: 39px;
+            }
+        }
+        /**********************************机械设备-设备类型（mechanicalEquipment.html）***********************************/
+           /**** 头部有多个网页都是通用的（ 设备类型为例） ****/
+        .MES,.MEFY,.MEFI,.MECO,.MECC,.MECDe,.MECD,.MECS{
+            width: 96%;
+            height: auto;
+            padding: 28px 2% 25px 2%;
+            margin: 0 auto;
+            //头部，下拉框
+            .MES_top{
+                width: 100%;
+                height: auto;
+                padding: 10px 0 15px 0;
+                overflow: hidden;
+                .MES_top_left{
+                    width: 50%;
+                    height: auto;
+                    float: left;
+                    height: 28px;
+                    .MES_topL_select{
+                        width: 120px;
+                        text-align: center;
+//                      border: 1px solid #91d5ad;
+                        height: 26px;
+                        line-height: 26px;
+                        outline: none;
+                        color: #555555;
+                        text-align:center;
+                        padding-left: 4px;
+                        option{
+                            text-align:right;
+                            appearance:none;
+                            border: none;
+                        }
+                    }
+                }
+                .MES_top_right{
+                    width: 50%;
+                    height: auto;
+                    float: left;
+                    .MES_topR_derive{
+                        text-align: right;
+                        a{
+                            cursor: pointer;
+                            img{
+                                height: 22px;
+                                margin-top: -3px;
+                            }
+                        }
+                        .MES_addData{
+                            margin-right: 20px;
+                        }
+                    }
+                }
+            }
+            //中间内容
+            .MES_content{
+                width: 100%;
+                height: auto;
+//              border: 1px solid #b0e1c4;
+                border-bottom: 2px solid #9ad8b4;
+                border-top: none;
+                clear: both;
+                //表的头部
+                .MES_content_title{
+                    width: 100%;
+                    height: auto;
+                    display: block;
+                    background-color: #d9eee2;
+                    .MES_content_titleUl{
+                        width: 100%;
+                        height: auto;
+                        li{
+                            width: 20%;
+                            height: 60px;
+                            line-height: 60px;
+                            border-top: 2px solid #9ad8b4;
+                            border-right: 1px solid #9ad8b4;
+                            float: left;
+                            box-sizing: border-box;
+                            text-align: center;
+                        }
+                        .MES_content_titleLi1{
+                            border-left: 2px solid #9ad8b4;
+                        }
+                        li:last-child{
+                            border-right: 2px solid #9ad8b4;
+                        }
+                    }
+                    .ul_clearB{
+                        clear: both;
+                    }
+                }
+                //表的头部结束
+                //表的内容部分，可以循环
+                .MES_contentC{
+                    width: 100%;
+                    height: auto;
+                    .MES_contentC_a{
+                        width: 100%;
+                        height: auto;
+                        display: block;
+                        .MES_contentCA_ul{
+                            width: 100%;
+                            height: auto;
+                            .MES_contentCA_li {
+                                width: 20%;
+                                height: 60px;
+                                line-height: 60px;
+                                border-top: 1px solid #9ad8b4;
+                                border-right: 1px solid #9ad8b4;
+                                float: left;
+                                box-sizing: border-box;
+                                text-align: center;
+                                white-space: nowrap;
+                                text-overflow: ellipsis;
+                                overflow: hidden;
+                            }
+                            .MES_contentCA_li:nth-child(1){
+                                border-left: 2px solid #9ad8b4;
+                            }
+                            .MES_contentCA_li:last-child{
+                                border-right: 2px solid #9ad8b4;
+                            }
+                        }
+                    }
+                    .MES_contentC_a:hover .MES_contentCA_ul .MES_contentCA_li{
+                        color: #04be52;
+                    }
+                }
+                //表中间内容部分，可循环    结束
+                
+                
+            }
+            
+        }
+        /**********************************机械设备-设备类型（mechanicalEquipment.html）结束***********************************/
+       
+        /********************************** 机械设备-年审预警 （ME_facility_year.html）***********************************/
+        .MEFY{
+            width: 96%;
+            height: auto;
+            padding: 28px 2% 25px 2%;
+            margin: 0 auto;
+            .MEFY_content{
+                width: 100%;
+                height: auto;
+//              border: 1px solid #b0e1c4;
+                border-bottom: 2px solid #9ad8b4;
+                border-top: none;
+                clear: both;
+                //表的头部
+                .MEFY_content_title{
+                    width: 100%;
+                    height: auto;
+                    display: block;
+                    background-color: #d9eee2;
+                    .MEFY_content_titleUl{
+                        width: 100%;
+                        height: auto;
+                        li{
+                            width: 25%;
+                            height: 60px;
+                            line-height: 60px;
+                            border-top: 2px solid #9ad8b4;
+                            border-right: 1px solid #9ad8b4;
+                            float: left;
+                            box-sizing: border-box;
+                            text-align: center;
+                        }
+                        li:nth-child(1){
+                            border-left: 2px solid #9ad8b4;
+                             width: 20%;
+                        }
+                        li:last-child{
+                            border-right: 2px solid #9ad8b4;
+                            width: 30%;
+                        }
+                        .MEFY_content_titleLi1{
+                           
+                        }
+                        .MEFY_content_titleLi4{
+                            
+                        }
+                    }
+                    .ul_clearB{
+                        clear: both;
+                    }
+                }
+                //表的头部结束
+                //表的内容部分，可以循环
+                .MEFY_contentC{
+                    width: 100%;
+                    height: auto;
+                    .MEFY_contentC_a{
+                        width: 100%;
+                        height: auto;
+                        display: block;
+                        .MEFY_contentCA_ul{
+                            width: 100%;
+                            height: auto;
+                            .MEFY_contentCA_li {
+                                width: 25%;
+                                height: 60px;
+                                line-height: 60px;
+                                border-top: 1px solid #9ad8b4;
+                                border-right: 1px solid #9ad8b4;
+                                float: left;
+                                box-sizing: border-box;
+                                text-align: center;
+                                white-space: nowrap;
+                                text-overflow: ellipsis;
+                                overflow: hidden;
+                            }
+                            .MEFY_contentCA_li:nth-child(1){
+                                border-left: 2px solid #9ad8b4;
+                                width: 20%;
+                            }
+                            .MEFY_contentCA_li:last-child{
+                                border-right: 2px solid #9ad8b4;
+                                width: 30%;
+                                color: red;
+                            }
+                            .MEFY_contentCA_li:last-child span{
+                                color: red;
+                            }
+                        }
+                    }
+                    .MEFY_contentC_a:hover .MEFY_contentCA_ul .MEFY_contentCA_li{
+                        color: #04be52;
+                    }
+                    .MEFY_contentC_a:hover .MEFY_contentCA_ul .MEFY_contentCA_li span{
+                        color: #04be52;
+                    }
+                }
+                //表中间内容部分，可循环    结束
+            }
+        }
+        
+        
+        /********************************** 机械设备-年审预警 （ME_facility_year.html）  结束  ***********************************/
+       
+        /********************************** 机械设备-保险预警 （ME_facility_insurance.html）简称：MEFI***********************************/
+        .MEFI{
+            width: 96%;
+            height: auto;
+            padding: 28px 2% 25px 2%;
+            margin: 0 auto;
+            .MEFI_content{
+                width: 100%;
+                height: auto;
+//              border: 1px solid #b0e1c4;
+                border-bottom: 2px solid #9ad8b4;
+                border-top: none;
+                clear: both;
+                //表的头部
+                .MEFI_content_title{
+                    width: 100%;
+                    height: auto;
+                    display: block;
+                    background-color: #d9eee2;
+                    .MEFI_content_titleUl{
+                        width: 100%;
+                        height: auto;
+                        li{
+                            width: 25%;
+                            height: 60px;
+                            line-height: 60px;
+                            border-top: 2px solid #9ad8b4;
+                            border-right: 1px solid #9ad8b4;
+                            float: left;
+                            box-sizing: border-box;
+                            text-align: center;
+                        }
+                        li:nth-child(1){
+                            border-left: 2px solid #9ad8b4;
+                             width: 20%;
+                        }
+                        li:last-child{
+                            border-right: 2px solid #9ad8b4;
+                            width: 30%;
+                        }
+                        .MEFI_content_titleLi1{
+                           
+                        }
+                        .MEFI_content_titleLi4{
+                            
+                        }
+                    }
+                    .ul_clearB{
+                        clear: both;
+                    }
+                }
+                //表的头部结束
+                //表的内容部分，可以循环
+                .MEFI_contentC{
+                    width: 100%;
+                    height: auto;
+                    .MEFI_contentC_a{
+                        width: 100%;
+                        height: auto;
+                        display: block;
+                        .MEFI_contentCA_ul{
+                            width: 100%;
+                            height: auto;
+                            .MEFI_contentCA_li {
+                                width: 25%;
+                                height: 60px;
+                                line-height: 60px;
+                                border-top: 1px solid #9ad8b4;
+                                border-right: 1px solid #9ad8b4;
+                                float: left;
+                                box-sizing: border-box;
+                                text-align: center;
+                                white-space: nowrap;
+                                text-overflow: ellipsis;
+                                overflow: hidden;
+                            }
+                            .MEFI_contentCA_li:nth-child(1){
+                                border-left: 2px solid #9ad8b4;
+                                width: 20%;
+                            }
+                            .MEFI_contentCA_li:last-child{
+                                border-right: 2px solid #9ad8b4;
+                                width: 30%;
+                                color: red;
+                            }
+                            .MEFI_contentCA_li:last-child span{
+                                color: red;
+                            }
+                        }
+                    }
+                    .MEFI_contentC_a:hover .MEFI_contentCA_ul .MEFI_contentCA_li{
+                        color: #04be52;
+                    }
+                    .MEFI_contentC_a:hover .MEFI_contentCA_ul .MEFI_contentCA_li span{
+                        color: #04be52;
+                    }
+                }
+                //表中间内容部分，可循环    结束
+            }
+        }
+        /********************************** 机械设备-保险预警 （ME_facility_insurance.html）  结束  ***********************************/
+       
+       
+       
+       
+        /********************************** 车辆情况-耗油量 （ME_car_oilConsumption.html）简称：MECO***********************************/
+        .MECO{
+            width: 96%;
+            height: auto;
+            padding: 28px 2% 25px 2%;
+            margin: 0 auto;
+            .MECO_content{
+                width: 100%;
+                height: auto;
+//              border: 1px solid #b0e1c4;
+                border-bottom: 2px solid #9ad8b4;
+                border-top: none;
+                clear: both;
+                //表的头部
+                .MECO_content_title{
+                    width: 100%;
+                    height: auto;
+                    display: block;
+                    background-color: #d9eee2;
+                    .MECO_content_titleUl{
+                        width: 100%;
+                        height: auto;
+                        li{
+                            width: 13.5%;
+                            height: 60px;
+                            line-height: 60px;
+                            border-top: 2px solid #9ad8b4;
+                            border-right: 1px solid #9ad8b4;
+                            float: left;
+                            box-sizing: border-box;
+                            text-align: center;
+                        }
+                        li:nth-child(1){
+                            border-left: 2px solid #9ad8b4;
+                            width: 19%;
+                        }
+                        li:last-child{
+                            border-right: 2px solid #9ad8b4;
+                        }
+                    }
+                    .ul_clearB{
+                        clear: both;
+                    }
+                }
+                //表的头部结束
+                //表的内容部分，可以循环
+                .MECO_contentC{
+                    width: 100%;
+                    height: auto;
+                    .MECO_contentC_a{
+                        width: 100%;
+                        height: auto;
+                        display: block;
+                        .MECO_contentCA_ul{
+                            width: 100%;
+                            height: auto;
+                            .MECO_contentCA_li {
+                                width: 13.5%;
+                                height: 60px;
+                                line-height: 60px;
+                                border-top: 1px solid #9ad8b4;
+                                border-right: 1px solid #9ad8b4;
+                                float: left;
+                                box-sizing: border-box;
+                                text-align: center;
+                                white-space: nowrap;
+                                text-overflow: ellipsis;
+                                overflow: hidden;
+                            }
+                            .MECO_contentCA_li:nth-child(1){
+                                border-left: 2px solid #9ad8b4;
+                                width: 19%;
+                            }
+                            .MECO_contentCA_li:last-child{
+                                border-right: 2px solid #9ad8b4;
+                            }
+                        }
+                    }
+                    .MECO_contentC_a:hover .MECO_contentCA_ul .MECO_contentCA_li{
+                        color: #04be52;
+                    }
+                }
+                //表中间内容部分，可循环    结束
+            }
+        }
+        /********************************** 车辆情况-耗油量 （ME_car_oilConsumption.html）简称：MECO  结束  ***********************************/
+       
+       /********************************** 车辆情况-车辆情况-用车量 （ME_car_car.html）简称：MECC***********************************/
+        .MECC{
+            width: 96%;
+            height: auto;
+            padding: 28px 2% 25px 2%;
+            margin: 0 auto;
+            .MECC_content{
+                width: 100%;
+                height: auto;
+//              border: 1px solid #b0e1c4;
+                border-bottom: 2px solid #9ad8b4;
+                border-top: none;
+                clear: both;
+                //表的头部
+                .MECC_content_title{
+                    width: 100%;
+                    height: auto;
+                    display: block;
+                    background-color: #d9eee2;
+                    .MECC_content_titleUl{
+                        width: 100%;
+                        height: auto;
+                        li{
+                            width: 25%;
+                            height: 60px;
+                            line-height: 60px;
+                            border-top: 2px solid #9ad8b4;
+                            border-right: 1px solid #9ad8b4;
+                            float: left;
+                            box-sizing: border-box;
+                            text-align: center;
+                        }
+                        li:nth-child(1){
+                            border-left: 2px solid #9ad8b4;
+                        }
+                        li:last-child{
+                            border-right: 2px solid #9ad8b4;
+                        }
+                    }
+                    .ul_clearB{
+                        clear: both;
+                    }
+                }
+                //表的头部结束
+                //表的内容部分，可以循环
+                .MECC_contentC{
+                    width: 100%;
+                    height: auto;
+                    .MECC_contentC_a{
+                        width: 100%;
+                        height: auto;
+                        display: block;
+                        .MECC_contentCA_ul{
+                            width: 100%;
+                            height: auto;
+                            .MECC_contentCA_li {
+                                width: 25%;
+                                height: 60px;
+                                line-height: 60px;
+                                border-top: 1px solid #9ad8b4;
+                                border-right: 1px solid #9ad8b4;
+                                float: left;
+                                box-sizing: border-box;
+                                text-align: center;
+                                white-space: nowrap;
+                                text-overflow: ellipsis;
+                                overflow: hidden;
+                            }
+                            .MECC_contentCA_li:nth-child(1){
+                                border-left: 2px solid #9ad8b4;
+                            }
+                            .MECC_contentCA_li:last-child{
+                                border-right: 2px solid #9ad8b4;
+                            }
+                        }
+                    }
+                    .MECC_contentC_a:hover .MECC_contentCA_ul .MECC_contentCA_li{
+                        color: #04be52;
+                    }
+                }
+                //表中间内容部分，可循环    结束
+            }
+        }
+        /********************************** 车辆情况-用车量 （ME_car_car.html）简称：MECC  结束  ***********************************/
+       
+       
+       /********************************** 车辆情况-周行车公里数 （ME_car_distance.html）简称：MECDe***********************************/
+        .MECDe{
+            width: 96%;
+            height: auto;
+            padding: 28px 2% 25px 2%;
+            margin: 0 auto;
+            .MECDe_content{
+                width: 100%;
+                height: auto;
+//              border: 1px solid #b0e1c4;
+                border-bottom: 2px solid #9ad8b4;
+                border-top: none;
+                clear: both;
+                //表的头部
+                .MECDe_content_title{
+                    width: 100%;
+                    height: auto;
+                    display: block;
+                    background-color: #d9eee2;
+                    .MECDe_content_titleUl{
+                        width: 100%;
+                        height: auto;
+                        li{
+                            width: 25%;
+                            height: 60px;
+                            line-height: 60px;
+                            border-top: 2px solid #9ad8b4;
+                            border-right: 1px solid #9ad8b4;
+                            float: left;
+                            box-sizing: border-box;
+                            text-align: center;
+                        }
+                        li:nth-child(1){
+                            border-left: 2px solid #9ad8b4;
+                        }
+                        li:last-child{
+                            border-right: 2px solid #9ad8b4;
+                        }
+                    }
+                    .ul_clearB{
+                        clear: both;
+                    }
+                }
+                //表的头部结束
+                //表的内容部分，可以循环
+                .MECDe_contentC{
+                    width: 100%;
+                    height: auto;
+                    .MECDe_contentC_a{
+                        width: 100%;
+                        height: auto;
+                        display: block;
+                        .MECDe_contentCA_ul{
+                            width: 100%;
+                            height: auto;
+                            .MECDe_contentCA_li {
+                                width: 25%;
+                                height: 60px;
+                                line-height: 60px;
+                                border-top: 1px solid #9ad8b4;
+                                border-right: 1px solid #9ad8b4;
+                                float: left;
+                                box-sizing: border-box;
+                                text-align: center;
+                                white-space: nowrap;
+                                text-overflow: ellipsis;
+                                overflow: hidden;
+                            }
+                            .MECDe_contentCA_li:nth-child(1){
+                                border-left: 2px solid #9ad8b4;
+                            }
+                            .MECDe_contentCA_li:last-child{
+                                border-right: 2px solid #9ad8b4;
+                            }
+                        }
+                    }
+                    .MECDe_contentC_a:hover .MECDe_contentCA_ul .MECDe_contentCA_li{
+                        color: #04be52;
+                    }
+                }
+                //表中间内容部分，可循环    结束
+            }
+        }
+        /********************************** 车辆情况-周行车公里数 （ME_car_distance.html）简称：MECDe  结束  ***********************************/
+       
+       
+       /********************************** 车辆情况-行车记录 （ME_car_driving.html）简称：MECD***********************************/
+        .MECD{
+            width: 96%;
+            height: auto;
+            padding: 28px 2% 25px 2%;
+            margin: 0 auto;
+            .MECD_content{
+                width: 100%;
+                height: auto;
+//              border: 1px solid #b0e1c4;
+                border-bottom: 2px solid #9ad8b4;
+                border-top: none;
+                clear: both;
+                //表的头部
+                .MECD_content_title{
+                    width: 100%;
+                    height: auto;
+                    display: block;
+                    background-color: #d9eee2;
+                    .MECD_content_titleUl{
+                        width: 100%;
+                        height: auto;
+                        li{
+                            width: 16.666%;
+                            height: 60px;
+                            line-height: 60px;
+                            border-top: 2px solid #9ad8b4;
+                            border-right: 1px solid #9ad8b4;
+                            float: left;
+                            box-sizing: border-box;
+                            text-align: center;
+                        }
+                        li:nth-child(1){
+                            border-left: 2px solid #9ad8b4;
+                        }
+                        li:last-child{
+                            border-right: 2px solid #9ad8b4;
+                        }
+                    }
+                    .ul_clearB{
+                        clear: both;
+                    }
+                }
+                //表的头部结束
+                //表的内容部分，可以循环
+                .MECD_contentC{
+                    width: 100%;
+                    height: auto;
+                    .MECD_contentC_a{
+                        width: 100%;
+                        height: auto;
+                        display: block;
+                        .MECD_contentCA_ul{
+                            width: 100%;
+                            height: auto;
+                            .MECD_contentCA_li {
+                                width: 16.666%;
+                                height: 60px;
+                                line-height: 60px;
+                                border-top: 1px solid #9ad8b4;
+                                border-right: 1px solid #9ad8b4;
+                                float: left;
+                                box-sizing: border-box;
+                                text-align: center;
+                                white-space: nowrap;
+                                text-overflow: ellipsis;
+                                overflow: hidden;
+                            }
+                            .MECD_contentCA_li:nth-child(1){
+                                border-left: 2px solid #9ad8b4;
+                            }
+                            .MECD_contentCA_li:last-child{
+                                border-right: 2px solid #9ad8b4;
+                            }
+                        }
+                    }
+                    .MECD_contentC_a:hover .MECD_contentCA_ul .MECD_contentCA_li{
+                        color: #04be52;
+                    }
+                }
+                //表中间内容部分，可循环    结束
+            }
+        }
+        /********************************** 车辆情况-行车记录 （ME_car_driving.html）简称：MECD  结束  ***********************************/
+       
+       
+       /********************************** 车辆情况-维修情况 （ME_car_service.html）简称：MECS***********************************/
+        .MECS{
+            width: 96%;
+            height: auto;
+            padding: 28px 2% 25px 2%;
+            margin: 0 auto;
+            .MECS_content{
+                width: 100%;
+                height: auto;
+//              border: 1px solid #b0e1c4;
+                border-bottom: 2px solid #9ad8b4;
+                border-top: none;
+                clear: both;
+                //表的头部
+                .MECS_content_title{
+                    width: 100%;
+                    height: auto;
+                    display: block;
+                    background-color: #d9eee2;
+                    .MECS_content_titleUl{
+                        width: 100%;
+                        height: auto;
+                        li{
+                            width: 20%;
+                            height: 60px;
+                            line-height: 60px;
+                            border-top: 2px solid #9ad8b4;
+                            border-right: 1px solid #9ad8b4;
+                            float: left;
+                            box-sizing: -webkit-border-box;
+                            box-sizing: border-box;
+                            text-align: center;
+                        }
+                        li:nth-child(1){
+                            border-left: 2px solid #9ad8b4;
+                        }
+                        li:last-child{
+                            border-right: 2px solid #9ad8b4;
+                        }
+                        .MECS_content_titleLi2{
+                            width: 40%;
+                        }
+                    }
+                    .ul_clearB{
+                        clear: both;
+                    }
+                }
+                //表的头部结束
+                //表的内容部分，可以循环
+                .MECS_contentC{
+                    width: 100%;
+                    height: auto;
+                    .MECS_contentC_a{
+                        width: 100%;
+                        height: auto;
+                        display: block;
+                        .MECS_contentCA_ul{
+                            width: 100%;
+                            height: auto;
+                            .MECS_contentCA_li {
+                                width: 20%;
+                                height: 60px;
+                                line-height: 60px;
+                                border-top: 1px solid #9ad8b4;
+                                border-right: 1px solid #9ad8b4;
+                                float: left;
+                                box-sizing: border-box;
+                                text-align: center;
+                                white-space: nowrap;
+                                text-overflow: ellipsis;
+                                overflow: hidden;
+                            }
+                            .MECS_contentCA_li:nth-child(1){
+                                border-left: 2px solid #9ad8b4;
+                            }
+                            .MECS_contentCA_li:last-child{
+                                border-right: 2px solid #9ad8b4;
+                            }
+                            .MECS_contentCA_li2{
+                                width: 40%;
+                            }
+                        }
+                    }
+                    .MECS_contentC_a:hover .MECS_contentCA_ul .MECS_contentCA_li{
+                        color: #04be52;
+                    }
+                }
+                //表中间内容部分，可循环    结束
+            }
+        }
+        /********************************** 车辆情况-维修情况 （ME_car_service.html）简称：MECS  结束  ***********************************/
+       
+       
+       
+       
+        /********************************** 分页 通用 ***********************************/
+        .ME_paging{
+            width: 100%;
+            height: 100px;
+            .ME_paging_ul{
+                width: auto;
+                height: auto;
+                float: right;
+                padding-top: 30px;
+                padding-right: 2%;
+                .ME_paging_li{
+                    line-height: 20px;
+                    border: 1px solid #b3dcc4;
+                    float: left;
+                    padding: 2px 4px;
+                    margin: 0 3px;
+                    a{
+                        color: #028c3c;
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+        /********************************** 分页 通用  结束 ***********************************/
+        
+    }
+}
+
+//右边的内容  结束

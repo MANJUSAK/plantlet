@@ -1,0 +1,314 @@
+//描述：这里是首页（home.html）的less样式
+//开发时间：2017-06-21
+body,
+td,
+th {
+    font-family: "新宋体";
+    font-size: 14px;
+    color: #000;
+}
+
+body {
+    margin-left: 0px;
+    margin-top: 0px;
+    margin-right: 0px;
+    margin-bottom: 0px;
+}
+
+a {
+    font-size: 14px;
+    color: #000;
+}
+
+a:link {
+    text-decoration: none;
+}
+
+a:visited {
+    text-decoration: none;
+    color: #000;
+}
+
+a:hover {
+    text-decoration: none;
+    color: #000;
+}
+
+a:active {
+    text-decoration: none;
+    color: #000;
+}
+
+img {
+    border: none;
+}
+
+.clearBoth {
+    clear: both;
+}
+//头部
+//.HE_head {
+//  width: 100%;
+//  height: 130px;
+//  min-width: 1200px;
+//  max-width: 1920px;
+//  margin: 0 auto;
+//  background-image: url(../images/home_head_bg.png);
+//  background-repeat: repeat-x;
+//  //头部左边的内容
+//  .HE_head_L {
+//      width: 37%;
+//      height: 130px;
+//      float: left;
+//      display: block;
+//      .HE_hL_center {
+//          width: 100%;
+//          height: 130px;
+//          display: table-cell;
+//          vertical-align: middle;
+//          img {
+//              width: 96%;
+//              padding: 0 2%;
+//              line-height: 130px;
+//          }
+//      }
+//  }
+//  //头部右边的内容
+//  .HE_head_R {
+//      width: 30%;
+//      height: 130px;
+//      float: right;
+//      background-image: url(../images/home_head_Rbg.png);
+//      background-size: 100% 100%;
+//      background-repeat: no-repeat;
+//      background-position: right top;
+//      .HE_hR_center {
+//          width: 200px;
+//          height: 36px;
+//          float: right;
+//          margin: 45px 20px 0 0;
+//          //可以点击的img
+//          a {
+//              float: left;
+//              margin: 0 15px;
+//              line-height: 36px;
+//              display: block;
+//              img {
+//                  line-height: 36px;
+//              }
+//          }
+//          //最右边的退出按钮样式设置
+//          .HE_hRC_R {
+//              margin-top: 3px;
+//          }
+//      }
+//  }
+//}
+//头部结束---------------
+
+//中间内容部分
+.HE_center {
+    width: 100%;
+    height: 900px;
+    margin: 0 auto;
+    padding: 0 25px;
+    box-sizing: border-box;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    font-size: 16px;
+    color: white;
+    min-width: 1200px;
+    max-width: 1920px;
+    
+    //中间部分内容，左边部分
+    .HE_center_L{
+        width: 250px;
+        height: 900px;
+        background-color: #35a363;
+        border-radius: 10px;
+        float: left;
+        //头像部分
+        .HE_cL_user{
+            width: 110px;
+            height: 110px;
+            border-radius: 55px;
+            margin: 30px 0 20px 70px;
+            img{
+                width: 110px;
+                height: auto;
+            }
+        }
+        //名字
+        .HE_cL_neme{
+            width: 130px;
+            height: auto;
+            margin-left: 78px;
+            p{
+                margin: 0;
+                line-height: 26px;
+                span{
+                    margin-left: 2px;
+                }
+               .HE_cL_Nname{
+                   color: #fff100;
+               }
+            }
+        }
+        //导航部分
+        .HE_cL_home{
+            width: 100%;
+            height: auto;
+            .HE_cL_hul{
+                width: 100%;
+                height: auto;
+                padding: 0;
+                margin: 0;
+                .HE_cL_hli{
+                    list-style: none;
+                    width: 100%;
+                    height: 36px;
+                    margin: 16px 0;
+                    a{
+                        color: white;
+                        width: 250px;
+                        height: 36px;
+                        line-height: 36px;
+                        font-size: 16px;
+                        display: block;
+                        img{
+                            float:left;
+                            margin: 8px 10px 0 60px;
+                        }
+                        span{
+                            float: left;
+                            margin: 0;
+                        }
+                    }
+                    a:hover{
+                         background-color: #22824a;
+                    }
+                }
+                img{
+                    visibility: hidden; 
+                }
+                //第一个单独的背景颜色
+                .HE_cL_hliShow{
+                    background-color: #22824a;
+                }
+                li:nth-child(1) img{
+                    visibility: visible;
+                }
+            }
+        }
+    }
+    //中间部分内容，右边部分
+    .HE_center_R{
+        width: auto;
+        height: 900px;
+        background: #eafde1;
+        margin-left: 280px;
+        border-radius: 10px;
+        background-image: url(../images/home_C_Rbg.jpg);
+        background-repeat: no-repeat;
+        background-position: center bottom;
+        background-size: 100% auto;
+        //控制图片文字的UI
+        .HE_CR_content{
+            width: 100%;
+            height: 100%;
+            padding: 0 40px;
+            box-sizing: border-box;
+            //第一行的图片
+            .HE_CRc_ul1{
+                width: 100%;
+                height: 330px;
+//              background-color: royalblue;
+                margin: 0;
+                padding: 0;
+                padding-top: 80px;
+                list-style: none;
+                .HE_CRc_li1{
+                    margin: 0;
+                    padding: 0;
+                    width: 25%;
+                    height: 100%;
+                    float: left;
+                    .HE_CRc_li1C{
+                        width: 100%;
+                        height: 330px;
+                        display: table-cell;
+                        vertical-align: middle;
+                        position: relative;
+                        .HE_CRc_li1img{
+                            width: 92%;
+                            margin: 4%;
+                        }
+                        .HE_CRc_li1a1 {
+                            width: 90px;
+                            height: auto;
+                            margin: 0 auto;
+                            position: absolute;
+                            top: 50%;
+                            margin-top: -10px;
+                            left: 50%;
+                            margin-left: -45px;
+                            img{
+                                  width: 100%;
+                                
+                            }
+                        }
+                    }
+                    
+                }
+            }
+             //第二行图片
+            .HE_CRc_agoul2{
+                width: 100%;
+                height: 330px;
+                padding: 0px 12.5%;
+                box-sizing: border-box;
+                .HE_CRc_ul2{
+                    width: 100%;
+                    height: 330px;
+    //              background-color: royalblue;
+                    margin: 0;
+                    padding: 0;
+                    list-style: none;
+                    .HE_CRc_li2{
+                        margin: 0;
+                        padding: 0;
+                        width: 33.3%;
+                        height: 100%;
+                        float: left;
+                        .HE_CRc_li2C{
+                            width: 100%;
+                            height: 330px;
+                            display: table-cell;
+                            vertical-align: middle;
+                            position: relative;
+                            .HE_CRc_li2img{
+                                width: 92%;
+                                margin: 4%;
+                            }
+                            .HE_CRc_li2a1 {
+                                width: 90px;
+                                height: auto;
+                                margin: 0 auto;
+                                position: absolute;
+                                top: 50%;
+                                margin-top: -10px;
+                                left: 50%;
+                                margin-left: -45px;
+                                img{
+                                      width: 100%;
+                                    
+                                }
+                            }
+                        }
+                     
+                    }   
+                }
+            }
+        }
+    }
+}

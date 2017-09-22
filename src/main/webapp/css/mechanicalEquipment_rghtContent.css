@@ -1,0 +1,986 @@
+/*
+ *描述： 该css样式为“机械设备管理系统”的样式，“机械设备管理系统”数据展示页面的样式
+ * ME为mechanicalEquipment.html的简称
+ * */
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+img {
+  border: none;
+  background: none;
+  vertical-align: middle;
+}
+.ul_clearB {
+  clear: both;
+}
+.ME_center_R {
+  width: 80%;
+  height: auto;
+  float: right;
+  margin-top: 2.7%;
+  border: 2px solid #028c3c;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 25px;
+}
+.ME_center_R input {
+  padding: 0;
+  margin: 0;
+  outline: none;
+}
+.ME_center_R img {
+  border: none;
+  background: none;
+  vertical-align: middle;
+}
+.ME_center_R ul,
+.ME_center_R ol,
+.ME_center_R li {
+  list-style-type: none;
+}
+.ME_center_R a,
+.ME_center_R span,
+.ME_center_R p {
+  font-size: 16px;
+  color: #000;
+}
+.ME_center_R a:link {
+  text-decoration: none;
+}
+.ME_center_R a:visited {
+  text-decoration: none;
+  color: #000;
+}
+.ME_center_R a:hover {
+  text-decoration: none;
+  color: #000;
+}
+.ME_center_R a:active {
+  text-decoration: none;
+  color: #000;
+}
+.ME_center_R img {
+  border: none;
+}
+.ME_center_R .MEC_R_conter {
+  width: 100%;
+  height: 100%;
+  border: 2px solid #d2d2d2;
+  border-top: 1px solid #d2d2d2;
+  border-radius: 8px;
+  overflow: hidden;
+  box-sizing: border-box;
+  /**********************************机械设备-设备类型（mechanicalEquipment.html）***********************************/
+  /**** 头部有多个网页都是通用的（ 设备类型为例） ****/
+  /**********************************机械设备-设备类型（mechanicalEquipment.html）结束***********************************/
+  /********************************** 机械设备-年审预警 （ME_facility_year.html）***********************************/
+  /********************************** 机械设备-年审预警 （ME_facility_year.html）  结束  ***********************************/
+  /********************************** 机械设备-保险预警 （ME_facility_insurance.html）简称：MEFI***********************************/
+  /********************************** 机械设备-保险预警 （ME_facility_insurance.html）  结束  ***********************************/
+  /********************************** 车辆情况-耗油量 （ME_car_oilConsumption.html）简称：MECO***********************************/
+  /********************************** 车辆情况-耗油量 （ME_car_oilConsumption.html）简称：MECO  结束  ***********************************/
+  /********************************** 车辆情况-车辆情况-用车量 （ME_car_car.html）简称：MECC***********************************/
+  /********************************** 车辆情况-用车量 （ME_car_car.html）简称：MECC  结束  ***********************************/
+  /********************************** 车辆情况-周行车公里数 （ME_car_distance.html）简称：MECDe***********************************/
+  /********************************** 车辆情况-周行车公里数 （ME_car_distance.html）简称：MECDe  结束  ***********************************/
+  /********************************** 车辆情况-行车记录 （ME_car_driving.html）简称：MECD***********************************/
+  /********************************** 车辆情况-行车记录 （ME_car_driving.html）简称：MECD  结束  ***********************************/
+  /********************************** 车辆情况-维修情况 （ME_car_service.html）简称：MECS***********************************/
+  /********************************** 车辆情况-维修情况 （ME_car_service.html）简称：MECS  结束  ***********************************/
+  /********************************** 分页 通用 ***********************************/
+  /********************************** 分页 通用  结束 ***********************************/
+}
+.ME_center_R .MEC_R_conter .MEC_RC_title {
+  width: 100%;
+  height: 39px;
+  background-color: #dedede;
+  border-radius: 6px 6px 0 0;
+  border-bottom: 1px solid #d0d0d0;
+}
+.ME_center_R .MEC_R_conter .MEC_RC_title .MEC_RC_titleSpan {
+  margin-left: 12px;
+  line-height: 39px;
+}
+.ME_center_R .MEC_R_conter .MES,
+.ME_center_R .MEC_R_conter .MEFY,
+.ME_center_R .MEC_R_conter .MEFI,
+.ME_center_R .MEC_R_conter .MECO,
+.ME_center_R .MEC_R_conter .MECC,
+.ME_center_R .MEC_R_conter .MECDe,
+.ME_center_R .MEC_R_conter .MECD,
+.ME_center_R .MEC_R_conter .MECS {
+  width: 96%;
+  height: auto;
+  padding: 28px 2% 25px 2%;
+  margin: 0 auto;
+}
+.ME_center_R .MEC_R_conter .MES .MES_top,
+.ME_center_R .MEC_R_conter .MEFY .MES_top,
+.ME_center_R .MEC_R_conter .MEFI .MES_top,
+.ME_center_R .MEC_R_conter .MECO .MES_top,
+.ME_center_R .MEC_R_conter .MECC .MES_top,
+.ME_center_R .MEC_R_conter .MECDe .MES_top,
+.ME_center_R .MEC_R_conter .MECD .MES_top,
+.ME_center_R .MEC_R_conter .MECS .MES_top {
+  width: 100%;
+  height: auto;
+  padding: 10px 0 15px 0;
+  overflow: hidden;
+}
+.ME_center_R .MEC_R_conter .MES .MES_top .MES_top_left,
+.ME_center_R .MEC_R_conter .MEFY .MES_top .MES_top_left,
+.ME_center_R .MEC_R_conter .MEFI .MES_top .MES_top_left,
+.ME_center_R .MEC_R_conter .MECO .MES_top .MES_top_left,
+.ME_center_R .MEC_R_conter .MECC .MES_top .MES_top_left,
+.ME_center_R .MEC_R_conter .MECDe .MES_top .MES_top_left,
+.ME_center_R .MEC_R_conter .MECD .MES_top .MES_top_left,
+.ME_center_R .MEC_R_conter .MECS .MES_top .MES_top_left {
+  width: 50%;
+  height: auto;
+  float: left;
+  height: 28px;
+}
+.ME_center_R .MEC_R_conter .MES .MES_top .MES_top_left .MES_topL_select,
+.ME_center_R .MEC_R_conter .MEFY .MES_top .MES_top_left .MES_topL_select,
+.ME_center_R .MEC_R_conter .MEFI .MES_top .MES_top_left .MES_topL_select,
+.ME_center_R .MEC_R_conter .MECO .MES_top .MES_top_left .MES_topL_select,
+.ME_center_R .MEC_R_conter .MECC .MES_top .MES_top_left .MES_topL_select,
+.ME_center_R .MEC_R_conter .MECDe .MES_top .MES_top_left .MES_topL_select,
+.ME_center_R .MEC_R_conter .MECD .MES_top .MES_top_left .MES_topL_select,
+.ME_center_R .MEC_R_conter .MECS .MES_top .MES_top_left .MES_topL_select {
+  width: 120px;
+  height: 26px;
+  line-height: 26px;
+  outline: none;
+  color: #555555;
+  text-align: center;
+  padding-left: 4px;
+}
+.ME_center_R .MEC_R_conter .MES .MES_top .MES_top_left .MES_topL_select option,
+.ME_center_R .MEC_R_conter .MEFY .MES_top .MES_top_left .MES_topL_select option,
+.ME_center_R .MEC_R_conter .MEFI .MES_top .MES_top_left .MES_topL_select option,
+.ME_center_R .MEC_R_conter .MECO .MES_top .MES_top_left .MES_topL_select option,
+.ME_center_R .MEC_R_conter .MECC .MES_top .MES_top_left .MES_topL_select option,
+.ME_center_R .MEC_R_conter .MECDe .MES_top .MES_top_left .MES_topL_select option,
+.ME_center_R .MEC_R_conter .MECD .MES_top .MES_top_left .MES_topL_select option,
+.ME_center_R .MEC_R_conter .MECS .MES_top .MES_top_left .MES_topL_select option {
+  text-align: right;
+  appearance: none;
+  border: none;
+}
+.ME_center_R .MEC_R_conter .MES .MES_top .MES_top_right,
+.ME_center_R .MEC_R_conter .MEFY .MES_top .MES_top_right,
+.ME_center_R .MEC_R_conter .MEFI .MES_top .MES_top_right,
+.ME_center_R .MEC_R_conter .MECO .MES_top .MES_top_right,
+.ME_center_R .MEC_R_conter .MECC .MES_top .MES_top_right,
+.ME_center_R .MEC_R_conter .MECDe .MES_top .MES_top_right,
+.ME_center_R .MEC_R_conter .MECD .MES_top .MES_top_right,
+.ME_center_R .MEC_R_conter .MECS .MES_top .MES_top_right {
+  width: 50%;
+  height: auto;
+  float: left;
+}
+.ME_center_R .MEC_R_conter .MES .MES_top .MES_top_right .MES_topR_derive,
+.ME_center_R .MEC_R_conter .MEFY .MES_top .MES_top_right .MES_topR_derive,
+.ME_center_R .MEC_R_conter .MEFI .MES_top .MES_top_right .MES_topR_derive,
+.ME_center_R .MEC_R_conter .MECO .MES_top .MES_top_right .MES_topR_derive,
+.ME_center_R .MEC_R_conter .MECC .MES_top .MES_top_right .MES_topR_derive,
+.ME_center_R .MEC_R_conter .MECDe .MES_top .MES_top_right .MES_topR_derive,
+.ME_center_R .MEC_R_conter .MECD .MES_top .MES_top_right .MES_topR_derive,
+.ME_center_R .MEC_R_conter .MECS .MES_top .MES_top_right .MES_topR_derive {
+  text-align: right;
+}
+.ME_center_R .MEC_R_conter .MES .MES_top .MES_top_right .MES_topR_derive a,
+.ME_center_R .MEC_R_conter .MEFY .MES_top .MES_top_right .MES_topR_derive a,
+.ME_center_R .MEC_R_conter .MEFI .MES_top .MES_top_right .MES_topR_derive a,
+.ME_center_R .MEC_R_conter .MECO .MES_top .MES_top_right .MES_topR_derive a,
+.ME_center_R .MEC_R_conter .MECC .MES_top .MES_top_right .MES_topR_derive a,
+.ME_center_R .MEC_R_conter .MECDe .MES_top .MES_top_right .MES_topR_derive a,
+.ME_center_R .MEC_R_conter .MECD .MES_top .MES_top_right .MES_topR_derive a,
+.ME_center_R .MEC_R_conter .MECS .MES_top .MES_top_right .MES_topR_derive a {
+  cursor: pointer;
+}
+.ME_center_R .MEC_R_conter .MES .MES_top .MES_top_right .MES_topR_derive a img,
+.ME_center_R .MEC_R_conter .MEFY .MES_top .MES_top_right .MES_topR_derive a img,
+.ME_center_R .MEC_R_conter .MEFI .MES_top .MES_top_right .MES_topR_derive a img,
+.ME_center_R .MEC_R_conter .MECO .MES_top .MES_top_right .MES_topR_derive a img,
+.ME_center_R .MEC_R_conter .MECC .MES_top .MES_top_right .MES_topR_derive a img,
+.ME_center_R .MEC_R_conter .MECDe .MES_top .MES_top_right .MES_topR_derive a img,
+.ME_center_R .MEC_R_conter .MECD .MES_top .MES_top_right .MES_topR_derive a img,
+.ME_center_R .MEC_R_conter .MECS .MES_top .MES_top_right .MES_topR_derive a img {
+  height: 22px;
+  margin-top: -3px;
+}
+.ME_center_R .MEC_R_conter .MES .MES_top .MES_top_right .MES_topR_derive .MES_addData,
+.ME_center_R .MEC_R_conter .MEFY .MES_top .MES_top_right .MES_topR_derive .MES_addData,
+.ME_center_R .MEC_R_conter .MEFI .MES_top .MES_top_right .MES_topR_derive .MES_addData,
+.ME_center_R .MEC_R_conter .MECO .MES_top .MES_top_right .MES_topR_derive .MES_addData,
+.ME_center_R .MEC_R_conter .MECC .MES_top .MES_top_right .MES_topR_derive .MES_addData,
+.ME_center_R .MEC_R_conter .MECDe .MES_top .MES_top_right .MES_topR_derive .MES_addData,
+.ME_center_R .MEC_R_conter .MECD .MES_top .MES_top_right .MES_topR_derive .MES_addData,
+.ME_center_R .MEC_R_conter .MECS .MES_top .MES_top_right .MES_topR_derive .MES_addData {
+  margin-right: 20px;
+}
+.ME_center_R .MEC_R_conter .MES .MES_content,
+.ME_center_R .MEC_R_conter .MEFY .MES_content,
+.ME_center_R .MEC_R_conter .MEFI .MES_content,
+.ME_center_R .MEC_R_conter .MECO .MES_content,
+.ME_center_R .MEC_R_conter .MECC .MES_content,
+.ME_center_R .MEC_R_conter .MECDe .MES_content,
+.ME_center_R .MEC_R_conter .MECD .MES_content,
+.ME_center_R .MEC_R_conter .MECS .MES_content {
+  width: 100%;
+  height: auto;
+  border-bottom: 2px solid #9ad8b4;
+  border-top: none;
+  clear: both;
+}
+.ME_center_R .MEC_R_conter .MES .MES_content .MES_content_title,
+.ME_center_R .MEC_R_conter .MEFY .MES_content .MES_content_title,
+.ME_center_R .MEC_R_conter .MEFI .MES_content .MES_content_title,
+.ME_center_R .MEC_R_conter .MECO .MES_content .MES_content_title,
+.ME_center_R .MEC_R_conter .MECC .MES_content .MES_content_title,
+.ME_center_R .MEC_R_conter .MECDe .MES_content .MES_content_title,
+.ME_center_R .MEC_R_conter .MECD .MES_content .MES_content_title,
+.ME_center_R .MEC_R_conter .MECS .MES_content .MES_content_title {
+  width: 100%;
+  height: auto;
+  display: block;
+  background-color: #d9eee2;
+}
+.ME_center_R .MEC_R_conter .MES .MES_content .MES_content_title .MES_content_titleUl,
+.ME_center_R .MEC_R_conter .MEFY .MES_content .MES_content_title .MES_content_titleUl,
+.ME_center_R .MEC_R_conter .MEFI .MES_content .MES_content_title .MES_content_titleUl,
+.ME_center_R .MEC_R_conter .MECO .MES_content .MES_content_title .MES_content_titleUl,
+.ME_center_R .MEC_R_conter .MECC .MES_content .MES_content_title .MES_content_titleUl,
+.ME_center_R .MEC_R_conter .MECDe .MES_content .MES_content_title .MES_content_titleUl,
+.ME_center_R .MEC_R_conter .MECD .MES_content .MES_content_title .MES_content_titleUl,
+.ME_center_R .MEC_R_conter .MECS .MES_content .MES_content_title .MES_content_titleUl {
+  width: 100%;
+  height: auto;
+}
+.ME_center_R .MEC_R_conter .MES .MES_content .MES_content_title .MES_content_titleUl li,
+.ME_center_R .MEC_R_conter .MEFY .MES_content .MES_content_title .MES_content_titleUl li,
+.ME_center_R .MEC_R_conter .MEFI .MES_content .MES_content_title .MES_content_titleUl li,
+.ME_center_R .MEC_R_conter .MECO .MES_content .MES_content_title .MES_content_titleUl li,
+.ME_center_R .MEC_R_conter .MECC .MES_content .MES_content_title .MES_content_titleUl li,
+.ME_center_R .MEC_R_conter .MECDe .MES_content .MES_content_title .MES_content_titleUl li,
+.ME_center_R .MEC_R_conter .MECD .MES_content .MES_content_title .MES_content_titleUl li,
+.ME_center_R .MEC_R_conter .MECS .MES_content .MES_content_title .MES_content_titleUl li {
+  width: 20%;
+  height: 60px;
+  line-height: 60px;
+  border-top: 2px solid #9ad8b4;
+  border-right: 1px solid #9ad8b4;
+  float: left;
+  box-sizing: border-box;
+  text-align: center;
+}
+.ME_center_R .MEC_R_conter .MES .MES_content .MES_content_title .MES_content_titleUl .MES_content_titleLi1,
+.ME_center_R .MEC_R_conter .MEFY .MES_content .MES_content_title .MES_content_titleUl .MES_content_titleLi1,
+.ME_center_R .MEC_R_conter .MEFI .MES_content .MES_content_title .MES_content_titleUl .MES_content_titleLi1,
+.ME_center_R .MEC_R_conter .MECO .MES_content .MES_content_title .MES_content_titleUl .MES_content_titleLi1,
+.ME_center_R .MEC_R_conter .MECC .MES_content .MES_content_title .MES_content_titleUl .MES_content_titleLi1,
+.ME_center_R .MEC_R_conter .MECDe .MES_content .MES_content_title .MES_content_titleUl .MES_content_titleLi1,
+.ME_center_R .MEC_R_conter .MECD .MES_content .MES_content_title .MES_content_titleUl .MES_content_titleLi1,
+.ME_center_R .MEC_R_conter .MECS .MES_content .MES_content_title .MES_content_titleUl .MES_content_titleLi1 {
+  border-left: 2px solid #9ad8b4;
+}
+.ME_center_R .MEC_R_conter .MES .MES_content .MES_content_title .MES_content_titleUl li:last-child,
+.ME_center_R .MEC_R_conter .MEFY .MES_content .MES_content_title .MES_content_titleUl li:last-child,
+.ME_center_R .MEC_R_conter .MEFI .MES_content .MES_content_title .MES_content_titleUl li:last-child,
+.ME_center_R .MEC_R_conter .MECO .MES_content .MES_content_title .MES_content_titleUl li:last-child,
+.ME_center_R .MEC_R_conter .MECC .MES_content .MES_content_title .MES_content_titleUl li:last-child,
+.ME_center_R .MEC_R_conter .MECDe .MES_content .MES_content_title .MES_content_titleUl li:last-child,
+.ME_center_R .MEC_R_conter .MECD .MES_content .MES_content_title .MES_content_titleUl li:last-child,
+.ME_center_R .MEC_R_conter .MECS .MES_content .MES_content_title .MES_content_titleUl li:last-child {
+  border-right: 2px solid #9ad8b4;
+}
+.ME_center_R .MEC_R_conter .MES .MES_content .MES_content_title .ul_clearB,
+.ME_center_R .MEC_R_conter .MEFY .MES_content .MES_content_title .ul_clearB,
+.ME_center_R .MEC_R_conter .MEFI .MES_content .MES_content_title .ul_clearB,
+.ME_center_R .MEC_R_conter .MECO .MES_content .MES_content_title .ul_clearB,
+.ME_center_R .MEC_R_conter .MECC .MES_content .MES_content_title .ul_clearB,
+.ME_center_R .MEC_R_conter .MECDe .MES_content .MES_content_title .ul_clearB,
+.ME_center_R .MEC_R_conter .MECD .MES_content .MES_content_title .ul_clearB,
+.ME_center_R .MEC_R_conter .MECS .MES_content .MES_content_title .ul_clearB {
+  clear: both;
+}
+.ME_center_R .MEC_R_conter .MES .MES_content .MES_contentC,
+.ME_center_R .MEC_R_conter .MEFY .MES_content .MES_contentC,
+.ME_center_R .MEC_R_conter .MEFI .MES_content .MES_contentC,
+.ME_center_R .MEC_R_conter .MECO .MES_content .MES_contentC,
+.ME_center_R .MEC_R_conter .MECC .MES_content .MES_contentC,
+.ME_center_R .MEC_R_conter .MECDe .MES_content .MES_contentC,
+.ME_center_R .MEC_R_conter .MECD .MES_content .MES_contentC,
+.ME_center_R .MEC_R_conter .MECS .MES_content .MES_contentC {
+  width: 100%;
+  height: auto;
+}
+.ME_center_R .MEC_R_conter .MES .MES_content .MES_contentC .MES_contentC_a,
+.ME_center_R .MEC_R_conter .MEFY .MES_content .MES_contentC .MES_contentC_a,
+.ME_center_R .MEC_R_conter .MEFI .MES_content .MES_contentC .MES_contentC_a,
+.ME_center_R .MEC_R_conter .MECO .MES_content .MES_contentC .MES_contentC_a,
+.ME_center_R .MEC_R_conter .MECC .MES_content .MES_contentC .MES_contentC_a,
+.ME_center_R .MEC_R_conter .MECDe .MES_content .MES_contentC .MES_contentC_a,
+.ME_center_R .MEC_R_conter .MECD .MES_content .MES_contentC .MES_contentC_a,
+.ME_center_R .MEC_R_conter .MECS .MES_content .MES_contentC .MES_contentC_a {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.ME_center_R .MEC_R_conter .MES .MES_content .MES_contentC .MES_contentC_a .MES_contentCA_ul,
+.ME_center_R .MEC_R_conter .MEFY .MES_content .MES_contentC .MES_contentC_a .MES_contentCA_ul,
+.ME_center_R .MEC_R_conter .MEFI .MES_content .MES_contentC .MES_contentC_a .MES_contentCA_ul,
+.ME_center_R .MEC_R_conter .MECO .MES_content .MES_contentC .MES_contentC_a .MES_contentCA_ul,
+.ME_center_R .MEC_R_conter .MECC .MES_content .MES_contentC .MES_contentC_a .MES_contentCA_ul,
+.ME_center_R .MEC_R_conter .MECDe .MES_content .MES_contentC .MES_contentC_a .MES_contentCA_ul,
+.ME_center_R .MEC_R_conter .MECD .MES_content .MES_contentC .MES_contentC_a .MES_contentCA_ul,
+.ME_center_R .MEC_R_conter .MECS .MES_content .MES_contentC .MES_contentC_a .MES_contentCA_ul {
+  width: 100%;
+  height: auto;
+}
+.ME_center_R .MEC_R_conter .MES .MES_content .MES_contentC .MES_contentC_a .MES_contentCA_ul .MES_contentCA_li,
+.ME_center_R .MEC_R_conter .MEFY .MES_content .MES_contentC .MES_contentC_a .MES_contentCA_ul .MES_contentCA_li,
+.ME_center_R .MEC_R_conter .MEFI .MES_content .MES_contentC .MES_contentC_a .MES_contentCA_ul .MES_contentCA_li,
+.ME_center_R .MEC_R_conter .MECO .MES_content .MES_contentC .MES_contentC_a .MES_contentCA_ul .MES_contentCA_li,
+.ME_center_R .MEC_R_conter .MECC .MES_content .MES_contentC .MES_contentC_a .MES_contentCA_ul .MES_contentCA_li,
+.ME_center_R .MEC_R_conter .MECDe .MES_content .MES_contentC .MES_contentC_a .MES_contentCA_ul .MES_contentCA_li,
+.ME_center_R .MEC_R_conter .MECD .MES_content .MES_contentC .MES_contentC_a .MES_contentCA_ul .MES_contentCA_li,
+.ME_center_R .MEC_R_conter .MECS .MES_content .MES_contentC .MES_contentC_a .MES_contentCA_ul .MES_contentCA_li {
+  width: 20%;
+  height: 60px;
+  line-height: 60px;
+  border-top: 1px solid #9ad8b4;
+  border-right: 1px solid #9ad8b4;
+  float: left;
+  box-sizing: border-box;
+  text-align: center;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.ME_center_R .MEC_R_conter .MES .MES_content .MES_contentC .MES_contentC_a .MES_contentCA_ul .MES_contentCA_li:nth-child(1),
+.ME_center_R .MEC_R_conter .MEFY .MES_content .MES_contentC .MES_contentC_a .MES_contentCA_ul .MES_contentCA_li:nth-child(1),
+.ME_center_R .MEC_R_conter .MEFI .MES_content .MES_contentC .MES_contentC_a .MES_contentCA_ul .MES_contentCA_li:nth-child(1),
+.ME_center_R .MEC_R_conter .MECO .MES_content .MES_contentC .MES_contentC_a .MES_contentCA_ul .MES_contentCA_li:nth-child(1),
+.ME_center_R .MEC_R_conter .MECC .MES_content .MES_contentC .MES_contentC_a .MES_contentCA_ul .MES_contentCA_li:nth-child(1),
+.ME_center_R .MEC_R_conter .MECDe .MES_content .MES_contentC .MES_contentC_a .MES_contentCA_ul .MES_contentCA_li:nth-child(1),
+.ME_center_R .MEC_R_conter .MECD .MES_content .MES_contentC .MES_contentC_a .MES_contentCA_ul .MES_contentCA_li:nth-child(1),
+.ME_center_R .MEC_R_conter .MECS .MES_content .MES_contentC .MES_contentC_a .MES_contentCA_ul .MES_contentCA_li:nth-child(1) {
+  border-left: 2px solid #9ad8b4;
+}
+.ME_center_R .MEC_R_conter .MES .MES_content .MES_contentC .MES_contentC_a .MES_contentCA_ul .MES_contentCA_li:last-child,
+.ME_center_R .MEC_R_conter .MEFY .MES_content .MES_contentC .MES_contentC_a .MES_contentCA_ul .MES_contentCA_li:last-child,
+.ME_center_R .MEC_R_conter .MEFI .MES_content .MES_contentC .MES_contentC_a .MES_contentCA_ul .MES_contentCA_li:last-child,
+.ME_center_R .MEC_R_conter .MECO .MES_content .MES_contentC .MES_contentC_a .MES_contentCA_ul .MES_contentCA_li:last-child,
+.ME_center_R .MEC_R_conter .MECC .MES_content .MES_contentC .MES_contentC_a .MES_contentCA_ul .MES_contentCA_li:last-child,
+.ME_center_R .MEC_R_conter .MECDe .MES_content .MES_contentC .MES_contentC_a .MES_contentCA_ul .MES_contentCA_li:last-child,
+.ME_center_R .MEC_R_conter .MECD .MES_content .MES_contentC .MES_contentC_a .MES_contentCA_ul .MES_contentCA_li:last-child,
+.ME_center_R .MEC_R_conter .MECS .MES_content .MES_contentC .MES_contentC_a .MES_contentCA_ul .MES_contentCA_li:last-child {
+  border-right: 2px solid #9ad8b4;
+}
+.ME_center_R .MEC_R_conter .MES .MES_content .MES_contentC .MES_contentC_a:hover .MES_contentCA_ul .MES_contentCA_li,
+.ME_center_R .MEC_R_conter .MEFY .MES_content .MES_contentC .MES_contentC_a:hover .MES_contentCA_ul .MES_contentCA_li,
+.ME_center_R .MEC_R_conter .MEFI .MES_content .MES_contentC .MES_contentC_a:hover .MES_contentCA_ul .MES_contentCA_li,
+.ME_center_R .MEC_R_conter .MECO .MES_content .MES_contentC .MES_contentC_a:hover .MES_contentCA_ul .MES_contentCA_li,
+.ME_center_R .MEC_R_conter .MECC .MES_content .MES_contentC .MES_contentC_a:hover .MES_contentCA_ul .MES_contentCA_li,
+.ME_center_R .MEC_R_conter .MECDe .MES_content .MES_contentC .MES_contentC_a:hover .MES_contentCA_ul .MES_contentCA_li,
+.ME_center_R .MEC_R_conter .MECD .MES_content .MES_contentC .MES_contentC_a:hover .MES_contentCA_ul .MES_contentCA_li,
+.ME_center_R .MEC_R_conter .MECS .MES_content .MES_contentC .MES_contentC_a:hover .MES_contentCA_ul .MES_contentCA_li {
+  color: #04be52;
+}
+.ME_center_R .MEC_R_conter .MEFY {
+  width: 96%;
+  height: auto;
+  padding: 28px 2% 25px 2%;
+  margin: 0 auto;
+}
+.ME_center_R .MEC_R_conter .MEFY .MEFY_content {
+  width: 100%;
+  height: auto;
+  border-bottom: 2px solid #9ad8b4;
+  border-top: none;
+  clear: both;
+}
+.ME_center_R .MEC_R_conter .MEFY .MEFY_content .MEFY_content_title {
+  width: 100%;
+  height: auto;
+  display: block;
+  background-color: #d9eee2;
+}
+.ME_center_R .MEC_R_conter .MEFY .MEFY_content .MEFY_content_title .MEFY_content_titleUl {
+  width: 100%;
+  height: auto;
+}
+.ME_center_R .MEC_R_conter .MEFY .MEFY_content .MEFY_content_title .MEFY_content_titleUl li {
+  width: 25%;
+  height: 60px;
+  line-height: 60px;
+  border-top: 2px solid #9ad8b4;
+  border-right: 1px solid #9ad8b4;
+  float: left;
+  box-sizing: border-box;
+  text-align: center;
+}
+.ME_center_R .MEC_R_conter .MEFY .MEFY_content .MEFY_content_title .MEFY_content_titleUl li:nth-child(1) {
+  border-left: 2px solid #9ad8b4;
+  width: 20%;
+}
+.ME_center_R .MEC_R_conter .MEFY .MEFY_content .MEFY_content_title .MEFY_content_titleUl li:last-child {
+  border-right: 2px solid #9ad8b4;
+  width: 30%;
+}
+.ME_center_R .MEC_R_conter .MEFY .MEFY_content .MEFY_content_title .ul_clearB {
+  clear: both;
+}
+.ME_center_R .MEC_R_conter .MEFY .MEFY_content .MEFY_contentC {
+  width: 100%;
+  height: auto;
+}
+.ME_center_R .MEC_R_conter .MEFY .MEFY_content .MEFY_contentC .MEFY_contentC_a {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.ME_center_R .MEC_R_conter .MEFY .MEFY_content .MEFY_contentC .MEFY_contentC_a .MEFY_contentCA_ul {
+  width: 100%;
+  height: auto;
+}
+.ME_center_R .MEC_R_conter .MEFY .MEFY_content .MEFY_contentC .MEFY_contentC_a .MEFY_contentCA_ul .MEFY_contentCA_li {
+  width: 25%;
+  height: 60px;
+  line-height: 60px;
+  border-top: 1px solid #9ad8b4;
+  border-right: 1px solid #9ad8b4;
+  float: left;
+  box-sizing: border-box;
+  text-align: center;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.ME_center_R .MEC_R_conter .MEFY .MEFY_content .MEFY_contentC .MEFY_contentC_a .MEFY_contentCA_ul .MEFY_contentCA_li:nth-child(1) {
+  border-left: 2px solid #9ad8b4;
+  width: 20%;
+}
+.ME_center_R .MEC_R_conter .MEFY .MEFY_content .MEFY_contentC .MEFY_contentC_a .MEFY_contentCA_ul .MEFY_contentCA_li:last-child {
+  border-right: 2px solid #9ad8b4;
+  width: 30%;
+  color: red;
+}
+.ME_center_R .MEC_R_conter .MEFY .MEFY_content .MEFY_contentC .MEFY_contentC_a .MEFY_contentCA_ul .MEFY_contentCA_li:last-child span {
+  color: red;
+}
+.ME_center_R .MEC_R_conter .MEFY .MEFY_content .MEFY_contentC .MEFY_contentC_a:hover .MEFY_contentCA_ul .MEFY_contentCA_li {
+  color: #04be52;
+}
+.ME_center_R .MEC_R_conter .MEFY .MEFY_content .MEFY_contentC .MEFY_contentC_a:hover .MEFY_contentCA_ul .MEFY_contentCA_li span {
+  color: #04be52;
+}
+.ME_center_R .MEC_R_conter .MEFI {
+  width: 96%;
+  height: auto;
+  padding: 28px 2% 25px 2%;
+  margin: 0 auto;
+}
+.ME_center_R .MEC_R_conter .MEFI .MEFI_content {
+  width: 100%;
+  height: auto;
+  border-bottom: 2px solid #9ad8b4;
+  border-top: none;
+  clear: both;
+}
+.ME_center_R .MEC_R_conter .MEFI .MEFI_content .MEFI_content_title {
+  width: 100%;
+  height: auto;
+  display: block;
+  background-color: #d9eee2;
+}
+.ME_center_R .MEC_R_conter .MEFI .MEFI_content .MEFI_content_title .MEFI_content_titleUl {
+  width: 100%;
+  height: auto;
+}
+.ME_center_R .MEC_R_conter .MEFI .MEFI_content .MEFI_content_title .MEFI_content_titleUl li {
+  width: 25%;
+  height: 60px;
+  line-height: 60px;
+  border-top: 2px solid #9ad8b4;
+  border-right: 1px solid #9ad8b4;
+  float: left;
+  box-sizing: border-box;
+  text-align: center;
+}
+.ME_center_R .MEC_R_conter .MEFI .MEFI_content .MEFI_content_title .MEFI_content_titleUl li:nth-child(1) {
+  border-left: 2px solid #9ad8b4;
+  width: 20%;
+}
+.ME_center_R .MEC_R_conter .MEFI .MEFI_content .MEFI_content_title .MEFI_content_titleUl li:last-child {
+  border-right: 2px solid #9ad8b4;
+  width: 30%;
+}
+.ME_center_R .MEC_R_conter .MEFI .MEFI_content .MEFI_content_title .ul_clearB {
+  clear: both;
+}
+.ME_center_R .MEC_R_conter .MEFI .MEFI_content .MEFI_contentC {
+  width: 100%;
+  height: auto;
+}
+.ME_center_R .MEC_R_conter .MEFI .MEFI_content .MEFI_contentC .MEFI_contentC_a {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.ME_center_R .MEC_R_conter .MEFI .MEFI_content .MEFI_contentC .MEFI_contentC_a .MEFI_contentCA_ul {
+  width: 100%;
+  height: auto;
+}
+.ME_center_R .MEC_R_conter .MEFI .MEFI_content .MEFI_contentC .MEFI_contentC_a .MEFI_contentCA_ul .MEFI_contentCA_li {
+  width: 25%;
+  height: 60px;
+  line-height: 60px;
+  border-top: 1px solid #9ad8b4;
+  border-right: 1px solid #9ad8b4;
+  float: left;
+  box-sizing: border-box;
+  text-align: center;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.ME_center_R .MEC_R_conter .MEFI .MEFI_content .MEFI_contentC .MEFI_contentC_a .MEFI_contentCA_ul .MEFI_contentCA_li:nth-child(1) {
+  border-left: 2px solid #9ad8b4;
+  width: 20%;
+}
+.ME_center_R .MEC_R_conter .MEFI .MEFI_content .MEFI_contentC .MEFI_contentC_a .MEFI_contentCA_ul .MEFI_contentCA_li:last-child {
+  border-right: 2px solid #9ad8b4;
+  width: 30%;
+  color: red;
+}
+.ME_center_R .MEC_R_conter .MEFI .MEFI_content .MEFI_contentC .MEFI_contentC_a .MEFI_contentCA_ul .MEFI_contentCA_li:last-child span {
+  color: red;
+}
+.ME_center_R .MEC_R_conter .MEFI .MEFI_content .MEFI_contentC .MEFI_contentC_a:hover .MEFI_contentCA_ul .MEFI_contentCA_li {
+  color: #04be52;
+}
+.ME_center_R .MEC_R_conter .MEFI .MEFI_content .MEFI_contentC .MEFI_contentC_a:hover .MEFI_contentCA_ul .MEFI_contentCA_li span {
+  color: #04be52;
+}
+.ME_center_R .MEC_R_conter .MECO {
+  width: 96%;
+  height: auto;
+  padding: 28px 2% 25px 2%;
+  margin: 0 auto;
+}
+.ME_center_R .MEC_R_conter .MECO .MECO_content {
+  width: 100%;
+  height: auto;
+  border-bottom: 2px solid #9ad8b4;
+  border-top: none;
+  clear: both;
+}
+.ME_center_R .MEC_R_conter .MECO .MECO_content .MECO_content_title {
+  width: 100%;
+  height: auto;
+  display: block;
+  background-color: #d9eee2;
+}
+.ME_center_R .MEC_R_conter .MECO .MECO_content .MECO_content_title .MECO_content_titleUl {
+  width: 100%;
+  height: auto;
+}
+.ME_center_R .MEC_R_conter .MECO .MECO_content .MECO_content_title .MECO_content_titleUl li {
+  width: 13.5%;
+  height: 60px;
+  line-height: 60px;
+  border-top: 2px solid #9ad8b4;
+  border-right: 1px solid #9ad8b4;
+  float: left;
+  box-sizing: border-box;
+  text-align: center;
+}
+.ME_center_R .MEC_R_conter .MECO .MECO_content .MECO_content_title .MECO_content_titleUl li:nth-child(1) {
+  border-left: 2px solid #9ad8b4;
+  width: 19%;
+}
+.ME_center_R .MEC_R_conter .MECO .MECO_content .MECO_content_title .MECO_content_titleUl li:last-child {
+  border-right: 2px solid #9ad8b4;
+}
+.ME_center_R .MEC_R_conter .MECO .MECO_content .MECO_content_title .ul_clearB {
+  clear: both;
+}
+.ME_center_R .MEC_R_conter .MECO .MECO_content .MECO_contentC {
+  width: 100%;
+  height: auto;
+}
+.ME_center_R .MEC_R_conter .MECO .MECO_content .MECO_contentC .MECO_contentC_a {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.ME_center_R .MEC_R_conter .MECO .MECO_content .MECO_contentC .MECO_contentC_a .MECO_contentCA_ul {
+  width: 100%;
+  height: auto;
+}
+.ME_center_R .MEC_R_conter .MECO .MECO_content .MECO_contentC .MECO_contentC_a .MECO_contentCA_ul .MECO_contentCA_li {
+  width: 13.5%;
+  height: 60px;
+  line-height: 60px;
+  border-top: 1px solid #9ad8b4;
+  border-right: 1px solid #9ad8b4;
+  float: left;
+  box-sizing: border-box;
+  text-align: center;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.ME_center_R .MEC_R_conter .MECO .MECO_content .MECO_contentC .MECO_contentC_a .MECO_contentCA_ul .MECO_contentCA_li:nth-child(1) {
+  border-left: 2px solid #9ad8b4;
+  width: 19%;
+}
+.ME_center_R .MEC_R_conter .MECO .MECO_content .MECO_contentC .MECO_contentC_a .MECO_contentCA_ul .MECO_contentCA_li:last-child {
+  border-right: 2px solid #9ad8b4;
+}
+.ME_center_R .MEC_R_conter .MECO .MECO_content .MECO_contentC .MECO_contentC_a:hover .MECO_contentCA_ul .MECO_contentCA_li {
+  color: #04be52;
+}
+.ME_center_R .MEC_R_conter .MECC {
+  width: 96%;
+  height: auto;
+  padding: 28px 2% 25px 2%;
+  margin: 0 auto;
+}
+.ME_center_R .MEC_R_conter .MECC .MECC_content {
+  width: 100%;
+  height: auto;
+  border-bottom: 2px solid #9ad8b4;
+  border-top: none;
+  clear: both;
+}
+.ME_center_R .MEC_R_conter .MECC .MECC_content .MECC_content_title {
+  width: 100%;
+  height: auto;
+  display: block;
+  background-color: #d9eee2;
+}
+.ME_center_R .MEC_R_conter .MECC .MECC_content .MECC_content_title .MECC_content_titleUl {
+  width: 100%;
+  height: auto;
+}
+.ME_center_R .MEC_R_conter .MECC .MECC_content .MECC_content_title .MECC_content_titleUl li {
+  width: 25%;
+  height: 60px;
+  line-height: 60px;
+  border-top: 2px solid #9ad8b4;
+  border-right: 1px solid #9ad8b4;
+  float: left;
+  box-sizing: border-box;
+  text-align: center;
+}
+.ME_center_R .MEC_R_conter .MECC .MECC_content .MECC_content_title .MECC_content_titleUl li:nth-child(1) {
+  border-left: 2px solid #9ad8b4;
+}
+.ME_center_R .MEC_R_conter .MECC .MECC_content .MECC_content_title .MECC_content_titleUl li:last-child {
+  border-right: 2px solid #9ad8b4;
+}
+.ME_center_R .MEC_R_conter .MECC .MECC_content .MECC_content_title .ul_clearB {
+  clear: both;
+}
+.ME_center_R .MEC_R_conter .MECC .MECC_content .MECC_contentC {
+  width: 100%;
+  height: auto;
+}
+.ME_center_R .MEC_R_conter .MECC .MECC_content .MECC_contentC .MECC_contentC_a {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.ME_center_R .MEC_R_conter .MECC .MECC_content .MECC_contentC .MECC_contentC_a .MECC_contentCA_ul {
+  width: 100%;
+  height: auto;
+}
+.ME_center_R .MEC_R_conter .MECC .MECC_content .MECC_contentC .MECC_contentC_a .MECC_contentCA_ul .MECC_contentCA_li {
+  width: 25%;
+  height: 60px;
+  line-height: 60px;
+  border-top: 1px solid #9ad8b4;
+  border-right: 1px solid #9ad8b4;
+  float: left;
+  box-sizing: border-box;
+  text-align: center;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.ME_center_R .MEC_R_conter .MECC .MECC_content .MECC_contentC .MECC_contentC_a .MECC_contentCA_ul .MECC_contentCA_li:nth-child(1) {
+  border-left: 2px solid #9ad8b4;
+}
+.ME_center_R .MEC_R_conter .MECC .MECC_content .MECC_contentC .MECC_contentC_a .MECC_contentCA_ul .MECC_contentCA_li:last-child {
+  border-right: 2px solid #9ad8b4;
+}
+.ME_center_R .MEC_R_conter .MECC .MECC_content .MECC_contentC .MECC_contentC_a:hover .MECC_contentCA_ul .MECC_contentCA_li {
+  color: #04be52;
+}
+.ME_center_R .MEC_R_conter .MECDe {
+  width: 96%;
+  height: auto;
+  padding: 28px 2% 25px 2%;
+  margin: 0 auto;
+}
+.ME_center_R .MEC_R_conter .MECDe .MECDe_content {
+  width: 100%;
+  height: auto;
+  border-bottom: 2px solid #9ad8b4;
+  border-top: none;
+  clear: both;
+}
+.ME_center_R .MEC_R_conter .MECDe .MECDe_content .MECDe_content_title {
+  width: 100%;
+  height: auto;
+  display: block;
+  background-color: #d9eee2;
+}
+.ME_center_R .MEC_R_conter .MECDe .MECDe_content .MECDe_content_title .MECDe_content_titleUl {
+  width: 100%;
+  height: auto;
+}
+.ME_center_R .MEC_R_conter .MECDe .MECDe_content .MECDe_content_title .MECDe_content_titleUl li {
+  width: 25%;
+  height: 60px;
+  line-height: 60px;
+  border-top: 2px solid #9ad8b4;
+  border-right: 1px solid #9ad8b4;
+  float: left;
+  box-sizing: border-box;
+  text-align: center;
+}
+.ME_center_R .MEC_R_conter .MECDe .MECDe_content .MECDe_content_title .MECDe_content_titleUl li:nth-child(1) {
+  border-left: 2px solid #9ad8b4;
+}
+.ME_center_R .MEC_R_conter .MECDe .MECDe_content .MECDe_content_title .MECDe_content_titleUl li:last-child {
+  border-right: 2px solid #9ad8b4;
+}
+.ME_center_R .MEC_R_conter .MECDe .MECDe_content .MECDe_content_title .ul_clearB {
+  clear: both;
+}
+.ME_center_R .MEC_R_conter .MECDe .MECDe_content .MECDe_contentC {
+  width: 100%;
+  height: auto;
+}
+.ME_center_R .MEC_R_conter .MECDe .MECDe_content .MECDe_contentC .MECDe_contentC_a {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.ME_center_R .MEC_R_conter .MECDe .MECDe_content .MECDe_contentC .MECDe_contentC_a .MECDe_contentCA_ul {
+  width: 100%;
+  height: auto;
+}
+.ME_center_R .MEC_R_conter .MECDe .MECDe_content .MECDe_contentC .MECDe_contentC_a .MECDe_contentCA_ul .MECDe_contentCA_li {
+  width: 25%;
+  height: 60px;
+  line-height: 60px;
+  border-top: 1px solid #9ad8b4;
+  border-right: 1px solid #9ad8b4;
+  float: left;
+  box-sizing: border-box;
+  text-align: center;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.ME_center_R .MEC_R_conter .MECDe .MECDe_content .MECDe_contentC .MECDe_contentC_a .MECDe_contentCA_ul .MECDe_contentCA_li:nth-child(1) {
+  border-left: 2px solid #9ad8b4;
+}
+.ME_center_R .MEC_R_conter .MECDe .MECDe_content .MECDe_contentC .MECDe_contentC_a .MECDe_contentCA_ul .MECDe_contentCA_li:last-child {
+  border-right: 2px solid #9ad8b4;
+}
+.ME_center_R .MEC_R_conter .MECDe .MECDe_content .MECDe_contentC .MECDe_contentC_a:hover .MECDe_contentCA_ul .MECDe_contentCA_li {
+  color: #04be52;
+}
+.ME_center_R .MEC_R_conter .MECD {
+  width: 96%;
+  height: auto;
+  padding: 28px 2% 25px 2%;
+  margin: 0 auto;
+}
+.ME_center_R .MEC_R_conter .MECD .MECD_content {
+  width: 100%;
+  height: auto;
+  border-bottom: 2px solid #9ad8b4;
+  border-top: none;
+  clear: both;
+}
+.ME_center_R .MEC_R_conter .MECD .MECD_content .MECD_content_title {
+  width: 100%;
+  height: auto;
+  display: block;
+  background-color: #d9eee2;
+}
+.ME_center_R .MEC_R_conter .MECD .MECD_content .MECD_content_title .MECD_content_titleUl {
+  width: 100%;
+  height: auto;
+}
+.ME_center_R .MEC_R_conter .MECD .MECD_content .MECD_content_title .MECD_content_titleUl li {
+  width: 16.666%;
+  height: 60px;
+  line-height: 60px;
+  border-top: 2px solid #9ad8b4;
+  border-right: 1px solid #9ad8b4;
+  float: left;
+  box-sizing: border-box;
+  text-align: center;
+}
+.ME_center_R .MEC_R_conter .MECD .MECD_content .MECD_content_title .MECD_content_titleUl li:nth-child(1) {
+  border-left: 2px solid #9ad8b4;
+}
+.ME_center_R .MEC_R_conter .MECD .MECD_content .MECD_content_title .MECD_content_titleUl li:last-child {
+  border-right: 2px solid #9ad8b4;
+}
+.ME_center_R .MEC_R_conter .MECD .MECD_content .MECD_content_title .ul_clearB {
+  clear: both;
+}
+.ME_center_R .MEC_R_conter .MECD .MECD_content .MECD_contentC {
+  width: 100%;
+  height: auto;
+}
+.ME_center_R .MEC_R_conter .MECD .MECD_content .MECD_contentC .MECD_contentC_a {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.ME_center_R .MEC_R_conter .MECD .MECD_content .MECD_contentC .MECD_contentC_a .MECD_contentCA_ul {
+  width: 100%;
+  height: auto;
+}
+.ME_center_R .MEC_R_conter .MECD .MECD_content .MECD_contentC .MECD_contentC_a .MECD_contentCA_ul .MECD_contentCA_li {
+  width: 16.666%;
+  height: 60px;
+  line-height: 60px;
+  border-top: 1px solid #9ad8b4;
+  border-right: 1px solid #9ad8b4;
+  float: left;
+  box-sizing: border-box;
+  text-align: center;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.ME_center_R .MEC_R_conter .MECD .MECD_content .MECD_contentC .MECD_contentC_a .MECD_contentCA_ul .MECD_contentCA_li:nth-child(1) {
+  border-left: 2px solid #9ad8b4;
+}
+.ME_center_R .MEC_R_conter .MECD .MECD_content .MECD_contentC .MECD_contentC_a .MECD_contentCA_ul .MECD_contentCA_li:last-child {
+  border-right: 2px solid #9ad8b4;
+}
+.ME_center_R .MEC_R_conter .MECD .MECD_content .MECD_contentC .MECD_contentC_a:hover .MECD_contentCA_ul .MECD_contentCA_li {
+  color: #04be52;
+}
+.ME_center_R .MEC_R_conter .MECS {
+  width: 96%;
+  height: auto;
+  padding: 28px 2% 25px 2%;
+  margin: 0 auto;
+}
+.ME_center_R .MEC_R_conter .MECS .MECS_content {
+  width: 100%;
+  height: auto;
+  border-bottom: 2px solid #9ad8b4;
+  border-top: none;
+  clear: both;
+}
+.ME_center_R .MEC_R_conter .MECS .MECS_content .MECS_content_title {
+  width: 100%;
+  height: auto;
+  display: block;
+  background-color: #d9eee2;
+}
+.ME_center_R .MEC_R_conter .MECS .MECS_content .MECS_content_title .MECS_content_titleUl {
+  width: 100%;
+  height: auto;
+}
+.ME_center_R .MEC_R_conter .MECS .MECS_content .MECS_content_title .MECS_content_titleUl li {
+  width: 20%;
+  height: 60px;
+  line-height: 60px;
+  border-top: 2px solid #9ad8b4;
+  border-right: 1px solid #9ad8b4;
+  float: left;
+  box-sizing: -webkit-border-box;
+  box-sizing: border-box;
+  text-align: center;
+}
+.ME_center_R .MEC_R_conter .MECS .MECS_content .MECS_content_title .MECS_content_titleUl li:nth-child(1) {
+  border-left: 2px solid #9ad8b4;
+}
+.ME_center_R .MEC_R_conter .MECS .MECS_content .MECS_content_title .MECS_content_titleUl li:last-child {
+  border-right: 2px solid #9ad8b4;
+}
+.ME_center_R .MEC_R_conter .MECS .MECS_content .MECS_content_title .MECS_content_titleUl .MECS_content_titleLi2 {
+  width: 40%;
+}
+.ME_center_R .MEC_R_conter .MECS .MECS_content .MECS_content_title .ul_clearB {
+  clear: both;
+}
+.ME_center_R .MEC_R_conter .MECS .MECS_content .MECS_contentC {
+  width: 100%;
+  height: auto;
+}
+.ME_center_R .MEC_R_conter .MECS .MECS_content .MECS_contentC .MECS_contentC_a {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.ME_center_R .MEC_R_conter .MECS .MECS_content .MECS_contentC .MECS_contentC_a .MECS_contentCA_ul {
+  width: 100%;
+  height: auto;
+}
+.ME_center_R .MEC_R_conter .MECS .MECS_content .MECS_contentC .MECS_contentC_a .MECS_contentCA_ul .MECS_contentCA_li {
+  width: 20%;
+  height: 60px;
+  line-height: 60px;
+  border-top: 1px solid #9ad8b4;
+  border-right: 1px solid #9ad8b4;
+  float: left;
+  box-sizing: border-box;
+  text-align: center;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.ME_center_R .MEC_R_conter .MECS .MECS_content .MECS_contentC .MECS_contentC_a .MECS_contentCA_ul .MECS_contentCA_li:nth-child(1) {
+  border-left: 2px solid #9ad8b4;
+}
+.ME_center_R .MEC_R_conter .MECS .MECS_content .MECS_contentC .MECS_contentC_a .MECS_contentCA_ul .MECS_contentCA_li:last-child {
+  border-right: 2px solid #9ad8b4;
+}
+.ME_center_R .MEC_R_conter .MECS .MECS_content .MECS_contentC .MECS_contentC_a .MECS_contentCA_ul .MECS_contentCA_li2 {
+  width: 40%;
+}
+.ME_center_R .MEC_R_conter .MECS .MECS_content .MECS_contentC .MECS_contentC_a:hover .MECS_contentCA_ul .MECS_contentCA_li {
+  color: #04be52;
+}
+.ME_center_R .MEC_R_conter .ME_paging {
+  width: 100%;
+  height: 100px;
+}
+.ME_center_R .MEC_R_conter .ME_paging .ME_paging_ul {
+  width: auto;
+  height: auto;
+  float: right;
+  padding-top: 30px;
+  padding-right: 2%;
+}
+.ME_center_R .MEC_R_conter .ME_paging .ME_paging_ul .ME_paging_li {
+  line-height: 20px;
+  border: 1px solid #b3dcc4;
+  float: left;
+  padding: 2px 4px;
+  margin: 0 3px;
+}
+.ME_center_R .MEC_R_conter .ME_paging .ME_paging_ul .ME_paging_li a {
+  color: #028c3c;
+  cursor: pointer;
+}

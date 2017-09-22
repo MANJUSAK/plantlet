@@ -152,7 +152,7 @@
         <result property="specMax" column="spec_max"/>
         <result property="unit" column="unit"/>
         <result property="sdOffer" column="seedling_offer"/>
-        <result property="comment" column="comment"/>
+        <result property="unit" column="unit"/>
         <result property="year" column="year"/>
         <result property="Jan" column="January"/>
         <result property="Feb" column="February"/>
@@ -172,7 +172,7 @@
     <select id="querySeedlingOfferStatisticsDetailDao"
             parameterType="com.goodsoft.plantlet.util.result.SeedlingOfferParam"
             resultMap="seedlingOfferStatisticsDetailMap">
-        SELECT `seedling_name`,`spec`,`spec_min`,`spec_max`, `comment`,`year`,`January`,`February`,`March`,
+        SELECT `seedling_name`,`spec`,`spec_min`,`spec_max`, `unit`,`year`,`January`,`February`,`March`,
         `April`,`May`,`June`,`July`,`August`,`September`,`October`,`November`,`December`
         FROM `gs_seedling_offer_view`
         <where>

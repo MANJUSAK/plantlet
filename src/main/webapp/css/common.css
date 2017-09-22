@@ -1,0 +1,126 @@
+html,
+body {
+  font-family: "微软雅黑";
+  width: 100%;
+  height: 100%;
+}
+li {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+header {
+  width: 100%;
+  height: 100px;
+  min-width: 1200px;
+  max-width: 1920px;
+  margin: 0 auto;
+  background: url(../images/Office-bg1.png);
+  background-size: 100% 100px;
+}
+header .header-left {
+  width: 30%;
+  float: left;
+  padding-top: 29px;
+}
+header .header-left img {
+  width: 100%;
+  height: auto;
+}
+header .header-right {
+  width: 25%;
+  height: 80px;
+  float: right;
+  padding-top: 10px;
+  position: relative;
+}
+header .header-right .Hr-item {
+  height: 60px;
+  float: left;
+}
+header .header-right .Hr-item:first-child {
+  width: 60px;
+  border-radius: 100%;
+}
+header .header-right .Hr-item:first-child img {
+  width: 60px;
+  height: 60px;
+  border-radius: 100%;
+  border: 2px solid white;
+}
+header .header-right .Hr-item:nth-child(2) {
+  width: 74%;
+  margin-left: 10px;
+}
+header .header-right .Hr-item:nth-child(2) ul li {
+  font-size: 12px;
+  line-height: 22px;
+  color: white;
+}
+header .header-right .Hr-item:last-child {
+  width: 30px;
+  margin-left: 10px;
+  position: absolute;
+  top: 30px;
+  right: 9%;
+}
+header .header-right .Hr-item:last-child .Hr-item_home {
+  line-height: 16px;
+  color: white;
+  font-size: 13px;
+  display: inline-block;
+  text-align: center;
+}
+header .header-right .Hr-item:last-child .Hr-item_home img {
+  width: 22px;
+}
+header .header-right .HE_hR_center {
+  width: 125px;
+  height: 36px;
+  float: right;
+  margin: 20px 0 0 0;
+}
+header .header-right .HE_hR_center a {
+  float: left;
+  margin: 0 15px;
+  line-height: 38px;
+  display: block;
+}
+header .header-right .HE_hR_center a img {
+  line-height: 36px;
+  width: 20px;
+}
+header .header-right .HE_hR_center .HE_hRC_R {
+  margin-top: 3px;
+}
+/****底部*****/
+.footer {
+  width: 100%;
+  height: auto;
+  background-color: #189845;
+  margin-top: 15px;
+  font-family: "新宋体";
+  display: none;
+}
+.ft_center {
+  width: 1000px;
+  height: auto;
+  padding: 20px 0;
+  text-align: center;
+  margin: 0 auto;
+  color: white;
+}
+.ft_center p {
+  margin: 0;
+  line-height: 26px;
+  color: white;
+}
+.ft_center p a {
+  color: white;
+}
+/****底部  结束*****/

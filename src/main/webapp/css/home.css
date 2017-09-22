@@ -1,0 +1,227 @@
+body,
+td,
+th {
+  font-family: "新宋体";
+  font-size: 14px;
+  color: #000;
+}
+body {
+  margin-left: 0px;
+  margin-top: 0px;
+  margin-right: 0px;
+  margin-bottom: 0px;
+}
+a {
+  font-size: 14px;
+  color: #000;
+}
+a:link {
+  text-decoration: none;
+}
+a:visited {
+  text-decoration: none;
+  color: #000;
+}
+a:hover {
+  text-decoration: none;
+  color: #000;
+}
+a:active {
+  text-decoration: none;
+  color: #000;
+}
+img {
+  border: none;
+}
+.clearBoth {
+  clear: both;
+}
+.HE_center {
+  width: 100%;
+  height: 900px;
+  margin: 0 auto;
+  padding: 0 25px;
+  box-sizing: border-box;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  font-size: 16px;
+  color: white;
+  min-width: 1200px;
+  max-width: 1920px;
+}
+.HE_center .HE_center_L {
+  width: 250px;
+  height: 900px;
+  background-color: #35a363;
+  border-radius: 10px;
+  float: left;
+}
+.HE_center .HE_center_L .HE_cL_user {
+  width: 110px;
+  height: 110px;
+  border-radius: 55px;
+  margin: 30px 0 20px 70px;
+}
+.HE_center .HE_center_L .HE_cL_user img {
+  width: 110px;
+  height: auto;
+}
+.HE_center .HE_center_L .HE_cL_neme {
+  width: 130px;
+  height: auto;
+  margin-left: 78px;
+}
+.HE_center .HE_center_L .HE_cL_neme p {
+  margin: 0;
+  line-height: 26px;
+}
+.HE_center .HE_center_L .HE_cL_neme p span {
+  margin-left: 2px;
+}
+.HE_center .HE_center_L .HE_cL_neme p .HE_cL_Nname {
+  color: #fff100;
+}
+.HE_center .HE_center_L .HE_cL_home {
+  width: 100%;
+  height: auto;
+}
+.HE_center .HE_center_L .HE_cL_home .HE_cL_hul {
+  width: 100%;
+  height: auto;
+  padding: 0;
+  margin: 0;
+}
+.HE_center .HE_center_L .HE_cL_home .HE_cL_hul .HE_cL_hli {
+  list-style: none;
+  width: 100%;
+  height: 36px;
+  margin: 16px 0;
+}
+.HE_center .HE_center_L .HE_cL_home .HE_cL_hul .HE_cL_hli a {
+  color: white;
+  width: 250px;
+  height: 36px;
+  line-height: 36px;
+  font-size: 16px;
+  display: block;
+}
+.HE_center .HE_center_L .HE_cL_home .HE_cL_hul .HE_cL_hli a img {
+  float: left;
+  margin: 8px 10px 0 60px;
+}
+.HE_center .HE_center_L .HE_cL_home .HE_cL_hul .HE_cL_hli a span {
+  float: left;
+  margin: 0;
+}
+.HE_center .HE_center_L .HE_cL_home .HE_cL_hul .HE_cL_hli a:hover {
+  background-color: #22824a;
+}
+.HE_center .HE_center_L .HE_cL_home .HE_cL_hul img {
+  visibility: hidden;
+}
+.HE_center .HE_center_L .HE_cL_home .HE_cL_hul .HE_cL_hliShow {
+  background-color: #22824a;
+}
+.HE_center .HE_center_L .HE_cL_home .HE_cL_hul li:nth-child(1) img {
+  visibility: visible;
+}
+.HE_center .HE_center_R {
+  width: auto;
+  height: 900px;
+  background: #eafde1;
+  margin-left: 280px;
+  border-radius: 10px;
+  background-image: url(../images/home_C_Rbg.jpg);
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  background-size: 100% auto;
+}
+.HE_center .HE_center_R .HE_CR_content {
+  width: 100%;
+  height: 100%;
+  padding: 0 40px;
+  box-sizing: border-box;
+}
+.HE_center .HE_center_R .HE_CR_content .HE_CRc_ul1 {
+  width: 100%;
+  height: 330px;
+  margin: 0;
+  padding: 0;
+  padding-top: 80px;
+  list-style: none;
+}
+.HE_center .HE_center_R .HE_CR_content .HE_CRc_ul1 .HE_CRc_li1 {
+  margin: 0;
+  padding: 0;
+  width: 25%;
+  height: 100%;
+  float: left;
+}
+.HE_center .HE_center_R .HE_CR_content .HE_CRc_ul1 .HE_CRc_li1 .HE_CRc_li1C {
+  width: 100%;
+  height: 330px;
+  display: table-cell;
+  vertical-align: middle;
+  position: relative;
+}
+.HE_center .HE_center_R .HE_CR_content .HE_CRc_ul1 .HE_CRc_li1 .HE_CRc_li1C .HE_CRc_li1img {
+  width: 92%;
+  margin: 4%;
+}
+.HE_center .HE_center_R .HE_CR_content .HE_CRc_ul1 .HE_CRc_li1 .HE_CRc_li1C .HE_CRc_li1a1 {
+  width: 90px;
+  height: auto;
+  margin: 0 auto;
+  position: absolute;
+  top: 50%;
+  margin-top: -10px;
+  left: 50%;
+  margin-left: -45px;
+}
+.HE_center .HE_center_R .HE_CR_content .HE_CRc_ul1 .HE_CRc_li1 .HE_CRc_li1C .HE_CRc_li1a1 img {
+  width: 100%;
+}
+.HE_center .HE_center_R .HE_CR_content .HE_CRc_agoul2 {
+  width: 100%;
+  height: 330px;
+  padding: 0px 12.5%;
+  box-sizing: border-box;
+}
+.HE_center .HE_center_R .HE_CR_content .HE_CRc_agoul2 .HE_CRc_ul2 {
+  width: 100%;
+  height: 330px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.HE_center .HE_center_R .HE_CR_content .HE_CRc_agoul2 .HE_CRc_ul2 .HE_CRc_li2 {
+  margin: 0;
+  padding: 0;
+  width: 33.3%;
+  height: 100%;
+  float: left;
+}
+.HE_center .HE_center_R .HE_CR_content .HE_CRc_agoul2 .HE_CRc_ul2 .HE_CRc_li2 .HE_CRc_li2C {
+  width: 100%;
+  height: 330px;
+  display: table-cell;
+  vertical-align: middle;
+  position: relative;
+}
+.HE_center .HE_center_R .HE_CR_content .HE_CRc_agoul2 .HE_CRc_ul2 .HE_CRc_li2 .HE_CRc_li2C .HE_CRc_li2img {
+  width: 92%;
+  margin: 4%;
+}
+.HE_center .HE_center_R .HE_CR_content .HE_CRc_agoul2 .HE_CRc_ul2 .HE_CRc_li2 .HE_CRc_li2C .HE_CRc_li2a1 {
+  width: 90px;
+  height: auto;
+  margin: 0 auto;
+  position: absolute;
+  top: 50%;
+  margin-top: -10px;
+  left: 50%;
+  margin-left: -45px;
+}
+.HE_center .HE_center_R .HE_CR_content .HE_CRc_agoul2 .HE_CRc_ul2 .HE_CRc_li2 .HE_CRc_li2C .HE_CRc_li2a1 img {
+  width: 100%;
+}

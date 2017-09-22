@@ -1,10 +1,11 @@
 package com.goodsoft.plantlet.service.supp;
 
+import com.goodsoft.plantlet.config.serviceaop.ServicelmplAop;
 import com.goodsoft.plantlet.domain.entity.nursery.Nursery;
 import com.goodsoft.plantlet.domain.entity.nursery.NurseryOut;
 import com.goodsoft.plantlet.util.DataAnalysisUtil;
 import com.goodsoft.plantlet.util.result.AnalysisParam;
-import org.apache.log4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ import java.util.Objects;
 @Service
 public class NurseryServiceSupp {
     //实例化日志管理工具类
-    private Logger logger = Logger.getLogger(NurseryServiceSupp.class);
+    private org.slf4j.Logger logger = LoggerFactory.getLogger(ServicelmplAop.class);
     //实例化数据解析工具类
     private DataAnalysisUtil analysisUtil = DataAnalysisUtil.getInstance();
     //初始化读取excel字段值
@@ -67,8 +68,7 @@ public class NurseryServiceSupp {
                                 sd.setPostCode(code);
                             }
                         } catch (Exception e) {
-                            this.logger.error(e);
-                            System.out.println(e.toString());
+                            this.logger.error(e.toString());
                         }
                         break;
                     case 7:
@@ -78,8 +78,7 @@ public class NurseryServiceSupp {
                                 sd.setTel(tel);
                             }
                         } catch (Exception e) {
-                            this.logger.error(e);
-                            System.out.println(e.toString());
+                            this.logger.error(e.toString());
                         }
                         break;
                     case 8:
@@ -102,8 +101,8 @@ public class NurseryServiceSupp {
                                 sd.setSpecMin(var.getNum());
                                 sd.setSpecMax(var.getNum_1());
                             } catch (Exception e) {
-                                System.out.println(e.toString());
-                                this.logger.error(e);
+
+                                this.logger.error(e.toString());
                             }
                         }
                         break;
@@ -114,8 +113,7 @@ public class NurseryServiceSupp {
                                 sd.setNum(num);
                             }
                         } catch (Exception e) {
-                            this.logger.error(e);
-                            System.out.println(e.toString());
+                            this.logger.error(e.toString());
                         }
                         break;
                     case 14:
@@ -125,8 +123,7 @@ public class NurseryServiceSupp {
                                 sd.setPrice(price);
                             }
                         } catch (Exception e) {
-                            this.logger.error(e);
-                            System.out.println(e.toString());
+                            this.logger.error(e.toString());
                         }
                         break;
                     case 15:
@@ -139,8 +136,7 @@ public class NurseryServiceSupp {
                                 sd.setArea(area);
                             }
                         } catch (Exception e) {
-                            this.logger.error(e);
-                            System.out.println(e.toString());
+                            this.logger.error(e.toString());
                         }
                         break;
                     case 17:
@@ -216,8 +212,8 @@ public class NurseryServiceSupp {
                                 sd.setTel(tel);
                             }
                         } catch (Exception e) {
-                            this.logger.error(e);
-                            System.out.println(e.toString());
+                            this.logger.error(e.toString());
+
                         }
                         break;
                     case 5:
@@ -251,8 +247,7 @@ public class NurseryServiceSupp {
                                 sd.setNum(num);
                             }
                         } catch (Exception e) {
-                            this.logger.error(e);
-                            System.out.println(e.toString());
+                            this.logger.error(e.toString());
                         }
                         break;
                     case 12:
@@ -263,8 +258,7 @@ public class NurseryServiceSupp {
                             }
                         } catch (Exception e) {
                             sd.setPrice(0);
-                            this.logger.error(e);
-                            System.out.println(e.toString());
+                            this.logger.error(e.toString());
                         }
                         break;
                     case 13:

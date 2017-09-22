@@ -12,7 +12,7 @@ public class SeedlingOfferStatistics implements java.io.Serializable {
     private String spec;// 规格前缀
     private double specMin;// 规格范围第一位
     private double specMax;// 规格范围第二位
-    private String comment;// 备注
+    private String unit;// 单位
     private int year;// 年份
     private double Jan;// 1月份造价
     private double Feb;// 2月份造价
@@ -59,12 +59,12 @@ public class SeedlingOfferStatistics implements java.io.Serializable {
         this.specMax = specMax;
     }
 
-    public String getComment() {
-        return comment;
+    public String getUnit() {
+        return unit;
     }
 
-    public void setComment(String comment) {
-        this.comment = comment;
+    public void setUnit(String unit) {
+        this.unit = unit;
     }
 
     public int getYear() {
@@ -193,11 +193,11 @@ public class SeedlingOfferStatistics implements java.io.Serializable {
                 Double.compare(that.Dec, Dec) == 0 &&
                 Objects.equals(sdName, that.sdName) &&
                 Objects.equals(spec, that.spec) &&
-                Objects.equals(comment, that.comment);
+                Objects.equals(unit, that.unit);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(sdName, spec, specMin, specMax, comment, year, Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec);
+        return Objects.hash(sdName, spec, specMin, specMax, unit, year, Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec);
     }
 }

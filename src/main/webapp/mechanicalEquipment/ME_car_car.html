@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<!-- 使用最新的IE兼容模式渲染此网页 -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<!-- 在双核浏览器下，默认使用webkit内核，由360浏览器提出 -->
+		<meta name="renderer" content="webkit">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>机械设备管理系统-车辆情况</title>
+		<!--<link rel="shortcut icon" href=""/>-->
+		<link rel="stylesheet" type="text/css" href="../css/common.css" />
+		<link rel="stylesheet" type="text/css" href="../vendor/font-awesome-4.6.3/css/font-awesome.css" />
+		<link rel="stylesheet" href="../css/mechanicalEquipment_leftNav.css" />
+		<link rel="stylesheet" href="../css/mechanicalEquipment_rghtContent.css" />
+		<!-- 让IE9以下的浏览器支持HTML5标签 -->
+		<!--[if lt IE 9]>
+        	<script src="http://cdn.bootcss.com/html5shiv/r29/html5.js"></script>
+        	<script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+	</head>
+	<!--
+		描述：该页面为'机械设备管理系统-车辆情况-用车量'页面（mechanicalEquipment_car_car.html）
+		ME为通用的页面样式。
+		该页面的简称为MECC。
+	-->
+
+	<body>
+		<!------------系统头部------------>
+		<header>
+			<div class="header-left">
+				<img src="../images/Office-bg2.png" />
+			</div>
+			<div class="header-right">
+				<div class="Hr-item">
+					<img src="../images/Office-user.jpg" />
+				</div>
+				<!--用户信息-->
+				<div class="Hr-item">
+					<ul>
+						<li>当前时间：<span id="Span"></span></li>
+						<li>姓名：李晓明</li>
+						<li>部门：高级研发部</li>
+					</ul>
+				</div>
+				<!--退出按钮-->
+				<div class="Hr-item">
+					<!--<i class="fa fa-power-off"></i>-->
+					<a href="../home.html" class="Hr-item_home">
+						<img src="../images/returnHome.png" />首页
+					</a>
+				</div>
+			</div>
+		</header>
+		<!----------------系统内容  结束--------------->
+		<section class="ME_section">
+			<div class="ME_content">
+				<div class="ME_center">
+					<!-------------------左边的导航------------------->
+					<div class="ME_center_L">
+						<div class="MEL_title">
+							<img src="../images/Gc-nav.png" />
+						</div>
+						<div class="MEL_nav">
+							<!--导航中的ul，可以重复使用-->
+							<ul class="ME_nav_ul1">
+								<li class="ME_nav_li1">
+									<span class="ME_nav_ul2_sh"><i class="nav_log"><img src="../images/nav_log1.png" /></i>机械设备<i class="more"></i></span>
+									<ul class="ME_nav_ul2">
+										<li class="ME_nav_li2">
+											<a href="mechanicalEquipment.html">设备类型</a>
+										</li>
+										<li class="ME_nav_li2">
+											<a href="ME_facility_parts.html">车辆配件</a>
+										</li>
+										<li class="ME_nav_li2">
+											<a href="ME_facility_year.html">年审预警</a>
+										</li>
+										<li class="ME_nav_li2">
+											<a href="ME_facility_insurance.html">保险预警</a>
+										</li>
+									</ul>
+								</li>
+							</ul>
+							<!--导航中的ul，可以重复使用  结束-->
+							<!--导航中的ul，可以重复使用-->
+							<ul class="ME_nav_ul1">
+								<li class="ME_nav_li1">
+									<span class="ME_nav_ul2_sh"><i class="nav_log"><img src="../images/nav_log2.png" /></i>车辆情况<i class="more"></i></span>
+									<ul class="ME_nav_ul2 ME_nav_ul2_show">
+										<li class="ME_nav_li2">
+											<a href="ME_car_driving.html">行车记录</a>
+										</li>
+										<li class="ME_nav_li2">
+											<a href="ME_car_service.html">维修情况</a>
+										</li>
+										<li class="ME_nav_li2">
+											<a href="ME_car_oilConsumption.html">耗油量</a>
+										</li>
+										<li class="ME_nav_li2">
+											<a href="ME_car_water.html">水量统计</a>
+										</li>
+										<li class="ME_nav_li2">
+											<a href="ME_car_car.html" class="ME_nav_li2a_color">用车量</a>
+										</li>
+										<li class="ME_nav_li2">
+											<a href="ME_car_distance.html">周行车公里数</a>
+										</li>
+									</ul>
+								</li>
+							</ul>
+							<!--导航中的ul，可以重复使用  结束-->
+							<!--导航中的ul，可以重复使用-->
+							<ul class="ME_nav_ul1">
+								<li class="ME_nav_li1">
+									<span class="ME_nav_ul2_sh"><i class="nav_log"><img src="../images/nav_log3.png" /></i>财务情况<i class="more"></i></span>
+									<ul class="ME_nav_ul2">
+										<li class="ME_nav_li2">
+											<a href="ME_finance_income.html">支出</a>
+										</li>
+										<li class="ME_nav_li2">
+											<a href="ME_finance_expenditure.html">收入情况</a>
+										</li>
+										<li class="ME_nav_li2">
+											<a href="ME_finance_overtimePay.html">人员加班费</a>
+										</li>
+									</ul>
+								</li>
+							</ul>
+							<!--导航中的ul，可以重复使用  结束-->
+							<!--导航中的ul，可以重复使用-->
+							<ul class="ME_nav_ul1">
+								<li class="ME_nav_li1">
+									<span class="ME_nav_ul2_sh"><i class="nav_log"><img src="../images/nav_log4.png" /></i>工作情况<i class="more"></i></span>
+									<ul class="ME_nav_ul2">
+										<li class="ME_nav_li2">
+											<a href="ME_work_schedule.html">工作进度</a>
+										</li>
+										<li class="ME_nav_li2">
+											<a href="ME_work_greenbelt.html">所工作绿地的工作情况</a>
+										</li>
+										<li class="ME_nav_li2">
+											<a href="ME_work_watering.html">所工作绿地的浇水情况</a>
+										</li>
+										<li class="ME_nav_li2">
+											<a href="ME_work_car.html">用车流程</a>
+										</li>
+									</ul>
+								</li>
+							</ul>
+							<!--导航中的ul，可以重复使用  结束-->
+							<!--导航中的ul，可以重复使用-->
+							<ul class="ME_nav_ul1">
+								<li class="ME_nav_li1">
+									<span class="ME_nav_ul2_sh"><i class="nav_log"><img src="../images/nav_log5.png" /></i>人员管理<i class="more"></i></span>
+									<ul class="ME_nav_ul2">
+										<li class="ME_nav_li2">
+											<a href="ME_personnel_list.html">人员名单</a>
+										</li>
+										<li class="ME_nav_li2">
+											<a href="ME_personnel_overtime.html">人员加班时间/费用</a>
+										</li>
+									</ul>
+								</li>
+							</ul>
+							<!--导航中的ul，可以重复使用  结束-->
+						</div>
+					</div>
+					<!------------------左边的导航  结束------------------->
+					<!--右边的导航-->
+					<div class="ME_center_R">
+						<div class="MEC_R_conter">
+							<!--面包屑导航-->
+							<div class="MEC_RC_title">
+								<span class="MEC_RC_titleSpan">当前位置：<a>机械设备管理系统</a> > <a>车辆情况</a> > <a>用车量</a></span>
+							</div>
+							<!--面包屑导航 结束-->
+<!-----------------------------------------------  上面为通用部分，只需替换下面内容即可   -------------------------------------------------->
+							<div class="MECC">
+								<!--头部，使用的是 设备类型（mechanicalEquipment.html）-->
+								<div class="MES_top">
+									<div class="MES_top_left">
+										<span>用车量统计：</span>
+									</div>
+									<!--导出-->
+									<div class="MES_top_right">
+										<div class="MES_topR_derive"><a class="MES_addData"><img src="../images/addData.png" />&nbsp;添加数据</a><a href=""><img src="../images/derive.png" />导出</a></div>
+									</div>
+								</div>
+								<!--头部，使用的是 设备类型（mechanicalEquipment.html）结束  -->
+								<!--表单内容-->
+								<div class="MECC_content">
+									<div class="MECC_content_title">
+										<ul class="MECC_content_titleUl">
+											<li class="MECC_content_titleLi MECC_content_titleLi1">车牌号</li>
+											<li class="MECC_content_titleLi MECC_content_titleLi2">驾驶员</li>
+											<li class="MECC_content_titleLi MECC_content_titleLi2">用车次数</li>
+											<li class="MECC_content_titleLi MECC_content_titleLi2">类型</li>
+										</ul>
+										<div class="ul_clearB"></div>
+									</div>
+									<div class="MECC_contentC">
+										<a target="_blank" href="" class="MECC_contentC_a">
+											<ul class="MECC_contentCA_ul">
+												<li class="MECC_contentCA_li MECC_contentCA_li1">贵A·88888</li>
+												<li class="MECC_contentCA_li MECC_contentCA_li1">李国强</li>
+												<li class="MECC_contentCA_li MECC_contentCA_li2">90</li>
+												<li class="MECC_contentCA_li MECC_contentCA_li3">专车</li>
+											</ul>
+											<div class="ul_clearB"></div>
+										</a>
+										<a target="_blank" href="" class="MECC_contentC_a">
+											<ul class="MECC_contentCA_ul">
+												<li class="MECC_contentCA_li MECC_contentCA_li1">贵A·88888</li>
+												<li class="MECC_contentCA_li MECC_contentCA_li1">李国强</li>
+												<li class="MECC_contentCA_li MECC_contentCA_li2">90</li>
+												<li class="MECC_contentCA_li MECC_contentCA_li3">专车</li>
+											</ul>
+											<div class="ul_clearB"></div>
+										</a>
+										<a target="_blank" href="" class="MECC_contentC_a">
+											<ul class="MECC_contentCA_ul">
+												<li class="MECC_contentCA_li MECC_contentCA_li1">贵A·88888</li>
+												<li class="MECC_contentCA_li MECC_contentCA_li1">李国强</li>
+												<li class="MECC_contentCA_li MECC_contentCA_li2">90</li>
+												<li class="MECC_contentCA_li MECC_contentCA_li3">专车</li>
+											</ul>
+											<div class="ul_clearB"></div>
+										</a>
+										<a target="_blank" href="" class="MECC_contentC_a">
+											<ul class="MECC_contentCA_ul">
+												<li class="MECC_contentCA_li MECC_contentCA_li1">贵A·88888</li>
+												<li class="MECC_contentCA_li MECC_contentCA_li1">李国强</li>
+												<li class="MECC_contentCA_li MECC_contentCA_li2">90</li>
+												<li class="MECC_contentCA_li MECC_contentCA_li3">专车</li>
+											</ul>
+											<div class="ul_clearB"></div>
+										</a>
+										
+									</div>
+									
+								</div>
+								<!--表单内容  结束-->
+							</div>
+							<!---- 分页 通用  ---->
+							<div class="ME_paging">
+								<ul class="ME_paging_ul">
+									<li class="ME_paging_li"><a>上一页</a></li>
+									<li class="ME_paging_li"><a>1</a></li>
+									<li class="ME_paging_li"><a>2</a></li>
+									<li class="ME_paging_li"><a>3</a></li>
+									<li class="ME_paging_li"><a>4</a></li>
+									<li class="ME_paging_li"><a>5</a></li>
+									<li class="ME_paging_li"><a>下一页</a></li>
+								</ul>
+								<div class="ul_clearB"></div>
+							</div>
+							<!---- 分页 通用  结束  ---->
+
+<!-----------------------------------------------  上面为通用部分，只需替换下面内容即可   -------------------------------------------------->
+
+						</div>
+					</div>
+					<!--右边的导航  结束-->
+				</div>
+			</div>
+		</section>
+		<!--网页底部-->
+		<div class="footer">
+			<div class="ft_center">
+				<p><a href="#0">回到主页</a> | <a>联系我们</a> | <a>网站声明</a></p>
+				<p><a>主办:贵阳市生态文明建设委员会</a>&nbsp;<a>承办:贵阳市城市绿化管理处</a></p>
+				<p><a>地址:贵州省贵阳市云岩区黔灵公园门口右侧</a>&nbsp;<a>联系电话:0851-86830383</a></p>
+				<p><a>技术支持:贵州恒昊软件科技有限公司</a></p>
+			</div>
+		</div>
+		<!--网页底部 结束-->
+	</body>
+
+	<script src="../js/jquery.min.js"></script>
+	<!--<script type="text/javascript" src="../js/jquery-2.1.0.js" ></script>-->
+	<script src="../js/common.js"></script>
+	<script type="text/javascript" src="../js/mechanicalEquipment.js"></script>
+	<script>
+		odd_bg("MECC_contentC_a");
+	</script>
+</html>

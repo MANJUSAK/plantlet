@@ -5,7 +5,8 @@ import com.goodsoft.plantlet.domain.entity.file.FileData;
 import com.goodsoft.plantlet.service.FileService;
 import com.goodsoft.plantlet.util.FileUploadUtil;
 import com.goodsoft.plantlet.util.GetOsNameUtil;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -30,7 +31,7 @@ public class FileServicelmpl implements FileService {
     //实例化获取操作系统类型工具类
     private GetOsNameUtil getOsNameUtil = GetOsNameUtil.getInstance();
     //实例化日志管理
-    private Logger logger = Logger.getLogger(FileServicelmpl.class);
+    private Logger logger = LoggerFactory.getLogger(FileServicelmpl.class);
 
     /**
      * 文件上传业务处理方法
@@ -180,8 +181,7 @@ public class FileServicelmpl implements FileService {
             //清除集合里的内容  避免数据混乱
             fileList.clear();
         } catch (Exception e) {
-            System.out.println(e.toString());
-            this.logger.error(e);
+            this.logger.error(e.toString());
             return 600;
         }
         return 0;
