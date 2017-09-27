@@ -18,6 +18,9 @@ public interface NurseryService {
     //省内苗圃数据查询
     public <T> T queryNurseryService(HttpServletRequest request, NurseryParam msg);
 
+    //省内苗圃excel导出
+    public <T> T excelNurseryService(HttpServletRequest request);
+
     //省内苗圃数据多数据添加
     public Status addNurseryService(MultipartFile[] files, Nursery msg);
 
@@ -27,6 +30,15 @@ public interface NurseryService {
     //省外苗圃数据查询
     public <T> T queryNurseryOutService(NurseryParam msg);
 
+    //省外苗圃excel导出
+    public <T> T excelNurseryOutService(HttpServletRequest request);
+
     //省外苗圃数据多数据添加
     public Status addNurseryOutService(MultipartFile[] files, NurseryOut msg);
+
+    //省内苗圃数据多数据更新
+    public Status updateNurseryService(MultipartFile[] files);
+
+    //省外苗圃数据多数据更新
+    public Status updateNurseryOutService(MultipartFile[] files);
 }

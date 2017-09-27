@@ -71,6 +71,14 @@
         ORDER BY nid DESC limit #{num},20;
     </select>
     <!--省内苗圃数据查询sql end-->
+    <!--省内苗圃所有数据查询sql start-->
+    <select id="queryNurseryAllDao" resultMap="nurseryMap">
+        SELECT `id`,`nursery_name`,`contacts`,`tel`,`nursery_intro`,`fax_num`,`email`,`nursery_add`,
+        `province`,`districts`,`nursery_area`,`fileId`,`pro_license_num`,`oper_license_num`,`spec`,
+        `spec_min`,`spec_max`,`price`,`quantity`,`post_code`,`plant_name`,`plant_type`,`county`
+        FROM `gs_nursery_province_info` ORDER BY nid;
+    </select>
+    <!--省内苗圃所有数据查询sql end-->
     <!--省外苗圃数据查询结果映射 start-->
     <resultMap id="NurseryOutMap" type="com.goodsoft.plantlet.domain.entity.nursery.NurseryOut">
         <result property="id" column="id"/>
@@ -135,6 +143,14 @@
         ORDER BY nid DESC limit #{num},20;
     </select>
     <!--省外苗圃数据查询sql end-->
+    <!--省外苗圃所有数据查询sql start-->
+    <select id="queryNurseryOutAllDao" resultMap="NurseryOutMap">
+        SELECT `id`,`province`,`city`,`company_name`,`tel`,`seedling_type`,`seedling_name`,`spec`,`unit`,
+        `quantity`,`price`,`comments`,`acquisition_time`,`address`,`fileId`,`fax_num`,`web_site`,`email`,
+        `spec_min`,`spec_max`
+        FROM `gs_nursery_outside_info` ORDER BY nid;
+    </select>
+    <!--省外苗圃所有数据查询sql end-->
     <!--数据查询 end-->
     <!--数据添加 start-->
     <!--省内苗圃数据添加sql start-->
@@ -154,12 +170,12 @@
     <!--省内苗圃数据多数据添加sql end-->
     <!--省内苗圃数据单条数据添加sql start-->
     <insert id="addNurseryOneDao" parameterType="com.goodsoft.plantlet.domain.entity.nursery.Nursery">
-    INSERT INTO `gs_nursery_province_info`
-    (`id`,`nursery_name`,`contacts`,`tel`,`nursery_intro`,`fax_num`,`email`,`nursery_add`,`province`,`districts`,`nursery_area`,
-    `fileId`,`pro_license_num`,`oper_license_num`,`spec`,`spec_min`,`spec_max`,`price`,`quantity`,`post_code`,`plant_name`,`plant_type`,`county`)
-    VALUES
-    (#{id},#{nurseryName},#{contact},#{tel},#{nurseryIntro},#{fax},#{email},#{nurseryAdd},#{province},#{districts},#{area},
-    #{fileId},#{proLicenseNum},#{operLicenseNum},#{spec},#{specMin},#{specMax},#{price},#{num},#{postCode},#{plantName},#{types},#{county})
+        INSERT INTO `gs_nursery_province_info`
+        (`id`,`nursery_name`,`contacts`,`tel`,`nursery_intro`,`fax_num`,`email`,`nursery_add`,`province`,`districts`,`nursery_area`,
+        `fileId`,`pro_license_num`,`oper_license_num`,`spec`,`spec_min`,`spec_max`,`price`,`quantity`,`post_code`,`plant_name`,`plant_type`,`county`)
+        VALUES
+        (#{id},#{nurseryName},#{contact},#{tel},#{nurseryIntro},#{fax},#{email},#{nurseryAdd},#{province},#{districts},#{area},
+        #{fileId},#{proLicenseNum},#{operLicenseNum},#{spec},#{specMin},#{specMax},#{price},#{num},#{postCode},#{plantName},#{types},#{county})
     </insert>
     <!--省内苗圃数据单条数据添加sql end-->
     <!--省内苗圃数据添加sql end-->
@@ -190,5 +206,26 @@
     <!--省外苗圃单条数据录入 end-->
     <!--省外苗圃信息数据录入sql end-->
     <!--数据添加 end-->
+    <!--数据更新 start-->
+    <!--省内苗圃多数据更新sql start-->
+    <update id="updateNurseryDao" parameterType="java.util.List">
+        <foreach collection="list" item="item" index="index" separator=";">
+            UPDATE `gs_nursery_province_info`
+            <set>
+                `nursery_name` = #{item.nurseryName},`contacts` = #{item.contact},`tel` = #{item.tel},`nursery_intro`
+                =#{item.nurseryIntro},
+                `fax_num` = #{item.fax},`email` = #{item.email},`nursery_add` = #{item.nurseryAdd},`province` =
+                #{item.province},`districts` = #{item.districts},`nursery_area` = #{item.area},
+                `pro_license_num` = #{item.proLicenseNum},`oper_license_num` =#{item.operLicenseNum},`spec` =
+                #{item.spec},
+                `spec_min` = #{item.specMin},`spec_max` = #{item.specMax},`price` = #{item.price},`quantity`
+                =#{item.num},`post_code` = #{item.postCode},
+                `plant_name` = #{item.plantName},`plant_type` = #{item.types},`county` = #{item.county}
+            </set>
+            WHERE `id` = #{item.id}
+        </foreach>
+    </update>
+    <!--省内苗圃多数据更新sql end-->
+    <!--数据更新 end-->
 </mapper>
         <!--mapper 苗圃管理 end -->

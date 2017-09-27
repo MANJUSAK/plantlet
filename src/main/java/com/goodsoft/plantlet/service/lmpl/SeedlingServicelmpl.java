@@ -3,13 +3,13 @@ package com.goodsoft.plantlet.service.lmpl;
 import com.goodsoft.plantlet.domain.dao.FileDao;
 import com.goodsoft.plantlet.domain.dao.SeedlingDao;
 import com.goodsoft.plantlet.domain.entity.file.FileData;
-import com.goodsoft.plantlet.domain.entity.seedlinginfo.SeedlingOffer;
-import com.goodsoft.plantlet.domain.entity.seedlinginfo.SeedlingStatistics;
-import com.goodsoft.plantlet.domain.entity.seedlinginfo.SupplyInfo;
 import com.goodsoft.plantlet.domain.entity.param.*;
 import com.goodsoft.plantlet.domain.entity.result.Result;
 import com.goodsoft.plantlet.domain.entity.result.Status;
 import com.goodsoft.plantlet.domain.entity.result.StatusEnum;
+import com.goodsoft.plantlet.domain.entity.seedlinginfo.SeedlingOffer;
+import com.goodsoft.plantlet.domain.entity.seedlinginfo.SeedlingStatistics;
+import com.goodsoft.plantlet.domain.entity.seedlinginfo.SupplyInfo;
 import com.goodsoft.plantlet.service.FileService;
 import com.goodsoft.plantlet.service.SeedlingService;
 import com.goodsoft.plantlet.service.supp.SeedlingServiceSupp;
@@ -62,7 +62,6 @@ public class SeedlingServicelmpl implements SeedlingService {
      * @param msg 检索条件
      * @param <T> 泛型
      * @return 查询结果
-     * @throws Exception
      */
     @Override
     public <T> T querySeedlingService(SeedlingStatisticsParam param) {
@@ -95,7 +94,6 @@ public class SeedlingServicelmpl implements SeedlingService {
      * @param msg     检索条件
      * @param <T>     泛型
      * @return 查询结果
-     * @throws Exception
      */
     @Override
     public <T> T querySeedlingService(HttpServletRequest request, SupplyParam msg) {
@@ -132,7 +130,6 @@ public class SeedlingServicelmpl implements SeedlingService {
      * @param msg 检索条件
      * @param <T> 泛型
      * @return 查询结果
-     * @throws Exception
      */
     @Override
     public <T> T querySeedlingService(SeedlingOfferParam msg) {
@@ -164,7 +161,6 @@ public class SeedlingServicelmpl implements SeedlingService {
      * @param msg 检索条件
      * @param <T> 泛型
      * @return 查询结果
-     * @throws Exception
      */
     @Override
     public <T> T querySeedlingOfferStatisticsService(SeedlingOfferParam msg) {
@@ -196,7 +192,6 @@ public class SeedlingServicelmpl implements SeedlingService {
      * @param keyWord 检索条件
      * @param <T>     泛型
      * @return 查询结果
-     * @throws Exception
      */
     @Override
     public <T> T querySeedlingStatisticsService(SeedlingStatisticsParam param) {
@@ -235,7 +230,6 @@ public class SeedlingServicelmpl implements SeedlingService {
      * @param keyWord 检索条件
      * @param <T>     泛型
      * @return 查询结果
-     * @throws Exception
      */
     @Override
     public <T> T querySeedlingStatisticsDetailService(SeedlingStatisticsParam param) {
@@ -266,7 +260,6 @@ public class SeedlingServicelmpl implements SeedlingService {
      *
      * @param <T> 泛型
      * @return 查询结果
-     * @throws Exception
      */
     @Override
     public <T> T querySeedlingAllNameService() {
@@ -289,7 +282,6 @@ public class SeedlingServicelmpl implements SeedlingService {
      *
      * @param msg 添加数据
      * @return 添加结果
-     * @throws Exception
      */
     @Override
     @Transactional
@@ -314,7 +306,6 @@ public class SeedlingServicelmpl implements SeedlingService {
      * @param files 数据文件
      * @param msg   发布数据
      * @return 发布结果
-     * @throws Exception
      */
     @Override
     @Transactional
@@ -353,7 +344,6 @@ public class SeedlingServicelmpl implements SeedlingService {
      *
      * @param msg发布数据
      * @return 发布结果
-     * @throws Exception
      */
     @Override
     public Status addSeedlingService(MultipartFile[] files, SeedlingOffer msg) {

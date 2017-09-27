@@ -39,7 +39,6 @@ public class UserServcielmpl implements UserService {
      * @param pwd   密码
      * @param <T>   泛型
      * @return 授权结果
-     * @throws Exception
      */
     @Override
     public <T> T loginService(String uName, String pwd) {
@@ -63,7 +62,6 @@ public class UserServcielmpl implements UserService {
      *
      * @param msg 注册信息
      * @return 注册结果
-     * @throws Exception
      */
     @Transactional
     @Override

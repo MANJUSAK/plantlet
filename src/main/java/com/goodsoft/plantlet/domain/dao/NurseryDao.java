@@ -18,6 +18,9 @@ public interface NurseryDao {
     //省内苗圃数据查询dao方法
     public List<Nursery> queryNurseryDao(NurseryParam msg) throws Exception;
 
+    //省内苗圃所有数据查询dao方法
+    public List<Nursery> queryNurseryAllDao() throws Exception;
+
     //省内苗圃多数据添加dao方法
     public void addNurseryDao(List<Nursery> msg) throws Exception;
 
@@ -27,9 +30,18 @@ public interface NurseryDao {
     //省外苗圃数据查询dao方法
     public List<NurseryOut> queryNurseryOutDao(NurseryParam msg) throws Exception;
 
+    //省外苗圃所有数据查询dao方法
+    public List<NurseryOut> queryNurseryOutAllDao() throws Exception;
+
     //省外苗圃多数据添加dao方法
     public void addNurseryOutDao(List<NurseryOut> msg) throws Exception;
 
     //省外苗圃单条数据dao方法
     public void addNurseryOutOneDao(NurseryOut msg) throws Exception;
+
+    //省内苗圃多数据更新dao方法
+    public void updateNurseryDao(List<Nursery> msg) throws Exception;
+
+    //省外苗圃多数据更新dao方法
+    public void updateNurseryOutDao(List<NurseryOut> msg) throws Exception;
 }

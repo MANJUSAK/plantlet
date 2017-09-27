@@ -1,37 +1,33 @@
 package com.goodsoft.plantlet.util;
 
-import org.apache.poi.hssf.usermodel.HSSFDateUtil;
+import org.apache.poi.hssf.usermodel.*;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFCell;
-import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * function xlxs文件格式excel表读取工具类
+ * function xls
  * Created by 严彬荣 on 2017/9/17.
  */
 @SuppressWarnings("ALL")
-public class Excel2007 {
+public class ReadExcel2003 {
     /**
-     * 创建Excel2007类的单例（详情见本包下UUIDUtil类） start
+     * 创建Excel2003类的单例（详情见本包下UUIDUtil类） start
      **/
-    private volatile static Excel2007 instance;
+    private volatile static ReadExcel2003 instance;
 
-    private Excel2007() {
+    private ReadExcel2003() {
     }
 
-    public static Excel2007 getInstance() {
+    public static ReadExcel2003 getInstance() {
         if (instance == null) {
-            synchronized (Excel2007.class) {
+            synchronized (ReadExcel2003.class) {
                 if (instance == null)
-                    instance = new Excel2007();
+                    instance = new ReadExcel2003();
             }
         }
         return instance;
@@ -40,9 +36,9 @@ public class Excel2007 {
     //实例化UUID工具类
     private UUIDUtil uuid = UUIDUtil.getInstance();
     // 默认单元格格式化日期字符串
-    /*private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");*/
+   /* private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");*/
     // 格式化数字
-    private DecimalFormat nf = new DecimalFormat("0");
+    private DecimalFormat nf = new DecimalFormat("0.000");
 
     /**
      * 读取excel表
@@ -51,19 +47,18 @@ public class Excel2007 {
      * @param wb     读取到的表格
      * @return 读取数据
      */
-    public List<List<Object>> getSheetExcel(XSSFWorkbook wb, String fileId) {
+    protected List<List<Object>> getSheetExcel(HSSFWorkbook wb, String fileId) {
         List<List<Object>> list = null;
         //读取表格数 start
         int st = wb.getNumberOfSheets();
         //遍历excel表格数
-        XSSFSheet sheet = wb.getSheetAt(0);
+        HSSFSheet sheet = wb.getSheetAt(0);
         if (sheet != null) {
             list = getRowExcel(sheet, fileId);
         }
         //读取表格数 end
         return list;
     }
-
 
     /**
      * 读取表格数据
@@ -72,17 +67,13 @@ public class Excel2007 {
      * @param sheet  读取的表
      * @return 读取数据
      */
-    private List<List<Object>> getRowExcel(XSSFSheet sheet, String fileId) {
-        // 默认单元格格式化日期字符串
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        // 格式化数字
-        DecimalFormat nf = new DecimalFormat("0");
+    private List<List<Object>> getRowExcel(HSSFSheet sheet, String fileId) {
         //初始化集合存放读取表格数据
         List<List<Object>> list = new ArrayList<List<Object>>();
         //初始化集合存放读取表格临时数据
         List<Object> temp = null;
-        XSSFRow row;
-        XSSFCell cell;
+        HSSFRow row;
+        HSSFCell cell;
         //读取表格中的数据 start
         int rowCount = sheet.getLastRowNum();
         //遍历行
@@ -112,7 +103,6 @@ public class Excel2007 {
                                 if (cell.getCellStyle().getDataFormatString() == null) {
                                     continue;
                                 }
-                                System.out.println(cell.getCellStyle().getDataFormatString());
                                 switch (cell.getCellStyle().getDataFormatString()) {
                                     case "General":
                                         temp.add(this.nf.format(cell.getNumericCellValue()));
@@ -162,7 +152,7 @@ public class Excel2007 {
      * @param column 列下标
      * @return boolean
      */
-    private boolean isMergedRegion(XSSFSheet sheet, int row, int column) {
+    private boolean isMergedRegion(HSSFSheet sheet, int row, int column) {
         int sheetMergeCount = sheet.getNumMergedRegions();
         for (int i = 0; i < sheetMergeCount; i++) {
             CellRangeAddress range = sheet.getMergedRegion(i);
@@ -187,7 +177,7 @@ public class Excel2007 {
      * @param column 列下标
      * @return 单元格数据
      */
-    private Object getMergedRegionValue(XSSFSheet sheet, int row, int column) {
+    private Object getMergedRegionValue(HSSFSheet sheet, int row, int column) {
         int sheetMergeCount = sheet.getNumMergedRegions();
         for (int i = 0; i < sheetMergeCount; i++) {
             CellRangeAddress ca = sheet.getMergedRegion(i);
@@ -197,8 +187,8 @@ public class Excel2007 {
             int lastRow = ca.getLastRow();
             if (row >= firstRow && row <= lastRow) {
                 if (column >= firstColumn && column <= lastColumn) {
-                    XSSFRow fRow = sheet.getRow(firstRow);
-                    XSSFCell fCell = fRow.getCell(firstColumn);
+                    HSSFRow fRow = sheet.getRow(firstRow);
+                    HSSFCell fCell = fRow.getCell(firstColumn);
                     return getCellValue(fCell);
                 }
             }
@@ -210,9 +200,9 @@ public class Excel2007 {
      * 获取单元格的值
      *
      * @param cell
-     * @return object
+     * @return
      */
-    public Object getCellValue(XSSFCell cell) {
+    public Object getCellValue(HSSFCell cell) {
         if (cell == null) return "";
         switch (cell.getCellType()) {
             case Cell.CELL_TYPE_STRING:

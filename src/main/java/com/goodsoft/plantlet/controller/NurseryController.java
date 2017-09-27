@@ -61,6 +61,27 @@ public class NurseryController {
     }
 
     /**
+     * 省内苗圃导出excel接口
+     *
+     * @return 响应结果
+     */
+    @RequestMapping(value = "/province/export/excel/seedling.action.do", method = RequestMethod.POST)
+    public Object excelNurseryController(HttpServletRequest request) {
+        return this.service.excelNurseryService(request);
+    }
+
+    /**
+     * 省内苗圃多数据更新接口
+     *
+     * @param files excel文件
+     * @return 响应结果
+     */
+    @RequestMapping(value = "/province/update/cont/seedling.action.do", method = RequestMethod.POST)
+    public Object updateNurseryController(@RequestParam("files") MultipartFile[] files) {
+        return this.service.updateNurseryService(files);
+    }
+
+    /**
      * 省外苗圃查询接口
      *
      * @param msg 条件查询参数
@@ -82,5 +103,26 @@ public class NurseryController {
     @RequestMapping(value = "/outside/add/seedling.action.do", method = RequestMethod.POST)
     public Object addNurseryOutController(@RequestParam("files") MultipartFile[] files, NurseryOut msg) {
         return this.service.addNurseryOutService(files, msg);
+    }
+
+    /**
+     * 省外苗圃导出excel接口
+     *
+     * @return 响应结果
+     */
+    @RequestMapping(value = "/outside/export/excel/seedling.action.do", method = RequestMethod.POST)
+    public Object excelNurseryOutController(HttpServletRequest request) {
+        return this.service.excelNurseryOutService(request);
+    }
+
+    /**
+     * 省内苗圃多数据更新接口
+     *
+     * @param files excel文件
+     * @return 响应结果
+     */
+    @RequestMapping(value = "/outside/update/cont/seedling.action.do", method = RequestMethod.POST)
+    public Object updateNurseryOutController(@RequestParam("files") MultipartFile[] files) {
+        return this.service.updateNurseryOutService(files);
     }
 }

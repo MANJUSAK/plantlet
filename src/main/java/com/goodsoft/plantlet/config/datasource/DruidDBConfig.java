@@ -1,13 +1,19 @@
 package com.goodsoft.plantlet.config.datasource;
 
 import com.alibaba.druid.pool.DruidDataSource;
+import com.alibaba.druid.wall.WallConfig;
+import com.alibaba.druid.wall.WallFilter;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.context.annotation.Primary;
 
+import javax.annotation.Resource;
 import java.sql.SQLException;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * 数据库连接池配置
@@ -25,6 +31,8 @@ import java.sql.SQLException;
 @SuppressWarnings("ALL")
 @Configuration
 public class DruidDBConfig {
+    @Resource
+    private WallFilter wallFilter;
     private Logger logger = Logger.getLogger(DruidDBConfig.class);
     @Value("${spring.datasource.url}")
     private String dbUrl;
@@ -94,6 +102,9 @@ public class DruidDBConfig {
         datasource.setRemoveAbandonedTimeout(this.removeAbandonedTimeout);
         datasource.setLogAbandoned(this.logAbandoned);
         datasource.setConnectionProperties(connectionProperties);
+        //添加druid过滤器 设置运行批量更新
+        List filter = Arrays.asList(wallFilter);
+        datasource.setProxyFilters(filter);
         try {
             datasource.setFilters(filters);
         } catch (SQLException e) {
@@ -101,5 +112,22 @@ public class DruidDBConfig {
             this.logger.error(e);
         }
         return datasource;
+    }
+
+    //允许批量更新
+    @Bean
+    public WallConfig wallConfig() {
+        WallConfig wallConfig = new WallConfig();
+        wallConfig.setMultiStatementAllow(true);
+        return wallConfig;
+    }
+
+    //注入过滤器
+    @Bean
+    @DependsOn
+    public WallFilter wallFilter(WallConfig wallConfig) {
+        WallFilter wallFilter = new WallFilter();
+        wallFilter.setConfig(wallConfig);
+        return wallFilter;
     }
 }
