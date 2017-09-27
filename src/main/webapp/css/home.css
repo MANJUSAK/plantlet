@@ -184,7 +184,7 @@ img {
 .HE_center .HE_center_R .HE_CR_content .HE_CRc_agoul2 {
   width: 100%;
   height: 330px;
-  padding: 0px 12.5%;
+  padding: 0px;
   box-sizing: border-box;
 }
 .HE_center .HE_center_R .HE_CR_content .HE_CRc_agoul2 .HE_CRc_ul2 {
@@ -197,7 +197,7 @@ img {
 .HE_center .HE_center_R .HE_CR_content .HE_CRc_agoul2 .HE_CRc_ul2 .HE_CRc_li2 {
   margin: 0;
   padding: 0;
-  width: 33.3%;
+  width: 25%;
   height: 100%;
   float: left;
 }

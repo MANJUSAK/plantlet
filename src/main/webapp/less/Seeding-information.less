@@ -213,6 +213,16 @@ section {
                                 border-bottom: 1px dashed #4CD242;
                                 overflow: hidden;
                                 cursor: pointer;
+                                &:hover li{
+                                    color: red;
+                                }
+                                &:hover li .jg-li {
+                                    color: red;
+                                }
+                                &:hover li .sl-li {
+                                    color: red;
+                                }
+                                
                             }
                             ul .sx-mc {
                                 float: left;
@@ -366,6 +376,7 @@ section {
                                         height: 140px;
                                         border-bottom: 1px solid #DEDEDE;
                                         margin-top: 10px;
+                                        cursor: pointer;
                                         .mt-imgs {
                                             width: 179px;
                                             height: 120px;
@@ -387,6 +398,13 @@ section {
                                             height: 140px;
                                             float: left;
                                             margin-left: 10px;
+                                            cursor: pointer;
+                                            &:hover  .mtr-title a{
+                                                color: red;
+                                            }
+                                             &:hover  .mtr-jianjie p{
+                                                color: red;
+                                            }
                                             .mtr-title {
                                                 width: 100%;
                                                 height: 39px;
@@ -403,8 +421,9 @@ section {
                                             .mtr-jianjie {
                                                 width: 100%;
                                                 height: 100px;
+                                                overflow: hidden;
                                                 p {
-                                                    font-size: 12px;
+                                                    font-size: 15px;
                                                     line-height: 25px;
                                                     text-indent: 24px;
                                                     color: #555;
@@ -439,6 +458,7 @@ section {
                             width: 100%;
                             height: 160px;
                             margin-bottom: 10px;
+                            cursor: pointer;
                             .gxc-left {
                                 width: 198px;
                                 height: 158px;
@@ -450,6 +470,12 @@ section {
                                     height: 160px;
                                 }
                             }
+                             .gxc-right:hover .gr-title a {
+                                color: red;
+                             }
+                             .gxc-right:hover .gr-text p {
+                                color: red;
+                             }
                             .gxc-right {
                                 width: 1030px;
                                 height: 160px;
@@ -472,11 +498,11 @@ section {
                                     border-bottom: 1px dashed #DEDEDE;
                                     overflow: hidden;
                                     text-overflow: ellipsis;
-                                    white-space: nowrap;
+                                    word-break: break-word;
                                     p {
-                                        font-size: 12px;
+                                        font-size: 14px;
                                         color: #555;
-                                        line-height: 25px;
+                                        line-height: 23.5px;
                                         text-indent: 24px;
                                     }
                                 }
@@ -600,13 +626,13 @@ section {
                             width: 100%;
                         }
                         ul li:first-child {
-                            height: 29px;
+                            height: 24px;
                             border-bottom: 1px solid #4CD242;
                         }
                     }
                     .jzm-center {
                         width: 250px;
-                        height: 58px;
+                        height: 46px;
                         float: left;
                         border: 1px solid #4CD242;
                         cursor: pointer;
@@ -614,10 +640,10 @@ section {
                         margin-right: 2%;
                         span {
                             display: block;
-                            line-height: 58px;
+                            line-height: 46px;
                             text-align: center;
                             color: #DEDEDE;
-                            font-size: 30px;
+                            font-size: 24px;
                             transition: 0.5s;
                             &:hover {
                                 color: #4CD242;

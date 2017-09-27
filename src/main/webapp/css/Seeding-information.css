@@ -25,6 +25,7 @@ section .Si-box .Si-nav .Sin-li {
   width: 190px;
   height: 300px;
   margin: 0 auto;
+  background: -webkit-linear-gradient(#dfffcb, #eafcde);
   background: linear-gradient(#dfffcb, #eafcde);
   border-left: 1px solid #4CD242;
   border-right: 1px solid #4CD242;
@@ -48,12 +49,14 @@ section .Si-box .Si-nav .Sin-li ul li a {
   color: #4CD242;
 }
 section .Si-box .Si-nav .Sin-li ul li:hover {
+  background: -webkit-linear-gradient(#399d34, #4cd242, #399d34);
   background: linear-gradient(#399d34, #4cd242, #399d34);
 }
 section .Si-box .Si-nav .Sin-li ul li:hover a {
   color: white;
 }
 section .Si-box .Si-nav .Sin-li ul .Sin-active {
+  background: -webkit-linear-gradient(#399d34, #4cd242, #399d34);
   background: linear-gradient(#399d34, #4cd242, #399d34);
 }
 section .Si-box .Si-nav .Sin-li ul .Sin-active a {
@@ -220,13 +223,13 @@ section .Si-box .Si-container .Sic-content .Sic-item .Sici-shuxing .sx-fors ul {
   cursor: pointer;
 }
 section .Si-box .Si-container .Sic-content .Sic-item .Sici-shuxing .sx-fors ul:hover li {
-	color: red;
+  color: red;
 }
 section .Si-box .Si-container .Sic-content .Sic-item .Sici-shuxing .sx-fors ul:hover li .jg-li {
-	color: red;
+  color: red;
 }
 section .Si-box .Si-container .Sic-content .Sic-item .Sici-shuxing .sx-fors ul:hover li .sl-li {
-	color: red;
+  color: red;
 }
 section .Si-box .Si-container .Sic-content .Sic-item .Sici-shuxing .sx-fors ul .sx-mc {
   float: left;
@@ -384,12 +387,6 @@ section .Si-box .Si-container .Sic-content .Sic-item .miaopu-content .mc-item .m
   margin-top: 10px;
   cursor: pointer;
 }
-section .Si-box .Si-container .Sic-content .Sic-item .miaopu-content .mc-item .mt-content .mt-item ul li:hover .mt-right .mtr-title a {
-	color: red;
-}
-section .Si-box .Si-container .Sic-content .Sic-item .miaopu-content .mc-item .mt-content .mt-item ul li:hover .mt-right .mtr-jianjie p {
-	color: red;
-}
 section .Si-box .Si-container .Sic-content .Sic-item .miaopu-content .mc-item .mt-content .mt-item ul li .mt-imgs {
   width: 179px;
   height: 120px;
@@ -411,6 +408,13 @@ section .Si-box .Si-container .Sic-content .Sic-item .miaopu-content .mc-item .m
   height: 140px;
   float: left;
   margin-left: 10px;
+  cursor: pointer;
+}
+section .Si-box .Si-container .Sic-content .Sic-item .miaopu-content .mc-item .mt-content .mt-item ul li .mt-right:hover .mtr-title a {
+  color: red;
+}
+section .Si-box .Si-container .Sic-content .Sic-item .miaopu-content .mc-item .mt-content .mt-item ul li .mt-right:hover .mtr-jianjie p {
+  color: red;
 }
 section .Si-box .Si-container .Sic-content .Sic-item .miaopu-content .mc-item .mt-content .mt-item ul li .mt-right .mtr-title {
   width: 100%;
@@ -428,9 +432,10 @@ section .Si-box .Si-container .Sic-content .Sic-item .miaopu-content .mc-item .m
 section .Si-box .Si-container .Sic-content .Sic-item .miaopu-content .mc-item .mt-content .mt-item ul li .mt-right .mtr-jianjie {
   width: 100%;
   height: 100px;
+  overflow: hidden;
 }
 section .Si-box .Si-container .Sic-content .Sic-item .miaopu-content .mc-item .mt-content .mt-item ul li .mt-right .mtr-jianjie p {
-  font-size: 12px;
+  font-size: 15px;
   line-height: 25px;
   text-indent: 24px;
   color: #555;
@@ -472,18 +477,17 @@ section .Si-box .Si-container .Sic-content .Sic-item .gx-content .gxc-text .gxc-
   width: 100%;
   height: 160px;
 }
+section .Si-box .Si-container .Sic-content .Sic-item .gx-content .gxc-text .gxc-right:hover .gr-title a {
+  color: red;
+}
+section .Si-box .Si-container .Sic-content .Sic-item .gx-content .gxc-text .gxc-right:hover .gr-text p {
+  color: red;
+}
 section .Si-box .Si-container .Sic-content .Sic-item .gx-content .gxc-text .gxc-right {
   width: 1030px;
   height: 160px;
   float: left;
   margin-left: 18px;
-}
-section .Si-box .Si-container .Sic-content .Sic-item .gx-content .gxc-text .gxc-right:hover div a {
-	color: red;
-}
-section .Si-box .Si-container .Sic-content .Sic-item .gx-content .gxc-text .gxc-right:hover div p {
-	color: red;
-	cursor: pointer;
 }
 section .Si-box .Si-container .Sic-content .Sic-item .gx-content .gxc-text .gxc-right .gr-title {
   width: 100%;
@@ -496,7 +500,6 @@ section .Si-box .Si-container .Sic-content .Sic-item .gx-content .gxc-text .gxc-
   line-height: 39px;
   padding-left: 15px;
 }
-
 section .Si-box .Si-container .Sic-content .Sic-item .gx-content .gxc-text .gxc-right .gr-text {
   width: 100%;
   height: 119px;
@@ -506,9 +509,9 @@ section .Si-box .Si-container .Sic-content .Sic-item .gx-content .gxc-text .gxc-
   word-break: break-word;
 }
 section .Si-box .Si-container .Sic-content .Sic-item .gx-content .gxc-text .gxc-right .gr-text p {
-  font-size: 12px;
+  font-size: 14px;
   color: #555;
-  line-height: 25px;
+  line-height: 23.5px;
   text-indent: 24px;
 }
 section .Si-box .Si-container .Sic-content .Sic-item .zaojia-topbar {
@@ -629,12 +632,12 @@ section .Si-box .Si-container .jzmore .jzm-box .jzm-aisde ul li {
   width: 100%;
 }
 section .Si-box .Si-container .jzmore .jzm-box .jzm-aisde ul li:first-child {
-  height: 29px;
+  height: 24px;
   border-bottom: 1px solid #4CD242;
 }
 section .Si-box .Si-container .jzmore .jzm-box .jzm-center {
   width: 250px;
-  height: 58px;
+  height: 46px;
   float: left;
   border: 1px solid #4CD242;
   cursor: pointer;
@@ -643,11 +646,12 @@ section .Si-box .Si-container .jzmore .jzm-box .jzm-center {
 }
 section .Si-box .Si-container .jzmore .jzm-box .jzm-center span {
   display: block;
-  line-height: 58px;
+  line-height: 46px;
   text-align: center;
   color: #DEDEDE;
-  font-size: 30px;
-  transition: 0.5s;
+  font-size: 24px;
+  -webkit-transition: 0.5s;
+          transition: 0.5s;
 }
 section .Si-box .Si-container .jzmore .jzm-box .jzm-center span:hover {
   color: #4CD242;
@@ -820,7 +824,8 @@ section .Si-box .Si-yaler .Siy-container .Siyc-form .form-container .form-buttom
   background: #40B239;
   margin-top: 50px;
   border-radius: 8px;
-  transition: 1s;
+  -webkit-transition: 1s;
+          transition: 1s;
 }
 section .Si-box .Si-yaler .Siy-container .Siyc-form .form-container .form-buttom:hover input {
   background: #4CD242;
@@ -834,7 +839,8 @@ section .Si-box .Si-yaler .Siy-container .Siyc-form .form-container .form-buttom
   font-size: 18px;
   color: white;
   cursor: pointer;
-  transition: 0.5s;
+  -webkit-transition: 0.5s;
+          transition: 0.5s;
   border-radius: 8px;
   outline: none;
 }

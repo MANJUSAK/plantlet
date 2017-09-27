@@ -1,4 +1,4 @@
-package com.goodsoft.plantlet.util.result;
+package com.goodsoft.plantlet.domain.entity.result;
 
 /**
  * function 系统响应状态提示枚举类

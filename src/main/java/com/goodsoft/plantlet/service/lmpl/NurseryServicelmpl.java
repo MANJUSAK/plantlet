@@ -5,6 +5,11 @@ import com.goodsoft.plantlet.domain.dao.NurseryDao;
 import com.goodsoft.plantlet.domain.entity.file.FileData;
 import com.goodsoft.plantlet.domain.entity.nursery.Nursery;
 import com.goodsoft.plantlet.domain.entity.nursery.NurseryOut;
+import com.goodsoft.plantlet.domain.entity.param.AnalysisParam;
+import com.goodsoft.plantlet.domain.entity.param.NurseryParam;
+import com.goodsoft.plantlet.domain.entity.result.Result;
+import com.goodsoft.plantlet.domain.entity.result.Status;
+import com.goodsoft.plantlet.domain.entity.result.StatusEnum;
 import com.goodsoft.plantlet.service.FileService;
 import com.goodsoft.plantlet.service.NurseryService;
 import com.goodsoft.plantlet.service.supp.NurseryServiceSupp;
@@ -13,7 +18,6 @@ import com.goodsoft.plantlet.util.DataAnalysisUtil;
 import com.goodsoft.plantlet.util.DeleteFileUtil;
 import com.goodsoft.plantlet.util.ExcelUtil;
 import com.goodsoft.plantlet.util.UUIDUtil;
-import com.goodsoft.plantlet.util.result.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -226,7 +230,6 @@ public class NurseryServicelmpl implements NurseryService {
         try {
             data = this.dao.queryNurseryOutDao(param);
         } catch (Exception e) {
-
             this.logger.error(e.toString());
             return (T) new Status(StatusEnum.SERVER_ERROR.getCODE(), StatusEnum.SERVER_ERROR.getEXPLAIN());
         }
@@ -291,6 +294,7 @@ public class NurseryServicelmpl implements NurseryService {
                     /*获取上传excel文件数据 end*/
                     //解析excel数据有效性
                     int len = this.serviceSupp.getNurseryOutExcelDataAnalysis(sdData);
+                    System.out.println(sdData.get(0).getSpec());
                     //判断解析数据是否满足正确格式数据，是存库，否删除原始文件
                     if (len > 0) {
                         this.dao.addNurseryOutDao(sdData);

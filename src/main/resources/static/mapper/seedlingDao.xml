@@ -26,7 +26,7 @@
     <!--查询苗木信息数据结果映射 end-->
     <!--查询苗木信息数据sql start-->
     <select id="querySeedlingInfoDao"
-            parameterType="com.goodsoft.plantlet.util.result.SeedlingStatisticsParam"
+            parameterType="com.goodsoft.plantlet.domain.entity.param.SeedlingStatisticsParam"
             resultMap="seedlingInfoMap">
         SELECT
         `id`,`seedling_name`,`spec`, `spec_min`,`spec_max`,`offer_price`,`price_out`,
@@ -68,7 +68,7 @@
     </resultMap>
     <!--供需信息数据结果映射 end-->
     <!--供需信息数据sql start-->
-    <select id="querySeedlingSupplyDao" parameterType="com.goodsoft.plantlet.util.result.SupplyParam"
+    <select id="querySeedlingSupplyDao" parameterType="com.goodsoft.plantlet.domain.entity.param.SupplyParam"
             resultMap="seedlingSupplyMap">
         SELECT `id`,`seedling_name`,`seedling_type`,`spec`,
         `spec_min`,`spec_max`,`unit`,`quantity`,`fileId`,
@@ -109,13 +109,13 @@
     </resultMap>
     <!--苗木造价查询结果映射 end-->
     <!--苗木造价查询sql start-->
-    <select id="querySeedlingOfferDao" parameterType="com.goodsoft.plantlet.util.result.SeedlingOfferParam"
+    <select id="querySeedlingOfferDao" parameterType="com.goodsoft.plantlet.domain.entity.param.SeedlingOfferParam"
             resultMap="seedlingOfferMap">
         SELECT `id`,`seedling_name`,`spec`,`spec_min`,`spec_max`,`unit`,`seedling_offer`,`comment`,`year`,`month`
         FROM `gs_seedling_offer`
         <where>
             <if test="keyWord != null and keyWord != ''">
-                AND seedling_name LIKE '%${keyWord}%'
+                AND seedling_name = #{keyWord}
             </if>
             <if test="spec != null and spec != ''">
                 AND spec= #{spec}
@@ -170,14 +170,14 @@
     <!--苗木造价统计年月查询结果映射 end-->
     <!--苗木造价统计年月查询sql start-->
     <select id="querySeedlingOfferStatisticsDetailDao"
-            parameterType="com.goodsoft.plantlet.util.result.SeedlingOfferParam"
+            parameterType="com.goodsoft.plantlet.domain.entity.param.SeedlingOfferParam"
             resultMap="seedlingOfferStatisticsDetailMap">
         SELECT `seedling_name`,`spec`,`spec_min`,`spec_max`, `unit`,`year`,`January`,`February`,`March`,
         `April`,`May`,`June`,`July`,`August`,`September`,`October`,`November`,`December`
         FROM `gs_seedling_offer_view`
         <where>
             <if test="keyWord != null and keyWord != ''">
-                AND seedling_name LIKE '%${keyWord}%'
+                AND seedling_name = #{keyWord}
             </if>
             <if test="spec != null and spec != ''">
                 AND spec= #{specMin}
@@ -200,22 +200,26 @@
         <result property="spec" column="spec"/>
         <result property="specMin" column="spec_min"/>
         <result property="specMax" column="spec_max"/>
-        <result property="offer" column="offer"/>
-        <result property="marketPrice" column="market_price"/>
+        <result property="offer" column="seedling_offer"/>
         <result property="sdName" column="seedling_name"/>
         <result property="numOut" column="num_out"/>
         <result property="num" column="num"/>
-        <result property="priceOut" column="price_out"/>
-        <result property="price" column="price"/>
+        <result property="minPriceOut" column="min_price_out"/>
+        <result property="maxPriceOut" column="max_price_out"/>
+        <result property="minPrice" column="min_price"/>
+        <result property="maxPrice" column="max_price"/>
         <result property="unit" column="unit"/>
+        <result property="year" column="year"/>
+        <result property="month" column="month"/>
     </resultMap>
     <!--苗木信息统计结果映射 end-->
     <!--苗木信息统计数据分析sql start-->
-    <select id="querySeedlingStatisticsDao" parameterType="com.goodsoft.plantlet.util.result.SeedlingStatisticsParam"
+    <select id="querySeedlingStatisticsDao"
+            parameterType="com.goodsoft.plantlet.domain.entity.param.SeedlingStatisticsParam"
             resultMap="SeedlingStatisticsMap">
-        SELECT `spec`,`spec_min`,`spec_max`,`seedling_name`,`unit`,`num_out`,`num`,
-        `price`,`price_out`,`offer`,`mark_price`
-        FROM `gs_seedling_statistics`
+        SELECT `num`,`num_out`,`seedling_name`,`spec`,`spec_min`,`spec_max`,`unit`,`min_price`,
+        `max_price`,`min_price_out`,`max_price_out`,`seedling_offer`,`year`,`month`
+        FROM `gs_seedling_statistics_view`
         <where>
             <if test="keyWord !=null and keyWord != ''">
                 AND seedling_name = #{keyWord}
@@ -228,6 +232,12 @@
             </if>
             <if test="specMax != null and specMax != ''">
                 AND spec_max= #{specMax}
+            </if>
+            <if test="year != null and year != ''">
+                AND `year`= #{year}
+            </if>
+            <if test="month != null and month != ''">
+                AND `month`= #{month}
             </if>
         </where>
         LIMIT #{num},20;
@@ -254,53 +264,20 @@
         <result property="city" column="districts"/>
     </resultMap>
     <!--苗木信息统计数据分析详细数据结果映射 end-->
-    <!--苗木信息统计数据分析详细数据sql start-->
-    <select id="querySeedlingStatisticsDetailDao"
-            parameterType="com.goodsoft.plantlet.util.result.SeedlingStatisticsParam"
-            resultMap="seedlingStatisticsDetailMap">
-        SELECT
-        `offer`,`province_out`,`spec`,`spec_min`,`spec_max`,`seedling_name`,`company_out`,
-        `num_out`,`price_out`,`company`,`county`,`districts`,`unit`,`num`,`price`,`market_price`
-        FROM `gs_seedling_statistics_detail`
-        <where>
-            <if test="keyWord !=null and keyWord != ''">
-                AND seedling_name = #{keyWord}
-            </if>
-            <if test="city != null and city != ''">
-                AND districts= #{city}
-            </if>
-            <if test="county != null and county != ''">
-                AND county= #{county}
-            </if>
-            <if test="spec != null and spec != ''">
-                AND province_out= #{provincOut}
-            </if>
-            <if test="spec != null and spec != ''">
-                AND spec= #{spec}
-            </if>
-            <if test="specMin != null and specMin != ''">
-                AND spec_min= #{specMin}
-            </if>
-            <if test="specMax != null and specMax != ''">
-                AND spec_max= #{specMax}
-            </if>
-        </where>
-        LIMIT #{num} , 20;
+    <!--查询苗木造价最新年月份数据sql start-->
+    <select id="queryNewestOfferDao" resultType="com.goodsoft.plantlet.domain.entity.param.NewestOfferParam">
+    SELECT
+    MAX(`year`) `year`, MAX(`month`) `month`
+    FROM
+    gs_seedling_offer
     </select>
-    <!--苗木信息统计数据分析详细数据sql end-->
+    <!--查询苗木造价最新年月份数据sql end-->
     <!--查询苗木信息统计数据所有植物名称sql start-->
     <select id="querySeedlingAllNameDao" resultType="java.lang.String">
-    SELECT DISTINCT
-    b.seedling_name
+    SELECT
+    `seedling_name`
     FROM
-    gs_seedling_offer a
-    RIGHT JOIN
-    (SELECT DISTINCT
-        a.seedling_name
-    FROM
-        gs_nursery_outside_info a
-    RIGHT JOIN gs_nursery_province_info b ON a.seedling_name = b.plant_name) b ON a.seedling_name = b.seedling_name
-    where b.seedling_name is not null;
+    `gs_seedling_name_view`
     </select>
     <!--查询苗木信息统计数据所有植物名称sql end-->
     <!--数据查询sql end-->
@@ -312,8 +289,8 @@
     (`id`,`seedling_name`,`spec`,`spec_min`,`spec_max`,`offer_price`,`price_out`,
     `market_price`,`quantity`,`quantity_out`,`unit`,`seedling_comp`,`comment`,`price`)
     VALUES
-    (#{id},#{sdName},#{spec},#{specMin},#{specMax},#{offer},#{priceOut},
-    #{marketPrice},#{num},#{numOut},#{unit},#{comp},#{comment},#{price});
+    (#{id},#{sdName},#{spec},#{specMin},#{specMax},#{offer},#{maxPpriceOut},
+    #{marketPrice},#{num},#{numOut},#{unit},#{comp},#{comment},#{minPrice});
     </insert>
     <!--苗木信息数据录入sql end-->
     <!--供需信息数据录入sql start-->

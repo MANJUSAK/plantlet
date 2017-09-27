@@ -1,4 +1,4 @@
-package com.goodsoft.plantlet.util.result;
+package com.goodsoft.plantlet.domain.entity.param;
 
 import java.util.Objects;
 

@@ -8,7 +8,7 @@ import java.util.Objects;
  * version v1.0
  */
 public class SeedlingStatistics implements java.io.Serializable {
-    private String id;//数据id
+    private String id;//数据编号
     private String spec;//规格
     private double specMin;//规格范围第一位
     private double specMax;//规格范围第二位
@@ -17,15 +17,14 @@ public class SeedlingStatistics implements java.io.Serializable {
     private String sdName;//苗木名称
     private int numOut;//省外数量
     private int num;//省内数量
-    private double priceOut;//省外价格
-    private double price;//省内价格
     private String unit;//单位
-    private String comp;//省内来源
-    private String compOut;//省外来源
-    private String province;//省份
-    private String city;//市
-    private String county;//区县
-    private String provinceOut;//外省
+    private double minPriceOut;//省外价格最小值
+    private double maxPriceOut;//省外价格最大值
+    private double minPrice;//省内价格最小值
+    private double maxPrice;//省内价格最大值
+    private int year;//年份
+    private int month;//月份
+    private String comp;//企业
     private String comment;//备注
 
     public String getId() {
@@ -100,20 +99,36 @@ public class SeedlingStatistics implements java.io.Serializable {
         this.num = num;
     }
 
-    public double getPriceOut() {
-        return priceOut;
+    public double getMinPriceOut() {
+        return minPriceOut;
     }
 
-    public void setPriceOut(double priceOut) {
-        this.priceOut = priceOut;
+    public void setMinPriceOut(double minPriceOut) {
+        this.minPriceOut = minPriceOut;
     }
 
-    public double getPrice() {
-        return price;
+    public double getMaxPriceOut() {
+        return maxPriceOut;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setMaxPriceOut(double maxPriceOut) {
+        this.maxPriceOut = maxPriceOut;
+    }
+
+    public double getMinPrice() {
+        return minPrice;
+    }
+
+    public void setMinPrice(double minPrice) {
+        this.minPrice = minPrice;
+    }
+
+    public double getMaxPrice() {
+        return maxPrice;
+    }
+
+    public void setMaxPrice(double maxPrice) {
+        this.maxPrice = maxPrice;
     }
 
     public String getUnit() {
@@ -124,6 +139,22 @@ public class SeedlingStatistics implements java.io.Serializable {
         this.unit = unit;
     }
 
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public int getMonth() {
+        return month;
+    }
+
+    public void setMonth(int month) {
+        this.month = month;
+    }
+
     public String getComp() {
         return comp;
     }
@@ -132,52 +163,12 @@ public class SeedlingStatistics implements java.io.Serializable {
         this.comp = comp;
     }
 
-    public String getCompOut() {
-        return compOut;
-    }
-
-    public void setCompOut(String compOut) {
-        this.compOut = compOut;
-    }
-
     public String getComment() {
         return comment;
     }
 
     public void setComment(String comment) {
         this.comment = comment;
-    }
-
-    public String getProvince() {
-        return province;
-    }
-
-    public void setProvince(String province) {
-        this.province = province;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getCounty() {
-        return county;
-    }
-
-    public void setCounty(String county) {
-        this.county = county;
-    }
-
-    public String getProvinceOut() {
-        return provinceOut;
-    }
-
-    public void setProvinceOut(String provinceOut) {
-        this.provinceOut = provinceOut;
     }
 
     @Override
@@ -191,23 +182,22 @@ public class SeedlingStatistics implements java.io.Serializable {
                 Double.compare(that.marketPrice, marketPrice) == 0 &&
                 numOut == that.numOut &&
                 num == that.num &&
-                Double.compare(that.priceOut, priceOut) == 0 &&
-                Double.compare(that.price, price) == 0 &&
+                Double.compare(that.minPriceOut, minPriceOut) == 0 &&
+                Double.compare(that.maxPriceOut, maxPriceOut) == 0 &&
+                Double.compare(that.minPrice, minPrice) == 0 &&
+                Double.compare(that.maxPrice, maxPrice) == 0 &&
+                year == that.year &&
+                month == that.month &&
                 Objects.equals(id, that.id) &&
                 Objects.equals(spec, that.spec) &&
-                Objects.equals(sdName, that.sdName) &&
                 Objects.equals(unit, that.unit) &&
                 Objects.equals(comp, that.comp) &&
-                Objects.equals(compOut, that.compOut) &&
-                Objects.equals(province, that.province) &&
-                Objects.equals(city, that.city) &&
-                Objects.equals(county, that.county) &&
-                Objects.equals(provinceOut, that.provinceOut) &&
-                Objects.equals(comment, that.comment);
+                Objects.equals(comment, that.comment) &&
+                Objects.equals(sdName, that.sdName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, spec, specMin, specMax, offer, marketPrice, sdName, numOut, num, priceOut, price, unit, comp, compOut, province, city, county, provinceOut, comment);
+        return Objects.hash(id, spec, specMin, specMax, offer, marketPrice, sdName, numOut, num, minPriceOut, maxPriceOut, minPrice, unit, maxPrice, year, month, comp, comment);
     }
 }

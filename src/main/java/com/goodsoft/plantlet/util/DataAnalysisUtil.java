@@ -1,6 +1,6 @@
 package com.goodsoft.plantlet.util;
 
-import com.goodsoft.plantlet.util.result.AnalysisParam;
+import com.goodsoft.plantlet.domain.entity.param.AnalysisParam;
 
 /**
  * function 数据解析工具类
@@ -43,6 +43,7 @@ public class DataAnalysisUtil {
             //含有特殊字符则获取特殊字符
             String str1 = var.substring(0, 2);
             try {
+                data.setStr(str1);
                 double min = Double.parseDouble(var.substring(2));
                 data.setNum(min);
             } catch (NumberFormatException e) {

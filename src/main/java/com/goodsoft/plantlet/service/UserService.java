@@ -1,7 +1,7 @@
 package com.goodsoft.plantlet.service;
 
 import com.goodsoft.plantlet.domain.entity.user.User;
-import com.goodsoft.plantlet.util.result.Status;
+import com.goodsoft.plantlet.domain.entity.result.Status;
 
 /**
  * function 用户管理业务接口类

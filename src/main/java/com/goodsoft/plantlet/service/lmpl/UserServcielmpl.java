@@ -1,12 +1,12 @@
 package com.goodsoft.plantlet.service.lmpl;
 
 import com.goodsoft.plantlet.domain.dao.UserDao;
+import com.goodsoft.plantlet.domain.entity.result.Result;
+import com.goodsoft.plantlet.domain.entity.result.Status;
+import com.goodsoft.plantlet.domain.entity.result.StatusEnum;
 import com.goodsoft.plantlet.domain.entity.user.User;
 import com.goodsoft.plantlet.service.UserService;
 import com.goodsoft.plantlet.util.UUIDUtil;
-import com.goodsoft.plantlet.util.result.Result;
-import com.goodsoft.plantlet.util.result.Status;
-import com.goodsoft.plantlet.util.result.StatusEnum;
 import com.horizon.util.encrypt.DESEDE;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

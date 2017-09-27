@@ -3,9 +3,10 @@ package com.goodsoft.plantlet.domain.dao;
 import com.goodsoft.plantlet.domain.entity.seedlinginfo.SeedlingOffer;
 import com.goodsoft.plantlet.domain.entity.seedlinginfo.SeedlingStatistics;
 import com.goodsoft.plantlet.domain.entity.seedlinginfo.SupplyInfo;
-import com.goodsoft.plantlet.util.result.SeedlingOfferParam;
-import com.goodsoft.plantlet.util.result.SeedlingStatisticsParam;
-import com.goodsoft.plantlet.util.result.SupplyParam;
+import com.goodsoft.plantlet.domain.entity.param.NewestOfferParam;
+import com.goodsoft.plantlet.domain.entity.param.SeedlingOfferParam;
+import com.goodsoft.plantlet.domain.entity.param.SeedlingStatisticsParam;
+import com.goodsoft.plantlet.domain.entity.param.SupplyParam;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -26,6 +27,9 @@ public interface SeedlingDao {
 
     //苗木造价数据查询dao方法
     public List<SeedlingOffer> querySeedlingOfferDao(SeedlingOfferParam msg) throws Exception;
+
+    //苗木造价数据查询dao方法
+    public NewestOfferParam queryNewestOfferDao() throws Exception;
 
     //苗木造价统计年月数据查询dao方法
     public List<SeedlingOffer> querySeedlingOfferStatisticsDetailDao(SeedlingOfferParam msg) throws Exception;

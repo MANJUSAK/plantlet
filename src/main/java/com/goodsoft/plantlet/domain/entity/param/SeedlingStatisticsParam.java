@@ -1,4 +1,4 @@
-package com.goodsoft.plantlet.util.result;
+package com.goodsoft.plantlet.domain.entity.param;
 
 import java.util.Objects;
 
@@ -15,6 +15,8 @@ public class SeedlingStatisticsParam implements java.io.Serializable {
     private String spec;//规格
     private String specMin;//规格范围第一位
     private String specMax;//规格范围第二位
+    private String year;//年
+    private String month;//月
     private int num;//页码
 
     public String getKeyWord() {
@@ -81,6 +83,22 @@ public class SeedlingStatisticsParam implements java.io.Serializable {
         this.num = num;
     }
 
+    public String getYear() {
+        return year;
+    }
+
+    public void setYear(String year) {
+        this.year = year;
+    }
+
+    public String getMonth() {
+        return month;
+    }
+
+    public void setMonth(String month) {
+        this.month = month;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -93,11 +111,13 @@ public class SeedlingStatisticsParam implements java.io.Serializable {
                 Objects.equals(county, that.county) &&
                 Objects.equals(spec, that.spec) &&
                 Objects.equals(specMin, that.specMin) &&
-                Objects.equals(specMax, that.specMax);
+                Objects.equals(specMax, that.specMax) &&
+                Objects.equals(year, that.year) &&
+                Objects.equals(month, that.month);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(keyWord, provincOut, city, county, spec, specMin, specMax, num);
+        return Objects.hash(keyWord, provincOut, city, county, spec, specMin, specMax, year, month, num);
     }
 }

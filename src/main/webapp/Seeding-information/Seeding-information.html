@@ -54,14 +54,22 @@
 			<div class="Si-box">
 				<div class="Si-nav">
 					<div class="Sin-topbar">
-						<img src="../images/Gc-nav_2.png" />
+						<img src="../images/Gc-nav_8.png" />
 					</div>
 					<div class="Sin-li">
 						<ul>
-							<li class="Sin-active"><a href="#">苗木信息</a></li>
-							<li><a href="miaopu-information.html">苗圃信息</a></li>
-							<li><a href="zaojia-information.html">造价信息</a></li>
-							<li><a href="gongxu-information.html">供需信息</a></li>
+							<li class="Sin-active">
+								<a href="#">苗木信息</a>
+							</li>
+							<li>
+								<a href="miaopu-information.html">苗圃信息</a>
+							</li>
+							<li>
+								<a href="zaojia-information.html">造价信息</a>
+							</li>
+							<li>
+								<a href="gongxu-information.html">供需信息</a>
+							</li>
 						</ul>
 					</div>
 				</div>
@@ -72,16 +80,16 @@
 								<ul>
 									<li>
 										<span>名称：</span>
-										<span><input type="text" name="sdName" /></span>
+										<span id="show_sdname"></span>
 									</li>
 									<!--<li><a  id="selecet_name"><i class="fa fa-search"></i></a></li>-->
 									<li>
 										<span>规格：</span>
 										<span><select name="spec" >
-											<option value=""></option>
-											<option value="Φ">Φ</option>
+											
 											<option value="H">H</option>
 											<option value="P">P</option>
+											<option value="Φ">Φ</option>
 											<option value="L">L</option>
 											<option value="D">D</option>
 										</select></span>
@@ -93,9 +101,11 @@
 											<input class="span-input" name="specMax" type="text" />
 										</span>
 									</li>
-									<li><a  id="selecet_sepc"><i class="fa fa-search"></i></a></li>
 									<li>
-										<a class="last-a" href="miaomu-add.html">添加更新</a>
+										<a id="selecet_sepc"><i class="fa fa-search"></i></a>
+									</li>
+									<li>
+										<a target="_blank" class="last-a" href="miaomu-add.html">添加更新</a>
 									</li>
 								</ul>
 							</div>
@@ -107,19 +117,19 @@
 										<div class="jiage-li">价格（元）</div>
 										<div class="jiage-li">
 											<ul>
-												<li>造价信息价格</li>
-												<li>省内价格</li>
-												<li>省外价格</li>
+												<li>本期造价价格</li>
+												<li>省内苗圃发布价</li>
+												<li>省外苗圃发布价</li>
 												<li>市场分析价格</li>
 											</ul>
 										</div>
 									</li>
 									<li class="shuliang">
-										<div class="shuliang-li">数量</div>
+										<div class="shuliang-li">库存数量</div>
 										<div class="shuliang-li">
 											<ul>
-												<li>省内</li>
-												<li>省外</li>
+												<li>省内苗圃</li>
+												<li>省外苗圃</li>
 											</ul>
 										</div>
 									</li>
@@ -128,7 +138,7 @@
 							</div>
 							<div class="Sici-shuxing">
 								<div class="sx-fors">
-									
+
 								</div>
 							</div>
 						</div>
@@ -141,7 +151,7 @@
 									<li></li>
 									<li></li>
 								</ul>
-							</div>	
+							</div>
 							<div class="jzm-center">
 								<span>加载更多</span>
 							</div>
@@ -161,8 +171,8 @@
 		<script src="../js/common.js"></script>
 		<script src="../js/Seeding-information.js"></script>
 		<script src="../js/host.js"></script>
-		<script type="text/javascript" src="../js/Seeding-information-list.js" ></script>
-		<script type="text/javascript" src="../js/seeding-add.js" ></script>
+		<script type="text/javascript" src="../js/Seeding-information-list.js"></script>
+		<script type="text/javascript" src="../js/seeding-add.js"></script>
 	</body>
 
 </html>

@@ -33,17 +33,21 @@
     </resultMap>
     <!--省内苗圃数据查询结果映射 end-->
     <!--省内苗圃数据查询sql start-->
-    <select id="queryNurseryDao" parameterType="com.goodsoft.plantlet.util.result.NurseryParam" resultMap="nurseryMap">
+    <select id="queryNurseryDao" parameterType="com.goodsoft.plantlet.domain.entity.param.NurseryParam"
+            resultMap="nurseryMap">
         SELECT `id`,`nursery_name`,`contacts`,`tel`,`nursery_intro`,`fax_num`,`email`,`nursery_add`,
         `province`,`districts`,`nursery_area`,`fileId`,`pro_license_num`,`oper_license_num`,`spec`,
         `spec_min`,`spec_max`,`price`,`quantity`,`post_code`,`plant_name`,`plant_type`,`county`
         FROM `gs_nursery_province_info`
         <where>
-            <if test="keyWord !=null and keyWord != ''">
-                AND nursery_name = #{keyWord}
+            <if test="id !=null and id != ''">
+                AND id = #{id}
             </if>
-            <if test="tp !=null and tp != ''">
-                AND plant_type = #{tp}
+            <if test="keyWord !=null and keyWord != ''">
+                AND plant_name = #{keyWord}
+            </if>
+            <if test="comp !=null and comp != ''">
+                AND nursery_name = #{comp}
             </if>
             <if test="province !=null and province != ''">
                 AND province = #{province}
@@ -54,20 +58,14 @@
             <if test="county !=null and county != ''">
                 AND county = #{county}
             </if>
+            <if test="spec !=null and spec != ''">
+                AND spec = #{spec}
+            </if>
             <if test="specMin !=null and specMin != ''">
                 AND spec_min &lt;= #{specMin}
             </if>
             <if test="specMax !=null and specMax != ''">
                 AND spec_max &gt;= #{specMax}
-            </if>
-            <if test="minPrice !=null and minPrice != ''">
-                AND price &gt;= #{minPrice}
-            </if>
-            <if test="maxPrice !=null and maxPrice != ''">
-                AND price &gt;= #{maxPrice}
-            </if>
-            <if test="area !=null and area != ''">
-                AND nursery_area = #{area}
             </if>
         </where>
         ORDER BY nid DESC limit #{num},20;
@@ -100,39 +98,38 @@
     </resultMap>
     <!--省外苗圃数据查询结果映射 end-->
     <!--省外苗圃数据查询sql start-->
-    <select id="queryNurseryOutDao" parameterType="com.goodsoft.plantlet.util.result.NurseryParam"
+    <select id="queryNurseryOutDao" parameterType="com.goodsoft.plantlet.domain.entity.param.NurseryParam"
             resultMap="NurseryOutMap">
         SELECT `id`,`province`,`city`,`company_name`,`tel`,`seedling_type`,`seedling_name`,`spec`,`unit`,
         `quantity`,`price`,`comments`,`acquisition_time`,`address`,`fileId`,`fax_num`,`web_site`,`email`,
         `spec_min`,`spec_max`
         FROM `gs_nursery_outside_info`
         <where>
+            <if test="id !=null and id != ''">
+                AND id = #{id}
+            </if>
             <if test="keyWord != null and keyWord != ''">
-                AND seedling_name LIKE '%${keyWord}%'
+                AND seedling_name = #{keyWord}
             </if>
-            <if test="tp != null and tp != ''">
-                AND seedling_type = #{tp}
-            </if>
-            <if test="comp != null and comp != ''">
-                AND company_name LIKE '%${comp}%'
+            <if test="comp !=null and comp != ''">
+                AND company_name = #{comp}
             </if>
             <if test="province !=null and province != ''">
-                AND province = #{province}
+                <foreach collection="province" index="index" item="item" separator="or">
+                    province = #{item}
+                </foreach>
             </if>
             <if test="city != null and city != ''">
                 AND city = #{city}
+            </if>
+            <if test="spec != null and spec != ''">
+                AND spec = #{spec}
             </if>
             <if test="specMin != null and specMin != ''">
                 AND spec_min &gt;= #{specMin}
             </if>
             <if test="specMax != null and specMax != ''">
                 AND spec_max &lt;= #{specMax}
-            </if>
-            <if test="minPrice != null and minPrice != ''">
-                AND price &gt;= #{minPrice}
-            </if>
-            <if test="maxPrice != null and maxPrice != ''">
-                AND price &lt;= #{maxPrice}
             </if>
         </where>
         ORDER BY nid DESC limit #{num},20;

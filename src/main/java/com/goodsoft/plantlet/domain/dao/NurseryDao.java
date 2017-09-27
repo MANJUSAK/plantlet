@@ -2,7 +2,7 @@ package com.goodsoft.plantlet.domain.dao;
 
 import com.goodsoft.plantlet.domain.entity.nursery.Nursery;
 import com.goodsoft.plantlet.domain.entity.nursery.NurseryOut;
-import com.goodsoft.plantlet.util.result.NurseryParam;
+import com.goodsoft.plantlet.domain.entity.param.NurseryParam;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

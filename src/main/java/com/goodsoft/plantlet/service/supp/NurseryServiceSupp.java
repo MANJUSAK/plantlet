@@ -1,10 +1,10 @@
 package com.goodsoft.plantlet.service.supp;
 
-import com.goodsoft.plantlet.config.serviceaop.ServicelmplAop;
+import com.goodsoft.plantlet.config.aop.ControllerAop;
 import com.goodsoft.plantlet.domain.entity.nursery.Nursery;
 import com.goodsoft.plantlet.domain.entity.nursery.NurseryOut;
+import com.goodsoft.plantlet.domain.entity.param.AnalysisParam;
 import com.goodsoft.plantlet.util.DataAnalysisUtil;
-import com.goodsoft.plantlet.util.result.AnalysisParam;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +21,7 @@ import java.util.Objects;
 @Service
 public class NurseryServiceSupp {
     //实例化日志管理工具类
-    private org.slf4j.Logger logger = LoggerFactory.getLogger(ServicelmplAop.class);
+    private org.slf4j.Logger logger = LoggerFactory.getLogger(ControllerAop.class);
     //实例化数据解析工具类
     private DataAnalysisUtil analysisUtil = DataAnalysisUtil.getInstance();
     //初始化读取excel字段值
@@ -101,9 +101,11 @@ public class NurseryServiceSupp {
                                 sd.setSpecMin(var.getNum());
                                 sd.setSpecMax(var.getNum_1());
                             } catch (Exception e) {
-
                                 this.logger.error(e.toString());
+                                sd.setSpec("");
                             }
+                        } else {
+                            sd.setSpec("");
                         }
                         break;
                     case 13:
@@ -165,10 +167,7 @@ public class NurseryServiceSupp {
     public int getNurseryExcelDataAnalysis(List<Nursery> sdData) {
         int len = sdData.size();
         for (int i = 0; i < len; ++i) {
-            if (sdData.get(i).getProvince() == "" || sdData.get(i).getNurseryName() == "" || sdData.get(i).getArea() == 0 ||
-                    sdData.get(i).getPostCode() == 0 || sdData.get(i).getTel() == 0 || sdData.get(i).getPlantName() == ""
-                    || sdData.get(i).getSpec() == null || sdData.get(i).getPrice() == 0 ||
-                    sdData.get(i).getNum() == 0 || sdData.get(i).getTypes() == "") {
+            if (sdData.get(i).getPlantName() == "") {
                 sdData.remove(i);
                 --i;
                 len = sdData.size();
@@ -184,7 +183,7 @@ public class NurseryServiceSupp {
      * @return 解析后数据
      */
     public List<NurseryOut> getNurseryOutExcelData(List<List<Object>> list) {
-//实例化数据保存集合类
+        //实例化数据保存集合类
         List<NurseryOut> sdData = sdData = new ArrayList<NurseryOut>();
         for (int i = 0, len = list.size(); i < len; ++i) {
             List<Object> data = list.get(i);
@@ -230,10 +229,17 @@ public class NurseryServiceSupp {
                         break;
                     case 9:
                         if (this.str != "") {
-                            AnalysisParam var = this.analysisUtil.getSpecAnalysis((String) this.str);
-                            sd.setSpec(var.getStr());
-                            sd.setSpecMin(var.getNum());
-                            sd.setSpecMax(var.getNum_1());
+                            try {
+                                AnalysisParam var = this.analysisUtil.getSpecAnalysis((String) this.str);
+                                sd.setSpec(var.getStr());
+                                sd.setSpecMin(var.getNum());
+                                sd.setSpecMax(var.getNum_1());
+                            } catch (Exception e) {
+                                this.logger.error(e.toString());
+                                sd.setSpec("");
+                            }
+                        } else {
+                            sd.setSpec("");
                         }
                         break;
                     case 10:
@@ -275,6 +281,7 @@ public class NurseryServiceSupp {
                 }
             }
             sd.setFileId("");
+            sd.setCity("");
             sdData.add(sd);
         }
         return sdData;
@@ -289,9 +296,7 @@ public class NurseryServiceSupp {
     public int getNurseryOutExcelDataAnalysis(List<NurseryOut> sdData) {
         int len = sdData.size();
         for (int i = 0; i < len; ++i) {
-            if (0 == sdData.get(i).getPrice() || sdData.get(i).getNum() == 0 || sdData.get(i).getSeedlingName() == ""
-                    || sdData.get(i).getCompany() == "" || sdData.get(i).getUnit() == "" ||
-                    sdData.get(i).getSpec() == null || sdData.get(i).getSpecMin() == 0) {
+            if (sdData.get(i).getSeedlingName() == "") {
                 sdData.remove(i);
                 --i;
                 len = sdData.size();

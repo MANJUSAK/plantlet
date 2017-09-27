@@ -1,79 +1,95 @@
 var html = '';
 var htmlx = '';
+var numberx = 0;
 $(function() {
-	var para = window.sessionStorage.getItem('seeding_detail');
-	var num_arr = para.split(',');
-	console.log(num_arr)
-	var url_ = window.sessionStorage.getItem('host') + '/plantlet/plant/find/detail/statistics/seedling.action.do';
+	//var para = window.sessionStorage.getItem('seeding_detail');
+	var url_host = window.sessionStorage.getItem('host');
+	var urls = [url_host + '/plantlet/nursery/province/find/seedling.action.do', url_host + '/plantlet/nursery/outside/find/seedling.action.do'];
 	var mydata = {
-		num: num_arr[0],
-		keyWord:num_arr[2],
+		num: numberx,
+		keyWord: GetQueryString('sdName'),
+		spec: GetQueryString('spec'),
+		specMin: GetQueryString('specMin'),
+		specMax: GetQueryString('specMax')
 	};
 	var mydatax = {
-		num: num_arr[0],
-		keyWord:num_arr[2],
-	};
-	var show_page = ['#show_page_n', '#show_page_w'];
+		num: numberx,
+		keyWord: GetQueryString('sdName'),
+		spec: GetQueryString('spec'),
+		specMin: GetQueryString('specMin'),
+		specMax: GetQueryString('specMax')
 
+	};
+	
+	var show_page = ['#show_page_n', '#show_page_w'];
+	//第一次进入，默认
+	getdata(urls[0], mydata, show_page[0], false, false);
+
+	//省内	市
 	$('#shi li').click(function() {
 
 		mydata.city = $(this).text();
-
-		getdata(url_, mydata, show_page[0], true, false);
+		mydata.num = numberx;
+		getdata(urls[0], mydata, show_page[0], false, false);
 	})
+	//贵阳市内	区县
 	$('#xianqu li').click(function() {
 		mydata.city = "贵阳市";
 		mydata.county = $(this).text();
-
-		getdata(url_, mydata, show_page[0], true, false);
+		mydata.num = numberx;
+		getdata(urls[0], mydata, show_page[0], false, false);
 	})
-	getdata(url_, mydata, show_page[0], true, false);
+
 	$('#MMc_tbL').click(function() {
-		getdata(url_, mydata, show_page[0], true, false);
+		mydata.num = numberx;
+		getdata(urls[0], mydata, show_page[0], false, false);
 	})
 	$('#more1').click(function() {
 		mydata.num = mydata.num + 1;
-		getdata(url_, mydata, show_page[0], false, true);
+		getdata(urls[0], mydata, show_page[0], false, true);
 	})
-
+	//省外
 	$('#MMc_tbR').click(function() {
-		getdata(url_, mydatax, show_page[1], false, false);
+		mydata.num = numberx;
+		getdata(urls[1], mydatax, show_page[1], true, false);
 	})
 	$('#more2').click(function() {
 		mydatax.num = mydatax.num + 1;
-		getdata(url_, mydatax, show_page[1], true, true);
+		getdata(urls[1], mydatax, show_page[1], true, true);
 	})
 
 	function getdata(url_, mydata, showpage, isn, ismore) {
 		html = ismore ? html : '';
 		htmlx = ismore ? htmlx : '';
+
 		$.ajax({
 			type: "get",
 			url: url_,
 			data: mydata,
 			async: true,
 			success: function(result) {
+				console.log(result)
 				if(result.errorCode == 0) {
 					var data = result.data;
 					$.each(data, function(i) {
-						if(!isn) { //省外
+						if(isn) { //省外
 							htmlx += '<tr class="MMcPc_table1_tr2">' +
-								'<td class="MMcPc_teb1_td1">' + data[i]['compOut'] + '</td>' +
+								'<td class="MMcPc_teb1_td1">' + data[i]['company'] + '</td>' +
 								'<td class="MMcPc_teb1_td2">' + data[i]['spec'] + data[i]['specMin'] + '-' + data[i]['specMax'] + '</td>' +
-								'<td class="MMcPc_teb1_td3">' + data[i]['numOut'] + '</td>' +
-								'<td class="MMcPc_teb1_td4">' + data[i]['marketPrice'] + '</td>' +
+								'<td class="MMcPc_teb1_td3">' + data[i]['num'] + '</td>' +
+								'<td class="MMcPc_teb1_td4">' + data[i]['price'] + '(元)/' + data[i]['unit'] + '</td>' +
 								'</tr>';
 						} else { //省内
 							html += '<tr class="MMcPc_table1_tr2">' +
-								'<td class="MMcPc_teb1_td1">' + data[i]['comp'] + '</td>' +
-								'<td class="MMcPc_teb1_td2">' + data[i]['spec'] + data[i]['specMin'] + '-' + data[i]['specMax'] + '（' + data[i]['unit'] + '）</td>' +
+								'<td class="MMcPc_teb1_td1">' + data[i]['nurseryName'] + '</td>' +
+								'<td class="MMcPc_teb1_td2">' + data[i]['spec'] + data[i]['specMin'] + '-' + data[i]['specMax'] + '</td>' +
 								'<td class="MMcPc_teb1_td3">' + data[i]['num'] + '</td>' +
-								'<td class="MMcPc_teb1_td4">' + data[i]['marketPrice'] + '</td>' +
+								'<td class="MMcPc_teb1_td4">' + data[i]['price'] + '元' + '</td>' +
 								'</tr>';
 						}
 					});
-					$('#seeding_detail').html(data[0]['sdName']);
-					if(!isn) {
+					$('#seeding_detail').html(data[0]['plantName']);
+					if(isn) {
 						$(showpage).html(htmlx);
 					} else {
 						$(showpage).html(html);
@@ -92,4 +108,10 @@ $(function() {
 		});
 	}
 
+	function GetQueryString(name) {
+		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+		var r = window.location.search.substr(1).match(reg);
+		if(r != null) return decodeURI(r[2]);
+		return null;
+	}
 })

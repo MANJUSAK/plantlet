@@ -2,8 +2,8 @@ package com.goodsoft.plantlet.service;
 
 import com.goodsoft.plantlet.domain.entity.nursery.Nursery;
 import com.goodsoft.plantlet.domain.entity.nursery.NurseryOut;
-import com.goodsoft.plantlet.util.result.NurseryParam;
-import com.goodsoft.plantlet.util.result.Status;
+import com.goodsoft.plantlet.domain.entity.param.NurseryParam;
+import com.goodsoft.plantlet.domain.entity.result.Status;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;

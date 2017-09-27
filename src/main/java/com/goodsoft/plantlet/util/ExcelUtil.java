@@ -1,6 +1,7 @@
 package com.goodsoft.plantlet.util;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.formula.functions.T;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.File;
@@ -66,5 +67,9 @@ public class ExcelUtil {
         } finally {
             is.close();
         }
+    }
+
+    public String writeExcel(List<T> list) {
+        return "";
     }
 }

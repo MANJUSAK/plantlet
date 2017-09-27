@@ -2,7 +2,7 @@ package com.goodsoft.plantlet.service.supp;
 
 import com.goodsoft.plantlet.domain.entity.seedlinginfo.SeedlingOffer;
 import com.goodsoft.plantlet.util.DataAnalysisUtil;
-import com.goodsoft.plantlet.util.result.AnalysisParam;
+import com.goodsoft.plantlet.domain.entity.param.AnalysisParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;

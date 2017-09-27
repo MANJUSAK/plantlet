@@ -142,18 +142,12 @@
 							<thead>
 								<tr class="MMcPc_table1_tr1">
 									<th class="MMcPc_teb1_th1">苗圃来源</th>
-									<th class="MMcPc_teb1_th2">规格（单位）</th>
+									<th class="MMcPc_teb1_th2">规格</th>
 									<th class="MMcPc_teb1_th3">数量</th>
-									<th class="MMcPc_teb1_th4">价格（元/株）</th>
+									<th class="MMcPc_teb1_th4">价格</th>
 								</tr>
 							</thead>
 							<!--遍历数据-->
-							<!--<tr class="MMcPc_table1_tr2">
-								<td class="MMcPc_teb1_td1">中喜生态产业股份有限公司</td>
-								<td class="MMcPc_teb1_td2">Φ3-4</td>
-								<td class="MMcPc_teb1_td3">120</td>
-								<td class="MMcPc_teb1_td4">3.6</td>
-							</tr>-->
 							<tbody id="show_page_w"></tbody>
 							<!--遍历数据 结束-->
 						</table>
@@ -178,7 +172,7 @@
 	<script type="text/javascript" src="../js/jquery-2.1.0.js"></script>
 	<script src="../js/common.js"></script>
 	<script type="text/javascript" src="../js/host.js"></script>
-	<script type="text/javascript" src="../js/Seeding-detail.js"></script>
+	<script type="text/javascript"  charset="UTF-8" src="../js/Seeding-detail.js"></script>
 	<script>
 		$(".MMc_tbL").click(function() {
 			$(".MMc_Outside").hide();
@@ -219,7 +213,7 @@
 			}
 		});
 		$(".city-item ul li").click(function(){
-			$(this).addClass("ci-active").siblings().removeClass("ci-active");
+			$(this).css("color","#4CD242").siblings().css("color","#555");
 		});
 	</script>
 

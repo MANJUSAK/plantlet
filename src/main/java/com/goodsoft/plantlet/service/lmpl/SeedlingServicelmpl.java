@@ -6,6 +6,10 @@ import com.goodsoft.plantlet.domain.entity.file.FileData;
 import com.goodsoft.plantlet.domain.entity.seedlinginfo.SeedlingOffer;
 import com.goodsoft.plantlet.domain.entity.seedlinginfo.SeedlingStatistics;
 import com.goodsoft.plantlet.domain.entity.seedlinginfo.SupplyInfo;
+import com.goodsoft.plantlet.domain.entity.param.*;
+import com.goodsoft.plantlet.domain.entity.result.Result;
+import com.goodsoft.plantlet.domain.entity.result.Status;
+import com.goodsoft.plantlet.domain.entity.result.StatusEnum;
 import com.goodsoft.plantlet.service.FileService;
 import com.goodsoft.plantlet.service.SeedlingService;
 import com.goodsoft.plantlet.service.supp.SeedlingServiceSupp;
@@ -14,7 +18,6 @@ import com.goodsoft.plantlet.util.DataAnalysisUtil;
 import com.goodsoft.plantlet.util.DeleteFileUtil;
 import com.goodsoft.plantlet.util.ExcelUtil;
 import com.goodsoft.plantlet.util.UUIDUtil;
-import com.goodsoft.plantlet.util.result.*;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -207,6 +210,13 @@ public class SeedlingServicelmpl implements SeedlingService {
         //初始化msg.getNum() end
         List<SeedlingStatistics> data = null;
         try {
+            if (param.getYear() == null || param.getYear() == "") {
+                NewestOfferParam nop = this.dao.queryNewestOfferDao();
+                param.setYear(String.valueOf(nop.getYear()));
+                if (param.getMonth() == null || param.getMonth() == "") {
+                    param.setMonth(String.valueOf(nop.getMonth()));
+                }
+            }
             data = this.dao.querySeedlingStatisticsDao(param);
         } catch (Exception e) {
             this.logger.error(e.toString());

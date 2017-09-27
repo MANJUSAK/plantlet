@@ -44,11 +44,11 @@ img { border: none; }
 	border: none;
 	border: 1px solid #4CD242;
 	margin-top: 20px;
+	border-collapse: collapse;
 }
 .NS_tr_title{
 	width: 100%;
 	height: auto;
-	
 }
 .NS_tr_title th {
 	padding: 10px 0;

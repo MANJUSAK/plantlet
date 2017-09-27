@@ -8,3 +8,4 @@
                                    |_|
  贵阳市城市绿化数据管理平台
  :: Spring Boot ::       (${spring-boot.version})
+ :: 系统版本号  ::       (v 1.0.0)

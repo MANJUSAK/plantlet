@@ -5,10 +5,11 @@ $(function() {
 	var urlx = [window.sessionStorage.getItem('host') + '/plantlet/plant/find/offer/seedling.action.do', window.sessionStorage.getItem('host') + '/plantlet/plant/find/offer/statistics/seedling.action.do'];
 	var mydata = {
 		num: numberx,
-		year: 2017
+		year: $('#year').val()
 	};
 	var show_page = ['.zj-container ul', '#show_all'];
-	getdata(urlx[0], mydata, show_page[0], false, false)
+	//getdata(urlx[0], mydata, show_page[0], false, false)
+	getdata(urlx[1], mydata, show_page[1], false, true);
 	//加载更多
 	$('.jzm-center').click(function() {
 		var y = $('#year').val();
@@ -31,12 +32,13 @@ $(function() {
 			mydata.num = numberx;
 			delete mydata.year;
 			getdata(urlx[0], mydata, show_page[0], false, false)
-			$("#zjFenqi").show();
-			$("#zaojiaAll").hide();
+			$("#zjFenqi").hide();
+			$("#zaojiaAll").show();
 		} else {
 			if(m == 0) {
-				$("#zjFenqi").hide();
-				$("#zaojiaAll").show();
+
+				$("#zjFenqi").show();
+				$("#zaojiaAll").hide();
 				//查看所有
 				delete mydata.month;
 				mydata.num = numberx;

@@ -1,4 +1,4 @@
-package com.goodsoft.plantlet.config.serviceaop;
+package com.goodsoft.plantlet.config.aop;
 
 import com.goodsoft.plantlet.util.GetIP;
 import org.aspectj.lang.JoinPoint;
@@ -13,8 +13,6 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * function 系统访问数据信息增强工具类
@@ -24,9 +22,9 @@ import java.util.Date;
 @SuppressWarnings("ALL")
 @Component
 @Aspect
-public class ServicelmplAop {
+public class ControllerAop {
 
-    private Logger logger = LoggerFactory.getLogger(ServicelmplAop.class);
+    private Logger logger = LoggerFactory.getLogger(ControllerAop.class);
 
     //匹配com.goodsoft.plantlet.service.lmpl包及其子包下的所有类的所有方法
     @Pointcut("execution(* com.goodsoft.plantlet.controller.*..*(..))")
@@ -42,8 +40,7 @@ public class ServicelmplAop {
         String method = request.getMethod();
         String queryString = request.getQueryString();
         String ip = GetIP.getIP(request);
-        String date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
-        logger.info("{},ip:{} 请求信息：,url:{},method:{},params:{}", date, ip, url, method, queryString);
+        logger.info("ip:{} 请求信息：,url:{},method:{},params:{}", ip, url, method, queryString);
     }
 
 }

@@ -40,6 +40,7 @@ $(function() {
 		if(abroadx) {
 			abroadx = false;
 		}
+        mydata.province = isabroadx[0];
 		getdata(url_, mydata, show_page[0], false, false);
 	})
 	//贵阳
@@ -54,7 +55,7 @@ $(function() {
 	})
 	//省外
 	$('#isabroadx a').click(function() {
-		var index = $(this).index() / 2;
+		var index =Math.ceil($(this).index() / 2);
 		mydata.num = numberx;
 		delete mydata.county;
 		delete mydata.city;
@@ -101,7 +102,7 @@ $(function() {
 								'</div>' +
 								'<div class="mt-right">' +
 								'<div class="mtr-title">' +
-								'<a href="">' + data[i]['company'] + '</a>' +
+								'<a href="miaopu_details.html?key=1&nums='+data[i]['id']+'">' + data[i]['company'] + '</a>' +
 								'</div>' +
 								'<div class="mtr-jianjie">' +
 								'<p>' + data[i]['seedlingName'] + '</p>' +
@@ -116,20 +117,19 @@ $(function() {
 								'</div>' +
 								'<div class="mt-right">' +
 								'<div class="mtr-title">' +
-								'<a href="#0">' + data[i]['nurseryName'] + '</a>' +
+								'<a href="miaopu_details.html?key=0&nums='+data[i]['id']+'">' + data[i]['nurseryName'] + '</a>' +
 								'</div>' +
 								'<div class="mtr-jianjie">' +
-								'<p>' + data[i]['nurseryIntro'] +'范德萨范德萨发生'+ '</p>' +
+								'<p>' + data[i]['nurseryIntro'] + '</p>' +
 								'</div>' +
 								'</div>' +
 								'</li></ul>';
 						}
-
 					});
 					if(isabroad) {
 						$(showpage).html(htmlx);
-						$('.isabroads').click(function() {
-							alert(0)
+						/*$('.isabroads').click(function() {
+							
 							var num = $(this).index();
 							var id = num < 20 ? num : num / 20;
 							var index = 0;
@@ -139,14 +139,14 @@ $(function() {
 								index = Math.ceil((num - (num % 20)) / 20);
 							}
 
-							var test = index + ',' + id;
+							var test = index + ',' + id+',';
 
 							window.sessionStorage.setItem('mp_detail', test);
 							window.open('miaopu_details.html')
-						})
+						})*/
 					} else {
 						$(showpage).html(html);
-						$('.iswithins').click(function() {
+						/*$('.iswithins').click(function() {
 							var num = $(this).index();
 							var id = num < 20 ? num : num / 20;
 							var index = 0;
@@ -156,11 +156,10 @@ $(function() {
 								index = Math.ceil((num - (num % 20)) / 20);
 							}
 
-							
 							var test = index + ',' + id
 							window.sessionStorage.setItem('mp_detail', test);
 							window.open('miaopu_details.html')
-						})
+						})*/
 					}
 
 				} else {

@@ -3,10 +3,10 @@ package com.goodsoft.plantlet.service;
 import com.goodsoft.plantlet.domain.entity.seedlinginfo.SeedlingOffer;
 import com.goodsoft.plantlet.domain.entity.seedlinginfo.SeedlingStatistics;
 import com.goodsoft.plantlet.domain.entity.seedlinginfo.SupplyInfo;
-import com.goodsoft.plantlet.util.result.SeedlingOfferParam;
-import com.goodsoft.plantlet.util.result.SeedlingStatisticsParam;
-import com.goodsoft.plantlet.util.result.Status;
-import com.goodsoft.plantlet.util.result.SupplyParam;
+import com.goodsoft.plantlet.domain.entity.param.SeedlingOfferParam;
+import com.goodsoft.plantlet.domain.entity.param.SeedlingStatisticsParam;
+import com.goodsoft.plantlet.domain.entity.result.Status;
+import com.goodsoft.plantlet.domain.entity.param.SupplyParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
