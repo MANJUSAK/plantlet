@@ -86,63 +86,7 @@ public class ReadExcel2003 {
                     }
                     cell = row.getCell(j);
                     if (cell != null && cell.getCellType() != XSSFCell.CELL_TYPE_BLANK) {
-                        switch (cell.getCellType()) {
-                            case XSSFCell.CELL_TYPE_STRING:
-                                temp.add(cell.getStringCellValue());
-                                break;
-                            case XSSFCell.CELL_TYPE_FORMULA:
-                                temp.add(cell.getNumericCellValue());
-                                break;
-                            case XSSFCell.CELL_TYPE_NUMERIC:
-                                if (cell.getCellStyle().getDataFormatString() == null) {
-                                    temp.add("");
-                                    continue;
-                                }
-                                switch (cell.getCellStyle().getDataFormatString()) {
-                                    case "General":
-                                        temp.add(cell.getNumericCellValue());
-                                        break;
-                                    case "@":
-                                        temp.add(cell.getNumericCellValue());
-                                        break;
-                                    case "0;[Red]0":
-                                        temp.add(cell.getNumericCellValue());
-                                        break;
-                                    case "0.00_);\\(0.00\\)":
-                                        temp.add(cell.getNumericCellValue());
-                                        break;
-                                    case "0.00;[Red]0.00":
-                                        temp.add(cell.getNumericCellValue());
-                                        break;
-                                    case "0.00_);[Red]\\(0.00\\)":
-                                        temp.add(cell.getNumericCellValue());
-                                        break;
-                                    case "0_);[Red]\\(0\\)":
-                                        temp.add(cell.getNumericCellValue());
-                                        break;
-                                    case "0_);\\(0\\)":
-                                        temp.add(cell.getNumericCellValue());
-                                        break;
-                                    case "0_":
-                                        temp.add(cell.getNumericCellValue());
-                                        break;
-                                    case "0_ ;[Red]\\-0\\":
-                                        temp.add(cell.getNumericCellValue());
-                                        break;
-                                    case "0.00_ ":
-                                        temp.add(cell.getNumericCellValue());
-                                        break;
-                                    default:
-                                        temp.add(HSSFDateUtil.getJavaDate(cell.getNumericCellValue()));
-                                        break;
-                                }
-                                break;
-                            case XSSFCell.CELL_TYPE_BOOLEAN:
-                                temp.add(cell.getBooleanCellValue());
-                                break;
-                            default:
-                                break;
-                        }
+                        temp.add(getCellValue(cell));
                     } else {
                         temp.add("");
                     }
