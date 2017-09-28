@@ -224,9 +224,9 @@ public class ReadExcel2007 {
                         return cell.getNumericCellValue();
                     case "0_);\\(0\\)":
                         return cell.getNumericCellValue();
-                    case "0_":
+                    case "0_ ":
                         return cell.getNumericCellValue();
-                    case "0_ ;[Red]\\-0\\":
+                    case "0_ ;[Red]\\-0\\ ":
                         return cell.getNumericCellValue();
                     case "0.00_ ":
                         return cell.getNumericCellValue();
