@@ -8,6 +8,8 @@ import com.goodsoft.plantlet.util.DataAnalysisUtil;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -24,24 +26,31 @@ public class NurseryServiceSupp {
     private org.slf4j.Logger logger = LoggerFactory.getLogger(ControllerAop.class);
     //实例化数据解析工具类
     private DataAnalysisUtil analysisUtil = DataAnalysisUtil.getInstance();
+    // 格式化日期字符串
+    private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+    // 格式化数字
+    private DecimalFormat db = new DecimalFormat("0.000");
+    private DecimalFormat in = new DecimalFormat("0");
     //初始化读取excel字段值
     private Object str = "";
 
     /**
      * 省内苗圃获取excel数据解析辅助方法
      *
+     * @param type 类型（导入还是更新）
      * @param list 读取到的excel数据
      * @return 解析后数据
      */
-    public List<Nursery> getNurseryExcelData(List<List<Object>> list) {
+    public List<Nursery> getNurseryExcelData(List<List<Object>> list, String type) {
         //实例化数据保存集合类
         List<Nursery> sdData = sdData = new ArrayList<Nursery>();
         for (int i = 0, len = list.size(); i < len; ++i) {
             List<Object> data = list.get(i);
             int d = data.size();
             Nursery sd = new Nursery();
-            switch (d) {
-                case 20:
+            //读取列数为20行时证明为数据更新，索引应从1开始
+            switch (type) {
+                case "update":
                     for (int j = 1; j < d; ++j) {
                         this.str = data.get(j);
                         switch (j) {
@@ -66,7 +75,7 @@ public class NurseryServiceSupp {
                             case 7:
                                 try {
                                     if (this.str != "") {
-                                        int code = Integer.parseInt((String) this.str);
+                                        int code = Integer.parseInt(this.in.format(this.str));
                                         sd.setPostCode(code);
                                     }
                                 } catch (Exception e) {
@@ -76,7 +85,7 @@ public class NurseryServiceSupp {
                             case 8:
                                 try {
                                     if (this.str != "") {
-                                        long tel = Long.parseLong((String) this.str);
+                                        long tel = Long.parseLong(this.in.format(this.str));
                                         sd.setTel(tel);
                                     }
                                 } catch (Exception e) {
@@ -113,7 +122,7 @@ public class NurseryServiceSupp {
                             case 14:
                                 try {
                                     if (this.str != "") {
-                                        int num = Integer.parseInt((String) this.str);
+                                        int num = Integer.parseInt(this.in.format(this.str));
                                         sd.setNum(num);
                                     }
                                 } catch (Exception e) {
@@ -123,7 +132,7 @@ public class NurseryServiceSupp {
                             case 15:
                                 try {
                                     if (this.str != "") {
-                                        double price = Double.parseDouble((String) this.str);
+                                        double price = Double.parseDouble(this.db.format(this.str));
                                         sd.setPrice(price);
                                     }
                                 } catch (Exception e) {
@@ -136,7 +145,7 @@ public class NurseryServiceSupp {
                             case 17:
                                 try {
                                     if (this.str != "") {
-                                        double area = Double.parseDouble((String) this.str);
+                                        double area = Double.parseDouble(this.db.format(this.str));
                                         sd.setArea(area);
                                     }
                                 } catch (Exception e) {
@@ -149,11 +158,13 @@ public class NurseryServiceSupp {
                             case 19:
                                 sd.setOperLicenseNum((String) this.str);
                                 break;
+                            case 20:
+                                sd.setNurseryIntro((String) this.str);
+                                break;
                             default:
                                 break;
                         }
                     }
-                    sd.setNurseryIntro("");
                     sd.setFileId("");
                     sdData.add(sd);
                     break;
@@ -182,7 +193,7 @@ public class NurseryServiceSupp {
                             case 6:
                                 try {
                                     if (this.str != "") {
-                                        int code = Integer.parseInt((String) this.str);
+                                        int code = Integer.parseInt(this.in.format(this.str));
                                         sd.setPostCode(code);
                                     }
                                 } catch (Exception e) {
@@ -192,7 +203,7 @@ public class NurseryServiceSupp {
                             case 7:
                                 try {
                                     if (this.str != "") {
-                                        long tel = Long.parseLong((String) this.str);
+                                        long tel = Long.parseLong(this.in.format(this.str));
                                         sd.setTel(tel);
                                     }
                                 } catch (Exception e) {
@@ -229,7 +240,7 @@ public class NurseryServiceSupp {
                             case 13:
                                 try {
                                     if (this.str != "") {
-                                        int num = Integer.parseInt((String) this.str);
+                                        int num = Integer.parseInt(this.in.format(this.str));
                                         sd.setNum(num);
                                     }
                                 } catch (Exception e) {
@@ -239,7 +250,7 @@ public class NurseryServiceSupp {
                             case 14:
                                 try {
                                     if (this.str != "") {
-                                        double price = Double.parseDouble((String) this.str);
+                                        double price = Double.parseDouble(this.db.format(this.str));
                                         sd.setPrice(price);
                                     }
                                 } catch (Exception e) {
@@ -252,7 +263,7 @@ public class NurseryServiceSupp {
                             case 16:
                                 try {
                                     if (this.str != "") {
-                                        double area = Double.parseDouble((String) this.str);
+                                        double area = Double.parseDouble(this.db.format(this.str));
                                         sd.setArea(area);
                                     }
                                 } catch (Exception e) {
@@ -265,11 +276,13 @@ public class NurseryServiceSupp {
                             case 18:
                                 sd.setOperLicenseNum((String) this.str);
                                 break;
+                            case 19:
+                                sd.setNurseryIntro((String) this.str);
+                                break;
                             default:
                                 break;
                         }
                     }
-                    sd.setNurseryIntro("");
                     sd.setFileId("");
                     sdData.add(sd);
                     break;
@@ -299,110 +312,224 @@ public class NurseryServiceSupp {
     /**
      * 省外苗圃获取excel数据解析辅助方法
      *
+     * @param type 类型（导入还是更新）
      * @param list 读取到的excel数据
      * @return 解析后数据
      */
-    public List<NurseryOut> getNurseryOutExcelData(List<List<Object>> list) {
+    public List<NurseryOut> getNurseryOutExcelData(List<List<Object>> list, String type) {
         //实例化数据保存集合类
         List<NurseryOut> sdData = sdData = new ArrayList<NurseryOut>();
         for (int i = 0, len = list.size(); i < len; ++i) {
             List<Object> data = list.get(i);
             int d = data.size();
             NurseryOut sd = new NurseryOut();
-            for (int j = 0; j < d; ++j) {
-                this.str = data.get(j);
-                switch (j) {
-                    case 0:
-                        sd.setId((String) this.str);
-                        break;
-                    case 1:
-                        sd.setProvince((String) this.str);
-                        break;
-                    case 2:
-                        sd.setCompany((String) this.str);
-                        break;
-                    case 3:
-                        sd.setAddress((String) this.str);
-                        break;
-                    case 4:
-                        try {
-                            if (this.str != "") {
-                                long tel = Long.parseLong((String) this.str);
-                                sd.setTel(tel);
-                            }
-                        } catch (Exception e) {
-                            this.logger.error(e.toString());
+            switch (type) {
+                case "update":
+                    for (int j = 1; j < d; ++j) {
+                        this.str = data.get(j);
+                        switch (j) {
+                            case 1:
+                                sd.setId((String) this.str);
+                                break;
+                            case 2:
+                                sd.setProvince((String) this.str);
+                                break;
+                            case 3:
+                                sd.setCompany((String) this.str);
+                                break;
+                            case 4:
+                                sd.setAddress((String) this.str);
+                                break;
+                            case 5:
+                                try {
+                                    if (this.str != "") {
+                                        long tel = Long.parseLong(this.in.format(this.str));
+                                        sd.setTel(tel);
+                                    }
+                                } catch (Exception e) {
+                                    this.logger.error(e.toString());
+                                }
+                                break;
+                            case 6:
+                                sd.setFax((String) this.str);
+                                break;
+                            case 7:
+                                sd.setWebSite((String) this.str);
+                                break;
+                            case 8:
+                                sd.setEmail((String) this.str);
+                                break;
+                            case 9:
+                                sd.setSeedlingName((String) this.str);
+                                break;
+                            case 10:
+                                if (this.str != "") {
+                                    try {
+                                        AnalysisParam var = this.analysisUtil.getSpecAnalysis((String) this.str);
+                                        sd.setSpec(var.getStr());
+                                        sd.setSpecMin(var.getNum());
+                                        sd.setSpecMax(var.getNum_1());
+                                    } catch (Exception e) {
+                                        this.logger.error(e.toString());
+                                        sd.setSpec("");
+                                    }
+                                } else {
+                                    sd.setSpec("");
+                                }
+                                break;
+                            case 11:
+                                sd.setUnit((String) this.str);
+                                break;
+                            case 12:
+                                try {
+                                    if (this.str != "") {
+                                        int num = Integer.parseInt(this.in.format(this.str));
+                                        sd.setNum(num);
+                                    }
+                                } catch (Exception e) {
+                                    this.logger.error(e.toString());
+                                }
+                                break;
+                            case 13:
+                                try {
+                                    if (this.str != "") {
+                                        double price = Double.parseDouble(this.db.format(this.str));
+                                        sd.setPrice(price);
+                                    }
+                                } catch (Exception e) {
+                                    this.logger.error(e.toString());
+                                }
+                                break;
+                            case 14:
+                                sd.setTypes((String) this.str);
+                                break;
+                            case 15:
+                                try {
+                                    if (this.str != "") {
+                                        sd.setDate(this.sdf.format(this.str));
+                                    } else {
+                                        sd.setDate("");
+                                    }
+                                } catch (Exception e) {
+                                    sd.setDate((String) this.str);
+                                    this.logger.error(e.toString());
+                                }
+                                break;
+                            case 16:
+                                sd.setComment((String) this.str);
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                    sd.setFileId("");
+                    sd.setCity("");
+                    sdData.add(sd);
+                    break;
+                default:
+                    for (int j = 0; j < d; ++j) {
+                        this.str = data.get(j);
+                        switch (j) {
+                            case 0:
+                                sd.setId((String) this.str);
+                                break;
+                            case 1:
+                                sd.setProvince((String) this.str);
+                                break;
+                            case 2:
+                                sd.setCompany((String) this.str);
+                                break;
+                            case 3:
+                                sd.setAddress((String) this.str);
+                                break;
+                            case 4:
+                                try {
+                                    if (this.str != "") {
+                                        long tel = Long.parseLong(this.in.format(this.str));
+                                        sd.setTel(tel);
+                                    }
+                                } catch (Exception e) {
+                                    this.logger.error(e.toString());
 
+                                }
+                                break;
+                            case 5:
+                                sd.setFax((String) this.str);
+                                break;
+                            case 6:
+                                sd.setWebSite((String) this.str);
+                                break;
+                            case 7:
+                                sd.setEmail((String) this.str);
+                                break;
+                            case 8:
+                                sd.setSeedlingName((String) this.str);
+                                break;
+                            case 9:
+                                if (this.str != "") {
+                                    try {
+                                        AnalysisParam var = this.analysisUtil.getSpecAnalysis((String) this.str);
+                                        sd.setSpec(var.getStr());
+                                        sd.setSpecMin(var.getNum());
+                                        sd.setSpecMax(var.getNum_1());
+                                    } catch (Exception e) {
+                                        this.logger.error(e.toString());
+                                        sd.setSpec("");
+                                    }
+                                } else {
+                                    sd.setSpec("");
+                                }
+                                break;
+                            case 10:
+                                sd.setUnit((String) this.str);
+                                break;
+                            case 11:
+                                try {
+                                    if (this.str != "") {
+                                        int num = Integer.parseInt(this.in.format(this.str));
+                                        sd.setNum(num);
+                                    }
+                                } catch (Exception e) {
+                                    this.logger.error(e.toString());
+                                }
+                                break;
+                            case 12:
+                                try {
+                                    if (this.str != "") {
+                                        double price = Double.parseDouble(this.db.format(this.str));
+                                        sd.setPrice(price);
+                                    }
+                                } catch (Exception e) {
+                                    this.logger.error(e.toString());
+                                }
+                                break;
+                            case 13:
+                                sd.setTypes((String) this.str);
+                                break;
+                            case 14:
+                                try {
+                                    if (this.str != "") {
+                                        sd.setDate(this.sdf.format(this.str));
+                                    } else {
+                                        sd.setDate("");
+                                    }
+                                } catch (Exception e) {
+                                    sd.setDate((String) this.str);
+                                    this.logger.error(e.toString());
+                                }
+                                break;
+                            case 15:
+                                sd.setComment((String) this.str);
+                                break;
+                            default:
+                                break;
                         }
-                        break;
-                    case 5:
-                        sd.setFax((String) this.str);
-                        break;
-                    case 6:
-                        sd.setWebSite((String) this.str);
-                        break;
-                    case 7:
-                        sd.setEmail((String) this.str);
-                        break;
-                    case 8:
-                        sd.setSeedlingName((String) this.str);
-                        break;
-                    case 9:
-                        if (this.str != "") {
-                            try {
-                                AnalysisParam var = this.analysisUtil.getSpecAnalysis((String) this.str);
-                                sd.setSpec(var.getStr());
-                                sd.setSpecMin(var.getNum());
-                                sd.setSpecMax(var.getNum_1());
-                            } catch (Exception e) {
-                                this.logger.error(e.toString());
-                                sd.setSpec("");
-                            }
-                        } else {
-                            sd.setSpec("");
-                        }
-                        break;
-                    case 10:
-                        sd.setUnit((String) this.str);
-                        break;
-                    case 11:
-                        int num = 0;
-                        try {
-                            if (this.str != "") {
-                                num = Integer.parseInt((String) this.str);
-                                sd.setNum(num);
-                            }
-                        } catch (Exception e) {
-                            this.logger.error(e.toString());
-                        }
-                        break;
-                    case 12:
-                        try {
-                            if (this.str != "") {
-                                double price = Double.parseDouble((String) this.str);
-                                sd.setPrice(price);
-                            }
-                        } catch (Exception e) {
-                            sd.setPrice(0);
-                            this.logger.error(e.toString());
-                        }
-                        break;
-                    case 13:
-                        sd.setTypes((String) this.str);
-                        break;
-                    case 14:
-                        sd.setDate((String) this.str);
-                        break;
-                    case 15:
-                        sd.setComment((String) this.str);
-                        break;
-                    default:
-                        break;
-                }
+                    }
+                    sd.setFileId("");
+                    sd.setCity("");
+                    sdData.add(sd);
+                    break;
             }
-            sd.setFileId("");
-            sd.setCity("");
-            sdData.add(sd);
         }
         return sdData;
     }

@@ -226,6 +226,23 @@
         </foreach>
     </update>
     <!--省内苗圃多数据更新sql end-->
+    <!--省外苗圃多数据更新sql start-->
+    <update id="updateNurseryOutDao" parameterType="java.util.List">
+        <foreach collection="list" item="item" index="index" separator=";">
+            UPDATE `gs_nursery_outside_info`
+            <set>
+                `province` = #{item.province},`city` = #{item.city},`company_name` = #{item.company},`tel` =
+                #{item.tel},`seedling_type` = #{item.types},`seedling_name` = #{item.seedlingName},
+                `spec` = #{item.spec},`unit` = #{item.unit},`quantity` = #{item.num},`price` =
+                #{item.price},`comments` = #{item.comment},`acquisition_time` = #{item.date},`address` =
+                #{item.address},
+                `fax_num` = #{item.fax},`web_site` = #{item.webSite},`email` = #{item.email},`spec_min` =
+                #{item.specMin},`spec_max` = #{item.specMax}
+            </set>
+            WHERE `id` = #{item.id}
+        </foreach>
+    </update>
+    <!--省外苗圃多数据更新sql end-->
     <!--数据更新 end-->
 </mapper>
         <!--mapper 苗圃管理 end -->

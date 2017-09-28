@@ -111,16 +111,26 @@ public class ExcelUtil {
      * @return excel路径地址
      * @throws Exception
      */
-    public String writeExcel(List list) throws Exception {
+    public String writeExcel(List list, String type) throws Exception {
         boolean bl = this.getOs.getOsName();
-        String path = "/plfile/excel/GS586B9BB86C49D98F07280F89C88B69.xlsx";
         StringBuilder sb = new StringBuilder();
         if (bl) {
             sb.append("/usr/plantlet");
-            sb.append(path);
         } else {
             sb.append("D:/plantlet");
-            sb.append(path);
+        }
+        String path = "";
+        switch (type) {
+            case "in":
+                path = "/plfile/GS586B9BB86C49D98F07280F89C88B66.xlsx";
+                sb.append(path);
+                break;
+            case "out":
+                path = "/plfile/GS586B9BB86C49D98F07280F89C88B88.xlsx";
+                sb.append(path);
+                break;
+            default:
+                break;
         }
         File file = new File(sb.toString());
         if (file.exists()) {
@@ -133,7 +143,7 @@ public class ExcelUtil {
         try {
             out = new FileOutputStream(file);
             XSSFWorkbook wb = new XSSFWorkbook();
-            this.writeExcel.createExcel(wb, list, "in").write(out);
+            this.writeExcel.createExcel(wb, list, type).write(out);
         } finally {
             out.close();
         }

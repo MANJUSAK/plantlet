@@ -1,12 +1,13 @@
 package com.goodsoft.plantlet.service.supp;
 
+import com.goodsoft.plantlet.domain.entity.param.AnalysisParam;
 import com.goodsoft.plantlet.domain.entity.seedlinginfo.SeedlingOffer;
 import com.goodsoft.plantlet.util.DataAnalysisUtil;
-import com.goodsoft.plantlet.domain.entity.param.AnalysisParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +25,11 @@ public class SeedlingServiceSupp {
     private Logger logger = LoggerFactory.getLogger(NurseryServiceSupp.class);
     //实例化数据解析工具类
     private DataAnalysisUtil analysisUtil = DataAnalysisUtil.getInstance();
+    // 格式化日期字符串
+    private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+    // 格式化数字
+    private DecimalFormat db = new DecimalFormat("0.000");
+    private DecimalFormat in = new DecimalFormat("0");
     //初始化读取excel字段值
     private Object str = "";
 
@@ -68,7 +74,7 @@ public class SeedlingServiceSupp {
                     case 4:
                         if (this.str != "") {
                             try {
-                                double price = Double.parseDouble((String) this.str);
+                                double price = Double.parseDouble(this.db.format(this.str));
                                 sd.setSdOffer(price);
                             } catch (Exception e) {
                                 this.logger.error(e.toString());
@@ -108,8 +114,7 @@ public class SeedlingServiceSupp {
     public int getSeedlingOfferExcelDataAnalysis(List<SeedlingOffer> sdData) {
         int len = sdData.size();
         for (int i = 0; i < len; ++i) {
-            if (sdData.get(i).getSdName() == "" || sdData.get(i).getSdOffer() == 0 || sdData.get(i).getUnit() == "" ||
-                    sdData.get(i).getYear() == 0 || sdData.get(i).getMonth() == 0 || sdData.get(i).getSpec() == null) {
+            if (sdData.get(i).getSdName() == "") {
                 sdData.remove(i);
                 --i;
                 len = sdData.size();

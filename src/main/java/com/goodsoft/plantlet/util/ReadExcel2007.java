@@ -39,10 +39,6 @@ public class ReadExcel2007 {
 
     //实例化UUID工具类
     private UUIDUtil uuid = UUIDUtil.getInstance();
-    // 默认单元格格式化日期字符串
-    /*private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");*/
-    // 格式化数字
-    private DecimalFormat nf = new DecimalFormat("0.000");
 
     /**
      * 读取excel表
@@ -136,27 +132,27 @@ public class ReadExcel2007 {
                                 break;
                             case XSSFCell.CELL_TYPE_NUMERIC:
                                 if (cell.getCellStyle().getDataFormatString() == null) {
+                                    temp.add("");
                                     continue;
                                 }
-                                System.out.println(cell.getCellStyle().getDataFormatString());
                                 switch (cell.getCellStyle().getDataFormatString()) {
                                     case "General":
-                                        temp.add(this.nf.format(cell.getNumericCellValue()));
+                                        temp.add(cell.getNumericCellValue());
                                         break;
                                     case "@":
-                                        temp.add(this.nf.format(cell.getNumericCellValue()));
+                                        temp.add(cell.getNumericCellValue());
                                         break;
                                     case "0;[Red]0":
-                                        temp.add(this.nf.format(cell.getNumericCellValue()));
+                                        temp.add(cell.getNumericCellValue());
                                         break;
                                     case "0.00_);\\(0.00\\)":
-                                        temp.add(this.nf.format(cell.getNumericCellValue()));
+                                        temp.add(cell.getNumericCellValue());
                                         break;
                                     case "0.00;[Red]0.00":
-                                        temp.add(this.nf.format(cell.getNumericCellValue()));
+                                        temp.add(cell.getNumericCellValue());
                                         break;
                                     case "0.00_);[Red]\\(0.00\\)":
-                                        temp.add(this.nf.format(cell.getNumericCellValue()));
+                                        temp.add(cell.getNumericCellValue());
                                         break;
                                     default:
                                         temp.add(HSSFDateUtil.getJavaDate(cell.getNumericCellValue()));
@@ -255,15 +251,15 @@ public class ReadExcel2007 {
                     case "General":
                         return cell.getNumericCellValue();
                     case "@":
-                        return this.nf.format(cell.getNumericCellValue());
+                        return cell.getNumericCellValue();
                     case "0;[Red]0":
-                        return this.nf.format(cell.getNumericCellValue());
+                        return cell.getNumericCellValue();
                     case "0.00_);\\(0.00\\)":
-                        return this.nf.format(cell.getNumericCellValue());
+                        return cell.getNumericCellValue();
                     case "0.00;[Red]0.00":
-                        return this.nf.format(cell.getNumericCellValue());
+                        return cell.getNumericCellValue();
                     case "0.00_);[Red]\\(0.00\\)":
-                        return this.nf.format(cell.getNumericCellValue());
+                        return cell.getNumericCellValue();
                     default:
                         return HSSFDateUtil.getJavaDate(cell.getNumericCellValue());
                 }
