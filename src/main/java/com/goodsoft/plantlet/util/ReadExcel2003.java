@@ -18,6 +18,8 @@ public class ReadExcel2003 {
      * 创建Excel2003类的单例（详情见本包下UUIDUtil类） start
      **/
     private volatile static ReadExcel2003 instance;
+    //实例化UUID工具类
+    private UUIDUtil uuid = UUIDUtil.getInstance();
 
     private ReadExcel2003() {
     }
@@ -31,9 +33,6 @@ public class ReadExcel2003 {
         }
         return instance;
     }
-
-    //实例化UUID工具类
-    private UUIDUtil uuid = UUIDUtil.getInstance();
 
     /**
      * 读取excel表
@@ -116,6 +115,21 @@ public class ReadExcel2003 {
                                         temp.add(cell.getNumericCellValue());
                                         break;
                                     case "0.00_);[Red]\\(0.00\\)":
+                                        temp.add(cell.getNumericCellValue());
+                                        break;
+                                    case "0_);[Red]\\(0\\)":
+                                        temp.add(cell.getNumericCellValue());
+                                        break;
+                                    case "0_);\\(0\\)":
+                                        temp.add(cell.getNumericCellValue());
+                                        break;
+                                    case "0_":
+                                        temp.add(cell.getNumericCellValue());
+                                        break;
+                                    case "0_ ;[Red]\\-0\\":
+                                        temp.add(cell.getNumericCellValue());
+                                        break;
+                                    case "0.00_ ":
                                         temp.add(cell.getNumericCellValue());
                                         break;
                                     default:
@@ -223,6 +237,16 @@ public class ReadExcel2003 {
                     case "0.00;[Red]0.00":
                         return cell.getNumericCellValue();
                     case "0.00_);[Red]\\(0.00\\)":
+                        return cell.getNumericCellValue();
+                    case "0_);[Red]\\(0\\)":
+                        return cell.getNumericCellValue();
+                    case "0_);\\(0\\)":
+                        return cell.getNumericCellValue();
+                    case "0_":
+                        return cell.getNumericCellValue();
+                    case "0_ ;[Red]\\-0\\":
+                        return cell.getNumericCellValue();
+                    case "0.00_ ":
                         return cell.getNumericCellValue();
                     default:
                         return HSSFDateUtil.getJavaDate(cell.getNumericCellValue());

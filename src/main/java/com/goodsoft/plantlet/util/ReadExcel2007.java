@@ -131,11 +131,12 @@ public class ReadExcel2007 {
                                 temp.add(cell.getNumericCellValue());
                                 break;
                             case XSSFCell.CELL_TYPE_NUMERIC:
-                                if (cell.getCellStyle().getDataFormatString() == null) {
+                                String getDate = cell.getCellStyle().getDataFormatString();
+                                if (getDate == null) {
                                     temp.add("");
                                     continue;
                                 }
-                                switch (cell.getCellStyle().getDataFormatString()) {
+                                switch (getDate) {
                                     case "General":
                                         temp.add(cell.getNumericCellValue());
                                         break;
@@ -152,6 +153,21 @@ public class ReadExcel2007 {
                                         temp.add(cell.getNumericCellValue());
                                         break;
                                     case "0.00_);[Red]\\(0.00\\)":
+                                        temp.add(cell.getNumericCellValue());
+                                        break;
+                                    case "0_);[Red]\\(0\\)":
+                                        temp.add(cell.getNumericCellValue());
+                                        break;
+                                    case "0_);\\(0\\)":
+                                        temp.add(cell.getNumericCellValue());
+                                        break;
+                                    case "0_ ":
+                                        temp.add(cell.getNumericCellValue());
+                                        break;
+                                    case "0_ ;[Red]\\-0\\ ":
+                                        temp.add(cell.getNumericCellValue());
+                                        break;
+                                    case "0.00_ ":
                                         temp.add(cell.getNumericCellValue());
                                         break;
                                     default:
@@ -259,6 +275,16 @@ public class ReadExcel2007 {
                     case "0.00;[Red]0.00":
                         return cell.getNumericCellValue();
                     case "0.00_);[Red]\\(0.00\\)":
+                        return cell.getNumericCellValue();
+                    case "0_);[Red]\\(0\\)":
+                        return cell.getNumericCellValue();
+                    case "0_);\\(0\\)":
+                        return cell.getNumericCellValue();
+                    case "0_":
+                        return cell.getNumericCellValue();
+                    case "0_ ;[Red]\\-0\\":
+                        return cell.getNumericCellValue();
+                    case "0.00_ ":
                         return cell.getNumericCellValue();
                     default:
                         return HSSFDateUtil.getJavaDate(cell.getNumericCellValue());
