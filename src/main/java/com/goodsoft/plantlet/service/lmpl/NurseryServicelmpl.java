@@ -56,6 +56,44 @@ public class NurseryServicelmpl implements NurseryService {
     //实例化获取服务器域名工具类
     private DomainNameUtil http = DomainNameUtil.getInstance();
 
+    /**
+     * 省内苗圃主页展示数据查询业务处理方法
+     *
+     * @param request http请求
+     * @param msg     条件查询参数
+     * @param <T>     泛型
+     * @return 查询结果
+     * @throws Exception
+     */
+    @Override
+    public <T> T queryIndexNurseryService(HttpServletRequest request, NurseryParam param) {
+        //初始化msg.getNum() start
+        int page = param.getNum();
+        if (page < 0) {
+            page = 0;
+        }
+        page *= 20;
+        param.setNum(page);
+        //初始化msg.getNum() end
+        List<Nursery> data = null;
+        try {
+            data = this.dao.queryIndexNurseryDao(param);
+            int sd = data.size();
+            if (sd > 0) {
+                for (int i = 0; i < sd; ++i) {
+                    //获取文件数据
+                    List<String> url = this.getFileSupp.getFileData(request, data.get(i).getFileId());
+                    data.get(i).setPicture(url);
+                }
+                return (T) new Result(0, data);
+            } else {
+                return (T) new Status(StatusEnum.NO_DATA.getCODE(), StatusEnum.NO_DATA.getEXPLAIN());
+            }
+        } catch (Exception e) {
+            this.logger.error(e.toString());
+            return (T) new Status(StatusEnum.SERVER_ERROR.getCODE(), StatusEnum.SERVER_ERROR.getEXPLAIN());
+        }
+    }
 
     /**
      * 省内苗圃数据查询业务处理方法
@@ -230,10 +268,41 @@ public class NurseryServicelmpl implements NurseryService {
     }
 
     /**
+     * 省外苗圃主页数据查询业务逻辑处理方法
+     *
+     * @param param 条件查询参数
+     * @param <T>   泛型
+     * @return 查询结果
+     * @throws Exception
+     */
+    @Override
+    public <T> T queryIndexNurseryOutService(NurseryParam param) {
+        //初始化msg.getNum() start
+        int page = param.getNum();
+        if (page < 0) {
+            page = 0;
+        }
+        page *= 20;
+        param.setNum(page);
+        //初始化msg.getNum() end
+        List<NurseryOut> data = null;
+        try {
+            data = this.dao.queryIndexNurseryOutDao(param);
+        } catch (Exception e) {
+            this.logger.error(e.toString());
+            return (T) new Status(StatusEnum.SERVER_ERROR.getCODE(), StatusEnum.SERVER_ERROR.getEXPLAIN());
+        }
+        if (data.size() > 0) {
+            return (T) new Result(0, data);
+        }
+        return (T) new Status(StatusEnum.NO_DATA.getCODE(), StatusEnum.NO_DATA.getEXPLAIN());
+    }
+
+    /**
      * 省外苗圃数据查询业务逻辑处理方法
      *
-     * @param msg 条件查询参数
-     * @param <T> 泛型
+     * @param param 条件查询参数
+     * @param <T>   泛型
      * @return 查询结果
      * @throws Exception
      */

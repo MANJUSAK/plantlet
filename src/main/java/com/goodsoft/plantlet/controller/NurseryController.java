@@ -27,13 +27,26 @@ public class NurseryController {
      * 省内苗圃查询接口
      *
      * @param request 请求
-     * @param msg     条件查询参数
+     * @param param   条件查询参数
+     * @return 响应结果
+     */
+    @CrossOrigin(origins = "*", maxAge = 3600, methods = RequestMethod.GET)
+    @RequestMapping("/province/find/index/seedling.action.do")
+    public Object queryIndexNurseryController(HttpServletRequest request, NurseryParam param) {
+        return this.service.queryIndexNurseryService(request, param);
+    }
+
+    /**
+     * 省内苗圃查询接口
+     *
+     * @param request 请求
+     * @param param   条件查询参数
      * @return 响应结果
      */
     @CrossOrigin(origins = "*", maxAge = 3600, methods = RequestMethod.GET)
     @RequestMapping("/province/find/seedling.action.do")
-    public Object queryNurseryController(HttpServletRequest request, NurseryParam msg) {
-        return this.service.queryNurseryService(request, msg);
+    public Object queryNurseryController(HttpServletRequest request, NurseryParam param) {
+        return this.service.queryNurseryService(request, param);
     }
 
     /**
@@ -82,15 +95,27 @@ public class NurseryController {
     }
 
     /**
+     * 省外苗圃主页数据展示查询接口
+     *
+     * @param param 条件查询参数
+     * @return 响应结果
+     */
+    @CrossOrigin(origins = "*", maxAge = 3600, methods = RequestMethod.GET)
+    @RequestMapping("/outside/find/index/seedling.action.do")
+    public Object queryIndexNurseryOutController(NurseryParam param) {
+        return this.service.queryIndexNurseryOutService(param);
+    }
+
+    /**
      * 省外苗圃查询接口
      *
-     * @param msg 条件查询参数
+     * @param param 条件查询参数
      * @return 响应结果
      */
     @CrossOrigin(origins = "*", maxAge = 3600, methods = RequestMethod.GET)
     @RequestMapping("/outside/find/seedling.action.do")
-    public Object queryNurseryOutController(NurseryParam msg) {
-        return this.service.queryNurseryOutService(msg);
+    public Object queryNurseryOutController(NurseryParam param) {
+        return this.service.queryNurseryOutService(param);
     }
 
     /**

@@ -14,6 +14,8 @@ import java.util.List;
  */
 @Repository
 public interface NurseryDao {
+    //省内苗圃数据主页展示dao方法
+    public List<Nursery> queryIndexNurseryDao(NurseryParam msg) throws Exception;
 
     //省内苗圃数据查询dao方法
     public List<Nursery> queryNurseryDao(NurseryParam msg) throws Exception;
@@ -26,6 +28,9 @@ public interface NurseryDao {
 
     //省内苗圃单条数据添加dao方法
     public void addNurseryOneDao(Nursery msg) throws Exception;
+
+    //省外苗圃数据主页展示dao方法
+    public List<NurseryOut> queryIndexNurseryOutDao(NurseryParam msg) throws Exception;
 
     //省外苗圃数据查询dao方法
     public List<NurseryOut> queryNurseryOutDao(NurseryParam msg) throws Exception;

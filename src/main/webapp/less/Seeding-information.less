@@ -115,6 +115,7 @@ section {
                                 line-height: 50px;
                                 i {
                                     color: #555;
+                                    display: inline;
                                     &:hover {
                                         color: red;
                                     }
@@ -212,17 +213,6 @@ section {
                             ul {
                                 border-bottom: 1px dashed #4CD242;
                                 overflow: hidden;
-                                cursor: pointer;
-                                &:hover li{
-                                    color: red;
-                                }
-                                &:hover li .jg-li {
-                                    color: red;
-                                }
-                                &:hover li .sl-li {
-                                    color: red;
-                                }
-                                
                             }
                             ul .sx-mc {
                                 float: left;
@@ -238,6 +228,10 @@ section {
                                 color: #555;
                                 a {
                                     color: #555;
+                                    display: block;
+                                }
+                                &:hover a{
+                                    color: red;
                                 }
                             }
                             .sx-mc:last-child {
@@ -260,6 +254,13 @@ section {
                                     font-size: 14px;
                                     line-height: 40px;
                                     color: #555;
+                                    a{
+                                        color: #555;
+                                        display: block;
+                                    }
+                                    &:hover a{
+                                        color: red;
+                                    }
                                 }
                                 .jg-li:last-child {
                                     border-right: none;
@@ -338,6 +339,146 @@ section {
                                     line-height: 40px;
                                     color: #Ddd;
                                 }
+                                ul {
+                                    width: 100%;
+                                    height: 40px;
+                                    position: relative;
+                                    .allCity {
+                                        width: 20%;
+                                        height: 35px;
+                                        float: left;
+                                        padding-top: 5px;
+                                        .allCity-box {
+                                            width: 40%;
+                                            height: 28px;
+                                            border: 1px solid #DEDEDE;
+                                            float: left;
+                                            margin-left: 4.5%;
+                                            span {
+                                                display: block;
+                                                text-align: center;
+                                                line-height: 30px;
+                                                font-size: 14px;
+                                                color: #555;
+                                                cursor: pointer;
+                                            }
+                                        }
+                                    }
+                                    .allCity-nav {
+                                        width: 99%;
+                                        height: auto;
+                                        background: #f0f0f0;
+                                        border: 1px solid #DEDEDE;
+                                        border-radius: 8px;
+                                        position: absolute;
+                                        top: 40px;
+                                        left: 0.5%;
+                                        z-index: 999;
+                                        display: none;
+                                        .An-title {
+                                            width: 100%;
+                                            height: 30px;
+                                            ul {
+                                                width: 100%;
+                                                height: 30px;
+                                                padding-top: 10px;
+                                                border-bottom: 1px solid #DEDEDE;
+                                                .anConfirm {
+                                                    width: 60px;
+                                                    height: 30px;
+                                                    float: left;
+                                                    background: linear-gradient(#399d34, #4cd242, #399d34);
+                                                    line-height: 30px;
+                                                    font-size: 12px;
+                                                    color: white;
+                                                    text-align: center;
+                                                    margin-left: 10px;
+                                                    border-radius: 4px 4px 0 0;
+                                                    cursor: pointer;
+                                                }
+                                                .anAll {
+                                                    width: 85%;
+                                                    height: 30px;
+                                                    float: left;
+                                                    margin-left: 10px;
+                                                    ul {
+                                                        width: 80%;
+                                                        height: 20px;
+                                                        font-size: 14px;
+                                                        color: #555;
+                                                        float: left;
+                                                        li {
+                                                            float: left;
+                                                            margin-left: 10px;
+                                                        }
+                                                    }
+                                                    .clooseA {
+                                                        width: 5%;
+                                                        height: 20px;
+                                                        float: left;
+                                                        margin-left: 2%;
+                                                        cursor: pointer;
+                                                        font-size: 14px;
+                                                        color: red;
+                                                        line-height: 25px;
+                                                        display: none;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        .An-container {
+                                            width: 100%;
+                                            height: auto;
+                                            margin-top: 20px;
+                                            .An-content {
+                                                width: 19%;
+                                                height: auto;
+                                                float: left;
+                                                padding: 0 5px;
+                                                .An-item {
+                                                    width: 100%;
+                                                    height: 30px;
+                                                    span {
+                                                        line-height: 30px;
+                                                        color: #555;
+                                                        input{
+                                                            vertical-align: middle;
+                                                            margin-top: -2px;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                    .allCity-li {
+                                        width: 80%;
+                                        height: 40px;
+                                        float: left;
+                                        ul {
+                                            width: 80%;
+                                            height: 40px;
+                                            font-size: 14px;
+                                            line-height: 40px;
+                                            color: #555;
+                                            float: left;
+                                            li {
+                                              float: left;
+                                              margin-left: 10px;
+                                            }
+                                        }
+                                        .clooseA2 {
+                                            width: 5%;
+                                            height: 40px;
+                                            float: left;
+                                            cursor: pointer;
+                                            font-size: 14px;
+                                            line-height: 40px;
+                                            text-align: center;
+                                            color: red;
+                                            display: none;
+                                        }
+                                    }
+                                }
                             }
                             .mt-city {
                                 width: 100%;
@@ -399,12 +540,7 @@ section {
                                             float: left;
                                             margin-left: 10px;
                                             cursor: pointer;
-                                            &:hover  .mtr-title a{
-                                                color: red;
-                                            }
-                                             &:hover  .mtr-jianjie p{
-                                                color: red;
-                                            }
+                                            
                                             .mtr-title {
                                                 width: 100%;
                                                 height: 39px;

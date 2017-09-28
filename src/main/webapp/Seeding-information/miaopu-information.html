@@ -79,14 +79,15 @@
 				<div class="Si-container">
 					<div class="Sic-content">
 						<div class="Sic-item">
-							<div class="miaopu-title">
-								<ul>
+							<div class="miaopu-title" style="text-align: left;">
+								<ul style="text-align: left;">
+									&nbsp;&nbsp;
 									<li id="iswithin" class="mt-active">省内苗圃</li>
 									<li id="isabroad">省外苗圃</li>
 								</ul>
 							</div>
 							<div class="miaopu-content">
-								<div class="mc-item" >
+								<div class="mc-item">
 									<div class="mt-province" id="iswithinx">
 										<a href="#">贵阳市</a>
 										<span>|</span>
@@ -100,11 +101,11 @@
 										<span>|</span>
 										<a href="#">铜仁市</a>
 										<span>|</span>
-										<a href="#">黔西南布依族苗族自治州</a>
+										<a href="#">黔西南自治州</a>
 										<span>|</span>
-										<a href="#">黔东南苗族侗族自治州</a>
+										<a href="#">黔东南自治州</a>
 										<span>|</span>
-										<a href="#">黔南布依族苗族自治州</a>
+										<a href="#">黔南自治州</a>
 									</div>
 									<div class="mt-city">
 										<div class="city-item" id="isguiyang">
@@ -133,29 +134,80 @@
 									</div>
 									<div class="mt-content">
 										<div class="mt-item" id="within">
-										
-											
+
 										</div>
 									</div>
 								</div>
 								<div class="mc-item">
 									<div class="mt-province" id="isabroadx">
-										<a href="#">河南省</a>
-										<span>|</span>
-										<a href="#">河北省</a>
-										<span>|</span>
-										<a href="#">湖南省</a>
-										<a href="#">湖北省</a>
-										<span>|</span>
-										<a href="#">山东省</a>
-										<span>|</span>
-										<a href="#">江苏省</a>
+										<ul>
+											<li class="allCity">
+												<div class="allCity-box" id="quanguo">
+													<span>全国</span>
+												</div>
+												<div class="allCity-box cityShengfen">
+													<span id="clooseCity"><i class="fa fa-plus-square"></i>&nbsp;选择省份</span>
+												</div>
+											</li>
+											<div class="allCity-nav" id="cityLi">
+												<div class="An-title">
+													<ul>
+														<li class="anConfirm" id="anConfirm">确认</li>
+														<li class="anConfirm" id="anCloose">收起</li>
+														<li class="anAll">
+															<ul></ul>
+															<div class="clooseA">取消</div>
+														</li>
+													</ul>
+												</div>
+												<div class="An-container">
+													<div class="An-content">
+														<div class="An-item"><span><label><input type="checkbox" value="河北省" />河北省</label></span></div>
+														<div class="An-item"><span><label><input type="checkbox" value="山西省" />山西省</label></span></div>
+														<div class="An-item"><span><label><input type="checkbox" value="辽宁省" />辽宁省</label></span></div>
+														<div class="An-item"><span><label><input type="checkbox" value="吉林省" />吉林省</label></span></div>
+														<div class="An-item"><span><label><input type="checkbox" value="黑龙江省" />黑龙江省</label></span></div>
+													</div>
+													<div class="An-content">
+														<div class="An-item"><span><label><input type="checkbox" value="江苏省" />江苏省</label></span></div>
+														<div class="An-item"><span><label><input type="checkbox" value="浙江省" />浙江省</label></span></div>
+														<div class="An-item"><span><label><input type="checkbox" value="安徽省" />安徽省</label></span></div>
+														<div class="An-item"><span><label><input type="checkbox" value="福建省" />福建省</label></span></div>
+														<div class="An-item"><span><label><input type="checkbox" value="江西省" />江西省</label></span></div>
+													</div>
+													<div class="An-content">
+														<div class="An-item"><span><label><input type="checkbox" value="山东省" />山东省</label></span></div>
+														<div class="An-item"><span><label><input type="checkbox" value="河南省" />河南省</label></span></div>
+														<div class="An-item"><span><label><input type="checkbox" value="湖北省" />湖北省</label></span></div>
+														<div class="An-item"><span><label><input type="checkbox" value="湖南省" />湖南省</label></span></div>
+														<div class="An-item"><span><label><input type="checkbox" value="广东省" />广东省</label></span></div>
+													</div>
+													<div class="An-content">
+														<div class="An-item"><span><label><input type="checkbox" value="海南省" />海南省</label></span></div>
+														<div class="An-item"><span><label><input type="checkbox" value="甘肃省" />甘肃省</label></span></div>
+														<div class="An-item"><span><label><input type="checkbox" value="四川省" />四川省</label></span></div>
+														<div class="An-item"><span><label><input type="checkbox" value="云南省" />云南省</label></span></div>
+														<div class="An-item"><span><label><input type="checkbox" value="陕西省" />陕西省</label></span></div>
+													</div>
+													<div class="An-content">
+														<div class="An-item"><span><label><input type="checkbox" value="青海省" />青海省</label></span></div>
+														<div class="An-item"><span><label><input type="checkbox" value="北京市" />北京市</label></span></div>
+														<div class="An-item"><span><label><input type="checkbox" value="天津市" />天津市</label></span></div>
+														<div class="An-item"><span><label><input type="checkbox" value="上海市" />上海市</label></span></div>
+														<div class="An-item"><span><label><input type="checkbox" value="重庆市" />重庆市</label></span></div>
+													</div>
+												</div>
+											</div>
+											<li class="allCity-li">
+												<ul id="provinces"></ul>
+												<div class="clooseA2">重置</div>
+											</li>
+										</ul>
 									</div>
+
 									<div class="mt-content">
 										<div class="mt-item" id="abroad">
-											
-												
-											
+
 										</div>
 									</div>
 								</div>
@@ -190,8 +242,11 @@
 		<script src="../js/jquery.min.js"></script>
 		<script src="../js/common.js"></script>
 		<script src="../js/Seeding-information.js"></script>
-		<script type="text/javascript" src="../js/host.js" ></script>
-		<script type="text/javascript" src="../js/miaopu-information-list.js" ></script>
+		<script type="text/javascript" src="../js/host.js"></script>
+		<script type="text/javascript" src="../js/miaopu-information-list.js"></script>
+		<script>
+			
+		</script>
 	</body>
 
 </html>

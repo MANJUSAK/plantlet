@@ -5,6 +5,7 @@ $(function() {
 	//var para = window.sessionStorage.getItem('seeding_detail');
 	var url_host = window.sessionStorage.getItem('host');
 	var urls = [url_host + '/plantlet/nursery/province/find/seedling.action.do', url_host + '/plantlet/nursery/outside/find/seedling.action.do'];
+	var isall = GetQueryString('isall');
 	var mydata = {
 		num: numberx,
 		keyWord: GetQueryString('sdName'),
@@ -20,10 +21,16 @@ $(function() {
 		specMax: GetQueryString('specMax')
 
 	};
-	
+
 	var show_page = ['#show_page_n', '#show_page_w'];
 	//第一次进入，默认
-	getdata(urls[0], mydata, show_page[0], false, false);
+	if(isall == 2) {
+		getdata(urls[0], mydata, show_page[0], false, false);
+	} else if(isall == 3) {
+		getdata(urls[1], mydata, show_page[1], true, false);
+	} else if(isall == 0) {
+		getdata(urls[0], mydata, show_page[0], false, false);
+	}
 
 	//省内	市
 	$('#shi li').click(function() {
@@ -98,7 +105,17 @@ $(function() {
 					if(mydata.num > 0) {
 						alert('已经没有更多数据了')
 					} else {
-						$(showpage).html('非常抱歉，暂时没此项数据');
+						var address = '';
+						if(mydata.city !== undefined) {
+							address += mydata.city;
+						}
+						if(mydata.county !== undefined) {
+							address += mydata.county;
+						}
+						if(mydata.province !== undefined) {
+							address += mydata.province;
+						}
+						$(showpage).html('非常抱歉，' + address + '暂时没此项数据');
 					}
 				}
 			},

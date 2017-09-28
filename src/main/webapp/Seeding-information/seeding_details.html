@@ -172,8 +172,30 @@
 	<script type="text/javascript" src="../js/jquery-2.1.0.js"></script>
 	<script src="../js/common.js"></script>
 	<script type="text/javascript" src="../js/host.js"></script>
-	<script type="text/javascript"  charset="UTF-8" src="../js/Seeding-detail.js"></script>
+	<script type="text/javascript" charset="UTF-8" src="../js/Seeding-detail.js"></script>
 	<script>
+		/** 接收参数改变现实的为省内、省外等情况 **/
+		//0表示省内和省外一起有，1为省内，2为省外
+		show_hide(Number(GetQueryString('isall')));
+
+		function show_hide(indet) {
+			if(indet == 0) {
+
+			} else if(indet == 2) {
+				$(".MMc_tbR").hide();
+			} else if(indet == 3) {
+				$(".MMc_tbL,.mt-province,.mt-city,.MMc_Province").hide();
+				$(".MMc_Outside").show();
+				$(".MMc_tbR").css({
+					"height": "34px",
+					"background-color": "white",
+					"border-top": "2px solid #81b97c",
+					"margin-left": "50px"
+				});
+			}
+
+		}
+
 		$(".MMc_tbL").click(function() {
 			$(".MMc_Outside").hide();
 			$(".MMc_Province").show();
@@ -206,15 +228,22 @@
 		$(".mt-province li").click(function() {
 			var t = $(this).index();
 			$(this).addClass("ci-active").siblings().removeClass("ci-active");
-			if(t == 0){
+			if(t == 0) {
 				$(".city-item").slideDown();
-			}else{
+			} else {
 				$(".city-item").slideUp();
 			}
 		});
-		$(".city-item ul li").click(function(){
-			$(this).css("color","#4CD242").siblings().css("color","#555");
+		$(".city-item ul li").click(function() {
+			$(this).css("color", "#4CD242").siblings().css("color", "#555");
 		});
+
+		function GetQueryString(name) {
+			var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+			var r = window.location.search.substr(1).match(reg);
+			if(r != null) return decodeURI(r[2]);
+			return null;
+		}
 	</script>
 
 </html>

@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletRequest;
  * version v1.0
  */
 public interface NurseryService {
+    //省内苗圃数据主页展示
+    public <T> T queryIndexNurseryService(HttpServletRequest request, NurseryParam msg);
 
     //省内苗圃数据查询
     public <T> T queryNurseryService(HttpServletRequest request, NurseryParam msg);
@@ -26,6 +28,9 @@ public interface NurseryService {
 
     //省内苗圃数据单条数据添加
     public Status addNurseryOneService(MultipartFile[] files, Nursery msg);
+
+    //省外苗圃数据主页展示查询
+    public <T> T queryIndexNurseryOutService(NurseryParam msg);
 
     //省外苗圃数据查询
     public <T> T queryNurseryOutService(NurseryParam msg);
