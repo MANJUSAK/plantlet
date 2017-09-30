@@ -8,7 +8,8 @@ import java.util.Objects;
  * Created by 严彬荣 on 2017/9/17.
  * version v1.0
  */
-public class User {
+public class User implements java.io.Serializable {
+    private static final long serialVersionUID = 1533791607305696188L;
     private String uid;//用户编号
     private String userName;//用户名
     private String passWord;//密码

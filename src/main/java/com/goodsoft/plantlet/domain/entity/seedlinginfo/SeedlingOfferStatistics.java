@@ -8,6 +8,7 @@ import java.util.Objects;
  * version v1.0
  */
 public class SeedlingOfferStatistics implements java.io.Serializable {
+    private static final long serialVersionUID = 1062415780325782054L;
     private String sdName;// 苗木名称
     private String spec;// 规格前缀
     private double specMin;// 规格范围第一位

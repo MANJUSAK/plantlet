@@ -1,10 +1,9 @@
 package com.goodsoft.plantlet.util;
 
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.util.List;
 
@@ -35,75 +34,8 @@ public class ExcelUtil {
 
     //实例化获取服务器系统标识工具类
     private GetOsNameUtil getOs = GetOsNameUtil.getInstance();
-
-    //实例化excel读取工具类
-    private ReadExcel2003 readExcel2003 = ReadExcel2003.getInstance();
-    private ReadExcel2007 readExcel2007 = ReadExcel2007.getInstance();
     //实例化创建excel工具类
     private WriteExcel2007 writeExcel = WriteExcel2007.getInstance();
-
-    /**
-     * 读取excel
-     * 单个表
-     *
-     * @param path   文件路径
-     * @param fileId 文件编号
-     * @return 读取数据
-     * @throws Exception
-     */
-    public List<List<Object>> readExcel(String path, String fileId) throws Exception {
-        //获取文件 start
-        File file = new File(path);
-        FileInputStream is = new FileInputStream(file);
-        String fileName = file.getName();
-        //获取文件 end
-        //读取excel start
-        XSSFWorkbook wb2007;
-        HSSFWorkbook wb2003;
-        try {
-            if (fileName.endsWith("xlsx")) {
-                wb2007 = new XSSFWorkbook(is);
-                //读取excel end
-                return this.readExcel2007.getSheetExcel(wb2007, fileId);
-            } else {
-                wb2003 = new HSSFWorkbook(is);
-                //读取excel end
-                return this.readExcel2003.getSheetExcel(wb2003, fileId);
-            }
-        } finally {
-            is.close();
-        }
-    }
-
-    /**
-     * 读取excel
-     * 多个表
-     *
-     * @param path   文件路径
-     * @param fileId 文件编号
-     * @return 读取数据
-     * @throws Exception
-     */
-    public List<List<List<Object>>> readAllExcel(String path, String fileId) throws Exception {
-        //获取文件 start
-        File file = new File(path);
-        FileInputStream is = new FileInputStream(file);
-        String fileName = file.getName();
-        //获取文件 end
-        //读取excel start
-        XSSFWorkbook wb2007;
-        try {
-            if (fileName.endsWith("xlsx")) {
-                wb2007 = new XSSFWorkbook(is);
-                //读取excel end
-                return this.readExcel2007.getSheetAllExcel(wb2007, fileId);
-            } else {
-                return null;
-            }
-        } finally {
-            is.close();
-        }
-    }
 
     /**
      * @param list
@@ -126,7 +58,7 @@ public class ExcelUtil {
                 sb.append(path);
                 break;
             case "out":
-                path = "/plfile/GS586B9BB86C49D98F07280F89C88B88.xlsx";
+                path = "/plfile/GS586B9BB86C49D98F07280F89C88B67.xlsx";
                 sb.append(path);
                 break;
             default:
@@ -139,13 +71,13 @@ public class ExcelUtil {
         } else {
             file.createNewFile();
         }
-        FileOutputStream out = null;
+        FileOutputStream fileOut = null;
         try {
-            out = new FileOutputStream(file);
+            fileOut = new FileOutputStream(file);
             XSSFWorkbook wb = new XSSFWorkbook();
-            this.writeExcel.createExcel(wb, list, type).write(out);
+            this.writeExcel.createExcel(wb, list, type).write(new BufferedOutputStream(fileOut));
         } finally {
-            out.close();
+            fileOut.close();
         }
         return path;
     }

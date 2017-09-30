@@ -6,7 +6,7 @@ package com.goodsoft.plantlet.domain.entity.result;
  * Created by 严彬荣 on 2017/7/24.
  * version v1.0
  */
-public enum StatusEnum implements java.io.Serializable {
+public enum StatusEnum {
     SUCCESS(0, "成功"),
     SERVER_ERROR(500, "发生不可预知的错误"),
     EXCEL_ERROR(500, "未解析到正确的excel表格，请上传正确的excel表格"),
@@ -16,6 +16,7 @@ public enum StatusEnum implements java.io.Serializable {
     UNKONW_ERROR(501, "未知错误"),
     ERROR(502, "错误操作"),
     NO_DATA(404, "无数据"),
+    NO_EXCEL_DATA(404, "无可用数据导出"),
     NO_URL(404, "无效请求"),
     NO_RIGHTS(401, "该用户无法操作此功能"),
     CHECKUSER(404, "用户名与密码不匹配"),

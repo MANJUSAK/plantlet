@@ -15,13 +15,13 @@ import javax.servlet.http.HttpServletRequest;
  */
 public interface NurseryService {
     //省内苗圃数据主页展示
-    public <T> T queryIndexNurseryService(HttpServletRequest request, NurseryParam msg);
+    public <T> T queryIndexNurseryService(HttpServletRequest request, NurseryParam param);
 
     //省内苗圃数据查询
-    public <T> T queryNurseryService(HttpServletRequest request, NurseryParam msg);
+    public <T> T queryNurseryService(HttpServletRequest request, NurseryParam param);
 
     //省内苗圃excel导出
-    public <T> T excelNurseryService(HttpServletRequest request);
+    public <T> T excelNurseryService(HttpServletRequest request, NurseryParam param);
 
     //省内苗圃数据多数据添加
     public Status addNurseryService(MultipartFile[] files, Nursery msg);
@@ -30,13 +30,13 @@ public interface NurseryService {
     public Status addNurseryOneService(MultipartFile[] files, Nursery msg);
 
     //省外苗圃数据主页展示查询
-    public <T> T queryIndexNurseryOutService(NurseryParam msg);
+    public <T> T queryIndexNurseryOutService(NurseryParam param);
 
     //省外苗圃数据查询
-    public <T> T queryNurseryOutService(NurseryParam msg);
+    public <T> T queryNurseryOutService(NurseryParam param);
 
     //省外苗圃excel导出
-    public <T> T excelNurseryOutService(HttpServletRequest request);
+    public <T> T excelNurseryOutService(HttpServletRequest request, NurseryParam param);
 
     //省外苗圃数据多数据添加
     public Status addNurseryOutService(MultipartFile[] files, NurseryOut msg);

@@ -9,6 +9,7 @@ import java.util.Objects;
  */
 public class SeedlingOffer implements java.io.Serializable {
 
+    private static final long serialVersionUID = 7916864702648706092L;
     private String id;//数据id
     private String sdName;//苗木名称
     private String spec;//规格前缀

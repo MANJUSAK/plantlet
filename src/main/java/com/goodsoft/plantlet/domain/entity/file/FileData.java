@@ -9,6 +9,7 @@ import java.util.Objects;
  * version v1.0
  */
 public class FileData implements java.io.Serializable {
+    private static final long serialVersionUID = -7500263342165526473L;
     private String fileId;//文件编号
     private String path;//文件路径
     private String bases;//根目录

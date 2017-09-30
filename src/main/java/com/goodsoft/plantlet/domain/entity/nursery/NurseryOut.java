@@ -8,6 +8,7 @@ import java.util.Objects;
  * version v1.0
  */
 public class NurseryOut implements java.io.Serializable {
+    private static final long serialVersionUID = 602967075477219871L;
     private String id;//数据id
     private String seedlingName;//苗木名称
     private long tel;//联系电话

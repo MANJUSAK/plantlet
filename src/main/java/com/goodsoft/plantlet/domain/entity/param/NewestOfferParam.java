@@ -8,6 +8,7 @@ import java.util.Objects;
  * version v1.0
  */
 public class NewestOfferParam implements java.io.Serializable {
+    private static final long serialVersionUID = -2727532216166774144L;
     private int year;//年
     private int month;//月
 

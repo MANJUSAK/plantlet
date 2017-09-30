@@ -78,9 +78,10 @@ public class NurseryController {
      *
      * @return 响应结果
      */
-    @RequestMapping(value = "/province/export/excel/seedling.action.do", method = RequestMethod.POST)
-    public Object excelNurseryController(HttpServletRequest request) {
-        return this.service.excelNurseryService(request);
+    @CrossOrigin(origins = "*", maxAge = 3600, methods = RequestMethod.GET)
+    @RequestMapping(value = "/province/export/excel/seedling.action.do", method = RequestMethod.GET)
+    public Object excelNurseryController(HttpServletRequest request, NurseryParam param) {
+        return this.service.excelNurseryService(request, param);
     }
 
     /**
@@ -135,9 +136,10 @@ public class NurseryController {
      *
      * @return 响应结果
      */
-    @RequestMapping(value = "/outside/export/excel/seedling.action.do", method = RequestMethod.POST)
-    public Object excelNurseryOutController(HttpServletRequest request) {
-        return this.service.excelNurseryOutService(request);
+    @CrossOrigin(origins = "*", maxAge = 3600, methods = RequestMethod.GET)
+    @RequestMapping(value = "/outside/export/excel/seedling.action.do", method = RequestMethod.GET)
+    public Object excelNurseryOutController(HttpServletRequest request, NurseryParam param) {
+        return this.service.excelNurseryOutService(request, param);
     }
 
     /**

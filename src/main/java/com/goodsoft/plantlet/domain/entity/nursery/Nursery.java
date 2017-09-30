@@ -9,6 +9,7 @@ import java.util.Objects;
  * version v1.0
  */
 public class Nursery implements java.io.Serializable {
+    private static final long serialVersionUID = -4431695486254426237L;
     private String id;//数据id
     private String plantName;//植物名称
     private String types;//种类
@@ -33,6 +34,10 @@ public class Nursery implements java.io.Serializable {
     private String operLicenseNum;//经营许可证编号
     private int postCode;//邮编
     private List<String> picture;//文件图片
+
+    public Nursery() {
+        this.fileId = "";
+    }
 
     public String getId() {
         return id;

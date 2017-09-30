@@ -65,13 +65,14 @@
         <result property="sdAdd" column="seedling_add"/>
         <result property="seedlingComp" column="seedling_comp"/>
         <result property="seedlingIntro" column="seedling_intro"/>
+        <result property="price" column="price"/>
     </resultMap>
     <!--供需信息数据结果映射 end-->
     <!--供需信息数据sql start-->
     <select id="querySeedlingSupplyDao" parameterType="com.goodsoft.plantlet.domain.entity.param.SupplyParam"
             resultMap="seedlingSupplyMap">
         SELECT `id`,`seedling_name`,`seedling_type`,`spec`,
-        `spec_min`,`spec_max`,`unit`,`quantity`,`fileId`,
+        `spec_min`,`spec_max`,`unit`,`quantity`,`fileId`,`price`,
         `contact`, `tel`,`seedling_add`,`seedling_comp`,`seedling_intro`
         FROM `gs_seedling_supply_info`
         <where>
@@ -208,7 +209,6 @@
         <result property="maxPriceOut" column="max_price_out"/>
         <result property="minPrice" column="min_price"/>
         <result property="maxPrice" column="max_price"/>
-        <result property="unit" column="unit"/>
         <result property="year" column="year"/>
         <result property="month" column="month"/>
     </resultMap>
@@ -217,7 +217,7 @@
     <select id="querySeedlingStatisticsDao"
             parameterType="com.goodsoft.plantlet.domain.entity.param.SeedlingStatisticsParam"
             resultMap="SeedlingStatisticsMap">
-        SELECT `num`,`num_out`,`seedling_name`,`spec`,`spec_min`,`spec_max`,`unit`,`min_price`,
+        SELECT `num`,`num_out`,`seedling_name`,`spec`,`spec_min`,`spec_max`,`min_price`,
         `max_price`,`min_price_out`,`max_price_out`,`seedling_offer`,`year`,`month`
         FROM `gs_seedling_statistics_view`
         <where>
@@ -297,10 +297,10 @@
     <insert id="addSeedlingSupplyDao" parameterType="com.goodsoft.plantlet.domain.entity.seedlinginfo.SupplyInfo">
     INSERT INTO `gs_seedling_supply_info`
     (`id`,`seedling_name`,`seedling_type`,`spec`,`spec_min`,`spec_max`,`unit`,`quantity`,
-    `fileId`,`contact`,`tel`,`seedling_add`,`seedling_comp`,`seedling_intro`)
+    `fileId`,`contact`,`tel`,`seedling_add`,`seedling_comp`,`seedling_intro`,`price`)
     VALUES
     (#{id},#{sdName},#{sdType},#{spec},#{specMin},#{specMax},
-    #{unit},#{num},#{fileId},#{contact},#{tel},#{sdAdd},#{seedlingComp},#{seedlingIntro});
+    #{unit},#{num},#{fileId},#{contact},#{tel},#{sdAdd},#{seedlingComp},#{seedlingIntro},#{price});
     </insert>
     <!--供需信息数据录入sql end-->
     <!--苗木造价单条数据添加sql start-->
@@ -323,5 +323,22 @@
     </insert>
     <!--苗木造价多数据添加sql end-->
     <!--数据录入sql end-->
+    <!--数据更新 start-->
+    <!--省内苗圃数据更新sql start-->
+    <update id="updateNurseryDao" parameterType="com.goodsoft.plantlet.domain.entity.seedlinginfo.SupplyInfo">
+        UPDATE `gs_nursery_province_info`
+        <set>
+            <if test="spec !=null and spec !=''">`spec` = #{spec},</if>
+            <if test="specMin !=null and specMin !=''">`spec_min` = #{specMin},</if>
+            <if test="specMax !=null and specMax !=''">`spec_max` = #{specMax},</if>
+            <if test="price !=null and price !=''">`price` = #{price},</if>
+            <if test="num !=null and num !=''">`quantity` = #{num}</if>
+        </set>
+        WHERE
+        `plant_name`=#{sdName} and `nursery_name`=#{seedlingComp} and `spec` = #{spec} and `spec_min`=#{specMin} and
+        `spec_max`=#{specMax}
+    </update>
+    <!--省内苗圃数据更新sql end-->
+    <!--数据更新 end-->
 </mapper>
         <!--mapper 查询苗木数据 end -->

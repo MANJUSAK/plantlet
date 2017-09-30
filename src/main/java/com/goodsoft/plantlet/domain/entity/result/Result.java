@@ -11,6 +11,7 @@ import java.util.Objects;
  */
 public class Result implements java.io.Serializable {
 
+    private static final long serialVersionUID = -2828998968005589782L;
     // 状态码
     private int errorCode;
     // 返回数据

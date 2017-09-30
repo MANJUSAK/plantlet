@@ -6,9 +6,9 @@ var within = '';
 var arr_provinces_li = null;
 $(function() {
 	//省内
-	var url_ = window.sessionStorage.getItem('host') + '/plantlet/nursery/province/find/seedling.action.do';
+	var url_ = window.sessionStorage.getItem('host') + '/plantlet/nursery/province/find/index/seedling.action.do';
 	//省外
-	var url_x = window.sessionStorage.getItem('host') + '/plantlet/nursery/outside/find/seedling.action.do';
+	var url_x = window.sessionStorage.getItem('host') + '/plantlet/nursery/outside/find/index/seedling.action.do';
 	var show_page = ['#within', '#abroad'];
 	var iswithinx = ['贵阳市', '遵义市', '六盘水市', '安顺市', '毕节市', '铜仁市', '黔西南布依族苗族自治州', '黔东南苗族侗族自治州', '黔南布依族苗族自治州'];
 	var isguiyang = ['清镇市', '修文县', '息烽县', '开阳县', '花溪区', '观山湖区', '云岩区', '乌当区', '小河区', '白云区', '南明区'];
@@ -125,11 +125,13 @@ $(function() {
 			async: true,
 			success: function(result) {
 				if(result.errorCode == 0) {
+					console.log(result)
 					var data = result.data;
 					$.each(data, function(i) {
 						//是否省外
 						if(isabroad) {
 							var img = data[i]['picture'] == null ? '' : data[i]['picture'][0];
+							var seedlingName = data[i]['seedlingName']==null?'无':data[i]['seedlingName'];
 							htmlx += '<ul class="isabroads"><li>' +
 								'<div class="mt-imgs">' +
 								'<div class="mti-content">' +
@@ -138,14 +140,15 @@ $(function() {
 								'</div>' +
 								'<div class="mt-right">' +
 								'<div class="mtr-title">' +
-								'<a href="miaopu_details.html?key=1&nums=' + data[i]['id'] + '">' + data[i]['company'] + '</a>' +
+								'<a href="miaopu_details.html?key=1&nums=' + data[i]['company'] + '">' + data[i]['company'] + '</a>' +
 								'</div>' +
 								'<div class="mtr-jianjie">' +
-								'<p>' + data[i]['seedlingName'] + '</p>' +
+								'<p>' + seedlingName + '</p>' +
 								'</div>' +
 								'</div>' +
 								'</li></ul>';
 						} else {
+							var nurseryIntro = data[i]['nurseryIntro']==null?'无':data[i]['nurseryIntro'];
 							html += '<ul class="iswithins"><li>' +
 								'<div class="mt-imgs">' +
 								'<div class="mti-content">' +
@@ -153,10 +156,10 @@ $(function() {
 								'</div>' +
 								'<div class="mt-right">' +
 								'<div class="mtr-title">' +
-								'<a href="miaopu_details.html?key=0&nums=' + data[i]['id'] + '">' + data[i]['nurseryName'] + '</a>' +
+								'<a href="miaopu_details.html?key=0&nums=' + data[i]['nurseryName'] + '">' + data[i]['nurseryName'] + '</a>' +
 								'</div>' +
 								'<div class="mtr-jianjie">' +
-								'<p>' + data[i]['nurseryIntro'] + '</p>' +
+								'<p>' +  nurseryIntro + '</p>' +
 								'</div>' +
 								'</div>' +
 								'</li></ul>';

@@ -9,9 +9,11 @@ import java.util.Objects;
  * version v1.0
  */
 public class NurseryParam implements java.io.Serializable {
+    private static final long serialVersionUID = -2663103036526929655L;
     private String id;//数据id
     private String keyWord;//关键字
-    private String[] province;//省份
+    private String[] provinces;//多省份
+    private String province;//单省份
     private String city;//区县市
     private String county;//县
     private String spec;//规格前缀
@@ -36,11 +38,19 @@ public class NurseryParam implements java.io.Serializable {
         this.keyWord = keyWord;
     }
 
-    public String[] getProvince() {
+    public String[] getProvinces() {
+        return provinces;
+    }
+
+    public void setProvinces(String[] provinces) {
+        this.provinces = provinces;
+    }
+
+    public String getProvince() {
         return province;
     }
 
-    public void setProvince(String[] province) {
+    public void setProvince(String province) {
         this.province = province;
     }
 
@@ -108,8 +118,9 @@ public class NurseryParam implements java.io.Serializable {
         return num == that.num &&
                 Objects.equals(id, that.id) &&
                 Objects.equals(keyWord, that.keyWord) &&
-                Arrays.equals(province, that.province) &&
+                Arrays.equals(provinces, that.provinces) &&
                 Objects.equals(city, that.city) &&
+                Objects.equals(province, that.province) &&
                 Objects.equals(county, that.county) &&
                 Objects.equals(spec, that.spec) &&
                 Objects.equals(specMin, that.specMin) &&
@@ -119,6 +130,6 @@ public class NurseryParam implements java.io.Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, keyWord, province, city, county, spec, specMin, specMax, comp, num);
+        return Objects.hash(id, keyWord, provinces, province, city, county, spec, specMin, specMax, comp, num);
     }
 }

@@ -125,11 +125,12 @@ public class FileServicelmpl implements FileService {
             var1 = "D:/plantlet";
         }
         //文件保存 start
+        List<String> fileList = null;
         try {
             //初始化文件保存集合
             List<FileData> list = new ArrayList<FileData>();
             //保存文件到服务器并获取文件相对路径
-            List<String> fileList = this.fileUploadUtil.fileUpload(files, fileType, var1);
+            fileList = this.fileUploadUtil.fileUpload(files, fileType, var1);
             String sort = null;
             //获取文件类型 start
             switch (fileType) {
@@ -181,6 +182,8 @@ public class FileServicelmpl implements FileService {
             //清除集合里的内容  避免数据混乱
             fileList.clear();
         } catch (Exception e) {
+            fileList.clear();
+            e.printStackTrace();
             this.logger.error(e.toString());
             return 600;
         }

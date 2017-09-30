@@ -7,6 +7,7 @@ import java.util.Objects;
  * Created by 严彬荣 on 2017/9/19.
  */
 public class SeedlingOfferParam implements java.io.Serializable {
+    private static final long serialVersionUID = 2620256859686659409L;
     private String keyWord;//关键字
     private String spec;//规格前缀
     private String specMin;//规格范围第一位

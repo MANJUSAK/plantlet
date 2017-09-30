@@ -55,6 +55,10 @@ public class NurseryServicelmpl implements NurseryService {
     private DataAnalysisUtil analysisUtil = DataAnalysisUtil.getInstance();
     //实例化获取服务器域名工具类
     private DomainNameUtil http = DomainNameUtil.getInstance();
+    //实例化省内超大excel读取工具类
+    private ReadExcelUtil readExcel = ReadExcelUtil.getInstance();
+    //实例化省外超大excel读取工具类
+    private ReadExcelOutUtil readExcelOut = ReadExcelOutUtil.getInstance();
 
     /**
      * 省内苗圃主页展示数据查询业务处理方法
@@ -91,6 +95,7 @@ public class NurseryServicelmpl implements NurseryService {
             }
         } catch (Exception e) {
             this.logger.error(e.toString());
+            e.printStackTrace();
             return (T) new Status(StatusEnum.SERVER_ERROR.getCODE(), StatusEnum.SERVER_ERROR.getEXPLAIN());
         }
     }
@@ -142,10 +147,10 @@ public class NurseryServicelmpl implements NurseryService {
      * @return 导出结果
      */
     @Override
-    public <T> T excelNurseryService(HttpServletRequest request) {
+    public <T> T excelNurseryService(HttpServletRequest request, NurseryParam param) {
         StringBuilder sb = new StringBuilder();
         try {
-            List<Nursery> data = this.dao.queryNurseryAllDao();
+            List<Nursery> data = this.dao.queryNurseryAllDao(param);
             if (data.size() > 0) {
                 sb.append(this.http.getServerDomainName(request).toString());
                 sb.append(this.excelUtil.writeExcel(data, "in"));
@@ -155,7 +160,7 @@ public class NurseryServicelmpl implements NurseryService {
             this.logger.error(e.toString());
             return (T) new Status(StatusEnum.DEFEAT.getCODE(), StatusEnum.DEFEAT.getEXPLAIN());
         }
-        return (T) new Status(StatusEnum.DEFEAT.getCODE(), StatusEnum.DEFEAT.getEXPLAIN());
+        return (T) new Status(StatusEnum.NO_EXCEL_DATA.getCODE(), StatusEnum.NO_EXCEL_DATA.getEXPLAIN());
     }
 
     /**
@@ -189,19 +194,19 @@ public class NurseryServicelmpl implements NurseryService {
             StringBuilder sb = new StringBuilder(file.getBases());
             sb.append(file.getPath());
             /*获取上传excel文件数据 start*/
-            List<List<Object>> list = this.excelUtil.readExcel(sb.toString(), uuid);
-            if (list == null) {
-                return new Status(StatusEnum.NO_EXCEL.getCODE(), StatusEnum.NO_EXCEL.getEXPLAIN());
-            }
-            List<Nursery> sdData = this.serviceSupp.getNurseryExcelData(list, "insert");
-            /*获取上传excel文件数据 end*/
+            this.readExcel.process(sb.toString());
+            List<Nursery> sdData = this.readExcel.list;
+            sdData = sdData.subList(2, sdData.size());
+            /*获取上传excel文件数据 end*//**/
             //解析excel数据有效性
             int len = this.serviceSupp.getNurseryExcelDataAnalysis(sdData);
             //判断解析数据是否满足正确格式数据，是存库，否删除原始文件
             if (len > 0) {
                 this.dao.addNurseryDao(sdData);
+                sdData.clear();
                 return new Status(StatusEnum.SUCCESS.getCODE(), StatusEnum.SUCCESS.getEXPLAIN());
             } else {
+                sdData.clear();
                 //删除硬盘上的文件
                 this.deleteFile.deleteFile(file);
                 //删除数据库文件数据
@@ -209,6 +214,7 @@ public class NurseryServicelmpl implements NurseryService {
                 return new Status(StatusEnum.EXCEL_NO_DATA.getCODE(), StatusEnum.EXCEL_NO_DATA.getEXPLAIN());
             }
         } catch (Exception e) {
+            this.readExcel.list.clear();
             //代码异常删除原始文件，避免数据冗余
             try {
                 //删除硬盘上的文件
@@ -284,6 +290,11 @@ public class NurseryServicelmpl implements NurseryService {
         }
         page *= 20;
         param.setNum(page);
+        //多省份查询
+        if (null != param.getProvince()) {
+            String[] province = param.getProvince().split(",");
+            param.setProvinces(province);
+        }
         //初始化msg.getNum() end
         List<NurseryOut> data = null;
         try {
@@ -315,6 +326,11 @@ public class NurseryServicelmpl implements NurseryService {
         }
         page *= 20;
         param.setNum(page);
+        //多省份查询
+        if (null != param.getProvince()) {
+            String[] province = param.getProvince().split(",");
+            param.setProvinces(province);
+        }
         //初始化msg.getNum() end
         List<NurseryOut> data = null;
         try {
@@ -336,10 +352,15 @@ public class NurseryServicelmpl implements NurseryService {
      * @return 导出结果
      */
     @Override
-    public <T> T excelNurseryOutService(HttpServletRequest request) {
+    public <T> T excelNurseryOutService(HttpServletRequest request, NurseryParam param) {
         StringBuilder sb = new StringBuilder();
+        //多省份查询
+        if (null != param.getProvince()) {
+            String[] province = param.getProvince().split(",");
+            param.setProvinces(province);
+        }
         try {
-            List<NurseryOut> data = this.dao.queryNurseryOutAllDao();
+            List<NurseryOut> data = this.dao.queryNurseryOutAllDao(param);
             if (data.size() > 0) {
                 sb.append(this.http.getServerDomainName(request).toString());
                 sb.append(this.excelUtil.writeExcel(data, "out"));
@@ -347,9 +368,10 @@ public class NurseryServicelmpl implements NurseryService {
             }
         } catch (Exception e) {
             this.logger.error(e.toString());
+            e.printStackTrace();
             return (T) new Status(StatusEnum.DEFEAT.getCODE(), StatusEnum.DEFEAT.getEXPLAIN());
         }
-        return (T) new Status(StatusEnum.DEFEAT.getCODE(), StatusEnum.DEFEAT.getEXPLAIN());
+        return (T) new Status(StatusEnum.NO_EXCEL_DATA.getCODE(), StatusEnum.NO_EXCEL_DATA.getEXPLAIN());
     }
 
     /**
@@ -399,19 +421,19 @@ public class NurseryServicelmpl implements NurseryService {
                     StringBuilder sb = new StringBuilder(file.getBases());
                     sb.append(file.getPath());
                     /*获取上传excel文件数据 start*/
-                    List<List<Object>> list = this.excelUtil.readExcel(sb.toString(), uuid);
-                    if (list == null) {
-                        return new Status(StatusEnum.NO_EXCEL.getCODE(), StatusEnum.NO_EXCEL.getEXPLAIN());
-                    }
-                    List<NurseryOut> sdData = this.serviceSupp.getNurseryOutExcelData(list, "insert");
+                    this.readExcelOut.process(sb.toString());
+                    List<NurseryOut> sdData = this.readExcelOut.list;
+                    sdData = sdData.subList(2, sdData.size());
                     /*获取上传excel文件数据 end*/
                     //解析excel数据有效性
                     int len = this.serviceSupp.getNurseryOutExcelDataAnalysis(sdData);
                     //判断解析数据是否满足正确格式数据，是存库，否删除原始文件
                     if (len > 0) {
                         this.dao.addNurseryOutDao(sdData);
+                        sdData.clear();
                         return new Status(StatusEnum.SUCCESS.getCODE(), StatusEnum.SUCCESS.getEXPLAIN());
                     } else {
+                        sdData.clear();
                         //删除硬盘上的文件
                         this.deleteFile.deleteFile(file);
                         //删除数据库文件数据
@@ -419,6 +441,7 @@ public class NurseryServicelmpl implements NurseryService {
                         return new Status(StatusEnum.EXCEL_NO_DATA.getCODE(), StatusEnum.EXCEL_NO_DATA.getEXPLAIN());
                     }
                 } catch (Exception e) {
+                    this.readExcelOut.list.clear();
                     //代码异常删除文件，避免数据冗余
                     try {
                         //删除硬盘上的文件
@@ -426,7 +449,6 @@ public class NurseryServicelmpl implements NurseryService {
                         //删除数据库文件数据
                         this.fileDao.deleteFileDao(uuid);
                     } catch (Exception e1) {
-
                         this.logger.error(e.toString());
                     }
                     this.logger.error(e.toString());
@@ -460,11 +482,11 @@ public class NurseryServicelmpl implements NurseryService {
         }
         FileData file = null;
         try {
-            //获取上传文件路径
+            /*//获取上传文件路径
             file = this.fileDao.queryFileOneDao(uuid);
             StringBuilder sb = new StringBuilder(file.getBases());
             sb.append(file.getPath());
-            /*获取上传excel文件数据 start*/
+            *//*获取上传excel文件数据 start*//*
             List<List<List<Object>>> list = this.excelUtil.readAllExcel(sb.toString(), uuid);
             for (int i = 0, length = list.size(); i < length; ++i) {
                 if (list == null) {
@@ -472,7 +494,7 @@ public class NurseryServicelmpl implements NurseryService {
                 }
                 List<List<Object>> data = list.get(i);
                 List<Nursery> sdData = this.serviceSupp.getNurseryExcelData(data, "update");
-                /*获取上传excel文件数据 end*/
+                *//*获取上传excel文件数据 end*//*
                 //解析excel数据有效性
                 int len = this.serviceSupp.getNurseryExcelDataAnalysis(sdData);
                 //判断解析数据是否满足正确格式数据，是存库，否删除原始文件
@@ -486,7 +508,8 @@ public class NurseryServicelmpl implements NurseryService {
                     return new Status(StatusEnum.EXCEL_NO_DATA.getCODE(), StatusEnum.EXCEL_NO_DATA.getEXPLAIN());
                 }
             }
-            return new Status(StatusEnum.SUCCESS.getCODE(), StatusEnum.SUCCESS.getEXPLAIN());
+            return new Status(StatusEnum.SUCCESS.getCODE(), StatusEnum.SUCCESS.getEXPLAIN());*/
+            return null;
         } catch (Exception e) {
             //代码异常删除文件，避免数据冗余
             try {
@@ -528,11 +551,11 @@ public class NurseryServicelmpl implements NurseryService {
         }
         FileData file = null;
         try {
-            //获取上传文件路径
+           /* //获取上传文件路径
             file = this.fileDao.queryFileOneDao(uuid);
             StringBuilder sb = new StringBuilder(file.getBases());
             sb.append(file.getPath());
-            /*获取上传excel文件数据 start*/
+            *//*获取上传excel文件数据 start*//*
             List<List<List<Object>>> list = this.excelUtil.readAllExcel(sb.toString(), uuid);
             for (int i = 0, length = list.size(); i < length; ++i) {
                 if (list == null) {
@@ -540,7 +563,7 @@ public class NurseryServicelmpl implements NurseryService {
                 }
                 List<List<Object>> data = list.get(i);
                 List<NurseryOut> sdData = this.serviceSupp.getNurseryOutExcelData(data, "update");
-                /*获取上传excel文件数据 end*/
+                *//*获取上传excel文件数据 end*//*
                 //解析excel数据有效性
                 int len = this.serviceSupp.getNurseryOutExcelDataAnalysis(sdData);
                 //判断解析数据是否满足正确格式数据，是存库，否删除原始文件
@@ -554,7 +577,8 @@ public class NurseryServicelmpl implements NurseryService {
                     return new Status(StatusEnum.EXCEL_NO_DATA.getCODE(), StatusEnum.EXCEL_NO_DATA.getEXPLAIN());
                 }
             }
-            return new Status(StatusEnum.SUCCESS.getCODE(), StatusEnum.SUCCESS.getEXPLAIN());
+            return new Status(StatusEnum.SUCCESS.getCODE(), StatusEnum.SUCCESS.getEXPLAIN());*/
+            return null;
         } catch (Exception e) {
             //代码异常删除文件，避免数据冗余
             try {

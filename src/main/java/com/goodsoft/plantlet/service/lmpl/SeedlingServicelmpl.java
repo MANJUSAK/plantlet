@@ -1,8 +1,10 @@
 package com.goodsoft.plantlet.service.lmpl;
 
 import com.goodsoft.plantlet.domain.dao.FileDao;
+import com.goodsoft.plantlet.domain.dao.NurseryDao;
 import com.goodsoft.plantlet.domain.dao.SeedlingDao;
 import com.goodsoft.plantlet.domain.entity.file.FileData;
+import com.goodsoft.plantlet.domain.entity.nursery.Nursery;
 import com.goodsoft.plantlet.domain.entity.param.*;
 import com.goodsoft.plantlet.domain.entity.result.Result;
 import com.goodsoft.plantlet.domain.entity.result.Status;
@@ -16,7 +18,7 @@ import com.goodsoft.plantlet.service.supp.SeedlingServiceSupp;
 import com.goodsoft.plantlet.service.supp.ServicelmplGetFileSupp;
 import com.goodsoft.plantlet.util.DataAnalysisUtil;
 import com.goodsoft.plantlet.util.DeleteFileUtil;
-import com.goodsoft.plantlet.util.ExcelUtil;
+import com.goodsoft.plantlet.util.ReadExcelOfferUtil;
 import com.goodsoft.plantlet.util.UUIDUtil;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
@@ -38,6 +40,8 @@ public class SeedlingServicelmpl implements SeedlingService {
     @Resource
     private SeedlingDao dao;
     @Resource
+    private NurseryDao suppDao;
+    @Resource
     private FileService fileService;
     @Resource
     private FileDao fileDao;
@@ -50,7 +54,7 @@ public class SeedlingServicelmpl implements SeedlingService {
     //实例化UUID工具类
     private UUIDUtil uuid = UUIDUtil.getInstance();
     //实例化excel工具类
-    private ExcelUtil excelUtil = ExcelUtil.getInstance();
+    private ReadExcelOfferUtil readExcel = ReadExcelOfferUtil.getInstance();
     //实例化文件删除工具类
     private DeleteFileUtil deleteFile = DeleteFileUtil.getInstance();
     //实例化数据解析工具类
@@ -331,6 +335,48 @@ public class SeedlingServicelmpl implements SeedlingService {
             msg.setSpec(var.getStr());
             msg.setSpecMin(var.getNum());
             msg.setSpecMax(var.getNum_1());
+            int i = this.dao.updateNurseryDao(msg);
+            if (i == 0) {
+                NurseryParam np = new NurseryParam();
+                Nursery ns = new Nursery();
+                np.setComp(msg.getSeedlingComp());
+                List<Nursery> data = this.suppDao.queryNurseryDao(np);
+                if (data.size() > 0) {
+                    ns = data.get(0);
+                    ns.setId(uuid);
+                    ns.setPlantName(msg.getSdName());
+                    ns.setPrice(msg.getPrice());
+                    ns.setSpec(msg.getSpec());
+                    ns.setSpecMin(msg.getSpecMin());
+                    ns.setSpecMax(msg.getSpecMax());
+                    ns.setNum(msg.getNum());
+                    ns.setTel(msg.getTel());
+                    this.suppDao.addNurseryOneDao(ns);
+                } else {
+                    ns.setId(uuid);
+                    ns.setProvince("贵州省");
+                    ns.setDistricts("贵阳市");
+                    ns.setNurseryIntro(msg.getSeedlingIntro());
+                    ns.setNurseryName(msg.getSeedlingComp());
+                    ns.setNurseryAdd(msg.getSdAdd());
+                    ns.setContact(msg.getContact());
+                    ns.setTypes(msg.getSdType());
+                    ns.setTel(msg.getTel());
+                    ns.setSpec(msg.getSpec());
+                    ns.setNum(msg.getNum());
+                    ns.setSpecMin(msg.getSpecMin());
+                    ns.setSpecMax(msg.getSpecMax());
+                    ns.setPrice(msg.getPrice());
+                    ns.setPlantName(msg.getSdName());
+                    ns.setCounty("");
+                    ns.setProLicenseNum("");
+                    ns.setOperLicenseNum("");
+                    ns.setFileId("");
+                    ns.setFax("");
+                    ns.setEmail("");
+                    this.suppDao.addNurseryOneDao(ns);
+                }
+            }
             this.dao.addSeedlingSupplyDao(msg);
             return new Status(StatusEnum.SUCCESS.getCODE(), StatusEnum.SUCCESS.getEXPLAIN());
         } catch (Exception e) {
@@ -379,19 +425,21 @@ public class SeedlingServicelmpl implements SeedlingService {
             StringBuilder sb = new StringBuilder(file.getBases());
             sb.append(file.getPath());
             /*获取上传excel文件数据 start*/
-            List<List<Object>> list = this.excelUtil.readExcel(sb.toString(), uuid);
-            if (list == null) {
-                return new Status(StatusEnum.NO_EXCEL.getCODE(), StatusEnum.NO_EXCEL.getEXPLAIN());
-            }
-            List<SeedlingOffer> sdData = this.serviceSupp.getSeedlingOfferExcelData(list);
+            this.readExcel.process(sb.toString());
+
+            List<SeedlingOffer> sdData = this.readExcel.list;
+            int size = sdData.size();
+            sdData = sdData.subList(2, size);
             /*获取上传excel文件数据 end*/
             //解析excel保存数据是否有无效，是移除
             int len = this.serviceSupp.getSeedlingOfferExcelDataAnalysis(sdData);
             //判断读取数据是否满足正确格式数据，是存库，否删除原始文件
             if (len > 0) {
                 this.dao.addSeedlingOfferDao(sdData);
+                sdData.clear();
                 return new Status(StatusEnum.SUCCESS.getCODE(), StatusEnum.SUCCESS.getEXPLAIN());
             } else {
+                sdData.clear();
                 //删除硬盘上的文件
                 this.deleteFile.deleteFile(file);
                 //删除数据库文件数据
@@ -399,6 +447,7 @@ public class SeedlingServicelmpl implements SeedlingService {
                 return new Status(StatusEnum.EXCEL_NO_DATA.getCODE(), StatusEnum.EXCEL_NO_DATA.getEXPLAIN());
             }
         } catch (Exception e) {
+            this.readExcel.list.clear();
             //代码异常删除原始文件，避免数据冗余
             try {
                 //删除硬盘上的文件

@@ -67,17 +67,17 @@
             <version>1.1.2</version>
         </dependency>
         <!--jdk1.7-->
-        <!--<dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.43</version>
-        </dependency>-->
-        <!--jdk1.8-->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>6.0.5</version>
+            <version>5.1.43</version>
         </dependency>
+        <!--jdk1.8-->
+        <!--<dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>6.0.5</version>
+        </dependency>-->
         <!--mysql end-->
         <!-- excel组件支持 start-->
         <!--泛型jar start-->
@@ -111,6 +111,16 @@
             <groupId>org.apache.poi</groupId>
             <artifactId>poi-scratchpad</artifactId>
             <version>3.14</version>
+        </dependency>
+        <dependency>
+            <groupId>apache-xerces</groupId>
+            <artifactId>xercesImpl</artifactId>
+            <version>2.9.1</version>
+        </dependency>
+        <dependency>
+            <groupId>sax</groupId>
+            <artifactId>sax</artifactId>
+            <version>2.0.1</version>
         </dependency>
         <!-- excel组件支持 end-->
         <!--word 插件 start-->

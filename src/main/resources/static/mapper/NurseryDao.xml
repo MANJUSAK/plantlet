@@ -10,6 +10,10 @@
         <result property="nurseryIntro" column="nursery_intro"/>
         <result property="fileId" column="fileId"/>
         <result property="nurseryAdd" column="nursery_add"/>
+        <result property="nurseryName" column="nursery_name"/>
+        <result property="districts" column="districts"/>
+        <result property="province" column="province"/>
+        <result property="county" column="county"/>
     </resultMap>
     <!--省内苗圃数据主页显示结果映射 end-->
     <!--省内苗圃数据查询结果映射 start-->
@@ -42,7 +46,7 @@
     <!--省内苗圃数据主页显示sql start-->
     <select id="queryIndexNurseryDao" parameterType="com.goodsoft.plantlet.domain.entity.param.NurseryParam"
             resultMap="nurseryMap_index">
-        SELECT DISTINCT `nursery_name`,`nursery_intro`,`nursery_add`,`fileId`
+        SELECT DISTINCT `nursery_name`,`province`,`districts`,`nursery_intro`,`county`,`nursery_add`,`fileId`
         FROM `gs_nursery_province_info`
         <where>
             <if test="keyWord !=null and keyWord != ''">
@@ -51,7 +55,7 @@
             <if test="comp !=null and comp != ''">
                 AND nursery_name = #{comp}
             </if>
-            <if test="province !=null and province != ''">
+            <if test="province != null and province !=''">
                 AND province = #{province}
             </if>
             <if test="city !=null and city != ''">
@@ -73,7 +77,7 @@
         limit #{num},20;
     </select>
     <!--省内苗圃数据主页显示sql end-->
-    <!--省内苗圃数据所有字段查询sql start-->
+    <!--省内苗圃数据字段查询sql start-->
     <select id="queryNurseryDao" parameterType="com.goodsoft.plantlet.domain.entity.param.NurseryParam"
             resultMap="nurseryMap">
         SELECT `id`,`nursery_name`,`contacts`,`tel`,`nursery_intro`,`fax_num`,`email`,`nursery_add`,
@@ -113,17 +117,31 @@
     </select>
     <!--省内苗圃数据所有字段查询sql end-->
     <!--省内苗圃所有数据查询sql start-->
-    <select id="queryNurseryAllDao" resultMap="nurseryMap">
+    <select id="queryNurseryAllDao" parameterType="com.goodsoft.plantlet.domain.entity.param.NurseryParam"
+            resultMap="nurseryMap">
         SELECT `id`,`nursery_name`,`contacts`,`tel`,`nursery_intro`,`fax_num`,`email`,`nursery_add`,
         `province`,`districts`,`nursery_area`,`fileId`,`pro_license_num`,`oper_license_num`,`spec`,
         `spec_min`,`spec_max`,`price`,`quantity`,`post_code`,`plant_name`,`plant_type`,`county`
-        FROM `gs_nursery_province_info` ORDER BY nid;
+        FROM `gs_nursery_province_info`
+        <where>
+            <if test="province !=null and province != ''">
+                AND province = #{province}
+            </if>
+            <if test="city !=null and city != ''">
+                AND districts = #{city}
+            </if>
+            <if test="county !=null and county != ''">
+                AND county = #{county}
+            </if>
+        </where>
+        ORDER BY nid;
     </select>
     <!--省内苗圃所有数据查询sql end-->
     <!--省外苗圃数据主页显示结果映射 start-->
     <resultMap id="NurseryOutMap_index" type="com.goodsoft.plantlet.domain.entity.nursery.NurseryOut">
         <result property="company" column="company_name"/>
         <result property="address" column="address"/>
+        <result property="province" column="province"/>
     </resultMap>
     <!--省外苗圃数据主页显示结果映射 end-->
     <!--省外苗圃数据查询结果映射 start-->
@@ -155,7 +173,7 @@
     <!--省外苗圃数据主页显示sql start-->
     <select id="queryIndexNurseryOutDao" parameterType="com.goodsoft.plantlet.domain.entity.param.NurseryParam"
             resultMap="NurseryOutMap_index">
-        SELECT DISTINCT `company_name`,`address`
+        SELECT DISTINCT `company_name`,`province`,`address`
         FROM `gs_nursery_outside_info`
         <where>
             <if test="keyWord != null and keyWord != ''">
@@ -164,8 +182,8 @@
             <if test="comp !=null and comp != ''">
                 AND company_name = #{comp}
             </if>
-            <if test="province !=null and province != ''">
-                <foreach collection="province" index="index" item="item" separator="or">
+            <if test="provinces !=null and provinces != ''">
+                <foreach collection="provinces" index="index" item="item" separator="or">
                     province = #{item}
                 </foreach>
             </if>
@@ -202,8 +220,8 @@
             <if test="comp !=null and comp != ''">
                 AND company_name = #{comp}
             </if>
-            <if test="province !=null and province != ''">
-                <foreach collection="province" index="index" item="item" separator="or">
+            <if test="provinces !=null and provinces != ''">
+                <foreach collection="provinces" index="index" item="item" separator="or">
                     province = #{item}
                 </foreach>
             </if>
@@ -224,11 +242,20 @@
     </select>
     <!--省外苗圃数据查询sql end-->
     <!--省外苗圃所有数据查询sql start-->
-    <select id="queryNurseryOutAllDao" resultMap="NurseryOutMap">
+    <select id="queryNurseryOutAllDao" parameterType="com.goodsoft.plantlet.domain.entity.param.NurseryParam"
+            resultMap="NurseryOutMap">
         SELECT `id`,`province`,`city`,`company_name`,`tel`,`seedling_type`,`seedling_name`,`spec`,`unit`,
         `quantity`,`price`,`comments`,`acquisition_time`,`address`,`fileId`,`fax_num`,`web_site`,`email`,
         `spec_min`,`spec_max`
-        FROM `gs_nursery_outside_info` ORDER BY nid;
+        FROM `gs_nursery_outside_info`
+        <where>
+            <if test="provinces !=null and provinces != ''">
+                <foreach collection="provinces" index="index" item="item" separator="or">
+                    province = #{item}
+                </foreach>
+            </if>
+        </where>
+        ORDER BY nid;
     </select>
     <!--省外苗圃所有数据查询sql end-->
     <!--数据查询 end-->

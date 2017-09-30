@@ -10,6 +10,7 @@ import java.util.Objects;
  * version v1.0
  */
 public class Status implements java.io.Serializable {
+    private static final long serialVersionUID = 8179717412450576971L;
     //状态码
     private int errorCode;
     //描述

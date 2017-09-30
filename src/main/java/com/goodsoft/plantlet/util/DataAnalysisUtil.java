@@ -38,7 +38,7 @@ public class DataAnalysisUtil {
         String str = var.replaceAll(" ", "");
         //获取规格前缀
         String specStr1 = str.substring(1, 2);
-        if ("≤".equals(specStr1) || "≥".equals(specStr1) || "<".equals(specStr1)
+        if ("≤".equals(specStr1) || "≥".equals(specStr1) || "＜".equals(specStr1) || "<".equals(specStr1)
                 || ">".equals(specStr1) || "=".equals(specStr1)) {
             //含有特殊字符则获取特殊字符
             String str1 = var.substring(0, 2);
@@ -47,7 +47,7 @@ public class DataAnalysisUtil {
                 double min = Double.parseDouble(var.substring(2));
                 data.setNum(min);
             } catch (NumberFormatException e) {
-                System.out.println(e.toString());
+                data.setStr(var);
             }
         } else {
             //将获取植物规格以“-”进行拆分
@@ -61,9 +61,9 @@ public class DataAnalysisUtil {
                     double min = Double.parseDouble(spec[0].substring(1));
                     double max = Double.parseDouble(spec[1]);
                     data.setNum(min);
-                    data.setNum_1(min);
+                    data.setNum_1(max);
                 } catch (NumberFormatException e) {
-                    System.out.println(e.toString());
+                    data.setStr(var);
                 }
             } else {
                 data.setStr(spec[0].substring(0, 1));
@@ -71,7 +71,7 @@ public class DataAnalysisUtil {
                     double min = Double.parseDouble(spec[0].substring(1));
                     data.setNum(min);
                 } catch (NumberFormatException e) {
-                    System.out.println(e.toString());
+                    data.setStr(var);
                 }
             }
         }

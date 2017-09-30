@@ -2,17 +2,19 @@ var numberx=0;
 $(function() {
 	var url_host = window.sessionStorage.getItem('host');
 	var urls = [url_host + "/plantlet/nursery/province/find/seedling.action.do", url_host + '/plantlet/nursery/outside/find/seedling.action.do'];
-	var id = GetQueryString('nums')
+	var companys = GetQueryString('nums')
 	var isabroad = GetQueryString('key')
+	console.log(companys)
 	$.ajax({
 		type: "get",
 		url: urls[isabroad],
 		data: {
 			num: numberx,
-			id: id
+			comp: companys
 		},
 		async: true,
 		success: function(result) {
+			console.log( urls[isabroad]);
 			if(result.errorCode == 0) {
 				var data = result.data[numberx];
 				if(isabroad == 1) {
@@ -27,7 +29,7 @@ $(function() {
 					$('#postCode').html(data['postCode'])
 					$('#emailx').html(data['email'])
 					$('#contact').html(data['fax'])
-					$('#tels').html(data['tel'])
+					$('#tels').html(data['tel']==0?'':data['tel'])
 					$('#fax').html(data['fax'])
 					getmore(urls[isabroad], nurseryName, isabroad);
 
@@ -45,7 +47,7 @@ $(function() {
 					$('#postCode').html(data['postCode'])
 					$('#emailx').html(data['email'])
 					$('#contact').html(data['fax'])
-					$('#tels').html(data['tel'])
+					$('#tels').html(data['tel']==0?'':data['tel'])
 					$('#fax').html(data['fax'])
 					getmore(urls[isabroad], nurseryName);
 				}
@@ -71,19 +73,23 @@ $(function() {
 					if(isabroad == 1) {
 						//省外
 						$.each(data, function(i) {
+							var specs = data[i]['spec']==''?'':data[i]['specMin']==0?'':data[i]['specMax']==0?data[i]['spec']+data[i]['specMin']:data[i]['spec']+data[i]['specMin']+ '-' + data[i]['specMax'];
+								var numsx = data[i]['num']==0?'':data[i]['num'];
 							html += '<div class="MX_mc_line">' +
 								'<div class="MX_mc_line_one"><span>' + data[i]['seedlingName'] + '</span></div>' +
-								'<div class="MX_mc_line_two"><span>' + data[i]['spec'] + data[i]['specMin'] + '-' + data[i]['specMax'] + '</span></div>' +
-								'<div class="MX_mc_line_three"><span>' + data[i]['num'] + '</span></div>' +
+								'<div class="MX_mc_line_two"><span>' + specs + '</span></div>' +
+								'<div class="MX_mc_line_three"><span>' + numsx + '</span></div>' +
 								'</div>';
 						});
 					} else {
 
 						$.each(data, function(i) {
+							var specs = data[i]['spec']==''?'':data[i]['specMin']==0?'':data[i]['specMax']==0?data[i]['spec']+data[i]['specMin']:data[i]['spec']+data[i]['specMin']+ '-' + data[i]['specMax'];
+							var numsx = data[i]['num']==0?'':data[i]['num'];
 							html += '<div class="MX_mc_line">' +
 								'<div class="MX_mc_line_one"><span>' + data[i]['plantName'] + '</span></div>' +
-								'<div class="MX_mc_line_two"><span>' + data[i]['spec'] + data[i]['specMin'] + '-' + data[i]['specMax'] + '</span></div>' +
-								'<div class="MX_mc_line_three"><span>' + data[i]['num'] + '</span></div>' +
+								'<div class="MX_mc_line_two"><span>' + specs + '</span></div>' +
+								'<div class="MX_mc_line_three"><span>' + numsx + '</span></div>' +
 								'</div>';
 						});
 					}
@@ -103,7 +109,7 @@ $(function() {
 	function GetQueryString(name) {
 		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
 		var r = window.location.search.substr(1).match(reg);
-		if(r != null) return unescape(r[2]);
+		if(r != null) return decodeURI(r[2]);
 		return null;
 	}
 

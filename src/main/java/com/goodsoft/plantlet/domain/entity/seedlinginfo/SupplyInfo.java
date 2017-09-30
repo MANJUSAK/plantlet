@@ -9,6 +9,7 @@ import java.util.Objects;
  * version v1.0
  */
 public class SupplyInfo implements java.io.Serializable {
+    private static final long serialVersionUID = -2837551732745666959L;
     private String id;//数据id
     private String seedlingComp;//苗木企业
     private String seedlingIntro;//苗木简介
@@ -21,8 +22,9 @@ public class SupplyInfo implements java.io.Serializable {
     private double num;//数量
     private String fileId;//文件编号
     private String contact;//联系人
-    private String tel;//手机号
+    private long tel;//手机号
     private String sdAdd;//供货地址
+    private double price;//价格
     private List<String> picture;//文件
 
     public String getId() {
@@ -121,11 +123,11 @@ public class SupplyInfo implements java.io.Serializable {
         this.contact = contact;
     }
 
-    public String getTel() {
+    public long getTel() {
         return tel;
     }
 
-    public void setTel(String tel) {
+    public void setTel(long tel) {
         this.tel = tel;
     }
 
@@ -135,6 +137,14 @@ public class SupplyInfo implements java.io.Serializable {
 
     public void setSdAdd(String sdAdd) {
         this.sdAdd = sdAdd;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     public List<String> getPicture() {
@@ -153,6 +163,8 @@ public class SupplyInfo implements java.io.Serializable {
         return Double.compare(that.specMin, specMin) == 0 &&
                 Double.compare(that.specMax, specMax) == 0 &&
                 Double.compare(that.num, num) == 0 &&
+                tel == that.tel &&
+                Double.compare(that.price, price) == 0 &&
                 Objects.equals(id, that.id) &&
                 Objects.equals(seedlingComp, that.seedlingComp) &&
                 Objects.equals(seedlingIntro, that.seedlingIntro) &&
@@ -162,14 +174,13 @@ public class SupplyInfo implements java.io.Serializable {
                 Objects.equals(unit, that.unit) &&
                 Objects.equals(fileId, that.fileId) &&
                 Objects.equals(contact, that.contact) &&
-                Objects.equals(tel, that.tel) &&
                 Objects.equals(sdAdd, that.sdAdd) &&
                 Objects.equals(picture, that.picture);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, seedlingComp, seedlingIntro, sdName, sdType, spec, specMin, specMax, unit, num, fileId, contact, tel, sdAdd, picture);
+        return Objects.hash(id, seedlingComp, seedlingIntro, sdName, sdType, spec, specMin, specMax, unit, num, fileId, contact, tel, sdAdd, price, picture);
     }
 }
 

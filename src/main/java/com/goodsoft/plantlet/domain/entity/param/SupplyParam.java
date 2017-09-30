@@ -9,6 +9,7 @@ import java.util.Objects;
  */
 public class SupplyParam implements java.io.Serializable {
 
+    private static final long serialVersionUID = -1022682616976182762L;
     private String keyWord;//关键字
     private String tp;//种类
     private String specMin;//规格范围第一位

@@ -8,6 +8,7 @@ import java.util.Objects;
  * version v1.0
  */
 public class SeedlingStatisticsParam implements java.io.Serializable {
+    private static final long serialVersionUID = 8423688272252505911L;
     private String keyWord;//关键字
     private String provincOut;//外省
     private String city;//省内市

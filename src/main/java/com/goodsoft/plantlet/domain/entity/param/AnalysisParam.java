@@ -8,6 +8,7 @@ import java.util.Objects;
  * version v1.0
  */
 public class AnalysisParam implements java.io.Serializable {
+    private static final long serialVersionUID = -6457887470637274777L;
     private String str;//字符
     //数字
     private double num;
