@@ -17,6 +17,7 @@ public enum StatusEnum {
     ERROR(502, "错误操作"),
     NO_DATA(404, "无数据"),
     NO_EXCEL_DATA(404, "无可用数据导出"),
+    NO_PDF_DATA(404, "无可用数据导出"),
     NO_URL(404, "无效请求"),
     NO_RIGHTS(401, "该用户无法操作此功能"),
     CHECKUSER(404, "用户名与密码不匹配"),

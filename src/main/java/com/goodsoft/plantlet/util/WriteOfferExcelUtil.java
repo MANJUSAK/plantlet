@@ -1,7 +1,7 @@
 package com.goodsoft.plantlet.util;
 
-import com.goodsoft.plantlet.domain.entity.nursery.Nursery;
-import com.goodsoft.plantlet.domain.entity.nursery.NurseryOut;
+import com.goodsoft.plantlet.domain.entity.seedlinginfo.SeedlingOffer;
+import com.goodsoft.plantlet.domain.entity.seedlinginfo.SeedlingOfferStatistics;
 import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.IndexedColors;
@@ -12,39 +12,42 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * function 写入数据到excel表工具类
- * Created by 严彬荣 on 2017/9/27.
+ * function 造价excel导出工具类
+ * Created by 严彬荣 on 2017/10/9.
  * version v1.0
  */
 @SuppressWarnings("ALL")
-public class WriteExcel2007 {
+public class WriteOfferExcelUtil {
     /**
-     * 创建Excel2007类的单例（详情见本包下UUIDUtil类） start
+     * 创建WriteOfferExcelUtil类的单例（详情见本包下UUIDUtil类） start
      **/
-    private volatile static WriteExcel2007 instance;
+    private volatile static WriteOfferExcelUtil instance;
 
-    private WriteExcel2007() {
+    private WriteOfferExcelUtil() {
     }
 
-    public static WriteExcel2007 getInstance() {
+    public static WriteOfferExcelUtil getInstance() {
         if (instance == null) {
-            synchronized (WriteExcel2007.class) {
+            synchronized (WriteOfferExcelUtil.class) {
                 if (instance == null)
-                    instance = new WriteExcel2007();
+                    instance = new WriteOfferExcelUtil();
             }
         }
         return instance;
+        //创建WriteOfferExcelUtil类的单例（详情见本包下UUIDUtil类） end
     }
 
     /**
      * 创建excel表格
      * 将表单数据写入excel表格中
      *
-     * @param list 写入到表格数据
+     * @param list  写入到表格数据
+     * @param year  年份
+     * @param month 月份
      * @return XSSFWorkbook
      */
-    protected XSSFWorkbook createExcel(XSSFWorkbook wb, List list, String type) {
-        return this.createHeaderStyle(wb, list, type);
+    protected XSSFWorkbook createExcel(XSSFWorkbook wb, List list, String type, int year, int month) {
+        return this.createHeaderStyle(wb, list, type, year, month);
     }
 
     /**
@@ -53,7 +56,7 @@ public class WriteExcel2007 {
      * @param list 写入到表格数据
      * @return XSSFWorkbook
      */
-    private XSSFWorkbook createHeaderStyle(XSSFWorkbook wb, List list, String type) {
+    private XSSFWorkbook createHeaderStyle(XSSFWorkbook wb, List list, String type, int year, int month) {
         XSSFCellStyle style = wb.createCellStyle();
         //水平居中
         style.setAlignment(XSSFCellStyle.ALIGN_CENTER);
@@ -80,7 +83,7 @@ public class WriteExcel2007 {
         font.setBoldweight(XSSFFont.BOLDWEIGHT_BOLD);
         // 把字体应用到当前的样式中
         style.setFont(font);
-        return this.writeHeaderCellExcel(wb, style, list, type);
+        return this.writeHeaderCellExcel(wb, style, list, type, year, month);
     }
 
 
@@ -94,8 +97,9 @@ public class WriteExcel2007 {
      * @param type  导出类型
      * @return XSSFWorkbook
      */
-    private XSSFWorkbook writeHeaderCellExcel(XSSFWorkbook wb, XSSFCellStyle style, List list, String type) {
+    private XSSFWorkbook writeHeaderCellExcel(XSSFWorkbook wb, XSSFCellStyle style, List list, String type, int year, int month) {
         List data = new ArrayList();
+        StringBuilder sb = new StringBuilder();
         int size = list.size();
         XSSFSheet sheet = null;
         CellRangeAddress cra = null;
@@ -110,15 +114,19 @@ public class WriteExcel2007 {
                     data = list.subList(((k - 1) * 10000), k * 10000);
                     //创建一张excel表
                     switch (type) {
-                        case "in":
-                            sheet = wb.createSheet("省内苗圃信息表" + k);
+                        case "only":
+                            sb.append("造价息信分期统计表（0表示无数据）");
+                            sb.append(k);
+                            sheet = wb.createSheet(sb.toString());
                             //合并单元格（第一行，第1-20列）
-                            cra = new CellRangeAddress(0, 0, 0, 20);
+                            cra = new CellRangeAddress(0, 0, 0, 5);
                             break;
-                        case "out":
-                            sheet = wb.createSheet("省外苗圃信息表" + k);
+                        case "more":
+                            sb.append("全年造价息信统计表（0表示无数据）");
+                            sb.append(k);
+                            sheet = wb.createSheet(sb.toString());
                             //合并单元格（第一行，第1-20列）
-                            cra = new CellRangeAddress(0, 0, 0, 16);
+                            cra = new CellRangeAddress(0, 0, 0, 15);
                             break;
                         default:
                             break;
@@ -135,11 +143,19 @@ public class WriteExcel2007 {
                     row.setHeight((short) (16 * 25));
                     XSSFCell cell = row.createCell(0);
                     switch (type) {
-                        case "in":
-                            cell.setCellValue("省内苗圃信息数据");
+                        case "only":
+                            sb.append(year);
+                            sb.append("年");
+                            sb.append(month);
+                            sb.append("月");
+                            sb.append("造价息信统计表（0表示无数据）");
+                            cell.setCellValue(sb.toString());
                             break;
-                        case "out":
-                            cell.setCellValue("省外苗圃信息数据");
+                        case "more":
+                            sb.append(year);
+                            sb.append("年");
+                            sb.append("全年造价息信统计表（0表示无数据）");
+                            cell.setCellValue(sb.toString());
                             break;
                         default:
                             break;
@@ -151,13 +167,19 @@ public class WriteExcel2007 {
                     data = list.subList(((k - 1) * 10000), size);
                     //创建一张excel表
                     switch (type) {
-                        case "in":
-                            sheet = wb.createSheet("省内苗圃信息表" + k);
-                            cra = new CellRangeAddress(0, 0, 0, 20);
+                        case "only":
+                            sb.append("造价息信统计表（0表示无数据）");
+                            sb.append(k);
+                            sheet = wb.createSheet(sb.toString());
+                            //合并单元格（第一行，第1-20列）
+                            cra = new CellRangeAddress(0, 0, 0, 5);
                             break;
-                        case "out":
-                            sheet = wb.createSheet("省外苗圃信息表" + k);
-                            cra = new CellRangeAddress(0, 0, 0, 16);
+                        case "more":
+                            sb.append("全年造价息信统计表（0表示无数据）");
+                            sb.append(k);
+                            sheet = wb.createSheet(sb.toString());
+                            //合并单元格（第一行，第1-20列）
+                            cra = new CellRangeAddress(0, 0, 0, 15);
                             break;
                         default:
                             break;
@@ -173,11 +195,19 @@ public class WriteExcel2007 {
                     row.setHeight((short) (16 * 25));
                     XSSFCell cell = row.createCell(0);
                     switch (type) {
-                        case "in":
-                            cell.setCellValue("省内苗圃信息数据");
+                        case "only":
+                            sb.append(year);
+                            sb.append("年");
+                            sb.append(month);
+                            sb.append("月");
+                            sb.append("造价息信统计表（0表示无数据）");
+                            cell.setCellValue(sb.toString());
                             break;
-                        case "out":
-                            cell.setCellValue("省外苗圃信息数据");
+                        case "more":
+                            sb.append(year);
+                            sb.append("年");
+                            sb.append("全年造价息信统计表（0表示无数据）");
+                            cell.setCellValue(sb.toString());
                             break;
                         default:
                             break;
@@ -191,13 +221,15 @@ public class WriteExcel2007 {
         } else {
             //创建一张excel表
             switch (type) {
-                case "in":
-                    sheet = wb.createSheet("省内苗圃信息表1");
-                    cra = new CellRangeAddress(0, 0, 0, 20);
+                case "only":
+                    sheet = wb.createSheet("造价息信分期统计表（0表示无数据）");
+                    //合并单元格（第一行，第1-20列）
+                    cra = new CellRangeAddress(0, 0, 0, 5);
                     break;
-                case "out":
-                    sheet = wb.createSheet("省外苗圃信息表1");
-                    cra = new CellRangeAddress(0, 0, 0, 16);
+                case "more":
+                    sheet = wb.createSheet("全年造价息信统计表（0表示无数据）");
+                    //合并单元格（第一行，第1-20列）
+                    cra = new CellRangeAddress(0, 0, 0, 15);
                     break;
                 default:
                     break;
@@ -213,11 +245,19 @@ public class WriteExcel2007 {
             row.setHeight((short) (16 * 25));
             XSSFCell cell = row.createCell(0);
             switch (type) {
-                case "in":
-                    cell.setCellValue("省内苗圃信息数据");
+                case "only":
+                    sb.append(year);
+                    sb.append("年");
+                    sb.append(month);
+                    sb.append("月");
+                    sb.append("造价息信统计表（0表示无数据）");
+                    cell.setCellValue(sb.toString());
                     break;
-                case "out":
-                    cell.setCellValue("省外苗圃信息数据");
+                case "more":
+                    sb.append(year);
+                    sb.append("年");
+                    sb.append("全年造价息信统计表（0表示无数据）");
+                    cell.setCellValue(sb.toString());
                     break;
                 default:
                     break;
@@ -240,122 +280,74 @@ public class WriteExcel2007 {
         XSSFRow row = sheet.createRow(1);
         // 创建表头单元格
         switch (type) {
-            case "in":
+            case "only":
                 cell = row.createCell(0);
                 cell.setCellValue("序号");
                 cell.setCellStyle(style);
                 cell = row.createCell(1);
-                cell.setCellValue("数据编号");
-                cell.setCellStyle(style);
-                cell = row.createCell(2);
-                cell.setCellValue("省份");
-                cell.setCellStyle(style);
-                cell = row.createCell(3);
-                cell.setCellValue("市");
-                cell.setCellStyle(style);
-                cell = row.createCell(4);
-                cell.setCellValue("所属区县");
-                cell.setCellStyle(style);
-                cell = row.createCell(5);
-                cell.setCellValue("苗圃名称");
-                cell.setCellStyle(style);
-                cell = row.createCell(6);
-                cell.setCellValue("地址");
-                cell.setCellStyle(style);
-                cell = row.createCell(7);
-                cell.setCellValue("邮编");
-                cell.setCellStyle(style);
-                cell = row.createCell(8);
-                cell.setCellValue("电话");
-                cell.setCellStyle(style);
-                cell = row.createCell(9);
-                cell.setCellValue("传真");
-                cell.setCellStyle(style);
-                cell = row.createCell(10);
-                cell.setCellValue("联系人");
-                cell.setCellStyle(style);
-                cell = row.createCell(11);
-                cell.setCellValue("邮箱");
-                cell.setCellStyle(style);
-                cell = row.createCell(12);
-                cell.setCellValue("植物名称");
-                cell.setCellStyle(style);
-                cell = row.createCell(13);
-                cell.setCellValue("规格");
-                cell.setCellStyle(style);
-                cell = row.createCell(14);
-                cell.setCellValue("数量");
-                cell.setCellStyle(style);
-                cell = row.createCell(15);
-                cell.setCellValue("单价");
-                cell.setCellStyle(style);
-                cell = row.createCell(16);
-                cell.setCellValue("种类");
-                cell.setCellStyle(style);
-                cell = row.createCell(17);
-                cell.setCellValue("苗圃面积");
-                cell.setCellStyle(style);
-                cell = row.createCell(18);
-                cell.setCellValue("生产许可证编号");
-                cell.setCellStyle(style);
-                cell = row.createCell(19);
-                cell.setCellValue("经营许可证编号");
-                cell.setCellStyle(style);
-                cell = row.createCell(20);
-                cell.setCellValue("企业简介");
-                cell.setCellStyle(style);
-                break;
-            case "out":
-                cell = row.createCell(0);
-                cell.setCellValue("序号");
-                cell.setCellStyle(style);
-                cell = row.createCell(1);
-                cell.setCellValue("数据编号");
-                cell.setCellStyle(style);
-                cell = row.createCell(2);
-                cell.setCellValue("省份");
-                cell.setCellStyle(style);
-                cell = row.createCell(3);
-                cell.setCellValue("苗圃名称");
-                cell.setCellStyle(style);
-                cell = row.createCell(4);
-                cell.setCellValue("地址");
-                cell.setCellStyle(style);
-                cell = row.createCell(5);
-                cell.setCellValue("电话");
-                cell.setCellStyle(style);
-                cell = row.createCell(6);
-                cell.setCellValue("传真");
-                cell.setCellStyle(style);
-                cell = row.createCell(7);
-                cell.setCellValue("网址");
-                cell.setCellStyle(style);
-                cell = row.createCell(8);
-                cell.setCellValue("邮箱");
-                cell.setCellStyle(style);
-                cell = row.createCell(9);
                 cell.setCellValue("苗木名称");
                 cell.setCellStyle(style);
-                cell = row.createCell(10);
+                cell = row.createCell(2);
                 cell.setCellValue("规格（cm）");
                 cell.setCellStyle(style);
-                cell = row.createCell(11);
+                cell = row.createCell(3);
                 cell.setCellValue("单位");
                 cell.setCellStyle(style);
+                cell = row.createCell(4);
+                cell.setCellValue("造价（元）");
+                cell.setCellStyle(style);
+                cell = row.createCell(5);
+                cell.setCellValue("备注");
+                cell.setCellStyle(style);
+                break;
+            case "more":
+                cell = row.createCell(0);
+                cell.setCellValue("序号");
+                cell.setCellStyle(style);
+                cell = row.createCell(1);
+                cell.setCellValue("苗木名称");
+                cell.setCellStyle(style);
+                cell = row.createCell(2);
+                cell.setCellValue("规格（cm）");
+                cell.setCellStyle(style);
+                cell = row.createCell(3);
+                cell.setCellValue("单位");
+                cell.setCellStyle(style);
+                cell = row.createCell(4);
+                cell.setCellValue("1月");
+                cell.setCellStyle(style);
+                cell = row.createCell(5);
+                cell.setCellValue("2月");
+                cell.setCellStyle(style);
+                cell = row.createCell(6);
+                cell.setCellValue("3月");
+                cell.setCellStyle(style);
+                cell = row.createCell(7);
+                cell.setCellValue("4月");
+                cell.setCellStyle(style);
+                cell = row.createCell(8);
+                cell.setCellValue("5月");
+                cell.setCellStyle(style);
+                cell = row.createCell(9);
+                cell.setCellValue("6月");
+                cell.setCellStyle(style);
+                cell = row.createCell(10);
+                cell.setCellValue("7月");
+                cell.setCellStyle(style);
+                cell = row.createCell(11);
+                cell.setCellValue("8月");
+                cell.setCellStyle(style);
                 cell = row.createCell(12);
-                cell.setCellValue("数量");
+                cell.setCellValue("9月");
                 cell.setCellStyle(style);
                 cell = row.createCell(13);
-                cell.setCellValue("价格（元）");
+                cell.setCellValue("10月");
                 cell.setCellStyle(style);
                 cell = row.createCell(14);
-                cell.setCellValue("种类");
+                cell.setCellValue("11月");
                 cell.setCellStyle(style);
                 cell = row.createCell(15);
-                cell.setCellValue("数据采集时间");
-                cell.setCellStyle(style);
-                cell = row.createCell(16);
-                cell.setCellValue("备注");
+                cell.setCellValue("12月");
                 cell.setCellStyle(style);
                 break;
             default:
@@ -412,18 +404,18 @@ public class WriteExcel2007 {
     private XSSFWorkbook nursery(XSSFWorkbook wb, XSSFSheet sheet, XSSFCellStyle style, List list, String type) {
         XSSFCell cell = null;
         switch (type) {
-            case "in":
+            case "only":
                 for (int i = 0, length = list.size(); i < length; ++i) {
                     XSSFRow row = sheet.createRow(2 + i);
-                    Nursery data = (Nursery) list.get(i);
+                    SeedlingOffer data = (SeedlingOffer) list.get(i);
                     //写入数据到sheet表中
                     writeData(row, cell, style, data, null, type, (1 + i));
                 }
                 break;
-            case "out":
+            case "more":
                 for (int i = 0, length = list.size(); i < length; ++i) {
                     XSSFRow row = sheet.createRow(2 + i);
-                    NurseryOut data = (NurseryOut) list.get(i);
+                    SeedlingOfferStatistics data = (SeedlingOfferStatistics) list.get(i);
                     //写入数据到sheet表中
                     writeData(row, cell, style, null, data, type, (1 + i));
                 }
@@ -445,55 +437,18 @@ public class WriteExcel2007 {
      * @param type    数据类型
      * @param i       序号
      */
-    private void writeData(XSSFRow row, XSSFCell cell, XSSFCellStyle style, Nursery data, NurseryOut dataOut, String type, int i) {
+    private void writeData(XSSFRow row, XSSFCell cell, XSSFCellStyle style, SeedlingOffer data, SeedlingOfferStatistics dataSta, String type, int i) {
         StringBuilder sb = new StringBuilder();
         // 创建表内容单元格
         switch (type) {
-            case "in":
+            case "only":
                 cell = row.createCell(0);
                 cell.setCellValue(i);
                 cell.setCellStyle(style);
                 cell = row.createCell(1);
-                cell.setCellValue(data.getId());
+                cell.setCellValue(data.getSdName());
                 cell.setCellStyle(style);
                 cell = row.createCell(2);
-                cell.setCellValue(data.getProvince());
-                cell.setCellStyle(style);
-                cell = row.createCell(3);
-                cell.setCellValue(data.getDistricts());
-                cell.setCellStyle(style);
-                cell = row.createCell(4);
-                cell.setCellValue(data.getCounty());
-                cell.setCellStyle(style);
-                cell = row.createCell(5);
-                cell.setCellValue(data.getNurseryName());
-                cell.setCellStyle(style);
-                cell = row.createCell(6);
-                cell.setCellValue(data.getNurseryAdd());
-                cell.setCellStyle(style);
-                cell = row.createCell(7);
-                int code = data.getPostCode();
-                if (code != 0)
-                    cell.setCellValue(code);
-                cell.setCellStyle(style);
-                cell = row.createCell(8);
-                long tel = data.getTel();
-                if (tel != 0)
-                    cell.setCellValue(tel);
-                cell.setCellStyle(style);
-                cell = row.createCell(9);
-                cell.setCellValue(data.getFax());
-                cell.setCellStyle(style);
-                cell = row.createCell(10);
-                cell.setCellValue(data.getContact());
-                cell.setCellStyle(style);
-                cell = row.createCell(11);
-                cell.setCellValue(data.getEmail());
-                cell.setCellStyle(style);
-                cell = row.createCell(12);
-                cell.setCellValue(data.getPlantName());
-                cell.setCellStyle(style);
-                cell = row.createCell(13);
                 String spec = data.getSpec();
                 if (!"".equals(spec)) {
                     if (data.getSpecMax() != 0) {
@@ -509,110 +464,82 @@ public class WriteExcel2007 {
                     }
                 }
                 cell.setCellStyle(style);
-                cell = row.createCell(14);
-                double num = data.getNum();
-                if (num != 0)
-                    cell.setCellValue(data.getNum());
+                cell = row.createCell(3);
+                cell.setCellValue(data.getUnit());
                 cell.setCellStyle(style);
-                cell = row.createCell(15);
-                double price = data.getPrice();
-                if (price != 0)
-                    cell.setCellValue(data.getPrice());
+                cell = row.createCell(4);
+                cell.setCellValue(data.getSdOffer());
                 cell.setCellStyle(style);
-                cell = row.createCell(16);
-                cell.setCellValue(data.getTypes());
-                cell.setCellStyle(style);
-                cell = row.createCell(17);
-                double area = data.getArea();
-                if (area != 0)
-                    cell.setCellValue(area);
-                cell.setCellStyle(style);
-                cell = row.createCell(18);
-                cell.setCellValue(data.getProLicenseNum());
-                cell.setCellStyle(style);
-                cell = row.createCell(19);
-                cell.setCellValue(data.getOperLicenseNum());
-                cell.setCellStyle(style);
-                cell = row.createCell(20);
-                cell.setCellValue(data.getNurseryIntro());
+                cell = row.createCell(5);
+                cell.setCellValue(data.getComment());
                 cell.setCellStyle(style);
                 break;
-            case "out":
+            case "more":
                 cell = row.createCell(0);
                 cell.setCellValue(i);
                 cell.setCellStyle(style);
                 cell = row.createCell(1);
-                cell.setCellValue(dataOut.getId());
+                cell.setCellValue(dataSta.getSdName());
                 cell.setCellStyle(style);
                 cell = row.createCell(2);
-                cell.setCellValue(dataOut.getProvince());
-                cell.setCellStyle(style);
-                cell = row.createCell(3);
-                cell.setCellValue(dataOut.getCompany());
-                cell.setCellStyle(style);
-                cell = row.createCell(4);
-                cell.setCellValue(dataOut.getAddress());
-                cell.setCellStyle(style);
-                cell = row.createCell(5);
-                long tel1 = dataOut.getTel();
-                if (tel1 != 0)
-                    cell.setCellValue(tel1);
-                cell.setCellStyle(style);
-                cell = row.createCell(6);
-                cell.setCellValue(dataOut.getFax());
-                cell.setCellStyle(style);
-                cell = row.createCell(7);
-                cell.setCellValue(dataOut.getWebSite());
-                cell.setCellStyle(style);
-                cell = row.createCell(8);
-                cell.setCellValue(dataOut.getEmail());
-                cell.setCellStyle(style);
-                cell = row.createCell(9);
-                cell.setCellValue(dataOut.getSeedlingName());
-                cell.setCellStyle(style);
-                cell = row.createCell(10);
-                String spec1 = dataOut.getSpec();
-                if (!"".equals(spec1)) {
-                    if (dataOut.getSpecMax() != 0) {
-                        sb.append(spec1);
-                        sb.append(dataOut.getSpecMin());
+                String specs = dataSta.getSpec();
+                if (!"".equals(specs)) {
+                    if (dataSta.getSpecMax() != 0) {
+                        sb.append(specs);
+                        sb.append(dataSta.getSpecMin());
                         sb.append("-");
-                        sb.append(dataOut.getSpecMax());
+                        sb.append(dataSta.getSpecMax());
                         cell.setCellValue(sb.toString());
                     } else {
-                        sb.append(spec1);
-                        sb.append(dataOut.getSpecMin());
+                        sb.append(specs);
+                        sb.append(dataSta.getSpecMin());
                         cell.setCellValue(sb.toString());
                     }
                 }
                 cell.setCellStyle(style);
+                cell = row.createCell(3);
+                cell.setCellValue(dataSta.getUnit());
+                cell.setCellStyle(style);
+                cell = row.createCell(4);
+                cell.setCellValue(dataSta.getJan());
+                cell.setCellStyle(style);
+                cell = row.createCell(5);
+                cell.setCellValue(dataSta.getFeb());
+                cell.setCellStyle(style);
+                cell = row.createCell(6);
+                cell.setCellValue(dataSta.getMar());
+                cell.setCellStyle(style);
+                cell = row.createCell(7);
+                cell.setCellValue(dataSta.getApr());
+                cell.setCellStyle(style);
+                cell = row.createCell(8);
+                cell.setCellValue(dataSta.getMay());
+                cell.setCellStyle(style);
+                cell = row.createCell(9);
+                cell.setCellValue(dataSta.getJun());
+                cell.setCellStyle(style);
+                cell = row.createCell(10);
+                cell.setCellValue(dataSta.getJul());
+                cell.setCellStyle(style);
                 cell = row.createCell(11);
-                cell.setCellValue(dataOut.getUnit());
+                cell.setCellValue(dataSta.getAug());
                 cell.setCellStyle(style);
                 cell = row.createCell(12);
-                int num1 = dataOut.getNum();
-                if (num1 != 0)
-                    cell.setCellValue(num1);
+                cell.setCellValue(dataSta.getSep());
                 cell.setCellStyle(style);
                 cell = row.createCell(13);
-                double price1 = dataOut.getPrice();
-                if (price1 != 0)
-                    cell.setCellValue(price1);
+                cell.setCellValue(dataSta.getOct());
                 cell.setCellStyle(style);
                 cell = row.createCell(14);
-                cell.setCellValue(dataOut.getTypes());
+                cell.setCellValue(dataSta.getNov());
                 cell.setCellStyle(style);
                 cell = row.createCell(15);
-                cell.setCellValue(dataOut.getDate());
-                cell.setCellStyle(style);
-                cell = row.createCell(16);
-                cell.setCellValue(dataOut.getComment());
+                cell.setCellValue(dataSta.getDec());
                 cell.setCellStyle(style);
                 break;
             default:
                 break;
         }
     }
-
 
 }

@@ -12,7 +12,7 @@
 		<!-- 在双核浏览器下，默认使用webkit内核，由360浏览器提出 -->
 		<meta name="renderer" content="webkit">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-		<title>greening-management</title>
+		<title>苗木信息化系统-造价信息</title>
 		<!--<link rel="shortcut icon" href=""/>-->
 		<link rel="stylesheet" type="text/css" href="../css/common.css" />
 		<link rel="stylesheet" type="text/css" href="../css/Seeding-information.css" />
@@ -82,40 +82,45 @@
 						<div class="Sic-item">
 							<div class="zaojia-topbar">
 								<span>
-								<select id="year">
-									<option value="0" selected="selected">全部</option>
-									<option value="2015">2015年</option>
-									<option value="2016">2016年</option>
-									<option value="2017" >2017年</option>
-								</select>
-							</span>
+									<select id="year">
+										<option value="0" >全部</option>
+										<option value="2015">2015年</option>
+										<option value="2016">2016年</option>
+										<option value="2017" selected="selected">2017年</option>
+									</select>
+								</span>
 								<span>
-								<select  id="month">
-									<option value="0">全部</option>
-									<option value="1">一期</option>
-									<option value="2">二期</option>
-									<option value="3">三期</option>
-									<option value="4">四期</option>
-									<option value="5">五期</option>
-									<option value="6">六期</option>
-									<option value="7">七期</option>
-									<option value="8">八期</option>
-									<option value="9">九期</option>
-									<option value="10">十期</option>
-									<option value="11">十一期</option>
-									<option value="12">十二期</option>
-								</select>
-							</span>
-
+									<select  id="month">
+										<option value="0">全部</option>
+										<option value="1">一期</option>
+										<option value="2">二期</option>
+										<option value="3">三期</option>
+										<option value="4">四期</option>
+										<option value="5">五期</option>
+										<option value="6">六期</option>
+										<option value="7">七期</option>
+										<option value="8">八期</option>
+										<option value="9">九期</option>
+										<option value="10">十期</option>
+										<option value="11">十一期</option>
+										<option value="12">十二期</option>
+									</select>
+								</span>
+								<span class="zaojia-topbar-derive">
+									<input type="button" id="export" value="导出数据" />
+								</span>
+								<span class="zaojia-topbar-show" id="export_show">
+									
+								</span>
 							</div>
 							<div class="zj-box">
 								<div class="zj-bitem" id="zaojiaAll">
 									<div class="NS_contert">
 										<div class="NS_center">
 											<div class="year_all_r" id="year_all">
-												<span >2015年</span>
-												<span >2016年</span>
-												<span style="color: #1F9952;border:1px solid #1F9952;">2017年</span>
+												<span>2015年</span>
+												<span>2016年</span>
+												<span  id="show_default">2017年</span>
 											</div>
 											<table class="NS_tab" border="1">
 												<thead>

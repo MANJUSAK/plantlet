@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--@author 严彬荣，version v1.0-->
+<!--mapper 苗木数据导出查询 start -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--suppress ALL -->
+<mapper namespace="com.goodsoft.plantlet.domain.dao.SeedlingOutputDao">
+    <!--苗木造价统计年月查询结果映射 start-->
+    <resultMap id="seedlingOfferStatisticsMap"
+               type="com.goodsoft.plantlet.domain.entity.seedlinginfo.SeedlingOfferStatistics">
+        <result property="id" column="id"/>
+        <result property="sdName" column="seedling_name"/>
+        <result property="spec" column="spec"/>
+        <result property="specMin" column="spec_min"/>
+        <result property="specMax" column="spec_max"/>
+        <result property="unit" column="unit"/>
+        <result property="sdOffer" column="seedling_offer"/>
+        <result property="unit" column="unit"/>
+        <result property="year" column="year"/>
+        <result property="Jan" column="January"/>
+        <result property="Feb" column="February"/>
+        <result property="Mar" column="March"/>
+        <result property="Apr" column="April"/>
+        <result property="May" column="May"/>
+        <result property="Jun" column="June"/>
+        <result property="Jul" column="July"/>
+        <result property="Aug" column="August"/>
+        <result property="Sep" column="September"/>
+        <result property="Oct" column="October"/>
+        <result property="Nov" column="November"/>
+        <result property="Dec" column="December"/>
+    </resultMap>
+    <!--苗木造价统计年月查询结果映射 end-->
+    <!--苗木造价统计年月查询sql start-->
+    <select id="querySeedlingOfferStatisticsDao" parameterType="int" resultMap="seedlingOfferStatisticsMap">
+        SELECT `seedling_name`,`spec`,`spec_min`,`spec_max`, `unit`,`year`,`January`,`February`,`March`,
+        `April`,`May`,`June`,`July`,`August`,`September`,`October`,`November`,`December`
+        FROM `gs_seedling_offer_view`
+        <where>
+            <if test="year != null and year != ''">
+                AND `year` = #{year}
+            </if>
+        </where>
+    </select>
+    <!--苗木造价统计年月查询sql end-->
+    <!--苗木造价查询结果映射 start-->
+    <resultMap id="seedlingOfferMap" type="com.goodsoft.plantlet.domain.entity.seedlinginfo.SeedlingOffer">
+        <result property="id" column="id"/>
+        <result property="sdName" column="seedling_name"/>
+        <result property="spec" column="spec"/>
+        <result property="specMin" column="spec_min"/>
+        <result property="specMax" column="spec_max"/>
+        <result property="unit" column="unit"/>
+        <result property="sdOffer" column="seedling_offer"/>
+        <result property="comment" column="comment"/>
+        <result property="year" column="year"/>
+        <result property="month" column="month"/>
+    </resultMap>
+    <!--苗木造价查询结果映射 end-->
+    <!--苗木造价查询sql start-->
+    <select id="querySeedlingOfferDao" parameterType="int" resultMap="seedlingOfferMap">
+        SELECT `id`,`seedling_name`,`spec`,`spec_min`,`spec_max`,`unit`,`seedling_offer`,`comment`,`year`,`month`
+        FROM `gs_seedling_offer`
+        <where>
+            <if test="year != null and year != ''">
+                AND `year` = #{year}
+            </if>
+            <if test="month != null and month != ''">
+                AND `month` = #{month}
+            </if>
+        </where>
+        ORDER BY `sid` DESC;
+    </select>
+    <!--苗木造价查询sql end-->
+    <!--苗木信息统计结果映射 start-->
+    <resultMap id="SeedlingStatisticsMap" type="com.goodsoft.plantlet.domain.entity.seedlinginfo.SeedlingStatistics">
+        <result property="spec" column="spec"/>
+        <result property="specMin" column="spec_min"/>
+        <result property="specMax" column="spec_max"/>
+        <result property="offer" column="seedling_offer"/>
+        <result property="sdName" column="seedling_name"/>
+        <result property="numOut" column="num_out"/>
+        <result property="num" column="num"/>
+        <result property="minPriceOut" column="min_price_out"/>
+        <result property="maxPriceOut" column="max_price_out"/>
+        <result property="minPrice" column="min_price"/>
+        <result property="maxPrice" column="max_price"/>
+        <result property="year" column="year"/>
+        <result property="month" column="month"/>
+    </resultMap>
+    <!--苗木信息统计结果映射 end-->
+    <!--苗木信息统计数据分析sql start-->
+    <select id="querySeedlingStatisticsDao" parameterType="int" resultMap="SeedlingStatisticsMap">
+        SELECT `num`,`num_out`,`seedling_name`,`spec`,`spec_min`,`spec_max`,`min_price`,
+        `max_price`,`min_price_out`,`max_price_out`,`seedling_offer`,`year`,`month`
+        FROM `gs_seedling_statistics_view`
+    </select>
+    <!--苗木信息统计数据分析sql end-->
+    <!--供需信息数据结果映射 start-->
+    <resultMap id="seedlingSupplyMap" type="com.goodsoft.plantlet.domain.entity.seedlinginfo.SupplyInfo">
+        <result property="id" column="id"/>
+        <result property="sdName" column="seedling_name"/>
+        <result property="sdType" column="seedling_type"/>
+        <result property="spec" column="spec"/>
+        <result property="specMin" column="spec_min"/>
+        <result property="specMax" column="spec_max"/>
+        <result property="unit" column="unit"/>
+        <result property="num" column="quantity"/>
+        <result property="contact" column="contact"/>
+        <result property="tel" column="tel"/>
+        <result property="sdAdd" column="seedling_add"/>
+        <result property="seedlingComp" column="seedling_comp"/>
+        <result property="seedlingIntro" column="seedling_intro"/>
+        <result property="price" column="price"/>
+    </resultMap>
+    <!--供需信息数据结果映射 end-->
+    <!--供需信息数据sql start-->
+    <select id="querySeedlingSupplyDao" parameterType="com.goodsoft.plantlet.domain.entity.param.SupplyParam"
+            resultMap="seedlingSupplyMap">
+        SELECT `id`,`seedling_name`,`seedling_type`,`spec`,
+        `spec_min`,`spec_max`,`unit`,`quantity`,`price`,
+        `contact`, `tel`,`seedling_add`,`seedling_comp`,`seedling_intro`
+        FROM `gs_seedling_supply_info`
+        ORDER BY sid DESC;
+    </select>
+    <!--供需信息数据sql end-->
+</mapper>
+        <!--mapper 苗木数据导出查询 end -->

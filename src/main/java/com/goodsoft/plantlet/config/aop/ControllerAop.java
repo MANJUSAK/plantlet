@@ -1,6 +1,6 @@
 package com.goodsoft.plantlet.config.aop;
 
-import com.goodsoft.plantlet.util.GetIP;
+import com.goodsoft.plantlet.util.GetIPUtil;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
@@ -39,7 +39,7 @@ public class ControllerAop {
         String url = request.getRequestURL().toString();
         String method = request.getMethod();
         String queryString = request.getQueryString();
-        String ip = GetIP.getIP(request);
+        String ip = GetIPUtil.getIP(request);
         logger.info("ip:{} 请求信息：,url:{},method:{},params:{}", ip, url, method, queryString);
     }
 

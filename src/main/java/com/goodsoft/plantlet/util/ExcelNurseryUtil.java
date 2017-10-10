@@ -8,25 +8,25 @@ import java.io.FileOutputStream;
 import java.util.List;
 
 /**
- * function Excel表格工具类
+ * function 苗圃Excel表格工具类
  * Created by 严彬荣 on 2017/9/4.
  * version v1.0
  */
 @SuppressWarnings("ALL")
-public class ExcelUtil {
+public class ExcelNurseryUtil {
     /**
      * 创建ExcelUtil类的单例（详情见本包下UUIDUtil类） start
      **/
-    private volatile static ExcelUtil instance;
+    private volatile static ExcelNurseryUtil instance;
 
-    private ExcelUtil() {
+    private ExcelNurseryUtil() {
     }
 
-    public static ExcelUtil getInstance() {
+    public static ExcelNurseryUtil getInstance() {
         if (instance == null) {
-            synchronized (ExcelUtil.class) {
+            synchronized (ExcelNurseryUtil.class) {
                 if (instance == null)
-                    instance = new ExcelUtil();
+                    instance = new ExcelNurseryUtil();
             }
         }
         return instance;
@@ -35,7 +35,7 @@ public class ExcelUtil {
     //实例化获取服务器系统标识工具类
     private GetOsNameUtil getOs = GetOsNameUtil.getInstance();
     //实例化创建excel工具类
-    private WriteExcel2007 writeExcel = WriteExcel2007.getInstance();
+    private WriteNurseryExcelUtil writeExcel = WriteNurseryExcelUtil.getInstance();
 
     /**
      * @param list

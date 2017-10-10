@@ -75,7 +75,6 @@ $(function() {
 			data: mydata,
 			async: true,
 			success: function(result) {
-				console.log(result)
 				if(result.errorCode == 0) {
 					var data = result.data;
 					$.each(data, function(i) {

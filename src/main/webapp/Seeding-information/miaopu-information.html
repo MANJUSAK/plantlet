@@ -12,7 +12,7 @@
 		<!-- 在双核浏览器下，默认使用webkit内核，由360浏览器提出 -->
 		<meta name="renderer" content="webkit">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-		<title>greening-management</title>
+		<title>苗木信息化系统-苗圃信息</title>
 		<!--<link rel="shortcut icon" href=""/>-->
 		<link rel="stylesheet" type="text/css" href="../css/common.css" />
 		<link rel="stylesheet" type="text/css" href="../css/Seeding-information.css" />
@@ -89,53 +89,68 @@
 							<div class="miaopu-content">
 								<div class="mc-item">
 									<div class="mt-province" id="iswithinx">
-										<a href="#">贵阳市</a>
-										<span>|</span>
-										<a href="#">遵义市</a>
-										<span>|</span>
-										<a href="#">六盘水市</a>
-										<span>|</span>
-										<a href="#">安顺市</a>
-										<span>|</span>
-										<a href="#">毕节市</a>
-										<span>|</span>
-										<a href="#">铜仁市</a>
-										<span>|</span>
-										<a href="#">黔西南自治州</a>
-										<span>|</span>
-										<a href="#">黔东南自治州</a>
-										<span>|</span>
-										<a href="#">黔南自治州</a>
+										<div class="mtp-nav">
+											<span class="mtp-span ci-active" id="all_withinx">全省</span>
+											<a href="#0">贵阳市</a>
+											<a href="#0">遵义市</a>
+											<a href="#0">六盘水市</a>
+											<a href="#0">安顺市</a>
+											<a href="#0">毕节市</a>
+											<a href="#0">铜仁市</a>
+											<a href="#0">黔西南自治州</a>
+											<a href="#0">黔东南自治州</a>
+											<a href="#0">黔南自治州</a>
+										</div>
+										<div class="export-data" id="Province_get">
+											<button>导出数据</button>
+										</div>
+										<div id="Province_get_">
+											
+										</div>
 									</div>
 									<div class="mt-city">
+										<div class="city-item"></div>
 										<div class="city-item" id="isguiyang">
-											<a href="#">清镇市</a>
-											<span>|</span>
-											<a href="#">修文县</a>
-											<span>|</span>
-											<a href="#">息烽县</a>
-											<span>|</span>
-											<a href="#">开阳县</a>
-											<span>|</span>
-											<a href="#">花溪区</a>
-											<span>|</span>
-											<a href="#">观山湖区</a>
-											<span>|</span>
-											<a href="#">云岩区</a>
-											<span>|</span>
-											<a href="#">乌当区</a>
-											<span>|</span>
-											<a href="#">小河区</a>
-											<span>|</span>
-											<a href="#">白云区</a>
-											<span>|</span>
-											<a href="#">南明区</a>
+											<a href="#0">清镇市</a>
+											<a href="#0">修文县</a>
+											<a href="#0">息烽县</a>
+											<a href="#0">开阳县</a>
+											<a href="#0">花溪区</a>
+											<a href="#0">观山湖区</a>
+											<a href="#0">云岩区</a>
+											<a href="#0">乌当区</a>
+											<a href="#0">小河区</a>
+											<a href="#0">白云区</a>
+											<a href="#0">南明区</a>
 										</div>
+										<div class="city-item"></div>
+										<div class="city-item"></div>
+										<div class="city-item"></div>
+										<div class="city-item"></div>
+										<div class="city-item"></div>
+										<div class="city-item"></div>
+										<div class="city-item"></div>
+										<div class="city-item"></div>
 									</div>
 									<div class="mt-content">
-										<div class="mt-item" id="within">
-
-										</div>
+										<table class="shengnei" border="1">
+											<thead>
+												<tr>
+													<td>序号</td>
+													<td>市</td>
+													<td>所属区县</td>
+													<td>苗圃名称</td>
+												</tr>
+											</thead>
+											<tbody id="show_province">
+												<!--<tr>
+													<td class="mtc-td1">1</td>
+													<td class="mtc-td2">贵阳市</td>
+													<td class="mtc-td3">修文县</td>
+													<td class="mtc-td4">修文县双叶花木园艺场</td>
+												</tr>-->
+											</tbody>
+										</table>
 									</div>
 								</div>
 								<div class="mc-item">
@@ -202,13 +217,37 @@
 												<ul id="provinces"></ul>
 												<div class="clooseA2">重置</div>
 											</li>
+											<li class="export-data" id="outside_get">
+												<button>导出数据</button>
+											</li>
+											<li id="outside_get_">
+												
+											</li>
 										</ul>
 									</div>
 
 									<div class="mt-content">
-										<div class="mt-item" id="abroad">
+										<table class="shengwai" border="1">
+											<thead>
+												<tr>
+													<td>序号</td>
+													<td>省份</td>
+													<td>市</td>
+													<td>所属区县</td>
+													<td>苗圃名称</td>
+												</tr>
+											</thead>
+											<tbody id="show_outside">
+												<!--<tr>
+													<td>1</td>
+													<td>贵州省</td>
+													<td>贵阳市</td>
+													<td>修文县</td>
+													<td>修文县双叶花木园艺场</td>
+												</tr>-->
+											</tbody>
+										</table>
 
-										</div>
 									</div>
 								</div>
 							</div>
@@ -237,16 +276,13 @@
 				</div>
 			</div>
 		</section>
-		<div style="clear: both; height: 20px;"></div>
+		<div style="clear: both; height: 1px;"></div>
 		<!--系统内容-->
 		<script src="../js/jquery.min.js"></script>
 		<script src="../js/common.js"></script>
 		<script src="../js/Seeding-information.js"></script>
 		<script type="text/javascript" src="../js/host.js"></script>
 		<script type="text/javascript" src="../js/miaopu-information-list.js"></script>
-		<script>
-			
-		</script>
 	</body>
 
 </html>

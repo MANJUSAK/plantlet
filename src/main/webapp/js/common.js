@@ -23,6 +23,7 @@ function domes() {
 	var naian = yier[full.charAt(0)] + yier[full.charAt(1)] + yier[full.charAt(2)] + yier[full.charAt(3)];
 	str = naian + "-" + month + "-" + dates + " " + hourss + ":" + minutess + ":" + secondss + "  " + weeks[days];
 	document.getElementById("Span").innerHTML = str;
+	$("#Span").css("color","#FFF");
 	
 }
 /***************页面头部的当前时间  结束*****************/

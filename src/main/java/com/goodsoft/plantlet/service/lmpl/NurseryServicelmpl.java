@@ -48,7 +48,7 @@ public class NurseryServicelmpl implements NurseryService {
     //实例化UUID工具类
     private UUIDUtil uuid = UUIDUtil.getInstance();
     //实例化excel工具类
-    private ExcelUtil excelUtil = ExcelUtil.getInstance();
+    private ExcelNurseryUtil excelNurseryUtil = ExcelNurseryUtil.getInstance();
     //实例化文件删除工具类
     private DeleteFileUtil deleteFile = DeleteFileUtil.getInstance();
     //实例化数据解析工具类
@@ -153,7 +153,7 @@ public class NurseryServicelmpl implements NurseryService {
             List<Nursery> data = this.dao.queryNurseryAllDao(param);
             if (data.size() > 0) {
                 sb.append(this.http.getServerDomainName(request).toString());
-                sb.append(this.excelUtil.writeExcel(data, "in"));
+                sb.append(this.excelNurseryUtil.writeExcel(data, "in"));
                 return (T) new Result(0, sb.toString());
             }
         } catch (Exception e) {
@@ -363,7 +363,7 @@ public class NurseryServicelmpl implements NurseryService {
             List<NurseryOut> data = this.dao.queryNurseryOutAllDao(param);
             if (data.size() > 0) {
                 sb.append(this.http.getServerDomainName(request).toString());
-                sb.append(this.excelUtil.writeExcel(data, "out"));
+                sb.append(this.excelNurseryUtil.writeExcel(data, "out"));
                 return (T) new Result(0, sb.toString());
             }
         } catch (Exception e) {
@@ -487,7 +487,7 @@ public class NurseryServicelmpl implements NurseryService {
             StringBuilder sb = new StringBuilder(file.getBases());
             sb.append(file.getPath());
             *//*获取上传excel文件数据 start*//*
-            List<List<List<Object>>> list = this.excelUtil.readAllExcel(sb.toString(), uuid);
+            List<List<List<Object>>> list = this.excelNurseryUtil.readAllExcel(sb.toString(), uuid);
             for (int i = 0, length = list.size(); i < length; ++i) {
                 if (list == null) {
                     return new Status(StatusEnum.NO_EXCEL.getCODE(), StatusEnum.NO_EXCEL.getEXPLAIN());
@@ -556,7 +556,7 @@ public class NurseryServicelmpl implements NurseryService {
             StringBuilder sb = new StringBuilder(file.getBases());
             sb.append(file.getPath());
             *//*获取上传excel文件数据 start*//*
-            List<List<List<Object>>> list = this.excelUtil.readAllExcel(sb.toString(), uuid);
+            List<List<List<Object>>> list = this.excelNurseryUtil.readAllExcel(sb.toString(), uuid);
             for (int i = 0, length = list.size(); i < length; ++i) {
                 if (list == null) {
                     return new Status(StatusEnum.NO_EXCEL.getCODE(), StatusEnum.NO_EXCEL.getEXPLAIN());

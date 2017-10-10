@@ -25,6 +25,7 @@ section {
                 height: 300px;
                 margin: 0 auto;
                 background: linear-gradient(#DFFFCB, #EAFCDE);
+                filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#DFFFCB, endColorstr=#EAFCDE);
                 border-left: 1px solid #4CD242;
                 border-right: 1px solid #4CD242;
                 margin-top: 5px;
@@ -45,6 +46,11 @@ section {
                         }
                         &:hover {
                             background: linear-gradient(#399D34, #4CD242, #399D34);
+                            background: linear-gradient(#399D34, #4CD242, #399D34);
+                            background: -webkit-linear-gradient(#399D34, #4CD242, #399D34);
+                            background: -ms-linear-gradient(#399D34, #4CD242, #399D34);
+                            background: -moz-linear-gradient(#399D34, #4CD242, #399D34);
+                            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#399D34, endColorstr=#4CD242);
                             a {
                                 color: white;
                             }
@@ -52,6 +58,10 @@ section {
                     }
                     .Sin-active {
                         background: linear-gradient(#399D34, #4CD242, #399D34);
+                        background: -webkit-linear-gradient(#399D34, #4CD242, #399D34);
+                        background: -ms-linear-gradient(#399D34, #4CD242, #399D34);
+                        background: -moz-linear-gradient(#399D34, #4CD242, #399D34);
+                        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#399D34, endColorstr=#4CD242);
                         a {
                             color: white;
                         }
@@ -68,6 +78,7 @@ section {
             float: left;
             margin-left: 40px;
             margin-top: 30px;
+            margin-bottom: 20px;
             border: 1px solid #4CD242;
             .Sic-content {
                 width: 100%;
@@ -122,9 +133,32 @@ section {
                                 }
                             }
                         }
+                        .Sic-search-educe {
+                            width: 250px;
+                            float: right;
+                            input {
+                                width: 73px;
+                                height: 26px;
+                                color: #555;
+                                cursor: pointer;
+                                outline: none;
+                                background-color: #F7F7F7;
+                                border: 1px solid #d2d2d2;
+                                border-radius: 2px;
+                                margin-top: 12px;
+                            }
+                            span{
+                                padding-left: 10px;
+                            }
+                            a{
+                                padding: 0;
+                                border: none;
+                                color: blue;
+                            }
+                        }
                         ul li:last-child {
                             .last-a {
-                                padding: 4px 12px;
+                                padding: 6px 12px;
                                 font-size: 14px;
                                 color: #555;
                                 &:hover {
@@ -213,6 +247,8 @@ section {
                             ul {
                                 border-bottom: 1px dashed #4CD242;
                                 overflow: hidden;
+                                width: 100%;
+                                height: 40px;
                             }
                             ul .sx-mc {
                                 float: left;
@@ -230,7 +266,7 @@ section {
                                     color: #555;
                                     display: block;
                                 }
-                                &:hover a{
+                                &:hover a {
                                     color: red;
                                 }
                             }
@@ -254,11 +290,11 @@ section {
                                     font-size: 14px;
                                     line-height: 40px;
                                     color: #555;
-                                    a{
+                                    a {
                                         color: #555;
                                         display: block;
                                     }
-                                    &:hover a{
+                                    &:hover a {
                                         color: red;
                                     }
                                 }
@@ -301,8 +337,9 @@ section {
                                 display: inline-block;
                                 font-size: 14px;
                                 color: #555;
-                                padding: 4px 18px;
+                                padding: 7px 18px;
                                 cursor: pointer;
+                                border-radius: 2px;
                                 &:hover {
                                     background: #4CD242;
                                     color: white;
@@ -325,19 +362,49 @@ section {
                                 width: 100%;
                                 height: 40px;
                                 border-bottom: 1px solid #DEDEDE;
-                                a {
-                                    font-size: 14px;
-                                    color: #555;
-                                    line-height: 40px;
-                                    padding: 6px 12px;
+                                .mtp-nav {
+                                    width: 80%;
+                                    height: 40px;
+                                    float: left;
+                                    .mtp-span {
+                                        font-size: 14px;
+                                        color: #555;
+                                        line-height: 40px;
+                                        padding: 0 12px;
+                                        border-right: 1.5px solid #ddd;
+                                        cursor: pointer;
+                                    }
+                                    a {
+                                        font-size: 14px;
+                                        color: #555;
+                                        line-height: 40px;
+                                        padding: 0 12px;
+                                        border-right: 1.5px solid #ddd;
+                                    }
+                                    a:last-child {
+                                        border-right: none;
+                                    }
+                                    .ci-active {
+                                        color: #4CD242;
+                                    }
                                 }
-                                .ci-active {
-                                    color: #4CD242;
-                                }
-                                span {
-                                    font-size: 12px;
-                                    line-height: 40px;
-                                    color: #Ddd;
+                                .export-data {
+                                    width: 6%;
+                                    height: 35px;
+                                    padding-top: 5px;
+                                    float: left;
+                                    margin-right: 1%;
+                                    button {
+                                        width: 100%;
+                                        height: 30px;
+                                        font-size: 14px;
+                                        color: #555;
+                                        cursor: pointer;
+                                        outline: none;
+                                        background-color: #F7F7F7;
+                                        border: 1px solid #d2d2d2;
+                                        border-radius: 2px;
+                                    }
                                 }
                                 ul {
                                     width: 100%;
@@ -441,7 +508,7 @@ section {
                                                     span {
                                                         line-height: 30px;
                                                         color: #555;
-                                                        input{
+                                                        input {
                                                             vertical-align: middle;
                                                             margin-top: -2px;
                                                         }
@@ -451,7 +518,7 @@ section {
                                         }
                                     }
                                     .allCity-li {
-                                        width: 80%;
+                                        width: 60%;
                                         height: 40px;
                                         float: left;
                                         ul {
@@ -462,8 +529,8 @@ section {
                                             color: #555;
                                             float: left;
                                             li {
-                                              float: left;
-                                              margin-left: 10px;
+                                                float: left;
+                                                margin-left: 10px;
                                             }
                                         }
                                         .clooseA2 {
@@ -482,89 +549,147 @@ section {
                             }
                             .mt-city {
                                 width: 100%;
-                                height: auto;
-                                overflow: hidden;
+                                height: 40px;
+                                border-bottom: 1px solid #DEDEDE;
+                                display: none;
                                 .city-item {
                                     width: 100%;
                                     height: 40px;
-                                    border-bottom: 1px solid #DEDEDE;
                                     float: left;
                                     display: none;
                                     a {
                                         font-size: 14px;
                                         color: #555;
                                         line-height: 40px;
-                                        padding: 6px 12px;
+                                        padding: 0 12px;
+                                        border-right: 1.5px solid #ddd;
+                                    }
+                                    a:last-child {
+                                        border-right: none;
                                     }
                                     .ci-active {
                                         color: #4CD242;
-                                    }
-                                    span {
-                                        font-size: 12px;
-                                        line-height: 40px;
-                                        color: #Ddd;
                                     }
                                 }
                             }
                             .mt-content {
                                 width: 100%;
                                 height: auto;
-                                .mt-item {
-                                    width: 100%;
-                                    height: auto;
-                                    ul li {
+                                margin-top: 5px;
+                                .shengnei {
+                                    width: 99%;
+                                    margin: 0 auto;
+                                    border-collapse: collapse;
+                                    border: none;
+                                    font-size: 14px;
+                                    line-height: 40px;
+                                    color: #555;
+                                    border: 1px solid #DEDEDE;
+                                    thead {
                                         width: 100%;
-                                        height: 140px;
-                                        border-bottom: 1px solid #DEDEDE;
-                                        margin-top: 10px;
-                                        cursor: pointer;
-                                        .mt-imgs {
-                                            width: 179px;
-                                            height: 120px;
-                                            padding: 10px;
-                                            border-right: 1px solid #DEDEDE;
-                                            float: left;
-                                            .mti-content {
-                                                width: 178px;
-                                                height: 118px;
-                                                border: 1px solid #DEDEDE;
-                                                img {
-                                                    width: 100%;
-                                                    height: 118px;
+                                        height: 40px;
+                                        text-align: center;
+                                        font-weight: bold;
+                                        td:first-child {
+                                            width: 5%;
+                                        }
+                                        td:nth-child(2) {
+                                            width: 10%;
+                                        }
+                                        td:nth-child(3) {
+                                            width: 15%;
+                                        }
+                                        td:last-child {
+                                            width: 70%;
+                                        }
+                                    }
+                                    tbody {
+                                        width: 100%;
+                                        td {
+                                            cursor: pointer;
+                                        }
+                                        td:first-child {
+                                            width: 5%;
+                                            word-break: break-word;
+                                            text-align: center;
+                                        }
+                                        td:nth-child(2) {
+                                            width: 10%;
+                                            word-break: break-word;
+                                            padding: 0 5px;
+                                            box-sizing: border-box;
+                                        }
+                                        td:nth-child(3) {
+                                            width: 15%;
+                                            word-break: break-word;
+                                            padding: 0 5px;
+                                            box-sizing: border-box;
+                                        }
+                                        td:last-child {
+                                            width: 70%;
+                                            word-break: break-word;
+                                            padding: 0 5px;
+                                            box-sizing: border-box;
+                                            a {
+                                                color: #555;
+                                                &:hover {
+                                                    color: red;
                                                 }
                                             }
                                         }
-                                        .mt-right {
-                                            width: 1038px;
-                                            height: 140px;
-                                            float: left;
-                                            margin-left: 10px;
+                                    }
+                                }
+                                .shengwai {
+                                    width: 99%;
+                                    margin: 0 auto;
+                                    border-collapse: collapse;
+                                    border: none;
+                                    font-size: 14px;
+                                    line-height: 40px;
+                                    color: #555;
+                                    border: 1px solid #DEDEDE;
+                                    thead {
+                                        width: 100%;
+                                        height: 40px;
+                                        text-align: center;
+                                        font-weight: bold;
+                                        td:first-child {
+                                            width: 5%;
+                                        }
+                                        td:nth-child(2) {
+                                            width: 10%;
+                                        }
+                                        td:nth-child(3) {
+                                            width: 10%;
+                                        }
+                                        td:nth-child(4) {
+                                            width: 15%;
+                                        }
+                                        td:last-child {
+                                            width: 60%;
+                                        }
+                                    }
+                                    tbody {
+                                        width: 100%;
+                                        td {
                                             cursor: pointer;
-                                            
-                                            .mtr-title {
-                                                width: 100%;
-                                                height: 39px;
-                                                border-bottom: 1px dashed #DEDEDE;
-                                                a {
-                                                    line-height: 39px;
-                                                    padding-left: 20px;
-                                                    color: #555;
-                                                    &:hover {
-                                                        color: red;
-                                                    }
-                                                }
-                                            }
-                                            .mtr-jianjie {
-                                                width: 100%;
-                                                height: 100px;
-                                                overflow: hidden;
-                                                p {
-                                                    font-size: 15px;
-                                                    line-height: 25px;
-                                                    text-indent: 24px;
-                                                    color: #555;
-                                                }
-                                            }
+                                            word-break: break-word;
+                                        }
+                                        td:first-child {
+                                            width: 5%;
+                                            text-align: center;
+                                        }
+                                        td:nth-child(2) {
+                                            width: 10%;
+                                        }
+                                        td:nth-child(3) {
+                                            width: 10%;
+                                        }
+                                        td:nth-child(4) {
+                                            width: 15%;
+                                        }
+                                        td:last-child {
+                                            width: 60%;
                                         }
                                     }
                                 }
@@ -606,12 +731,12 @@ section {
                                     height: 160px;
                                 }
                             }
-                             .gxc-right:hover .gr-title a {
+                            .gxc-right:hover .gr-title a {
                                 color: red;
-                             }
-                             .gxc-right:hover .gr-text p {
+                            }
+                            .gxc-right:hover .gr-text p {
                                 color: red;
-                             }
+                            }
                             .gxc-right {
                                 width: 1030px;
                                 height: 160px;
@@ -659,6 +784,30 @@ section {
                                 border: none;
                                 color: #555;
                                 border: 1px solid #DEDEDE;
+                            }
+                        }
+                        .zaojia-topbar-derive {
+                            margin-left: 59%;
+                            input {
+                                width: 74px;
+                                height: 30px;
+                                font-size: 14px;
+                                color: #555;
+                                cursor: pointer;
+                                outline: none;
+                                background-color: #F7F7F7;
+                                border: 1px solid #d2d2d2;
+                                border-radius: 2px;
+                            }
+                        }
+                        .zaojia-topbar-show {
+                            width: auto;
+                            margin-left: -15px !important;
+                            text-align: left;
+                            font-size: 14px;
+                            a {
+                                font-size: 14px;
+                                color: blue;
                             }
                         }
                         .chakan-all {
@@ -778,7 +927,7 @@ section {
                             display: block;
                             line-height: 46px;
                             text-align: center;
-                            color: #DEDEDE;
+                            color: #adadad;
                             font-size: 24px;
                             transition: 0.5s;
                             &:hover {

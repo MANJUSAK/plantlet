@@ -140,6 +140,18 @@
             <version>2.6.0</version>
         </dependency>
         <!--word 插件 end-->
+        <!--pdf组件 start-->
+        <dependency>
+            <groupId>com.itextpdf</groupId>
+            <artifactId>itextpdf</artifactId>
+            <version>5.5.12</version>
+        </dependency>
+        <dependency>
+            <groupId>com.itextpdf</groupId>
+            <artifactId>itext-asian</artifactId>
+            <version>5.2.0</version>
+        </dependency>
+        <!--pdf组件 end-->
         <!--json解析包 start-->
         <!-- <dependency>
              <groupId>com.google.code.gson</groupId>

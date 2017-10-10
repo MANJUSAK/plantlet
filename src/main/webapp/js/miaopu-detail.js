@@ -1,10 +1,10 @@
-var numberx=0;
+var numberx = 0;
 $(function() {
 	var url_host = window.sessionStorage.getItem('host');
 	var urls = [url_host + "/plantlet/nursery/province/find/seedling.action.do", url_host + '/plantlet/nursery/outside/find/seedling.action.do'];
 	var companys = GetQueryString('nums')
 	var isabroad = GetQueryString('key')
-	console.log(companys)
+
 	$.ajax({
 		type: "get",
 		url: urls[isabroad],
@@ -14,41 +14,40 @@ $(function() {
 		},
 		async: true,
 		success: function(result) {
-			console.log( urls[isabroad]);
 			if(result.errorCode == 0) {
 				var data = result.data[numberx];
 				if(isabroad == 1) {
-					$('#nurseryName').html(data['company'])
-					$('#nurseryAdd').html(data['address'])
+					$('#nurseryName').html(data['company'] == null ? '' : data['company'])
+					$('#nurseryAdd').html(data['address'] == null ? '' : data['address'])
 					//$('#nurseryIntro').html(data['nurseryIntro'])
-					$('#p_d_c').html(data['province'])
-					$('#area').html(data['area'])
-					var nurseryName = data['company'];
+					$('#p_d_c').html(data['province'] == null ? '' : data['province'])
+					$('#area').html(data['area'] == 0 ? '' : data['area'])
+					var nurseryName = data['company'] == null ? '' : data['company'];
 					/*********/
-					$('#nurseryAddx').html(data['nurseryAdd'])
-					$('#postCode').html(data['postCode'])
+					$('#nurseryAddx').html(data['nurseryAdd'] == null ? '' : data['nurseryAdd'])
+					$('#postCode').html(data['postCode'] == 0 ? '' : data['postCode'])
 					$('#emailx').html(data['email'])
-					$('#contact').html(data['fax'])
-					$('#tels').html(data['tel']==0?'':data['tel'])
-					$('#fax').html(data['fax'])
+					$('#contact').html(data['contact'] == null ? '' : data['contact'])
+					$('#tels').html(data['tel'] == 0 ? '' : data['tel'])
+					$('#fax').html(data['fax'] == 0 ? '' : data['fax'])
 					getmore(urls[isabroad], nurseryName, isabroad);
 
 				} else {
 					var img = data['picture'] == null ? '' : ' <img class="MXi_L_img" src="' + data['picture'] + '" />';
 					$('#imgx').html(img)
-					$('#nurseryName').html(data['nurseryName'])
-					$('#nurseryAdd').html(data['nurseryAdd'])
-					$('#nurseryIntro').html(data['nurseryIntro'])
+					$('#nurseryName').html(data['nurseryName'] == null ? '' : data['nurseryName'])
+					$('#nurseryAdd').html(data['nurseryAdd'] == null ? '' : data['nurseryAdd'])
+					$('#nurseryIntro').html(data['nurseryIntro'] == null ? '' : data['nurseryIntro'])
 					$('#p_d_c').html(data['province'] + '&nbsp;' + data['districts'] + '&nbsp;' + data['county'])
-					$('#area').html(data['area'])
-					var nurseryName = data['nurseryName'];
+					$('#area').html(data['area'] == 0 ? '' : data['area'])
+					var nurseryName = data['nurseryName'] == null ? '' : data['nurseryName'];
 					/*********/
-					$('#nurseryAddx').html(data['nurseryAdd'])
-					$('#postCode').html(data['postCode'])
-					$('#emailx').html(data['email'])
-					$('#contact').html(data['fax'])
-					$('#tels').html(data['tel']==0?'':data['tel'])
-					$('#fax').html(data['fax'])
+					$('#nurseryAddx').html(data['nurseryAdd'] == null ? '' : data['nurseryAdd'])
+					$('#postCode').html(data['postCode'] == 0 ? '' : data['postCode'])
+					$('#emailx').html(data['email'] == null ? '' : data['email'])
+					$('#contact').html(data['contact'] == null ? '' : data['contact'])
+					$('#tels').html(data['tel'] == 0 ? '' : data['tel'])
+					$('#fax').html(data['fax'] == 0 ? '' : data['fax'])
 					getmore(urls[isabroad], nurseryName);
 				}
 			}
@@ -73,24 +72,17 @@ $(function() {
 					if(isabroad == 1) {
 						//省外
 						$.each(data, function(i) {
-							var specs = data[i]['spec']==''?'':data[i]['specMin']==0?'':data[i]['specMax']==0?data[i]['spec']+data[i]['specMin']:data[i]['spec']+data[i]['specMin']+ '-' + data[i]['specMax'];
-								var numsx = data[i]['num']==0?'':data[i]['num'];
-							html += '<div class="MX_mc_line">' +
-								'<div class="MX_mc_line_one"><span>' + data[i]['seedlingName'] + '</span></div>' +
-								'<div class="MX_mc_line_two"><span>' + specs + '</span></div>' +
-								'<div class="MX_mc_line_three"><span>' + numsx + '</span></div>' +
-								'</div>';
+							var specs = data[i]['spec'] == '' ? '' : data[i]['specMin'] == 0 ? '' : data[i]['specMax'] == 0 ? data[i]['spec'] + data[i]['specMin'] : data[i]['spec'] + data[i]['specMin'] + '-' + data[i]['specMax'];
+							var numsx = data[i]['num'] == 0 ? '' : data[i]['num'];
+							html += '<tr class="MX_mc_tr2"><td class="MX_mc_td1">' + data[i]['seedlingName'] + '</td><td class="MX_mc_td2">' + specs + '</td><td class="MX_mc_td3">' + numsx + '</td></tr>';
 						});
 					} else {
 
 						$.each(data, function(i) {
-							var specs = data[i]['spec']==''?'':data[i]['specMin']==0?'':data[i]['specMax']==0?data[i]['spec']+data[i]['specMin']:data[i]['spec']+data[i]['specMin']+ '-' + data[i]['specMax'];
-							var numsx = data[i]['num']==0?'':data[i]['num'];
-							html += '<div class="MX_mc_line">' +
-								'<div class="MX_mc_line_one"><span>' + data[i]['plantName'] + '</span></div>' +
-								'<div class="MX_mc_line_two"><span>' + specs + '</span></div>' +
-								'<div class="MX_mc_line_three"><span>' + numsx + '</span></div>' +
-								'</div>';
+							var specs = data[i]['spec'] == '' ? '' : data[i]['specMin'] == 0 ? '' : data[i]['specMax'] == 0 ? data[i]['spec'] + data[i]['specMin'] : data[i]['spec'] + data[i]['specMin'] + '-' + data[i]['specMax'];
+							var numsx = data[i]['num'] == 0 ? '' : data[i]['num'];
+							var price = data[i]['dprice']==0?'':data[i]['price'];
+							html += '<tr class="MX_mc_tr2"><td class="MX_mc_td1">' + data[i]['plantName'] + '</td><td class="MX_mc_td2">' + specs + '</td><td class="MX_mc_td3">' + numsx + '</td><td class="MX_mc_td4">' + price + '</td></tr>';
 						});
 					}
 

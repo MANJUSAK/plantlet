@@ -20,11 +20,11 @@ public class SupplyInfo implements java.io.Serializable {
     private double specMax;//规格范围第二位
     private String unit;//单位
     private double num;//数量
-    private String fileId;//文件编号
     private String contact;//联系人
     private long tel;//手机号
     private String sdAdd;//供货地址
     private double price;//价格
+    private String directory;//文件根目录，用户导入到pdf
     private List<String> picture;//文件
 
     public String getId() {
@@ -107,16 +107,16 @@ public class SupplyInfo implements java.io.Serializable {
         this.num = num;
     }
 
-    public String getFileId() {
-        return fileId;
-    }
-
-    public void setFileId(String fileId) {
-        this.fileId = fileId;
-    }
-
     public String getContact() {
         return contact;
+    }
+
+    public String getDirectory() {
+        return directory;
+    }
+
+    public void setDirectory(String directory) {
+        this.directory = directory;
     }
 
     public void setContact(String contact) {
@@ -172,15 +172,15 @@ public class SupplyInfo implements java.io.Serializable {
                 Objects.equals(sdType, that.sdType) &&
                 Objects.equals(spec, that.spec) &&
                 Objects.equals(unit, that.unit) &&
-                Objects.equals(fileId, that.fileId) &&
                 Objects.equals(contact, that.contact) &&
                 Objects.equals(sdAdd, that.sdAdd) &&
+                Objects.equals(directory, that.directory) &&
                 Objects.equals(picture, that.picture);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, seedlingComp, seedlingIntro, sdName, sdType, spec, specMin, specMax, unit, num, fileId, contact, tel, sdAdd, price, picture);
+        return Objects.hash(id, seedlingComp, seedlingIntro, sdName, sdType, spec, specMin, specMax, unit, num, contact, tel, sdAdd, price, directory, picture);
     }
 }
 

@@ -4,13 +4,15 @@ var numberx = 0;
 var abroadx = false;
 var within = '';
 var arr_provinces_li = null;
+var isexport = true;
 $(function() {
+	var host = window.sessionStorage.getItem('host');
 	//省内
-	var url_ = window.sessionStorage.getItem('host') + '/plantlet/nursery/province/find/index/seedling.action.do';
+	var url_ = host + '/plantlet/nursery/province/find/index/seedling.action.do';
 	//省外
-	var url_x = window.sessionStorage.getItem('host') + '/plantlet/nursery/outside/find/index/seedling.action.do';
-	var show_page = ['#within', '#abroad'];
-	var iswithinx = ['贵阳市', '遵义市', '六盘水市', '安顺市', '毕节市', '铜仁市', '黔西南布依族苗族自治州', '黔东南苗族侗族自治州', '黔南布依族苗族自治州'];
+	var url_x = host + '/plantlet/nursery/outside/find/index/seedling.action.do';
+	var show_page = ['#show_province', '#show_outside'];
+	var iswithinx = ['贵阳市', '遵义市', '六盘水市', '安顺市', '毕节市', '铜仁市', '黔西南自治州', '黔东南自治州', '黔南自治州'];
 	var isguiyang = ['清镇市', '修文县', '息烽县', '开阳县', '花溪区', '观山湖区', '云岩区', '乌当区', '小河区', '白云区', '南明区'];
 	//var isabroadx = ['河南省', '河北省', '湖南省', '湖北省', '山东省', '江苏省'];
 
@@ -30,36 +32,46 @@ $(function() {
 		};
 		//mydata.province = isabroadx[0];
 		getdata(url_x, mydata, show_page[1], true, false);
+		//清空数据
+		arr_provinces_li = null;
+		reset_download_();
 	})
 	//点击省内
-	$('#iswithin').click(function() {
+	$('#iswithin,#all_withinx').click(function() {
 		if(abroadx) {
 			abroadx = false;
 		}
-		delete mydata.province;
-		mydata.num = numberx;
+
+		mydata = {
+			num: numberx
+		};
 		getdata(url_, mydata, show_page[0], false, false);
+		//清空数据
+		arr_provinces_li = null;
+		reset_download_();
 	})
 	//省内
 	$('#iswithinx a').click(function() {
-		var frist = $(this).index() / 2;
 		mydata.num = numberx;
 		delete mydata.county;
-		mydata.city = iswithinx[frist];
+		mydata.city = iswithinx[$(this).index() - 1];
 		if(abroadx) {
 			abroadx = false;
 		}
 		getdata(url_, mydata, show_page[0], false, false);
+		reset_download_();
 	})
 	//贵阳
 	$('#isguiyang a').click(function() {
-		var idnex = $(this).index() / 2;
+		var idnex = $(this).index();
 		mydata.num = numberx;
 		mydata.county = isguiyang[idnex];
 		if(abroadx) {
 			abroadx = false;
 		}
 		getdata(url_, mydata, show_page[0], false, false);
+		reset_download_();
+
 	})
 	//省外
 
@@ -72,24 +84,40 @@ $(function() {
 			});
 			$(".clooseA2").show();
 		}
-		
+		//前端显示控制
 		$(".allCity-li ul").html(cc);
 		$(".anAll ul li").html("");
-
 		$(".clooseA").hide();
 		$("#cityLi").slideUp();
-		$('.allCity-li ul .provinces_li').click(function() {
-			//var index = Math.ceil($(this).index() / 2);
+		//点击单省时查询单省数据
+		$('#provinces .provinces_li').click(function() {
 			mydata.num = numberx;
 			delete mydata.county;
 			delete mydata.city;
 			mydata.province = $(this).text();
-			/*
-			if(!abroadx) {
-				abroadx = true;
-			}*/
 			getdata(url_x, mydata, show_page[1], true, false);
+			reset_download_();
+
 		})
+		//点击确定时，查询多省数据
+		if(arr_provinces_li != null) {
+			var len = arr_provinces_li.length;
+			var provinces = '';
+			for(var i = 0; i < len; i++) {
+				if(i == 0) {
+					provinces += arr_provinces_li[i];
+				} else {
+					provinces += ',' + arr_provinces_li[i];
+				}
+			}
+			mydata = {
+				num: numberx,
+				province: provinces,
+			}
+			getdata(url_x, mydata, show_page[1], true, false);
+			reset_download_();
+		}
+
 	});
 	//点击取消回复input原始状态
 	$(".clooseA2").click(function() {
@@ -112,6 +140,90 @@ $(function() {
 		}
 
 	})
+	//省内导出
+	$('#Province_get button').click(function() {
+		if(!isexport) {
+			alert('请求正在执行中')
+			return 0;
+		}
+		isexport = false;
+		////////////////分割线
+		$('#Province_get_').html(' ');
+		var download_url = host + '/plantlet/nursery/province/export/excel/seedling.action.do';
+		var mydatax = {};
+		//设置下载省份
+		mydata.province == undefined ? '' : mydatax.province = mydata.province;
+		//设置下载城市
+		mydata.city == undefined ? '' : mydatax.city = mydata.city;
+		//设置下载区县
+		mydata.county == undefined ? '' : mydatax.county = mydata.county;
+		$.ajax({
+			type: "get",
+			url: download_url,
+			data: mydatax,
+			async: true,
+			success: function(result) {
+				if(result.errorCode == 0) {
+					var down_html = '<span style="line-height: 40px;font-size: 14px;">导出成功，请<a href="' + result.data + '">点击下载</a></span>';
+					$('#Province_get_').html(down_html);
+				} else {
+
+					$('#Province_get_').html(result.msg);
+				}
+				isexport = true;
+			},
+			error: function(e) {
+				console.log(e.status);
+				isexport = true;
+			}
+		});
+		
+	})
+	//省外导出
+	$('#outside_get button').click(function() {
+		if(!isexport) {
+			alert('请求正在执行中')
+			return 0;
+		}
+		isexport = false;
+		///////////分割线
+		$('#outside_get_').html(' ');
+		var download_url = host + '/plantlet/nursery/outside/export/excel/seedling.action.do';
+		var mydatax = {};
+		//设置下载省份
+		mydata.province == undefined ? '' : mydatax.province = mydata.province;
+		//设置下载城市
+		mydata.city == undefined ? '' : mydatax.city = mydata.city;
+		//设置下载区县
+		mydata.county == undefined ? '' : mydatax.county = mydata.county;
+		$.ajax({
+			type: "get",
+			url: download_url,
+			data: mydatax,
+			async: true,
+			success: function(result) {
+				if(result.errorCode == 0) {
+					var down_html = '<span style="line-height: 40px;font-size: 14px;">导出成功，请<a href="' + result.data + '">点击下载</a></span>';
+					$('#outside_get_').html(down_html);
+				} else {
+
+					$('#outside_get_').html('<span style="line-height: 40px;font-size: 14px;">' + result.msg + '</span>');
+				}
+				isexport = true;
+			},
+			error: function(e) {
+				console.log(e.status);
+				isexport = true;
+			}
+		});
+		
+	})
+	//重置下载地址
+	function reset_download_() {
+		$('#outside_get_').html('');
+		$('#Province_get_').html('');
+		isexport = true;
+	}
 	//			请求地址		请求参数	展示位置 	是否省外	是否加载更多
 	function getdata(url_, mydata, showpage, isabroad, ismore) {
 		//如果ismore 为真则 HTML=HTML  反之 HTML 重置
@@ -125,80 +237,40 @@ $(function() {
 			async: true,
 			success: function(result) {
 				if(result.errorCode == 0) {
-					console.log(result)
 					var data = result.data;
 					$.each(data, function(i) {
+						//序号
+						var numx = mydata.num == 0 ? i + 1 : (i + 1) + (mydata.num * 20);
 						//是否省外
 						if(isabroad) {
-							var img = data[i]['picture'] == null ? '' : data[i]['picture'][0];
-							var seedlingName = data[i]['seedlingName']==null?'无':data[i]['seedlingName'];
-							htmlx += '<ul class="isabroads"><li>' +
-								'<div class="mt-imgs">' +
-								'<div class="mti-content">' +
-								'<img src="' + img + '" />' +
-								'</div>' +
-								'</div>' +
-								'<div class="mt-right">' +
-								'<div class="mtr-title">' +
-								'<a href="miaopu_details.html?key=1&nums=' + data[i]['company'] + '">' + data[i]['company'] + '</a>' +
-								'</div>' +
-								'<div class="mtr-jianjie">' +
-								'<p>' + seedlingName + '</p>' +
-								'</div>' +
-								'</div>' +
-								'</li></ul>';
+							var province = data[i]['province'] == null ? '无' : data[i]['province'];
+							var company = data[i]['company'] == null ? '无' : data[i]['company'];
+
+							htmlx += '<tr>' +
+								'<td>' + numx + '</td>' +
+								'<td>' + province + '</td>' +
+								'<td></td>' +
+								'<td></td>' +
+								'<td><a href="miaopu_details.html?key=1&nums=' + data[i]['company'] + '" target="_blank">' + company + '</a></td>' +
+								'</tr>';
 						} else {
-							var nurseryIntro = data[i]['nurseryIntro']==null?'无':data[i]['nurseryIntro'];
-							html += '<ul class="iswithins"><li>' +
-								'<div class="mt-imgs">' +
-								'<div class="mti-content">' +
-								'</div>' +
-								'</div>' +
-								'<div class="mt-right">' +
-								'<div class="mtr-title">' +
-								'<a href="miaopu_details.html?key=0&nums=' + data[i]['nurseryName'] + '">' + data[i]['nurseryName'] + '</a>' +
-								'</div>' +
-								'<div class="mtr-jianjie">' +
-								'<p>' +  nurseryIntro + '</p>' +
-								'</div>' +
-								'</div>' +
-								'</li></ul>';
+							var province = data[i]['province'] == null ? '无' : data[i]['province'];
+							var districts = data[i]['districts'] == null ? '无' : data[i]['districts'];
+							var county = data[i]['county'] == null ? '无' : data[i]['county'];
+							var nurseryName = data[i]['nurseryName'] == null ? '无' : data[i]['nurseryName'];
+
+							html += '<tr>' +
+								'<td class="mtc-td1">' + numx + '</td>' +
+								'<td class="mtc-td2">' + districts + '</td>' +
+								'<td class="mtc-td3">' + county + '</td>' +
+								'<td class="mtc-td4"><a href="miaopu_details.html?key=0&nums=' + data[i]['nurseryName'] + '" target="_blank">' + nurseryName + '</a></td>' +
+								'</tr>';
 						}
 					});
 					if(isabroad) {
 						$(showpage).html(htmlx);
-						/*$('.isabroads').click(function() {
-							
-							var num = $(this).index();
-							var id = num < 20 ? num : num / 20;
-							var index = 0;
-							if((num + 1) < 20) {
-								index = 0;
-							} else {
-								index = Math.ceil((num - (num % 20)) / 20);
-							}
-
-							var test = index + ',' + id+',';
-
-							window.sessionStorage.setItem('mp_detail', test);
-							window.open('miaopu_details.html')
-						})*/
 					} else {
 						$(showpage).html(html);
-						/*$('.iswithins').click(function() {
-							var num = $(this).index();
-							var id = num < 20 ? num : num / 20;
-							var index = 0;
-							if((num + 1) < 20) {
-								index = 0;
-							} else {
-								index = Math.ceil((num - (num % 20)) / 20);
-							}
-
-							var test = index + ',' + id
-							window.sessionStorage.setItem('mp_detail', test);
-							window.open('miaopu_details.html')
-						})*/
 					}
 
 				} else {
@@ -215,7 +287,7 @@ $(function() {
 						if(mydata.province !== undefined) {
 							address += mydata.province;
 						}
-						$(showpage).html('非常抱歉，' + address + '暂时没此项数据');
+						$(showpage).html('<tr><td colspan="5">' + '非常抱歉，' + address + '暂时没此项数据' + '</td></tr>');
 					}
 				}
 			},

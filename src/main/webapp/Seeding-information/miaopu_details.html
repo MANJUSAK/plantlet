@@ -10,7 +10,7 @@
 		<!-- 在双核浏览器下，默认使用webkit内核，由360浏览器提出 -->
 		<meta name="renderer" content="webkit">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-		<title>苗圃信息</title>
+		<title>苗木信息化系统-苗圃信息-详情</title>
 		<link rel="stylesheet" href="../css/common.css" />
 		<link rel="stylesheet" href="../css/plantlet_details.css" />
 		<link rel="stylesheet" type="text/css" href="../vendor/font-awesome-4.6.3/css/font-awesome.min.css" />
@@ -38,7 +38,7 @@
 				<!--用户信息-->
 				<div class="Hr-item">
 					<ul>
-						<li>当前时间：<span id="Span"></span></li>
+						<li>当前时间：<span id="Span" style="color: white;"></span></li>
 						<li>姓名：</li>
 						<li>部门：</li>
 					</ul>
@@ -98,14 +98,20 @@
 					</div>
 					<div class="MX_mpimg_content">
 						<div class="MX_mc">
-							<div class="MX_mc_line1">
-								<div class="MX_mc_line1_one"><span>苗木名称</span></div>
-								<div class="MX_mc_line1_two"><span>规格</span></div>
-								<div class="MX_mc_line1_three"><span>数量</span></div>
-							</div>
-							<div id="show_mp">
-								
-							</div>
+							<table class="MX_mc_tab1" border="1" cellpadding="0" cellspacing="0">
+								<thead>
+									<tr class="MX_mc_tr1">
+										<th class="MX_mc_th1">苗木名称</th>
+										<th class="MX_mc_th2">规格</th>
+										<th class="MX_mc_th3">数量</th>
+										<th class="MX_mc_th4">价格</th>
+									</tr>
+								</thead>
+								<!--循环的内容-->
+								<tbody id="show_mp">
+
+								</tbody>
+							</table>
 
 						</div>
 					</div>
@@ -118,6 +124,7 @@
 					</div>
 					<!--展示图片-->
 					<div class="MX_mpimg_content">
+						
 						<div class="MX_mc_one">
 							<ul class="MX_mc_oneUl">
 								<li class="MX_mc_oneLi1">苗木地址</li>

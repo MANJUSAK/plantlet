@@ -22,22 +22,22 @@ $(function() {
 	$("#clooseLayer").click(function() {
 		$("#SiLayer").hide();
 	});
-	//切换市
-	$(".mt-province a").click(function() {
-		$(this).addClass("ci-active").siblings().removeClass("ci-active");
+	//全省
+	$(".mtp-nav span").click(function(){
+		$(".mt-city").slideUp();
+		$(this).addClass("ci-active");
+		$(".mtp-nav a").removeClass("ci-active");
 	});
-	$(".mt-province a").click(function() {
-		var c = $(this).index();
-		if (c == 0) {
-			$(".city-item").eq(c).slideDown();
-		} else{
-			$(".city-item").eq(0).slideUp();
-			$(".city-item a").removeClass("ci-active");
-		}
+	//切换市
+	$(".mtp-nav a").click(function() {
+		$(".mt-city").slideDown();
+		var a = $(this).index();
+		$(this).addClass("ci-active").siblings().removeClass("ci-active");
+		$(".city-item").eq(a).slideDown().siblings().hide();
 	});
 	
 	//贵阳市县
-	$(".mt-city a").click(function() {
+	$(".city-item a").click(function() {
 		$(this).addClass("ci-active").siblings().removeClass("ci-active");
 	});
 

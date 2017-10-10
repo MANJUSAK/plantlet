@@ -7,20 +7,20 @@ import javax.servlet.http.HttpServletRequest;
  * Created by 严彬荣 on 2017/8/14.
  * version v1.0
  */
-public class GetIP {
+public class GetIPUtil {
     /**
      * 创建本类的单例模式（具体说明参见本包下的UUIDUtil类） start
      */
-    private volatile static GetIP instance;
+    private volatile static GetIPUtil instance;
 
-    private GetIP() {
+    private GetIPUtil() {
     }
 
-    public static GetIP getInstance() {
+    public static GetIPUtil getInstance() {
         if (instance == null) {
-            synchronized (GetIP.class) {
+            synchronized (GetIPUtil.class) {
                 if (instance == null)
-                    instance = new GetIP();
+                    instance = new GetIPUtil();
             }
         }
         return instance;

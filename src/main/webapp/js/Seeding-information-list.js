@@ -1,5 +1,6 @@
 var html = '';
 var numberx = 0;
+var isexport = true;
 $(function() {
 	var url_ = window.sessionStorage.getItem('host') + '/plantlet/plant/find/statistics/seedling.action.do';
 	var sdname_url = window.sessionStorage.getItem('host') + '/plantlet/plant/find/all/sd_name/seedling.action.do';
@@ -51,23 +52,7 @@ $(function() {
 		});
 
 	}
-	/*$('#sdnamex').change(function() {
-		var name = $('select[name=sdName]').val();
-		mydata.num = numberx;
-		if(Number(name) == 0) {
-			delete mydata.keyWord;
-		} else {
-			mydata.keyWord = name;
-		}
-		var spec = $('select[name=spec]').val();
-		if(Number(spec) == 0) {
-			delete mydata.spec;
-		} else {
-			mydata.spec = spec;
-		}
-		console.log(mydata)
-		getdata(url_, mydata, show_page, false);
-	})*/
+
 	$('select[name="spec"]').change(function() {
 		if(Number($(this).val()) == 0) {
 			mydata = {
@@ -117,12 +102,10 @@ $(function() {
 				getdata(url_, mydata, show_page, false);
 			}
 
-			console.log(mydata)
 		} else {
 			//最大值不为空,则最大值大于最小值时才请求数据
 			if(Number(mydata.specMax) > Number(mydata.specMin)) {
 				getdata(url_, mydata, show_page, false);
-				console.log(mydata)
 			}
 		}
 
@@ -152,7 +135,6 @@ $(function() {
 			} else {
 				getdata(url_, mydata, show_page, false);
 			}
-			console.log(mydata)
 		} else {
 			//最小值不为空,则最小值小于最大值时才请求数据
 			if(Number(mydata.specMax) > Number(mydata.specMin)) {
@@ -161,7 +143,6 @@ $(function() {
 				} else {
 					getdata(url_, mydata, show_page, false);
 				}
-				console.log(mydata)
 			}
 		}
 
@@ -184,32 +165,34 @@ $(function() {
 					var data = result.data;
 					$.each(data, function(i) {
 						data[i]['comment'] = data[i]['comment'] == null ? '' : data[i]['comment'];
-						var price = data[i]['minPrice'] == data[i]['maxPrice'] ? data[i]['minPrice'] : data[i]['minPrice'] + '-' + data[i]['maxPrice'];
-						var priceOut = data[i]['minPriceOut'] == data[i]['maxPriceOut'] ? data[i]['minPriceOut'] : data[i]['minPriceOut'] + '-' + data[i]['maxPriceOut'];
+						var price = data[i]['minPrice'] == 0 ? '' : data[i]['minPrice'] == data[i]['maxPrice'] ? data[i]['minPrice'] : data[i]['minPrice'] + '-' + data[i]['maxPrice'];
+						var priceOut = data[i]['minPriceOut'] == 0 ? '' : data[i]['minPriceOut'] == data[i]['maxPriceOut'] ? data[i]['minPriceOut'] : data[i]['minPriceOut'] + '-' + data[i]['maxPriceOut'];
 						var marketPrice = data[i]['marketPrice'] == 0 ? '' : data[i]['marketPrice'] + '';
-						var specs =Number(data[i]['specMax'])==0? data[i]['spec'] + data[i]['specMin']:data[i]['spec'] + data[i]['specMin'] + '-' + data[i]['specMax'] ;
+						var specs = Number(data[i]['specMax']) == 0 ? data[i]['spec'] + data[i]['specMin'] : data[i]['spec'] + data[i]['specMin'] + '-' + data[i]['specMax'];
+						var numOut = data[i]['numOut'] == 0 ? '' : data[i]['numOut'];
+						var num = data[i]['num'] == 0 ? '' : data[i]['num'];
+						var offer = data[i]['offer'] == 0 ? '' : data[i]['offer'];
 						html += '<ul class="Seed_detail">' +
-							'<li class="sx-mc"><a href="seeding_details.html?sdName=' + data[i]['sdName'] + '&spec=' + data[i]['spec'] + '&specMin=' + data[i]['specMin'] + '&specMax=' + data[i]['specMax'] + '&isall=0">' +
+							'<li class="sx-mc"><a target="_blank" href="seeding_details.html?sdName=' + data[i]['sdName'] + '&spec=' + data[i]['spec'] + '&specMin=' + data[i]['specMin'] + '&specMax=' + data[i]['specMax'] + '&isall=0">' +
 							'' + data[i]['sdName'] + '</a></li>' +
-							'<li class="sx-mc">' + specs+ '</li>' +
+							'<li class="sx-mc">' + specs + '</li>' +
 							'<li class="sx-jg">' +
-							//'<a href="seeding_details.html?sdName=' + data[i]['sdName'] + '&spec=' + data[i]['spec'] + '&specMin=' + data[i]['specMin'] + '&specMax=' + data[i]['specMax'] + '&isall=1">' +
-							'<div class="jg-li">' + data[i]['offer'] + '</div>' +
-							'<div class="jg-li"><a href="seeding_details.html?sdName=' + data[i]['sdName'] + '&spec=' + data[i]['spec'] + '&specMin=' + data[i]['specMin'] + '&specMax=' + data[i]['specMax'] + '&isall=2">' +
+							'<div class="jg-li">' + offer+'</div>' +
+							'<div class="jg-li"><a target="_blank" href="seeding_details.html?sdName=' + data[i]['sdName'] + '&spec=' + data[i]['spec'] + '&specMin=' + data[i]['specMin'] + '&specMax=' + data[i]['specMax'] + '&isall=2">' +
 							'' + price + '</a></div>' +
-							'<div class="jg-li"><a href="seeding_details.html?sdName=' + data[i]['sdName'] + '&spec=' + data[i]['spec'] + '&specMin=' + data[i]['specMin'] + '&specMax=' + data[i]['specMax'] + '&isall=3">' +
+							'<div class="jg-li"><a target="_blank" href="seeding_details.html?sdName=' + data[i]['sdName'] + '&spec=' + data[i]['spec'] + '&specMin=' + data[i]['specMin'] + '&specMax=' + data[i]['specMax'] + '&isall=3">' +
 							'' + priceOut + '</a></div>' +
 							'<div class="jg-li">' + marketPrice + '</div>' +
 							'</li>' +
 							'<li class="sx-sl">' +
-							'<div class="sl-li">' + data[i]['num'] + '</div>' +
-							'<div class="sl-li">' + data[i]['numOut'] + '</div>' +
+							'<div class="sl-li">' + num + '</div>' +
+							'<div class="sl-li">' + numOut + '</div>' +
 							'</li>' +
 							'<li class="sx-mc">' + data[i]['comment'] + '</li>' +
 							'</ul>';
 					});
 					$(show_page).html(html);
-					
+
 				} else {
 					if(mydata.num > 0) {
 						alert('已经没有更多数据了');
@@ -223,5 +206,33 @@ $(function() {
 			}
 		});
 	}
+
+	//文件导出
+	$('#export').click(function() {
+		if(!isexport) {
+			alert('请求正在执行中')
+			return 0;
+		}
+		isexport = false;
+
+		$('#export_show').html(' ');
+		$.ajax({
+			type: "get",
+			url: window.sessionStorage.getItem("host") + "/plantlet/plant/output/seedling/statistics/seedling.action.do",
+			success: function(result) {
+				if(result.errorCode == 0) {
+					$('#export_show').html('导出成功，请<a href="' + result.data + '">点击下载</a>');
+				} else {
+					$('#export_show').html(result.msg);
+				}
+				isexport = true;
+			},
+			error: function(e) {
+				console.log(e.status)
+				isexport = true;
+			}
+		});
+
+	})
 
 })

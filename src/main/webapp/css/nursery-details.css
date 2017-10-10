@@ -150,10 +150,11 @@ body {
 .nursery-details-section .nds-box .nds-footer {
   width: 100%;
   height: 100%;
-    overflow: hidden !important;
+  overflow: hidden !important;
   background: white;
   margin-top: 20px;
-    padding: 20px 0;
+  padding: 20px 0;
+  margin-bottom: 20px;
 }
 .nursery-details-section .nds-box .nds-footer .nds-footer-content {
   width: 96%;

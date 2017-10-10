@@ -1,21 +1,25 @@
 var html = '';
 var htmlx = '';
 var numberx = 0;
+var isexport = true;
 $(function() {
-
-	var urlx = [window.sessionStorage.getItem('host') + '/plantlet/plant/find/offer/seedling.action.do', window.sessionStorage.getItem('host') + '/plantlet/plant/find/offer/statistics/seedling.action.do'];
+	var host = window.sessionStorage.getItem("host");
+	var urlx = [host + '/plantlet/plant/find/offer/seedling.action.do', host + '/plantlet/plant/find/offer/statistics/seedling.action.do'];
 	var mydata = {
 		num: numberx,
 		year: 2017
 	};
 	var show_page = ['.zj-container ul', '#show_all'];
 	getdata(urlx[1], mydata, show_page[1], false, true);
+	//更改下级菜单样式
+	$('#show_default').css('border', '1px solid #1F9952');
+	$('#show_default').css('color', '#1F9952');
 	//加载更多
 	$('.jzm-center').click(function() {
 		var y = $('#year').val();
 		var m = $('#month').val();
 		mydata.num = mydata.num + 1;
-		console.log(mydata)
+
 		if(y != 0 && m == 0 || y == 0 && m == 0) {
 			delete mydata.month;
 			if(y == 0 && m == 0) {
@@ -39,13 +43,21 @@ $(function() {
 			mydata = {
 				num: numberx,
 			};
+			$('#year_all span').css('border', '1px solid transparent');
+			$('#year_all span').css('color', '#000000');
+			$('#show_default').css('border', '1px solid #1F9952');
+			$('#show_default').css('color', '#1F9952');
 			getdata(urlx[1], mydata, show_page[1], false, true);
 			//getdata(urlx[0], mydata, show_page[0], false, false)
-			console.log(mydata)
+
 			$("#zjFenqi").hide();
 			$("#zaojiaAll").show();
-
 			$('#year_all').show();
+			//更改下级菜单样式
+			$('#year_all span').css({
+				'border': '1px solid transparent',
+				'color': '#000000'
+			});
 		} else if(y == 0 && Number(m) != 0) {
 			$('#year_all').hide();
 
@@ -58,7 +70,7 @@ $(function() {
 				month: m,
 			};
 			getdata(urlx[0], mydata, show_page[0], false, false)
-			console.log(mydata)
+
 		} else if(Number(y) != 0 && Number(m) == 0) {
 			$('#year_all').hide();
 
@@ -70,7 +82,7 @@ $(function() {
 				year: y
 			};
 			getdata(urlx[1], mydata, show_page[1], false, true);
-			console.log(mydata)
+
 		} else {
 			$('#year_all').hide();
 
@@ -82,7 +94,7 @@ $(function() {
 				month: m,
 			};
 			getdata(urlx[0], mydata, show_page[0], false, false);
-			console.log(mydata)
+
 		}
 
 	})
@@ -90,25 +102,31 @@ $(function() {
 	$('#month').change(function() {
 		var m = $(this).val();
 		var year = $('#year').val();
+		//年月皆为零时，查询所有，此类型数据
 		if(m == 0 && year == 0) {
 			mydata = {
 				num: numberx,
 			};
+			$('#year_all span').css('border', '1px solid transparent');
+			$('#year_all span').css('color', '#000000');
 			getdata(urlx[1], mydata, show_page[1], false, true);
+			//前端页面控制
 			$("#zjFenqi").hide();
 			$("#zaojiaAll").show();
 			$('#year_all').show();
-			console.log(mydata)
+
 		} else if(m == 0 && Number(year) != 0) {
+			//仅月份为全部时，按年查询此类数据，
 			$('#year_all').hide();
 			mydata = {
 				num: numberx,
 				year: year
 			};
 			getdata(urlx[1], mydata, show_page[1], false, true);
+			//前端页面控制
 			$("#zjFenqi").hide();
 			$("#zaojiaAll").show();
-			console.log(mydata)
+
 		} else if(m != 0 && year == 0) {
 			$('#year_all').hide();
 			eval('mydata.month=' + m);
@@ -119,7 +137,7 @@ $(function() {
 			getdata(urlx[0], mydata, show_page[0], false, false);
 			$("#zjFenqi").show();
 			$("#zaojiaAll").hide();
-			console.log(mydata)
+
 		} else {
 			$('#year_all').hide();
 			eval('mydata.month=' + m);
@@ -131,15 +149,20 @@ $(function() {
 			getdata(urlx[0], mydata, show_page[0], false, false);
 			$("#zjFenqi").show();
 			$("#zaojiaAll").hide();
-			console.log(mydata)
+
 		}
 
 	})
+	//选择全部时 显示二级菜单（作分页功能
+	//此应该动态获取服务器数据来动态生成的
 	$('#year_all span').click(function() {
 		var index = $(this).index();
 		var selects = document.getElementById("year");
-		$('#year_all span').css('border', '1px solid transparent');
-		$('#year_all span').css('color', '#000000');
+		//更改样式
+		$('#year_all span').css({
+			'border': '1px solid transparent',
+			'color': '#000000'
+		});
 		switch(index) {
 			case 0:
 				mydata = {
@@ -148,8 +171,10 @@ $(function() {
 				};
 				selects[1].selected = true;
 				getdata(urlx[1], mydata, show_page[1], false, true);
-				$(this).css('border', '1px solid #1F9952')
-				$(this).css('color', '#1F9952');
+				$(this).css({
+					'border': '1px solid #1F9952',
+					'color': '#1F9952'
+				});
 				break;
 			case 1:
 				mydata = {
@@ -158,8 +183,10 @@ $(function() {
 				};
 				selects[2].selected = true;
 				getdata(urlx[1], mydata, show_page[1], false, true);
-				$(this).css('border', '1px solid #1F9952')
-				$(this).css('color', '#1F9952');
+				$(this).css({
+					'border': '1px solid #1F9952',
+					'color': '#1F9952'
+				});
 				break;
 			case 2:
 				mydata = {
@@ -168,11 +195,13 @@ $(function() {
 				};
 				selects[3].selected = true;
 				getdata(urlx[1], mydata, show_page[1], false, true);
-				$(this).css('border', '1px solid #1F9952')
-				$(this).css('color', '#1F9952');
+				$(this).css({
+					'border': '1px solid #1F9952',
+					'color': '#1F9952'
+				});
 				break;
 		}
-		console.log(mydata)
+
 	});
 
 	function getdata(urlx, mydata, show_page, isMore, isall) {
@@ -185,7 +214,7 @@ $(function() {
 			async: true,
 			data: mydata,
 			success: function(result) {
-				console.log(result)
+
 				if(result.errorCode == 0) {
 					var data = result.data;
 					$.each(data, function(i) {
@@ -240,7 +269,7 @@ $(function() {
 
 					if(isall) {
 						if(mydata.year == undefined) {
-							$('#show_all_year').html('全部年份');
+							$('#show_all_year').html('2017年份');
 						} else {
 							$('#show_all_year').html(mydata.year + '年份');
 						}
@@ -259,14 +288,55 @@ $(function() {
 						if(isall) {
 							$('#show_all_year').html(mydata.year + '年份');
 						}
-						$(show_page).html('非常抱歉，暂时没此项数据');
+						$(show_page).html('<tr><td colspan="20" style="padding: 8px 5px;box-sizing: border-box;">' + '非常抱歉，暂时没此项数据' + '</td></tr>');
 					}
 				}
 			},
-			error: function() {
-
+			error: function(e) {
+				console.log(e.status)
 			}
 		});
 	}
 
+	//数据导出
+	$('#export').click(function() {
+		if(!isexport) {
+			alert('请求正在执行中')
+			return 0;
+		}
+		isexport = false;
+		///////////////////分割线
+		$('#export_show').html(' ');
+		var datax = {};
+		datax.year = mydata.year == undefined ? 2017 : mydata.year;
+		mydata.month == undefined ? '' : datax.month = mydata.month;
+		var url_ = [host + '/plantlet/plant/output/offer/seedling.action.do', host + '/plantlet/plant/output/offer/statistics/seedling.action.do'];
+		if(mydata.month == undefined) {
+			exportData(url_[1], null, '#export_show');
+		} else {
+			exportData(url_[0], datax, '#export_show');
+		}
+	})
+
+	function exportData(url_, mydatax, htm) {
+		$.ajax({
+			type: "get",
+			url: url_,
+			async: true,
+			data: mydatax,
+			success: function(result) {
+				if(result.errorCode == 0) {
+					$(htm).html('<span>导出成功，请</span><a href="' + result.data + '">点击下载</a>');
+				} else {
+					$(htm).html(result.msg);
+				}
+				isexport = true;
+			},
+			error: function(e) {
+				console.log(e.status)
+				isexport = true;
+			}
+		});
+
+	}
 })

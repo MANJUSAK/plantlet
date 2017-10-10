@@ -37,6 +37,10 @@ img { border: none; }
     color: white;
     background: #81B97C;
 }
+.year_all_r span{
+	cursor: pointer;
+	padding: 4px 3px;
+}
 /*表格*/
 .NS_tab{
 	width: 100%;

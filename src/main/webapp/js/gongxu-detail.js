@@ -28,6 +28,7 @@ getdetail(url_gx,mydatax);
 					$('#seedlingIntro').html(data['seedlingIntro']);
 					$('#copmz').html(data['seedlingComp']);
 					$('#telxx').html(data['tel']);
+					$('#price').html(data['price']==0?'':data['price']+'（元/'+data['unit']+'）')
 				}
 			}
 		});

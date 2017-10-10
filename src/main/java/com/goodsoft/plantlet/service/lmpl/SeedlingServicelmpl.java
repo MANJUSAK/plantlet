@@ -115,7 +115,7 @@ public class SeedlingServicelmpl implements SeedlingService {
             int sd = data.size();
             if (sd > 0) {
                 for (int i = 0; i < sd; ++i) {
-                    List<String> url = this.getFileSupp.getFileData(request, data.get(i).getFileId());
+                    List<String> url = this.getFileSupp.getFileData(request, data.get(i).getId());
                     data.get(i).setPicture(url);
                 }
                 return (T) new Result(0, data);
@@ -209,11 +209,15 @@ public class SeedlingServicelmpl implements SeedlingService {
         //初始化msg.getNum() end
         List<SeedlingStatistics> data = null;
         try {
-            if (param.getYear() == null || param.getYear() == "") {
-                NewestOfferParam nop = this.dao.queryNewestOfferDao();
-                param.setYear(String.valueOf(nop.getYear()));
-                if (param.getMonth() == null || param.getMonth() == "") {
-                    param.setMonth(String.valueOf(nop.getMonth()));
+            if (param.getKeyWord() == null || param.getKeyWord() == "") {
+                if (param.getSpec() == null || param.getSpec() == "") {
+                    if (param.getYear() == null || param.getYear() == "") {
+                        NewestOfferParam nop = this.dao.queryNewestOfferDao();
+                        param.setYear(String.valueOf(nop.getYear()));
+                        if (param.getMonth() == null || param.getMonth() == "") {
+                            param.setMonth(String.valueOf(nop.getMonth()));
+                        }
+                    }
                 }
             }
             data = this.dao.querySeedlingStatisticsDao(param);
@@ -328,8 +332,7 @@ public class SeedlingServicelmpl implements SeedlingService {
             case 600:
                 return new Status(StatusEnum.FILE_UPLOAD.getCODE(), StatusEnum.FILE_UPLOAD.getEXPLAIN());
         }
-        msg.setFileId(uuid);
-        msg.setId(this.uuid.getUUID().toString());
+        msg.setId(uuid);
         try {
             AnalysisParam var = this.analysisUtil.getSpecAnalysis((String) msg.getSpec());
             msg.setSpec(var.getStr());
