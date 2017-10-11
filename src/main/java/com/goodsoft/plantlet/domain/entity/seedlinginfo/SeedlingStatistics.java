@@ -19,10 +19,7 @@ public class SeedlingStatistics implements java.io.Serializable {
     private int numOut;//省外数量
     private int num;//省内数量
     private String unit;//单位
-    private double minPriceOut;//省外价格最小值
-    private double maxPriceOut;//省外价格最大值
-    private double minPrice;//省内价格最小值
-    private double maxPrice;//省内价格最大值
+    private double maxPrice;//按百分比分析价格
     private int year;//年份
     private int month;//月份
     private String comp;//企业
@@ -100,30 +97,6 @@ public class SeedlingStatistics implements java.io.Serializable {
         this.num = num;
     }
 
-    public double getMinPriceOut() {
-        return minPriceOut;
-    }
-
-    public void setMinPriceOut(double minPriceOut) {
-        this.minPriceOut = minPriceOut;
-    }
-
-    public double getMaxPriceOut() {
-        return maxPriceOut;
-    }
-
-    public void setMaxPriceOut(double maxPriceOut) {
-        this.maxPriceOut = maxPriceOut;
-    }
-
-    public double getMinPrice() {
-        return minPrice;
-    }
-
-    public void setMinPrice(double minPrice) {
-        this.minPrice = minPrice;
-    }
-
     public double getMaxPrice() {
         return maxPrice;
     }
@@ -183,22 +156,19 @@ public class SeedlingStatistics implements java.io.Serializable {
                 Double.compare(that.marketPrice, marketPrice) == 0 &&
                 numOut == that.numOut &&
                 num == that.num &&
-                Double.compare(that.minPriceOut, minPriceOut) == 0 &&
-                Double.compare(that.maxPriceOut, maxPriceOut) == 0 &&
-                Double.compare(that.minPrice, minPrice) == 0 &&
                 Double.compare(that.maxPrice, maxPrice) == 0 &&
                 year == that.year &&
                 month == that.month &&
                 Objects.equals(id, that.id) &&
                 Objects.equals(spec, that.spec) &&
+                Objects.equals(sdName, that.sdName) &&
                 Objects.equals(unit, that.unit) &&
                 Objects.equals(comp, that.comp) &&
-                Objects.equals(comment, that.comment) &&
-                Objects.equals(sdName, that.sdName);
+                Objects.equals(comment, that.comment);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, spec, specMin, specMax, offer, marketPrice, sdName, numOut, num, minPriceOut, maxPriceOut, minPrice, unit, maxPrice, year, month, comp, comment);
+        return Objects.hash(id, spec, specMin, specMax, offer, marketPrice, sdName, numOut, num, unit, maxPrice, year, month, comp, comment);
     }
 }

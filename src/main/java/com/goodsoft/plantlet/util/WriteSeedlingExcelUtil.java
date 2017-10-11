@@ -290,10 +290,8 @@ public class WriteSeedlingExcelUtil {
      * @param row
      * @param cell
      * @param style
-     * @param data    省内苗圃数据
-     * @param dataOut 省外苗圃数据
-     * @param type    数据类型
-     * @param i       序号
+     * @param data  苗木统计数据
+     * @param i     序号
      */
     private void writeData(XSSFRow row, XSSFCell cell, XSSFCellStyle style, SeedlingStatistics data, int i) {
         StringBuilder sb = new StringBuilder();
@@ -324,19 +322,19 @@ public class WriteSeedlingExcelUtil {
         cell.setCellValue(data.getOffer());
         cell.setCellStyle(style);
         cell = row.createCell(4);
-        cell.setCellValue(data.getMinPrice() + "-" + data.getMaxPrice());
+        cell.setCellValue(data.getMaxPrice());
         cell.setCellStyle(style);
         cell = row.createCell(5);
-        cell.setCellValue(data.getMinPriceOut() + "-" + data.getMaxPriceOut());
+        cell.setCellValue(data.getMaxPrice());
         cell.setCellStyle(style);
         cell = row.createCell(6);
         cell.setCellValue(data.getMarketPrice());
         cell.setCellStyle(style);
         cell = row.createCell(7);
-        cell.setCellValue(data.getNum());
+        cell.setCellValue(data.getNum() + data.getUnit());
         cell.setCellStyle(style);
         cell = row.createCell(8);
-        cell.setCellValue(data.getNumOut());
+        cell.setCellValue(data.getNumOut() + data.getUnit());
         cell.setCellStyle(style);
         cell = row.createCell(9);
         cell.setCellValue(data.getYear());

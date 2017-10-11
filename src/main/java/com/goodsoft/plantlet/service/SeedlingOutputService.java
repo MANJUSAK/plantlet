@@ -1,5 +1,7 @@
 package com.goodsoft.plantlet.service;
 
+import com.goodsoft.plantlet.domain.entity.param.SeedlingStatisticsParam;
+
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -15,7 +17,7 @@ public interface SeedlingOutputService {
     public <T> T outputSeedlingOfferService(HttpServletRequest request);
 
     //苗木信息统计数据导出
-    public <T> T outputSeedlingStatisticsService(HttpServletRequest request);
+    public <T> T outputSeedlingStatisticsService(HttpServletRequest request, SeedlingStatisticsParam param);
 
-    public <T> T outputSeedlingSupplyService(HttpServletRequest request);
+    public <T> T outputSeedlingSupplyService(HttpServletRequest request, String stp);
 }

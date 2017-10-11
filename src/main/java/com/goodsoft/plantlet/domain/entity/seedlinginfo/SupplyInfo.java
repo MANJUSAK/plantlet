@@ -15,6 +15,7 @@ public class SupplyInfo implements java.io.Serializable {
     private String seedlingIntro;//苗木简介
     private String sdName;//植物名称
     private String sdType;//种类
+    private int type;//供需类型（1为供应，2为需求）
     private String spec;//规格前缀
     private double specMin;//规格范围第一位
     private double specMax;//规格范围第二位
@@ -65,6 +66,14 @@ public class SupplyInfo implements java.io.Serializable {
 
     public void setSdType(String sdType) {
         this.sdType = sdType;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 
     public String getSpec() {
@@ -160,7 +169,8 @@ public class SupplyInfo implements java.io.Serializable {
         if (this == o) return true;
         if (!(o instanceof SupplyInfo)) return false;
         SupplyInfo that = (SupplyInfo) o;
-        return Double.compare(that.specMin, specMin) == 0 &&
+        return type == that.type &&
+                Double.compare(that.specMin, specMin) == 0 &&
                 Double.compare(that.specMax, specMax) == 0 &&
                 Double.compare(that.num, num) == 0 &&
                 tel == that.tel &&
@@ -180,7 +190,7 @@ public class SupplyInfo implements java.io.Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, seedlingComp, seedlingIntro, sdName, sdType, spec, specMin, specMax, unit, num, contact, tel, sdAdd, price, directory, picture);
+        return Objects.hash(id, seedlingComp, seedlingIntro, sdName, sdType, type, spec, specMin, specMax, unit, num, contact, tel, sdAdd, price, directory, picture);
     }
 }
 

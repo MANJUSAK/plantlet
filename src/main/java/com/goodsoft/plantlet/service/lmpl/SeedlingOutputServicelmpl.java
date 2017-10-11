@@ -5,6 +5,7 @@ import com.goodsoft.plantlet.domain.dao.SeedlingDao;
 import com.goodsoft.plantlet.domain.dao.SeedlingOutputDao;
 import com.goodsoft.plantlet.domain.entity.file.FileData;
 import com.goodsoft.plantlet.domain.entity.param.NewestOfferParam;
+import com.goodsoft.plantlet.domain.entity.param.SeedlingStatisticsParam;
 import com.goodsoft.plantlet.domain.entity.result.Result;
 import com.goodsoft.plantlet.domain.entity.result.Status;
 import com.goodsoft.plantlet.domain.entity.result.StatusEnum;
@@ -104,10 +105,13 @@ public class SeedlingOutputServicelmpl implements SeedlingOutputService {
      * @return 导出结果
      */
     @Override
-    public <T> T outputSeedlingStatisticsService(HttpServletRequest request) {
+    public <T> T outputSeedlingStatisticsService(HttpServletRequest request, SeedlingStatisticsParam param) {
         StringBuilder sb = new StringBuilder();
+        if (param.getPercent() == 0) {
+            param.setPercent(0.6);
+        }
         try {
-            List<SeedlingStatistics> data = this.dao.querySeedlingStatisticsDao();
+            List<SeedlingStatistics> data = this.dao.querySeedlingStatisticsDao(param);
             if (data.size() > 0) {
                 sb.append(this.http.getServerDomainName(request).toString());
                 sb.append(this.excelSeedlingUtil.writeExcel(data));
@@ -128,10 +132,10 @@ public class SeedlingOutputServicelmpl implements SeedlingOutputService {
      * @return 导出结果
      */
     @Override
-    public <T> T outputSeedlingSupplyService(HttpServletRequest request) {
+    public <T> T outputSeedlingSupplyService(HttpServletRequest request, String stp) {
         StringBuilder sb = new StringBuilder();
         try {
-            List<SupplyInfo> data = this.dao.querySeedlingSupplyDao();
+            List<SupplyInfo> data = this.dao.querySeedlingSupplyDao(stp);
             int len = data.size();
             if (len > 0) {
                 for (int i = 0; i < len; ++i) {

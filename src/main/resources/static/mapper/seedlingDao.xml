@@ -65,13 +65,14 @@
         <result property="seedlingComp" column="seedling_comp"/>
         <result property="seedlingIntro" column="seedling_intro"/>
         <result property="price" column="price"/>
+        <result property="type" column="s_type"/>
     </resultMap>
     <!--供需信息数据结果映射 end-->
     <!--供需信息数据sql start-->
     <select id="querySeedlingSupplyDao" parameterType="com.goodsoft.plantlet.domain.entity.param.SupplyParam"
             resultMap="seedlingSupplyMap">
         SELECT `id`,`seedling_name`,`seedling_type`,`spec`,
-        `spec_min`,`spec_max`,`unit`,`quantity`,`price`,
+        `spec_min`,`spec_max`,`unit`,`quantity`,`price`,`s_type`,
         `contact`, `tel`,`seedling_add`,`seedling_comp`,`seedling_intro`
         FROM `gs_seedling_supply_info`
         <where>
@@ -79,7 +80,7 @@
                 AND seedling_name LIKE '%${keyWord}%'
             </if>
             <if test="tp != null and tp != ''">
-                AND seedling_type = #{seedling_type}
+                AND seedling_type = #{tp}
             </if>
             <if test="specMin != null and specMin != ''">
                 AND spec_min &gt;=#{specMin}
@@ -87,8 +88,8 @@
             <if test="specMax != null and specMax != ''">
                 AND spec_max &lt;=#{specMax}
             </if>
-            <if test="sdAdd !=null and sdAdd != ''">
-                AND seedling_add = #{sdAdd}
+            <if test="stp !=null and stp != ''">
+                AND s_type = #{stp}
             </if>
         </where>
         ORDER BY sid DESC limit #{num},20;
@@ -204,20 +205,19 @@
         <result property="sdName" column="seedling_name"/>
         <result property="numOut" column="num_out"/>
         <result property="num" column="num"/>
-        <result property="minPriceOut" column="min_price_out"/>
-        <result property="maxPriceOut" column="max_price_out"/>
-        <result property="minPrice" column="min_price"/>
-        <result property="maxPrice" column="max_price"/>
+        <result property="maxPrice" column="price"/>
         <result property="year" column="year"/>
         <result property="month" column="month"/>
+        <result property="unit" column="unit"/>
     </resultMap>
     <!--苗木信息统计结果映射 end-->
     <!--苗木信息统计数据分析sql start-->
     <select id="querySeedlingStatisticsDao"
             parameterType="com.goodsoft.plantlet.domain.entity.param.SeedlingStatisticsParam"
             resultMap="SeedlingStatisticsMap">
-        SELECT `num`,`num_out`,`seedling_name`,`spec`,`spec_min`,`spec_max`,`min_price`,
-        `max_price`,`min_price_out`,`max_price_out`,`seedling_offer`,`year`,`month`
+        SELECT
+        `num`,`num_out`,`seedling_name`,`spec`,`spec_min`,`spec_max`,`seedling_offer`,`year`,`month`,
+        FORMAT(`seedling_offer`* #{percent},2) AS `price`,`unit`
         FROM `gs_seedling_statistics_view`
         <where>
             <if test="keyWord !=null and keyWord != ''">
@@ -272,10 +272,10 @@
     <insert id="addSeedlingSupplyDao" parameterType="com.goodsoft.plantlet.domain.entity.seedlinginfo.SupplyInfo">
     INSERT INTO `gs_seedling_supply_info`
     (`id`,`seedling_name`,`seedling_type`,`spec`,`spec_min`,`spec_max`,`unit`,`quantity`,
-    `contact`,`tel`,`seedling_add`,`seedling_comp`,`seedling_intro`,`price`)
+    `contact`,`tel`,`seedling_add`,`seedling_comp`,`seedling_intro`,`price`,`s_type`)
     VALUES
     (#{id},#{sdName},#{sdType},#{spec},#{specMin},#{specMax},
-    #{unit},#{num},#{contact},#{tel},#{sdAdd},#{seedlingComp},#{seedlingIntro},#{price});
+    #{unit},#{num},#{contact},#{tel},#{sdAdd},#{seedlingComp},#{seedlingIntro},#{price},#{type});
     </insert>
     <!--供需信息数据录入sql end-->
     <!--苗木造价单条数据添加sql start-->

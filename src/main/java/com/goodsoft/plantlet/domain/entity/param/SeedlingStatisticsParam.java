@@ -19,6 +19,7 @@ public class SeedlingStatisticsParam implements java.io.Serializable {
     private String year;//年
     private String month;//月
     private int num;//页码
+    private double percent;//百分比
 
     public String getKeyWord() {
         return keyWord;
@@ -100,12 +101,21 @@ public class SeedlingStatisticsParam implements java.io.Serializable {
         this.month = month;
     }
 
+    public double getPercent() {
+        return percent;
+    }
+
+    public void setPercent(double percent) {
+        this.percent = percent;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof SeedlingStatisticsParam)) return false;
         SeedlingStatisticsParam that = (SeedlingStatisticsParam) o;
         return num == that.num &&
+                Double.compare(that.percent, percent) == 0 &&
                 Objects.equals(keyWord, that.keyWord) &&
                 Objects.equals(provincOut, that.provincOut) &&
                 Objects.equals(city, that.city) &&
@@ -119,6 +129,6 @@ public class SeedlingStatisticsParam implements java.io.Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(keyWord, provincOut, city, county, spec, specMin, specMax, year, month, num);
+        return Objects.hash(keyWord, provincOut, city, county, spec, specMin, specMax, year, month, num, percent);
     }
 }

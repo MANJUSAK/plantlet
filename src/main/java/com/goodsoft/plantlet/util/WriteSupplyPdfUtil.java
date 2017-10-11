@@ -37,7 +37,15 @@ public class WriteSupplyPdfUtil {
     //实例化获取服务器系统标识工具类
     private GetOsNameUtil getOs = GetOsNameUtil.getInstance();
 
+    /**
+     * pdf文档导出方法
+     *
+     * @param data 导出数据
+     * @return pdf相对路径
+     * @throws Exception
+     */
     public String writePdf(java.util.List<SupplyInfo> data) throws Exception {
+        //获取系统类型
         boolean bl = this.getOs.getOsName();
         StringBuilder sb = new StringBuilder();
         if (bl) {
@@ -64,31 +72,31 @@ public class WriteSupplyPdfUtil {
                 sb.delete(0, sb.length());
                 // 新建章节
                 Chapter chapter = new Chapter(0);
+                //设置章节为空
                 Section section = chapter.addSection("", 0);
                 section.add(new Paragraph(data.get(i).getSdName(), title));
-                section.add(new Paragraph("\n", FontChinese));
-                sb.delete(0, sb.length());
-                sb.append("类型：");
+                sb.append("\n供需类型：");
+                switch (data.get(i).getType()) {
+                    case 1:
+                        sb.append("供应信息");
+                        break;
+                    case 2:
+                        sb.append("需求信息");
+                        break;
+                    default:
+                        break;
+                }
+                sb.append("\n植物种类：");
                 sb.append(data.get(i).getSdType());
-                section.add(new Paragraph(sb.toString(), FontChinese));
-                sb.delete(0, sb.length());
-                sb.append("苗木企业：");
+                sb.append("\n苗圃企业：");
                 sb.append(data.get(i).getSeedlingComp());
-                section.add(new Paragraph(sb.toString(), FontChinese));
-                sb.delete(0, sb.length());
-                sb.append("地址：");
+                sb.append("\n地址：");
                 sb.append(data.get(i).getSdAdd());
-                section.add(new Paragraph(sb.toString(), FontChinese));
-                sb.delete(0, sb.length());
-                sb.append("联系人：");
+                sb.append("\n联系人：");
                 sb.append(data.get(i).getContact());
-                section.add(new Paragraph(sb.toString(), FontChinese));
-                sb.delete(0, sb.length());
-                sb.append("联系方式：");
+                sb.append("\n联系方式：");
                 sb.append(data.get(i).getTel());
-                section.add(new Paragraph(sb.toString(), FontChinese));
-                sb.delete(0, sb.length());
-                sb.append("规格：");
+                sb.append("\n规格：");
                 sb.append(data.get(i).getSpec());
                 sb.append(data.get(i).getSpecMin());
                 double max = data.get(i).getSpecMax();
@@ -96,24 +104,16 @@ public class WriteSupplyPdfUtil {
                     sb.append("-");
                     sb.append(max);
                 }
-                section.add(new Paragraph(sb.toString(), FontChinese));
-                sb.delete(0, sb.length());
-                sb.append("数量：");
+                sb.append("\n数量：");
                 sb.append(data.get(i).getNum());
                 sb.append(" ");
                 sb.append(data.get(i).getUnit());
-                section.add(new Paragraph(sb.toString(), FontChinese));
-                sb.delete(0, sb.length());
-                sb.append("价格：");
+                sb.append("\n价格：");
                 double price = data.get(i).getPrice();
-                if (price != 0) {
-                    sb.append(data.get(i).getPrice());
-                    sb.append(" ￥");
-                }
+                sb.append(data.get(i).getPrice());
+                sb.append(" ￥");
+                sb.append("\n\n供需说明：");
                 section.add(new Paragraph(sb.toString(), FontChinese));
-                section.add(new Paragraph("\n"));
-                section.add(new Paragraph("供需说明：", FontChinese));
-                section.add(new Paragraph("\n"));
                 sb.delete(0, sb.length());
                 sb.append("        ");
                 sb.append(data.get(i).getSeedlingIntro());
@@ -124,12 +124,14 @@ public class WriteSupplyPdfUtil {
                     // 加入图片
                     Image jpg = Image.getInstance(data.get(i).getDirectory());
                     jpg.scaleAbsolute(200, 150);// 直接设定显示尺寸
-                    jpg.setAbsolutePosition(335, 630);
+                    jpg.setAbsolutePosition(338, 618);//设置图片位置
                     doc.add(jpg);
                 }
             }
             return path;
-        } finally {
+        } finally
+
+        {
             // 关闭文档对象，释放资源
             doc.close();
         }

@@ -168,7 +168,7 @@ $(function() {
 					$('#Province_get_').html(down_html);
 				} else {
 
-					$('#Province_get_').html(result.msg);
+					$('#Province_get_').html('<span style="color: red;">'+result.msg+'</span>');
 				}
 				isexport = true;
 			},

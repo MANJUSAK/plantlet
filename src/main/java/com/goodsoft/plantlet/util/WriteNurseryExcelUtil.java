@@ -113,7 +113,7 @@ public class WriteNurseryExcelUtil {
                         case "in":
                             sheet = wb.createSheet("省内苗圃信息表" + k);
                             //合并单元格（第一行，第1-20列）
-                            cra = new CellRangeAddress(0, 0, 0, 20);
+                            cra = new CellRangeAddress(0, 0, 0, 21);
                             break;
                         case "out":
                             sheet = wb.createSheet("省外苗圃信息表" + k);
@@ -153,7 +153,7 @@ public class WriteNurseryExcelUtil {
                     switch (type) {
                         case "in":
                             sheet = wb.createSheet("省内苗圃信息表" + k);
-                            cra = new CellRangeAddress(0, 0, 0, 20);
+                            cra = new CellRangeAddress(0, 0, 0, 21);
                             break;
                         case "out":
                             sheet = wb.createSheet("省外苗圃信息表" + k);
@@ -193,7 +193,7 @@ public class WriteNurseryExcelUtil {
             switch (type) {
                 case "in":
                     sheet = wb.createSheet("省内苗圃信息表1");
-                    cra = new CellRangeAddress(0, 0, 0, 20);
+                    cra = new CellRangeAddress(0, 0, 0, 21);
                     break;
                 case "out":
                     sheet = wb.createSheet("省外苗圃信息表1");
@@ -281,27 +281,30 @@ public class WriteNurseryExcelUtil {
                 cell.setCellValue("植物名称");
                 cell.setCellStyle(style);
                 cell = row.createCell(13);
-                cell.setCellValue("规格");
+                cell.setCellValue("规格(cm)");
                 cell.setCellStyle(style);
                 cell = row.createCell(14);
                 cell.setCellValue("数量");
                 cell.setCellStyle(style);
                 cell = row.createCell(15);
-                cell.setCellValue("单价");
+                cell.setCellValue("单位");
                 cell.setCellStyle(style);
                 cell = row.createCell(16);
-                cell.setCellValue("种类");
+                cell.setCellValue("单价(元)");
                 cell.setCellStyle(style);
                 cell = row.createCell(17);
-                cell.setCellValue("苗圃面积");
+                cell.setCellValue("种类");
                 cell.setCellStyle(style);
                 cell = row.createCell(18);
-                cell.setCellValue("生产许可证编号");
+                cell.setCellValue("苗圃面积(㎡)");
                 cell.setCellStyle(style);
                 cell = row.createCell(19);
-                cell.setCellValue("经营许可证编号");
+                cell.setCellValue("生产许可证编号");
                 cell.setCellStyle(style);
                 cell = row.createCell(20);
+                cell.setCellValue("经营许可证编号");
+                cell.setCellStyle(style);
+                cell = row.createCell(21);
                 cell.setCellValue("企业简介");
                 cell.setCellStyle(style);
                 break;
@@ -515,25 +518,28 @@ public class WriteNurseryExcelUtil {
                     cell.setCellValue(data.getNum());
                 cell.setCellStyle(style);
                 cell = row.createCell(15);
+                cell.setCellValue(data.getUnit());
+                cell.setCellStyle(style);
+                cell = row.createCell(16);
                 double price = data.getPrice();
                 if (price != 0)
                     cell.setCellValue(data.getPrice());
                 cell.setCellStyle(style);
-                cell = row.createCell(16);
+                cell = row.createCell(17);
                 cell.setCellValue(data.getTypes());
                 cell.setCellStyle(style);
-                cell = row.createCell(17);
+                cell = row.createCell(18);
                 double area = data.getArea();
                 if (area != 0)
                     cell.setCellValue(area);
                 cell.setCellStyle(style);
-                cell = row.createCell(18);
+                cell = row.createCell(19);
                 cell.setCellValue(data.getProLicenseNum());
                 cell.setCellStyle(style);
-                cell = row.createCell(19);
+                cell = row.createCell(20);
                 cell.setCellValue(data.getOperLicenseNum());
                 cell.setCellStyle(style);
-                cell = row.createCell(20);
+                cell = row.createCell(21);
                 cell.setCellValue(data.getNurseryIntro());
                 cell.setCellStyle(style);
                 break;

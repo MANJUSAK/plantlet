@@ -1,5 +1,6 @@
 package com.goodsoft.plantlet.controller;
 
+import com.goodsoft.plantlet.domain.entity.param.SeedlingStatisticsParam;
 import com.goodsoft.plantlet.service.SeedlingOutputService;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -54,13 +55,13 @@ public class SeedlingOutputController {
      */
     @CrossOrigin(origins = "*", maxAge = 3600, methods = RequestMethod.GET)
     @RequestMapping("/output/seedling/statistics/seedling.action.do")
-    public Object outputSeedlingStatisticsController(HttpServletRequest request) {
-        return this.service.outputSeedlingStatisticsService(request);
+    public Object outputSeedlingStatisticsController(HttpServletRequest request, SeedlingStatisticsParam param) {
+        return this.service.outputSeedlingStatisticsService(request, param);
     }
 
     @CrossOrigin(origins = "*", maxAge = 3600, methods = RequestMethod.GET)
     @RequestMapping("/output/supply/seedling.action.do")
-    public Object outputSupplyController(HttpServletRequest request) {
-        return this.service.outputSeedlingSupplyService(request);
+    public Object outputSupplyController(HttpServletRequest request, String stp) {
+        return this.service.outputSeedlingSupplyService(request, stp);
     }
 }

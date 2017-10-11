@@ -222,7 +222,6 @@ public class NurseryServicelmpl implements NurseryService {
                 //删除数据库文件数据
                 this.fileDao.deleteFileDao(uuid);
             } catch (Exception e1) {
-
                 this.logger.error(e.toString());
             }
             this.logger.error(e.toString());
@@ -256,7 +255,7 @@ public class NurseryServicelmpl implements NurseryService {
                 return new Status(StatusEnum.FILE_UPLOAD.getCODE(), StatusEnum.FILE_UPLOAD.getEXPLAIN());
         }
         msg.setFileId(uuid);
-        msg.setId(this.uuid.getUUID().toString());
+        msg.setId(uuid);
         //获取规格数据并进行解析
         if (null != msg.getSpec()) {
             AnalysisParam var = this.analysisUtil.getSpecAnalysis(msg.getSpec());

@@ -27,6 +27,7 @@ public class Nursery implements java.io.Serializable {
     private double specMin;//规格范围第一位
     private double specMax;//规格范围第二位
     private double num;//数量
+    private String unit;//单位
     private double price;//单价
     private double area;//苗圃面积
     private String fileId;//文件编号
@@ -152,7 +153,6 @@ public class Nursery implements java.io.Serializable {
     }
 
     public double getSpecMin() {
-
         return specMin;
     }
 
@@ -174,6 +174,14 @@ public class Nursery implements java.io.Serializable {
 
     public void setNum(double num) {
         this.num = num;
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
     }
 
     public double getPrice() {
@@ -257,6 +265,7 @@ public class Nursery implements java.io.Serializable {
                 Objects.equals(districts, nursery.districts) &&
                 Objects.equals(county, nursery.county) &&
                 Objects.equals(spec, nursery.spec) &&
+                Objects.equals(unit, nursery.unit) &&
                 Objects.equals(fileId, nursery.fileId) &&
                 Objects.equals(proLicenseNum, nursery.proLicenseNum) &&
                 Objects.equals(operLicenseNum, nursery.operLicenseNum) &&
@@ -265,6 +274,6 @@ public class Nursery implements java.io.Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, plantName, types, nurseryName, contact, tel, nurseryIntro, fax, email, nurseryAdd, province, districts, county, spec, specMin, specMax, num, price, area, fileId, proLicenseNum, operLicenseNum, postCode, picture);
+        return Objects.hash(id, plantName, types, nurseryName, contact, tel, nurseryIntro, fax, email, nurseryAdd, province, districts, county, spec, specMin, specMax, num, unit, price, area, fileId, proLicenseNum, operLicenseNum, postCode, picture);
     }
 }

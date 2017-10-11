@@ -223,7 +223,7 @@ $(function() {
 				if(result.errorCode == 0) {
 					$('#export_show').html('导出成功，请<a href="' + result.data + '">点击下载</a>');
 				} else {
-					$('#export_show').html(result.msg);
+					$('#export_show').html('<span style="color: red;">'+result.msg+'</span>');
 				}
 				isexport = true;
 			},

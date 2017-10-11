@@ -328,7 +328,7 @@ $(function() {
 				if(result.errorCode == 0) {
 					$(htm).html('<span>导出成功，请</span><a href="' + result.data + '">点击下载</a>');
 				} else {
-					$(htm).html(result.msg);
+					$(htm).html('<span style="color: red;">'+result.msg+'</span>');
 				}
 				isexport = true;
 			},

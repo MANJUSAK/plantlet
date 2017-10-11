@@ -39,6 +39,7 @@
         <result property="specMax" column="spec_max"/>
         <result property="price" column="price"/>
         <result property="num" column="quantity"/>
+        <result property="unit" column="unit"/>
         <result property="postCode" column="post_code"/>
         <result property="county" column="county"/>
     </resultMap>
@@ -82,7 +83,7 @@
             resultMap="nurseryMap">
         SELECT `id`,`nursery_name`,`contacts`,`tel`,`nursery_intro`,`fax_num`,`email`,`nursery_add`,
         `province`,`districts`,`nursery_area`,`fileId`,`pro_license_num`,`oper_license_num`,`spec`,
-        `spec_min`,`spec_max`,`price`,`quantity`,`post_code`,`plant_name`,`plant_type`,`county`
+        `spec_min`,`spec_max`,`price`,`quantity`,`unit`,`post_code`,`plant_name`,`plant_type`,`county`
         FROM `gs_nursery_province_info`
         <where>
             <if test="id !=null and id != ''">
@@ -120,13 +121,11 @@
     <select id="queryNurseryAllDao" parameterType="com.goodsoft.plantlet.domain.entity.param.NurseryParam"
             resultMap="nurseryMap">
         SELECT `id`,`nursery_name`,`contacts`,`tel`,`nursery_intro`,`fax_num`,`email`,`nursery_add`,
-        `province`,`districts`,`nursery_area`,`fileId`,`pro_license_num`,`oper_license_num`,`spec`,
-        `spec_min`,`spec_max`,`price`,`quantity`,`post_code`,`plant_name`,`plant_type`,`county`
+        `province`,`districts`,`nursery_area` * 667 AS
+        `nursery_area`,`fileId`,`pro_license_num`,`oper_license_num`,`spec`,
+        `spec_min`,`spec_max`,`price`,`quantity`,`unit`,`post_code`,`plant_name`,`plant_type`,`county`
         FROM `gs_nursery_province_info`
         <where>
-            <if test="province !=null and province != ''">
-                AND province = #{province}
-            </if>
             <if test="city !=null and city != ''">
                 AND districts = #{city}
             </if>
@@ -134,7 +133,11 @@
                 AND county = #{county}
             </if>
         </where>
-        ORDER BY nid;
+        ORDER BY
+        <if test="city ==null or city == '' and county ==null or county == ''">
+            county,
+        </if>
+        nid DESC;
     </select>
     <!--省内苗圃所有数据查询sql end-->
     <!--省外苗圃数据主页显示结果映射 start-->
@@ -265,12 +268,12 @@
     <insert id="addNurseryDao" parameterType="java.util.List">
         INSERT INTO `gs_nursery_province_info`
         (`id`,`nursery_name`,`contacts`,`tel`,`nursery_intro`,`fax_num`,`email`,`nursery_add`,`province`,`districts`,`nursery_area`,
-        `fileId`,`pro_license_num`,`oper_license_num`,`spec`,`spec_min`,`spec_max`,`price`,`quantity`,`post_code`,`plant_name`,`plant_type`,`county`)
+        `fileId`,`pro_license_num`,`oper_license_num`,`spec`,`spec_min`,`spec_max`,`price`,`quantity`,`unit`,`post_code`,`plant_name`,`plant_type`,`county`)
         VALUES
         <foreach collection="list" index="index" item="item" separator=",">
             (#{item.id},#{item.nurseryName},#{item.contact},#{item.tel},#{item.nurseryIntro},#{item.fax},#{item.email},
             #{item.nurseryAdd},#{item.province},#{item.districts},#{item.area},#{item.fileId},#{item.proLicenseNum},
-            #{item.operLicenseNum},#{item.spec},#{item.specMin},#{item.specMax},#{item.price},#{item.num},#{item.postCode},#{item.plantName},
+            #{item.operLicenseNum},#{item.spec},#{item.specMin},#{item.specMax},#{item.price},#{item.num},#{item.unit},#{item.postCode},#{item.plantName},
             #{item.types},#{item.county})
         </foreach>
     </insert>
@@ -279,10 +282,10 @@
     <insert id="addNurseryOneDao" parameterType="com.goodsoft.plantlet.domain.entity.nursery.Nursery">
         INSERT INTO `gs_nursery_province_info`
         (`id`,`nursery_name`,`contacts`,`tel`,`nursery_intro`,`fax_num`,`email`,`nursery_add`,`province`,`districts`,`nursery_area`,
-        `fileId`,`pro_license_num`,`oper_license_num`,`spec`,`spec_min`,`spec_max`,`price`,`quantity`,`post_code`,`plant_name`,`plant_type`,`county`)
+        `fileId`,`pro_license_num`,`oper_license_num`,`spec`,`spec_min`,`spec_max`,`price`,`quantity`,`unit`,`post_code`,`plant_name`,`plant_type`,`county`)
         VALUES
         (#{id},#{nurseryName},#{contact},#{tel},#{nurseryIntro},#{fax},#{email},#{nurseryAdd},#{province},#{districts},#{area},
-        #{fileId},#{proLicenseNum},#{operLicenseNum},#{spec},#{specMin},#{specMax},#{price},#{num},#{postCode},#{plantName},#{types},#{county})
+        #{fileId},#{proLicenseNum},#{operLicenseNum},#{spec},#{specMin},#{specMax},#{price},#{num},#{unit},#{postCode},#{plantName},#{types},#{county})
     </insert>
     <!--省内苗圃数据单条数据添加sql end-->
     <!--省内苗圃数据添加sql end-->

@@ -123,11 +123,7 @@ public class ReadExcelOutUtil extends DefaultHandler {
         return parser;
     }
 
-    public void startElement(String uri, String localName, String name,
-                             Attributes attributes) throws SAXException {
-
-//      System.out.println("startElement: " + localName + ", " + name + ", " + attributes);
-
+    public void startElement(String uri, String localName, String name,Attributes attributes) throws SAXException {
         // c => 单元格
         if ("c".equals(name)) {
             // 如果下一个元素是 SST 的索引，则将nextIsString标记为true
@@ -150,7 +146,6 @@ public class ReadExcelOutUtil extends DefaultHandler {
             } else {
                 numberFlag = false;
             }
-
         }
         // 当元素为t时
         if ("t".equals(name)) {
@@ -158,7 +153,6 @@ public class ReadExcelOutUtil extends DefaultHandler {
         } else {
             isTElement = true;
         }
-
         // 置空
         lastContents = "";
     }

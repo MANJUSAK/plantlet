@@ -124,11 +124,7 @@ public class ReadExcelUtil extends DefaultHandler {
         return parser;
     }
 
-    public void startElement(String uri, String localName, String name,
-                             Attributes attributes) throws SAXException {
-
-//      System.out.println("startElement: " + localName + ", " + name + ", " + attributes);
-
+    public void startElement(String uri, String localName, String name, Attributes attributes) throws SAXException {
         // c => 单元格
         if ("c".equals(name)) {
             // 如果下一个元素是 SST 的索引，则将nextIsString标记为true
@@ -151,15 +147,13 @@ public class ReadExcelUtil extends DefaultHandler {
             } else {
                 numberFlag = false;
             }
-
         }
-        // 当元素为t时
+        // 当元素为t时,不管是不是空值都设置为true
         if ("t".equals(name)) {
             isTElement = true;
         } else {
             isTElement = true;
         }
-
         // 置空
         lastContents = "";
     }
@@ -307,6 +301,9 @@ public class ReadExcelUtil extends DefaultHandler {
                     }
                     break;
                 case 14:
+                    sd.setUnit(this.str);
+                    break;
+                case 15:
                     try {
                         if (this.str != "") {
                             double price = Double.parseDouble(this.str);
@@ -315,10 +312,10 @@ public class ReadExcelUtil extends DefaultHandler {
                     } catch (Exception e) {
                     }
                     break;
-                case 15:
+                case 16:
                     sd.setTypes(this.str);
                     break;
-                case 16:
+                case 17:
                     try {
                         if (this.str != "") {
                             double area = Double.parseDouble(this.str);
@@ -327,13 +324,13 @@ public class ReadExcelUtil extends DefaultHandler {
                     } catch (Exception e) {
                     }
                     break;
-                case 17:
+                case 18:
                     sd.setProLicenseNum(this.str);
                     break;
-                case 18:
+                case 19:
                     sd.setOperLicenseNum(this.str);
                     break;
-                case 19:
+                case 20:
                     sd.setNurseryIntro(this.str);
                     break;
                 default:

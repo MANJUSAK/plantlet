@@ -432,8 +432,8 @@ public class WriteOfferExcelUtil {
      * @param row
      * @param cell
      * @param style
-     * @param data    省内苗圃数据
-     * @param dataOut 省外苗圃数据
+     * @param data    造价分期数据
+     * @param dataSta 全年造价统计数据
      * @param type    数据类型
      * @param i       序号
      */

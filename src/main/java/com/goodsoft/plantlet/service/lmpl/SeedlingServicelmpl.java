@@ -206,6 +206,9 @@ public class SeedlingServicelmpl implements SeedlingService {
         }
         page *= 20;
         param.setNum(page);
+        if (param.getPercent() == 0) {
+            param.setPercent(0.6);
+        }
         //初始化msg.getNum() end
         List<SeedlingStatistics> data = null;
         try {

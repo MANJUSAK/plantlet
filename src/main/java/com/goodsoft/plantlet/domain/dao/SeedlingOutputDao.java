@@ -1,5 +1,6 @@
 package com.goodsoft.plantlet.domain.dao;
 
+import com.goodsoft.plantlet.domain.entity.param.SeedlingStatisticsParam;
 import com.goodsoft.plantlet.domain.entity.seedlinginfo.SeedlingOffer;
 import com.goodsoft.plantlet.domain.entity.seedlinginfo.SeedlingOfferStatistics;
 import com.goodsoft.plantlet.domain.entity.seedlinginfo.SeedlingStatistics;
@@ -23,8 +24,8 @@ public interface SeedlingOutputDao {
     public List<SeedlingOfferStatistics> querySeedlingOfferStatisticsDao(@Param("year") int year) throws Exception;
 
     //苗木信息统计数据导出
-    public List<SeedlingStatistics> querySeedlingStatisticsDao() throws Exception;
+    public List<SeedlingStatistics> querySeedlingStatisticsDao(SeedlingStatisticsParam param) throws Exception;
 
     //供需数据导出
-    public List<SupplyInfo> querySeedlingSupplyDao() throws Exception;
+    public List<SupplyInfo> querySeedlingSupplyDao(@Param("stp") String stp) throws Exception;
 }

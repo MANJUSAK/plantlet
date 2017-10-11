@@ -67,17 +67,17 @@
             <version>1.1.2</version>
         </dependency>
         <!--jdk1.7-->
+        <!-- <dependency>
+             <groupId>mysql</groupId>
+             <artifactId>mysql-connector-java</artifactId>
+             <version>5.1.43</version>
+         </dependency>-->
+        <!--jdk1.8-->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.43</version>
-        </dependency>
-        <!--jdk1.8-->
-        <!--<dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
             <version>6.0.5</version>
-        </dependency>-->
+        </dependency>
         <!--mysql end-->
         <!-- excel组件支持 start-->
         <!--泛型jar start-->
@@ -86,7 +86,7 @@
             <artifactId>poi</artifactId>
             <version>3.14</version>
         </dependency>
-        <!--泛型jar start-->
+        <!--泛型jar end-->
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi-examples</artifactId>
@@ -124,7 +124,7 @@
         </dependency>
         <!-- excel组件支持 end-->
         <!--word 插件 start-->
-        <dependency>
+        <!--<dependency>
             <groupId>org.freemarker</groupId>
             <artifactId>freemarker</artifactId>
             <version>2.3.26-incubating</version>
@@ -138,7 +138,7 @@
             <groupId>org.apache.xmlbeans</groupId>
             <artifactId>xmlbeans</artifactId>
             <version>2.6.0</version>
-        </dependency>
+        </dependency>-->
         <!--word 插件 end-->
         <!--pdf组件 start-->
         <dependency>
