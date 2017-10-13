@@ -80,10 +80,16 @@
 					<div class="Sic-content">
 						<div class="Sic-item">
 							<div class="gx-title">
-								<i class="fa fa-file-text-o" id="showLayer">&nbsp;添加苗木数据</i>
-								<div class="gx-title-educe">
-									<input type="button" id="export" value="导出数据" /><span id="export_show"></span>
+								<!--左边供需信息和需求信息-->
+								<div class="gx-title-one">
+									<span class="gx-title-oneSpan">全部</span>
+									<span>供应信息</span>
+									<span>需求信息</span>
 								</div>
+								<div class="gx-title-educe">
+									<input type="button" id="export"  value="导出数据" /><span id="export_show"></span>
+								</div>
+								<i class="fa fa-file-text-o" id="showLayer">&nbsp;添加苗木数据</i>
 							</div>
 							<div class="gx-content">
 								<div class="gxc-text">
@@ -164,13 +170,27 @@
 									<div class="fi-tip" id="flnameTip"></div>
 									<div class="form-item">
 										<div class="fi-left">
-											<p>苗木企业：</p>
+											<p>苗圃企业：</p>
 										</div>
 										<div class="fi-right">
 											<span><input type="text" name="seedlingComp" id="mmQiye" /></span>
 										</div>
 									</div>
+									<!--    -->
 									<div class="fi-tip" id="mmqiyeTip"></div>
+									<div class="form-item">
+										<div class="fi-left">
+											<p>供需类型：</p>
+										</div>
+										<div class="fi-right">
+											<span>
+												<label class="fi-right-radio"><input type="radio" name="type" checked="checked" value="1" />供应信息</label>
+												<label class="fi-right-radio"><input type="radio" name="type" value="2" />需求信息</label>
+											</span>
+										</div>
+									</div>
+									<div class="fi-tip"></div>
+									<!--	-->
 									<div class="form-item">
 										<div class="fi-left">
 											<p>规&nbsp;格(cm)：</p>
@@ -224,6 +244,7 @@
 										</div>
 									</div>
 									<div class="fi-tip" id="mmjianjieTip"></div>
+									<div style="clear: both;"></div>
 									<div class="form-item picture">
 										<div class="fi-left">
 											<p>图&nbsp;片：</p>

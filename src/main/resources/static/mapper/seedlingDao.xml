@@ -243,11 +243,17 @@
     </select>
     <!--苗木信息统计数据分析sql end-->
     <!--查询苗木造价最新年月份数据sql start-->
-    <select id="queryNewestOfferDao" resultType="com.goodsoft.plantlet.domain.entity.param.NewestOfferParam">
-    SELECT
-    MAX(`year`) `year`, MAX(`month`) `month`
-    FROM
-    gs_seedling_offer
+    <select id="queryNewestOfferDao" parameterType="int"
+            resultType="com.goodsoft.plantlet.domain.entity.param.NewestOfferParam">
+        SELECT
+        MAX(`year`) `year`, MAX(`month`) `month`
+        FROM
+        gs_seedling_offer
+        <where>
+            <if test="year !=0 and year !=''">
+                `year`=#{year}
+            </if>
+        </where>
     </select>
     <!--查询苗木造价最新年月份数据sql end-->
     <!--查询苗木信息统计数据所有植物名称sql start-->

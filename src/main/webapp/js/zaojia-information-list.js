@@ -1,15 +1,20 @@
 var html = '';
 var htmlx = '';
-var numberx = 0;
-var isexport = true;
+var numberx = 0;//初始化请求页码
+var isexport = true;//设置导出文件执行状态
 $(function() {
+	//获取统一请求地址
 	var host = window.sessionStorage.getItem("host");
+	//拼接请求路径
 	var urlx = [host + '/plantlet/plant/find/offer/seedling.action.do', host + '/plantlet/plant/find/offer/statistics/seedling.action.do'];
+	//设置请求参数
 	var mydata = {
 		num: numberx,
 		year: 2017
 	};
+	//设置呈现位置参数
 	var show_page = ['.zj-container ul', '#show_all'];
+	//请求数据
 	getdata(urlx[1], mydata, show_page[1], false, true);
 	//更改下级菜单样式
 	$('#show_default').css('border', '1px solid #1F9952');
@@ -19,26 +24,31 @@ $(function() {
 		var y = $('#year').val();
 		var m = $('#month').val();
 		mydata.num = mydata.num + 1;
-
+		//根据筛选参数控制请求信息
 		if(y != 0 && m == 0 || y == 0 && m == 0) {
+		//M 表示月份  移除月份
 			delete mydata.month;
 			if(y == 0 && m == 0) {
+				//0表示所有
 				$('#year_all').show();
+				//请求所以数据
 				getdata(urlx[1], mydata, show_page[1], true, true);
 			} else {
 				$('#year_all').hide();
+				//请求某一年的全部数据
 				getdata(urlx[1], mydata, show_page[1], true, true);
 			}
 		} else {
 			$('#year_all').hide();
+			//按期请求数据
 			getdata(urlx[0], mydata, show_page[0], true, false);
 		}
 
 	})
 	//按年筛选
 	$('#year').change(function() {
-		var y = $(this).val();
-		var m = $('#month').val();
+		var y = $(this).val();//年份
+		var m = $('#month').val();//月份
 		if(y == 0 && m == 0) {
 			mydata = {
 				num: numberx,
@@ -48,7 +58,6 @@ $(function() {
 			$('#show_default').css('border', '1px solid #1F9952');
 			$('#show_default').css('color', '#1F9952');
 			getdata(urlx[1], mydata, show_page[1], false, true);
-			//getdata(urlx[0], mydata, show_page[0], false, false)
 
 			$("#zjFenqi").hide();
 			$("#zaojiaAll").show();
@@ -158,11 +167,12 @@ $(function() {
 	$('#year_all span').click(function() {
 		var index = $(this).index();
 		var selects = document.getElementById("year");
-		//更改样式
+		//重置样式
 		$('#year_all span').css({
 			'border': '1px solid transparent',
 			'color': '#000000'
 		});
+		//根据index参数来控制前端样式
 		switch(index) {
 			case 0:
 				mydata = {
@@ -203,10 +213,19 @@ $(function() {
 		}
 
 	});
-
+	/**
+	 * 
+	 * @param {Object} urlx		请求数据地址
+	 * @param {Object} mydata	请求参数
+	 * @param {Object} show_page 呈现位置，格式为：'#id'、'.class'、'#id .class 标签名'等，即为jQuery的选择方式
+	 * @param {Object} isMore	是否为加载更多（即换页	true or false
+	 * @param {Object} isall	是否为显示所有	true or false
+	 */
 	function getdata(urlx, mydata, show_page, isMore, isall) {
+		//判断是否为加载更多，是则保留上一次的值，反之清空
 		html = isMore ? html : '';
 		htmlx = isMore ? htmlx : '';
+		//ajax请求
 		$.ajax({
 			type: "get",
 			cache: false,
@@ -214,14 +233,19 @@ $(function() {
 			async: true,
 			data: mydata,
 			success: function(result) {
-
+				//判断是否 为正确数据
 				if(result.errorCode == 0) {
+					//获取数据集合
 					var data = result.data;
+					//循环数据
 					$.each(data, function(i) {
+						//规格拼接
 						var specs = Number(data[i]['specMax']) == 0 ? data[i]['spec'] + data[i]['specMin'] : data[i]['spec'] + data[i]['specMin'] + '-' + data[i]['specMax'];
 
 						if(isall) {
+							//生成序号
 							var numx = mydata.num == 0 ? i + 1 : (i + 1) + (mydata.num * 20);
+							//设定月份  排除显示为0 的 
 							data[i]['jan'] = data[i]['jan'] == 0 ? ' ' : data[i]['jan'];
 							data[i]['feb'] = data[i]['feb'] == 0 ? ' ' : data[i]['feb'];
 							data[i]['mar'] = data[i]['mar'] == 0 ? ' ' : data[i]['mar'];
@@ -254,7 +278,9 @@ $(function() {
 								'<td>' + data[i]['dec'] + '</td>' +
 								'</tr>';
 						} else {
+							//修正 显示的值
 							data[i]['comment'] = data[i]['comment'] == null ? '无' : data[i]['comment'];
+							//生成序号
 							var numx = mydata.num == 0 ? i + 1 : (i + 1) + (mydata.num * 20);
 							html += '<li class="zj_detailx">' +
 								'<div class="zj-item">' + numx + '</div>' +
@@ -266,28 +292,30 @@ $(function() {
 								'</li>';
 						}
 					});
-
+					//根据 isall 参数 判断是否为显示全部 调用不同的 返回结果	html 为 按期 显示	htmlx 为显示所有
 					if(isall) {
+						//如未设置年份参数 则默认为2017 即当前年份
 						if(mydata.year == undefined) {
 							$('#show_all_year').html('2017年份');
 						} else {
 							$('#show_all_year').html(mydata.year + '年份');
 						}
+						//htmlx 为显示所有
 						$(show_page).html(htmlx);
 					} else {
+						//html 为 按期 显示
 						$(show_page).html(html);
 					}
-					//详情
-					/*$('.zj_detailx').click(function() {
-						window.sessionStorage.setItem('zj_detail',JSON.stringify(data[$(this).index() - (mydata.num * 20)]));
-					})*/
 				} else {
+					//根据 num 值判断是否为第一页
 					if(mydata.num > 0) {
 						alert('已经没有更多数据了')
 					} else {
+						//判断是否为显示全部		是则更新年份设置
 						if(isall) {
 							$('#show_all_year').html(mydata.year + '年份');
 						}
+						//提示 该年没有数据
 						$(show_page).html('<tr><td colspan="20" style="padding: 8px 5px;box-sizing: border-box;">' + '非常抱歉，暂时没此项数据' + '</td></tr>');
 					}
 				}
@@ -306,18 +334,29 @@ $(function() {
 		}
 		isexport = false;
 		///////////////////分割线
+		//重置下载地址显示
 		$('#export_show').html(' ');
+		//声明 datax 对象  用作请求参数
 		var datax = {};
+		//跟据 页码数据的请求参数设置  数据导出参数
 		datax.year = mydata.year == undefined ? 2017 : mydata.year;
 		mydata.month == undefined ? '' : datax.month = mydata.month;
+		//设置 请求url					分期导出 接口															导出全部接口
 		var url_ = [host + '/plantlet/plant/output/offer/seedling.action.do', host + '/plantlet/plant/output/offer/statistics/seedling.action.do'];
+		//如果月份未设置 则 导出全部
 		if(mydata.month == undefined) {
 			exportData(url_[1], null, '#export_show');
 		} else {
 			exportData(url_[0], datax, '#export_show');
 		}
 	})
-
+	//导出数据方法（文件
+	/**
+	 * 
+	 * @param {Object} url_	请求地址	
+	 * @param {Object} mydatax	请求参数
+	 * @param {Object} htm	请求数据显示位置
+	 */
 	function exportData(url_, mydatax, htm) {
 		$.ajax({
 			type: "get",

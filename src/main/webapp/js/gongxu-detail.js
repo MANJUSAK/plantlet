@@ -1,11 +1,12 @@
 $(function() {
 	var url_gx = window.sessionStorage.getItem('host') + '/plantlet/plant/find/supply/seedling.action.do';
 	var detialx = window.sessionStorage.getItem('gx_detail');
-	var datax =detialx.split(',') ;
-	var mydatax={
-		num:datax[0]
+	var datax = detialx.split(',');
+	var mydatax = {
+		num: datax[0]
 	};
-getdetail(url_gx,mydatax);
+	getdetail(url_gx, mydatax);
+	//	获取数据的方法		路径		参数
 	function getdetail(url_x, mydatax) {
 		$.ajax({
 			type: "get",
@@ -15,7 +16,7 @@ getdetail(url_gx,mydatax);
 			success: function(result) {
 				if(result.errorCode == 0) {
 					var data = result.data[datax[1]];
-					var img = data['picture']==null?'':' <img src="'+data['picture']+'" />';
+					var img = data['picture'] == null ? '' : ' <img src="' + data['picture'] + '" />';
 					$('#imgshow').html(img);
 					$('#titlex').html(data['sdName']);
 					$('#copmx').html(data['seedlingComp']);
@@ -28,7 +29,7 @@ getdetail(url_gx,mydatax);
 					$('#seedlingIntro').html(data['seedlingIntro']);
 					$('#copmz').html(data['seedlingComp']);
 					$('#telxx').html(data['tel']);
-					$('#price').html(data['price']==0?'':data['price']+'（元/'+data['unit']+'）')
+					$('#price').html(data['price'] == 0 ? '' : data['price'] + '（元/' + data['unit'] + '）')
 				}
 			}
 		});

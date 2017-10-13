@@ -674,6 +674,12 @@ section {
                                         td {
                                             cursor: pointer;
                                             word-break: break-word;
+                                            a{
+                                                color: #555;
+                                                &:hover{
+                                                    color: red;
+                                                }
+                                            }
                                         }
                                         td:first-child {
                                             width: 5%;
@@ -703,13 +709,34 @@ section {
                         width: 100%;
                         height: 40px;
                         border-bottom: 1px dashed #4CD242;
+                        .gx-title-one{
+                            float: left;
+                            margin-left: 20px;
+                            line-height: 41px;
+                            span{
+                                margin: 0 5px;
+                                cursor: pointer;
+                                padding: 4px 10px;
+                                box-sizing: border-box;f
+                                &:hover{
+                                    color: #1F9952;
+                                }
+                            }
+                            .gx-title-oneSpan{
+                                border: 1px solid #1F9952;
+                                color: #1F9952;
+                                border-radius: 2px;
+                                box-sizing: border-box;
+                            }
+                        }
                         i {
                             line-height: 40px;
                             color: #4CD242;
                             padding-left: 20px;
                             font-size: 14px;
                             cursor: pointer;
-                            float: left;
+                            float: right;
+                            margin-right: 15px;
                         }
                         .gx-title-educe {
                             height: 41px;
@@ -990,13 +1017,13 @@ section {
             .Siy-container {
                 width: 800px;
                 height: auto;
-                margin: 80px auto 0;
+                margin: 15px auto 0;
                 .Siyc-biaoti {
                     width: 100%;
                     height: 60px;
                     background: #E3FED1;
                     color: #333;
-                    font-size: 14px;
+                    font-size: 16px;
                     line-height: 60px;
                     text-align: center;
                 }
@@ -1056,6 +1083,18 @@ section {
                                         border: 1px solid #DEDEDE;
                                         padding-left: 10px;
                                         border-radius: 4px;
+                                    }
+                                    .fi-right-radio{
+                                        width: 150px;
+                                        font-size: 14px;
+                                        color: #555;
+                                        margin-right: 5px;
+                                        input{
+                                            vertical-align: middle;
+                                            margin-top: -3px;
+                                            width: 13px;
+                                            margin-right: 2px;
+                                        }
                                     }
                                 }
                                 .siImg2 {

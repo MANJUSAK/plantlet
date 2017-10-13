@@ -14,7 +14,7 @@ public interface SeedlingOutputService {
     public <T> T outputSeedlingOfferService(HttpServletRequest request, int year, int month);
 
     //苗木造价统计数据导出业务方法
-    public <T> T outputSeedlingOfferService(HttpServletRequest request);
+    public <T> T outputSeedlingOfferService(HttpServletRequest request, String year);
 
     //苗木信息统计数据导出
     public <T> T outputSeedlingStatisticsService(HttpServletRequest request, SeedlingStatisticsParam param);

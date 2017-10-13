@@ -124,7 +124,6 @@ $(function() {
 	}
 
 	$('#sbumit').click(function() {
-		debugger;
 		validate();
 		if(result == true) {
 			var formx = new FormData(document.getElementById("myform"));

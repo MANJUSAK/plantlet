@@ -80,15 +80,25 @@ public class SeedlingOutputServicelmpl implements SeedlingOutputService {
      * @return 导出结果
      */
     @Override
-    public <T> T outputSeedlingOfferService(HttpServletRequest request) {
+    public <T> T outputSeedlingOfferService(HttpServletRequest request, String year) {
         StringBuilder sb = new StringBuilder();
+        int iyear = 0;
         try {
-            NewestOfferParam nop = this.suppDao.queryNewestOfferDao();
-            int year = nop.getYear();
-            List<SeedlingOfferStatistics> data = this.dao.querySeedlingOfferStatisticsDao(year);
+            if (year != null || "".equals(year)) {
+                iyear = Integer.parseInt(year);
+            }
+        } catch (NumberFormatException e) {
+        }
+        try {
+            if (iyear == 0) {
+                NewestOfferParam nop = this.suppDao.queryNewestOfferDao(0);
+                nop = this.suppDao.queryNewestOfferDao(nop.getYear());
+                iyear = nop.getYear();
+            }
+            List<SeedlingOfferStatistics> data = this.dao.querySeedlingOfferStatisticsDao(iyear);
             if (data.size() > 0) {
                 sb.append(this.http.getServerDomainName(request).toString());
-                sb.append(this.excelSeedlingUtil.writeExcel(data, "more", year, 0));
+                sb.append(this.excelSeedlingUtil.writeExcel(data, "more", iyear, 0));
                 return (T) new Result(0, sb.toString());
             }
         } catch (Exception e) {

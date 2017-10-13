@@ -7,6 +7,7 @@ import com.goodsoft.plantlet.domain.entity.param.SupplyParam;
 import com.goodsoft.plantlet.domain.entity.seedlinginfo.SeedlingOffer;
 import com.goodsoft.plantlet.domain.entity.seedlinginfo.SeedlingStatistics;
 import com.goodsoft.plantlet.domain.entity.seedlinginfo.SupplyInfo;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -29,7 +30,7 @@ public interface SeedlingDao {
     public List<SeedlingOffer> querySeedlingOfferDao(SeedlingOfferParam msg) throws Exception;
 
     //苗木造价数据查询dao方法
-    public NewestOfferParam queryNewestOfferDao() throws Exception;
+    public NewestOfferParam queryNewestOfferDao(@Param("year") int year) throws Exception;
 
     //苗木造价统计年月数据查询dao方法
     public List<SeedlingOffer> querySeedlingOfferStatisticsDetailDao(SeedlingOfferParam msg) throws Exception;

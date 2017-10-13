@@ -50,15 +50,20 @@ $(function() {
 	});
 
 	//控制textarea不能拖动
-	$("textarea").css("resize", "none")
-
+	$("textarea").css("resize", "none");
+	/**---------- 供需信息头部的切换卡改变样式(gongxu-information.html) ----------**/
+	$(".gx-title-one span").click(function(){
+		$(this).siblings().removeClass("gx-title-oneSpan");
+		$(this).addClass("gx-title-oneSpan");
+	});
+	
+	/**---------- 供需信息头部的切换卡改变样式 结束 ----------**/
 });
 //选择图片，马上预览  上传图片
 function uploadImg(obj, ID) {
 	var file = obj.files[0];
 	var reader = new FileReader();
 	reader.onload = function(e) {
-
 		var qq = document.getElementById(ID);
 		qq.src = e.target.result;
 		//或者 img.src = this.result;  //e.target == this

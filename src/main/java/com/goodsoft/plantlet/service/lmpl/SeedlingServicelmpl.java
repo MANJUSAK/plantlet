@@ -215,7 +215,8 @@ public class SeedlingServicelmpl implements SeedlingService {
             if (param.getKeyWord() == null || param.getKeyWord() == "") {
                 if (param.getSpec() == null || param.getSpec() == "") {
                     if (param.getYear() == null || param.getYear() == "") {
-                        NewestOfferParam nop = this.dao.queryNewestOfferDao();
+                        NewestOfferParam nop = this.dao.queryNewestOfferDao(0);
+                        nop = this.dao.queryNewestOfferDao(nop.getYear());
                         param.setYear(String.valueOf(nop.getYear()));
                         if (param.getMonth() == null || param.getMonth() == "") {
                             param.setMonth(String.valueOf(nop.getMonth()));

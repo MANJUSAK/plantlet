@@ -2,25 +2,25 @@ var html = '';
 var htmlx = '';
 var numberx = 0;
 var abroadx = false;
-var within = '';
-var arr_provinces_li = null;
-var isexport = true;
+var arr_provinces_li = null;//初始化省外选择信息
+var isexport = true;//设置数据导出状态
 $(function() {
+	//设置通用地址
 	var host = window.sessionStorage.getItem('host');
 	//省内
 	var url_ = host + '/plantlet/nursery/province/find/index/seedling.action.do';
 	//省外
 	var url_x = host + '/plantlet/nursery/outside/find/index/seedling.action.do';
 	var show_page = ['#show_province', '#show_outside'];
+	//设置省内 市
 	var iswithinx = ['贵阳市', '遵义市', '六盘水市', '安顺市', '毕节市', '铜仁市', '黔西南自治州', '黔东南自治州', '黔南自治州'];
+	//设置贵阳地区
 	var isguiyang = ['清镇市', '修文县', '息烽县', '开阳县', '花溪区', '观山湖区', '云岩区', '乌当区', '小河区', '白云区', '南明区'];
-	//var isabroadx = ['河南省', '河北省', '湖南省', '湖北省', '山东省', '江苏省'];
-
+	//设置初始请求参数
 	var mydata = {
 		num: numberx,
-		/*city:'贵阳市',
-		county:'南明区'*/
 	};
+	//请求初始页码数据
 	getdata(url_, mydata, show_page[0], false, false);
 	//点击省外
 	$('#isabroad,#quanguo').click(function() {
@@ -30,7 +30,6 @@ $(function() {
 		mydata = {
 			num: numberx,
 		};
-		//mydata.province = isabroadx[0];
 		getdata(url_x, mydata, show_page[1], true, false);
 		//清空数据
 		arr_provinces_li = null;
@@ -225,6 +224,14 @@ $(function() {
 		isexport = true;
 	}
 	//			请求地址		请求参数	展示位置 	是否省外	是否加载更多
+	/**
+	 * 请求数据放法
+	 * @param {Object} url_	请求地址
+	 * @param {Object} mydata	请求参数
+	 * @param {Object} showpage	呈现页码位置
+	 * @param {Object} isabroad	是否省外	true表示省外	false 省内
+	 * @param {Object} ismore	是否为加载更多	true 是	false 否
+	 */
 	function getdata(url_, mydata, showpage, isabroad, ismore) {
 		//如果ismore 为真则 HTML=HTML  反之 HTML 重置
 		html = ismore ? html : '';

@@ -239,6 +239,8 @@ public class ReadExcelOfferUtil extends DefaultHandler {
                         } catch (Exception e) {
                             sd.setSpec("");
                         }
+                    } else {
+                        sd.setSpec("");
                     }
                     break;
                 case 3:
@@ -262,7 +264,6 @@ public class ReadExcelOfferUtil extends DefaultHandler {
                             sd.setYear(yera);
                             sd.setMonth(month);
                         } catch (Exception e) {
-                            e.printStackTrace();
                         }
                     }
                     break;

@@ -25,7 +25,6 @@ section .Si-box .Si-nav .Sin-li {
   width: 190px;
   height: 300px;
   margin: 0 auto;
-  background: -webkit-linear-gradient(#dfffcb, #eafcde);
   background: linear-gradient(#dfffcb, #eafcde);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#dfffcb, endColorstr=#eafcde);
   border-left: 1px solid #4CD242;
@@ -52,6 +51,8 @@ section .Si-box .Si-nav .Sin-li ul li a {
 section .Si-box .Si-nav .Sin-li ul li:hover {
   background: linear-gradient(#399d34, #4cd242, #399d34);
   background: -webkit-linear-gradient(#399d34, #4cd242, #399d34);
+  background: -ms-linear-gradient(#399d34, #4cd242, #399d34);
+  background: -moz-linear-gradient(#399d34, #4cd242, #399d34);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#399d34, endColorstr=#4cd242);
 }
 section .Si-box .Si-nav .Sin-li ul li:hover a {
@@ -60,6 +61,8 @@ section .Si-box .Si-nav .Sin-li ul li:hover a {
 section .Si-box .Si-nav .Sin-li ul .Sin-active {
   background: linear-gradient(#399d34, #4cd242, #399d34);
   background: -webkit-linear-gradient(#399d34, #4cd242, #399d34);
+  background: -ms-linear-gradient(#399d34, #4cd242, #399d34);
+  background: -moz-linear-gradient(#399d34, #4cd242, #399d34);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#399d34, endColorstr=#4cd242);
 }
 section .Si-box .Si-nav .Sin-li ul .Sin-active a {
@@ -460,7 +463,6 @@ section .Si-box .Si-container .Sic-content .Sic-item .miaopu-content .mc-item .m
   width: 60px;
   height: 30px;
   float: left;
-  background: -webkit-linear-gradient(#399d34, #4cd242, #399d34);
   background: linear-gradient(#399d34, #4cd242, #399d34);
   line-height: 30px;
   font-size: 12px;
@@ -680,6 +682,12 @@ section .Si-box .Si-container .Sic-content .Sic-item .miaopu-content .mc-item .m
   cursor: pointer;
   word-break: break-word;
 }
+section .Si-box .Si-container .Sic-content .Sic-item .miaopu-content .mc-item .mt-content .shengwai tbody td a {
+  color: #555;
+}
+section .Si-box .Si-container .Sic-content .Sic-item .miaopu-content .mc-item .mt-content .shengwai tbody td a:hover {
+  color: red;
+}
 section .Si-box .Si-container .Sic-content .Sic-item .miaopu-content .mc-item .mt-content .shengwai tbody td:first-child {
   width: 5%;
   text-align: center;
@@ -704,13 +712,34 @@ section .Si-box .Si-container .Sic-content .Sic-item .gx-title {
   height: 40px;
   border-bottom: 1px dashed #4CD242;
 }
+section .Si-box .Si-container .Sic-content .Sic-item .gx-title .gx-title-one {
+  float: left;
+  margin-left: 20px;
+  line-height: 41px;
+}
+section .Si-box .Si-container .Sic-content .Sic-item .gx-title .gx-title-one span {
+  margin: 0 5px;
+  cursor: pointer;
+  padding: 4px 10px;
+  box-sizing: border-box;
+}
+f section .Si-box .Si-container .Sic-content .Sic-item .gx-title .gx-title-one span:hover {
+  color: #1F9952;
+}
+section .Si-box .Si-container .Sic-content .Sic-item .gx-title .gx-title-one .gx-title-oneSpan {
+  border: 1px solid #1F9952;
+  color: #1F9952;
+  border-radius: 2px;
+  box-sizing: border-box;
+}
 section .Si-box .Si-container .Sic-content .Sic-item .gx-title i {
   line-height: 40px;
   color: #4CD242;
   padding-left: 20px;
   font-size: 14px;
   cursor: pointer;
-  float: left;
+  float: right;
+  margin-right: 15px;
 }
 section .Si-box .Si-container .Sic-content .Sic-item .gx-title .gx-title-educe {
   height: 41px;
@@ -954,8 +983,7 @@ section .Si-box .Si-container .jzmore .jzm-box .jzm-center span {
   text-align: center;
   color: #adadad;
   font-size: 24px;
-  -webkit-transition: 0.5s;
-          transition: 0.5s;
+  transition: 0.5s;
 }
 section .Si-box .Si-container .jzmore .jzm-box .jzm-center span:hover {
   color: #4CD242;
@@ -989,14 +1017,14 @@ section .Si-box .Si-yaler .Siy-title .Siy-cloose i {
 section .Si-box .Si-yaler .Siy-container {
   width: 800px;
   height: auto;
-  margin: 80px auto 0;
+  margin: 15px auto 0;
 }
 section .Si-box .Si-yaler .Siy-container .Siyc-biaoti {
   width: 100%;
   height: 60px;
   background: #E3FED1;
   color: #333;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 60px;
   text-align: center;
 }
@@ -1061,6 +1089,18 @@ section .Si-box .Si-yaler .Siy-container .Siyc-form .form-container .form-item .
   border: 1px solid #DEDEDE;
   padding-left: 10px;
   border-radius: 4px;
+}
+section .Si-box .Si-yaler .Siy-container .Siyc-form .form-container .form-item .fi-right span .fi-right-radio {
+  width: 150px;
+  font-size: 14px;
+  color: #555;
+  margin-right: 5px;
+}
+section .Si-box .Si-yaler .Siy-container .Siyc-form .form-container .form-item .fi-right span .fi-right-radio input {
+  vertical-align: middle;
+  margin-top: -3px;
+  width: 13px;
+  margin-right: 2px;
 }
 section .Si-box .Si-yaler .Siy-container .Siyc-form .form-container .form-item .fi-right .siImg2 {
   width: 190px;
@@ -1128,8 +1168,7 @@ section .Si-box .Si-yaler .Siy-container .Siyc-form .form-container .form-buttom
   background: #40B239;
   margin-top: 50px;
   border-radius: 8px;
-  -webkit-transition: 1s;
-          transition: 1s;
+  transition: 1s;
 }
 section .Si-box .Si-yaler .Siy-container .Siyc-form .form-container .form-buttom:hover input {
   background: #4CD242;
@@ -1143,8 +1182,7 @@ section .Si-box .Si-yaler .Siy-container .Siyc-form .form-container .form-buttom
   font-size: 18px;
   color: white;
   cursor: pointer;
-  -webkit-transition: 0.5s;
-          transition: 0.5s;
+  transition: 0.5s;
   border-radius: 8px;
   outline: none;
 }

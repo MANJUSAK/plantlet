@@ -43,8 +43,8 @@ public class SeedlingOutputController {
      */
     @CrossOrigin(origins = "*", maxAge = 3600, methods = RequestMethod.GET)
     @RequestMapping("/output/offer/statistics/seedling.action.do")
-    public Object outputSeedlingOfferController(HttpServletRequest request) {
-        return this.service.outputSeedlingOfferService(request);
+    public Object outputSeedlingOfferController(HttpServletRequest request, String year) {
+        return this.service.outputSeedlingOfferService(request, year);
     }
 
     /**
