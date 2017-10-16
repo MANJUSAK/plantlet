@@ -6,88 +6,103 @@ $(function() {
 	var urls = [url_host + "/plantlet/nursery/province/find/seedling.action.do", url_host + '/plantlet/nursery/outside/find/seedling.action.do'];
 	//获取浏览器地址栏参数	传入 参数名称即可（支持中文参数值
 	//此参数为苗圃名称
-	var companys = GetQueryString('nums')
+	var companys = GetQueryString('nums');
 	//	此参数判断是否为身外	1为省外	0为省内
-	var isabroad = GetQueryString('key')
-	//ajax请求数据
-	$.ajax({
-		type: "get",
-		url: urls[isabroad],
-		data: {
-			num: numberx,
-			comp: companys
-		},
-		async: true,
-		success: function(result) {
-			console.log(result)
-			//判断数据是否正确
-			if(result.errorCode == 0) {
-				//提取数据集合第一个数据
-				var data = result.data[numberx];
-				//判断是否为省外	
-				if(isabroad == 1) {
-					$('#nurseryName').html(data['company'] == null ? '' : data['company'])
-					$('#nurseryAdd').html(data['address'] == null ? '' : data['address'])
-					//$('#nurseryIntro').html(data['nurseryIntro'])
-					$('#p_d_c').html(data['province'] == null ? '' : data['province'])
-					$('#area').html(data['area'] <2 ? '' : data['area']*667)
-					//提取苗木企业名称
-					var nurseryName = data['company'] == null ? '' : data['company'];
-					/*********/
-					$('#nurseryAddx').html(data['nurseryAdd'] == null ? '' : data['nurseryAdd'])
-					$('#postCode').html(data['postCode'] == 0 ? '' : data['postCode'])
-					$('#emailx').html(data['email'])
-					$('#contact').html(data['contact'] == null ? '' : data['contact'])
-					$('#tels').html(data['tel'] == 0 ? '' : data['tel'])
-					$('#fax').html(data['fax'] == 0 ? '' : data['fax'])
-					//根据苗木企业名称查询企业下的苗圃信息
-					getmore(urls[isabroad], nurseryName, isabroad);
+	var isabroad = GetQueryString('key');
+	//存放循环出来的HTML
+	var html = '';
+	//加载更多，默认的加载页数
+	var numberxx = 0;
 
-				} else {
-					var img = data['picture'] == null ? '' : ' <img class="MXi_L_img" src="' + data['picture'] + '" />';
-					$('#imgx').html(img)
-					$('#nurseryName').html(data['nurseryName'] == null ? '' : data['nurseryName'])
-					$('#nurseryAdd').html(data['nurseryAdd'] == null ? '' : data['nurseryAdd'])
-					$('#nurseryIntro').html(data['nurseryIntro'] == null ? '' : data['nurseryIntro'])
-					$('#p_d_c').html(data['province'] + '&nbsp;' + data['districts'] + '&nbsp;' + data['county'])
-					$('#area').html(data['area']<2 ? '' : data['area']*667)
-					//提取苗木企业名称
-					var nurseryName = data['nurseryName'] == null ? '' : data['nurseryName'];
-					/*********/
-					$('#nurseryAddx').html(data['nurseryAdd'] == null ? '' : data['nurseryAdd'])
-					$('#postCode').html(data['postCode'] == 0 ? '' : data['postCode'])
-					$('#emailx').html(data['email'] == null ? '' : data['email'])
-					$('#contact').html(data['contact'] == null ? '' : data['contact'])
-					$('#tels').html(data['tel'] == 0 ? '' : data['tel'])
-					$('#fax').html(data['fax'] == 0 ? '' : data['fax'])
-					//根据苗木企业名称查询企业下的苗圃信息
-					getmore(urls[isabroad], nurseryName);
-				}
-			}
-		},
-		error: function(e) {
-			console.log(e.status);
-		}
+	$(".jzm-center").click(function() {
+		getdata();
 	});
+	getdata();
+	//ajax请求数据
+	function getdata() {
+		$.ajax({
+			type: "get",
+			url: urls[isabroad],
+			data: {
+				num: numberx,
+				comp: companys
+			},
+			async: true,
+			success: function(result) {
+				console.log(result);
+				//判断数据是否正确
+				if(result.errorCode == 0) {
+					//提取数据集合第一个数据
+					var data = result.data[numberx];
+					//判断是否为省外	
+					if(isabroad == 1) {
+						$('#nurseryName').html(data['company'] == null ? '' : data['company'])
+						$('#nurseryAdd').html(data['address'] == null ? '' : data['address'])
+						//$('#nurseryIntro').html(data['nurseryIntro'])
+						$('#p_d_c').html(data['province'] == null ? '' : data['province'])
+						$('#area').html(data['area'] < 1 ? '' : data['area'] * 667)
+						//提取苗木企业名称
+						var nurseryName = data['company'] == null ? '' : data['company'];
+						/*********/
+						$('#nurseryAddx').html(data['nurseryAdd'] == null ? '' : data['nurseryAdd'])
+						$('#postCode').html(data['postCode'] == 0 ? '' : data['postCode'])
+						$('#emailx').html(data['email'])
+						$('#contact').html(data['contact'] == null ? '' : data['contact'])
+						$('#tels').html(data['tel'] == 0 ? '' : data['tel'])
+						$('#fax').html(data['fax'] == 0 ? '' : data['fax'])
+						//根据苗木企业名称查询企业下的苗圃信息
+						console.log("省外nurseryName：" + nurseryName);
+						getmore(urls[isabroad], nurseryName, isabroad, true);
+
+					} else {
+						var img = data['picture'] == null ? '' : ' <img class="MXi_L_img" src="' + data['picture'] + '" />';
+						$('#imgx').html(img)
+						$('#nurseryName').html(data['nurseryName'] == null ? '' : data['nurseryName'])
+						$('#nurseryAdd').html(data['nurseryAdd'] == null ? '' : data['nurseryAdd'])
+						$('#nurseryIntro').html(data['nurseryIntro'] == null ? '' : data['nurseryIntro'])
+						$('#p_d_c').html(data['province'] + '&nbsp;' + data['districts'] + '&nbsp;' + data['county'])
+						$('#area').html(data['area'] < 1 ? '' : data['area'] * 667)
+						//提取苗木企业名称
+						var nurseryName = data['nurseryName'] == null ? '' : data['nurseryName'];
+						/*********/
+						$('#nurseryAddx').html(data['nurseryAdd'] == null ? '' : data['nurseryAdd'])
+						$('#postCode').html(data['postCode'] == 0 ? '' : data['postCode'])
+						$('#emailx').html(data['email'] == null ? '' : data['email'])
+						$('#contact').html(data['contact'] == null ? '' : data['contact'])
+						$('#tels').html(data['tel'] == 0 ? '' : data['tel'])
+						$('#fax').html(data['fax'] == 0 ? '' : data['fax'])
+						console.log("省外内nurseryName：" + nurseryName);
+						//根据苗木企业名称查询企业下的苗圃信息
+						getmore(urls[isabroad], nurseryName, null, true);
+					}
+				}
+			},
+			error: function(e) {
+				console.log(e.status);
+			}
+		});
+	}
 	/**
 	 * 获取苗圃企业下的苗圃信息
 	 * @param {Object} urlx	请求地址	
 	 * @param {Object} nurseryName	苗木企业名称
 	 * @param {Object} isabroad	是否省内
 	 */
-	function getmore(urlx, nurseryName, isabroad) {
+	function getmore(urlx, nurseryName, isabroad, ismore) {
+		html = ismore ? html : '';
 		$.ajax({
 			type: "get",
 			url: urlx,
 			data: {
+				num: numberxx,
 				comp: nurseryName
 			},
+			//data: mydata,
 			async: true,
 			success: function(result) {
-				console.log(result)
+				console.log(result);
 				if(result.errorCode == 0) {
 					var data = result.data;
-					var html = '';
 					if(isabroad == 1) {
 						//循环省外数据
 						$.each(data, function(i) {
@@ -105,16 +120,20 @@ $(function() {
 							html += '<tr class="MX_mc_tr2"><td class="MX_mc_td1">' + data[i]['plantName'] + '</td><td class="MX_mc_td2">' + specs + '</td><td class="MX_mc_td3">' + numsx + '</td><td class="MX_mc_td4">' + price + '</td></tr>';
 						});
 					}
-
 					$('#show_mp').html(html);
 				} else {
-					$('#show_mp').html(result.msg);
+					if (numberxx!=0) {
+						alert('已经没有更多数据了');
+					} else{
+						$('#show_mp').html(result.msg);
+					}
 				}
 			},
 			error: function(e) {
 				console.log(e.status);
 			}
 		});
+		numberxx = numberxx + 1;
 
 	}
 	//获取地址栏	参数 	传入参数名称即可获取参数值（支持中文）

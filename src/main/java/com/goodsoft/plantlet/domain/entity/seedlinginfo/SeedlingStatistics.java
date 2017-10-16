@@ -19,7 +19,8 @@ public class SeedlingStatistics implements java.io.Serializable {
     private int numOut;//省外数量
     private int num;//省内数量
     private String unit;//单位
-    private double maxPrice;//按百分比分析价格
+    private double minPrice;//按百分比分析最低价格
+    private double maxPrice;//按百分比分析最高价格
     private int year;//年份
     private int month;//月份
     private String comp;//企业
@@ -97,6 +98,14 @@ public class SeedlingStatistics implements java.io.Serializable {
         this.num = num;
     }
 
+    public double getMinPrice() {
+        return minPrice;
+    }
+
+    public void setMinPrice(double minPrice) {
+        this.minPrice = minPrice;
+    }
+
     public double getMaxPrice() {
         return maxPrice;
     }
@@ -156,6 +165,7 @@ public class SeedlingStatistics implements java.io.Serializable {
                 Double.compare(that.marketPrice, marketPrice) == 0 &&
                 numOut == that.numOut &&
                 num == that.num &&
+                Double.compare(that.minPrice, minPrice) == 0 &&
                 Double.compare(that.maxPrice, maxPrice) == 0 &&
                 year == that.year &&
                 month == that.month &&
@@ -169,6 +179,6 @@ public class SeedlingStatistics implements java.io.Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, spec, specMin, specMax, offer, marketPrice, sdName, numOut, num, unit, maxPrice, year, month, comp, comment);
+        return Objects.hash(id, spec, specMin, specMax, offer, marketPrice, sdName, numOut, num, unit, minPrice, maxPrice, year, month, comp, comment);
     }
 }

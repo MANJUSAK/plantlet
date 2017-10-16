@@ -96,7 +96,7 @@ public class WriteSupplyPdfUtil {
                 sb.append(data.get(i).getContact());
                 sb.append("\n联系方式：");
                 sb.append(data.get(i).getTel());
-                sb.append("\n规格：");
+                sb.append("\n规格(cm)：");
                 sb.append(data.get(i).getSpec());
                 sb.append(data.get(i).getSpecMin());
                 double max = data.get(i).getSpecMax();
@@ -122,16 +122,17 @@ public class WriteSupplyPdfUtil {
                 String image = data.get(i).getDirectory();
                 if (image != null) {
                     // 加入图片
-                    Image jpg = Image.getInstance(data.get(i).getDirectory());
-                    jpg.scaleAbsolute(200, 150);// 直接设定显示尺寸
-                    jpg.setAbsolutePosition(338, 618);//设置图片位置
-                    doc.add(jpg);
+                    try {
+                        Image jpg = Image.getInstance(data.get(i).getDirectory());
+                        jpg.scaleAbsolute(200, 150);// 直接设定显示尺寸
+                        jpg.setAbsolutePosition(338, 618);//设置图片位置
+                        doc.add(jpg);
+                    } catch (Exception e) {
+                    }
                 }
             }
             return path;
-        } finally
-
-        {
+        } finally {
             // 关闭文档对象，释放资源
             doc.close();
         }

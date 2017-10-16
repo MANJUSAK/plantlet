@@ -1,7 +1,7 @@
 var html = '';
 var htmlx = '';
-var numberx = 0;
-var abroadx = false;
+var numberx = 0;//需要传到后台的参数；
+var abroadx = false;//省内为false，省外为true；
 var arr_provinces_li = null;//初始化省外选择信息
 var isexport = true;//设置数据导出状态
 $(function() {
@@ -12,7 +12,7 @@ $(function() {
 	//省外
 	var url_x = host + '/plantlet/nursery/outside/find/index/seedling.action.do';
 	var show_page = ['#show_province', '#show_outside'];
-	//设置省内 市
+	//设置省内市
 	var iswithinx = ['贵阳市', '遵义市', '六盘水市', '安顺市', '毕节市', '铜仁市', '黔西南自治州', '黔东南自治州', '黔南自治州'];
 	//设置贵阳地区
 	var isguiyang = ['清镇市', '修文县', '息烽县', '开阳县', '花溪区', '观山湖区', '云岩区', '乌当区', '小河区', '白云区', '南明区'];
@@ -22,7 +22,7 @@ $(function() {
 	};
 	//请求初始页码数据
 	getdata(url_, mydata, show_page[0], false, false);
-	//点击省外
+	//点击省外和全国
 	$('#isabroad,#quanguo').click(function() {
 		if(!abroadx) {
 			abroadx = true;
@@ -31,16 +31,16 @@ $(function() {
 			num: numberx,
 		};
 		getdata(url_x, mydata, show_page[1], true, false);
-		//清空数据
+		//清空数据（省外信息）
 		arr_provinces_li = null;
 		reset_download_();
+		console.log("省外："+numberx);
 	})
 	//点击省内
 	$('#iswithin,#all_withinx').click(function() {
 		if(abroadx) {
 			abroadx = false;
 		}
-
 		mydata = {
 			num: numberx
 		};
@@ -48,11 +48,12 @@ $(function() {
 		//清空数据
 		arr_provinces_li = null;
 		reset_download_();
+		console.log("省内："+numberx);
 	})
 	//省内
 	$('#iswithinx a').click(function() {
 		mydata.num = numberx;
-		delete mydata.county;
+		delete mydata.county;//county：县
 		mydata.city = iswithinx[$(this).index() - 1];
 		if(abroadx) {
 			abroadx = false;
@@ -64,13 +65,13 @@ $(function() {
 	$('#isguiyang a').click(function() {
 		var idnex = $(this).index();
 		mydata.num = numberx;
+		//county县
 		mydata.county = isguiyang[idnex];
 		if(abroadx) {
 			abroadx = false;
 		}
 		getdata(url_, mydata, show_page[0], false, false);
 		reset_download_();
-
 	})
 	//省外
 
@@ -96,7 +97,6 @@ $(function() {
 			mydata.province = $(this).text();
 			getdata(url_x, mydata, show_page[1], true, false);
 			reset_download_();
-
 		})
 		//点击确定时，查询多省数据
 		if(arr_provinces_li != null) {
@@ -116,7 +116,6 @@ $(function() {
 			getdata(url_x, mydata, show_page[1], true, false);
 			reset_download_();
 		}
-
 	});
 	//点击取消回复input原始状态
 	$(".clooseA2").click(function() {
@@ -127,6 +126,7 @@ $(function() {
 		});
 		$(this).hide();
 		arr_provinces_li = null;
+		$('#outside_get_').html(' ');
 	});
 	//加载更多
 	$('.jzm-center').click(function() {
@@ -137,7 +137,6 @@ $(function() {
 		} else {
 			getdata(url_, mydata, show_page[0], abroadx, true);
 		}
-
 	})
 	//省内导出
 	$('#Province_get button').click(function() {
@@ -145,6 +144,8 @@ $(function() {
 			alert('请求正在执行中')
 			return 0;
 		}
+		//显示正在加载
+		$(".t_div").show()
 		isexport = false;
 		////////////////分割线
 		$('#Province_get_').html(' ');
@@ -167,13 +168,17 @@ $(function() {
 					$('#Province_get_').html(down_html);
 				} else {
 
-					$('#Province_get_').html('<span style="color: red;">'+result.msg+'</span>');
+					$('#Province_get_').html('<span style="color: red;line-height: 40px;">'+result.msg+'</span>');
 				}
 				isexport = true;
+				//隐藏正在加载
+				$(".t_div").hide()
 			},
 			error: function(e) {
 				console.log(e.status);
 				isexport = true;
+				//隐藏正在加载
+				$(".t_div").hide()
 			}
 		});
 		
@@ -184,6 +189,8 @@ $(function() {
 			alert('请求正在执行中')
 			return 0;
 		}
+		//显示正在加载
+		$(".t_div").show()
 		isexport = false;
 		///////////分割线
 		$('#outside_get_').html(' ');
@@ -205,25 +212,27 @@ $(function() {
 					var down_html = '<span style="line-height: 40px;font-size: 14px;">导出成功，请<a href="' + result.data + '">点击下载</a></span>';
 					$('#outside_get_').html(down_html);
 				} else {
-
-					$('#outside_get_').html('<span style="line-height: 40px;font-size: 14px;">' + result.msg + '</span>');
+					$('#outside_get_').html('<span style="line-height: 40px;font-size: 14px;color:red">' + result.msg + '</span>');
 				}
 				isexport = true;
+				//隐藏正在加载
+				$(".t_div").hide()
 			},
 			error: function(e) {
 				console.log(e.status);
 				isexport = true;
+				//隐藏正在加载
+				$(".t_div").hide()
 			}
 		});
-		
 	})
-	//重置下载地址
+	//重置下载地址  导出按钮后面的文字提示
 	function reset_download_() {
 		$('#outside_get_').html('');
 		$('#Province_get_').html('');
 		isexport = true;
 	}
-	//			请求地址		请求参数	展示位置 	是否省外	是否加载更多
+	//请求地址		请求参数	展示位置 	是否省外	是否加载更多
 	/**
 	 * 请求数据放法
 	 * @param {Object} url_	请求地址
@@ -252,7 +261,6 @@ $(function() {
 						if(isabroad) {
 							var province = data[i]['province'] == null ? '无' : data[i]['province'];
 							var company = data[i]['company'] == null ? '无' : data[i]['company'];
-
 							htmlx += '<tr>' +
 								'<td>' + numx + '</td>' +
 								'<td>' + province + '</td>' +
@@ -261,9 +269,13 @@ $(function() {
 								'<td><a href="miaopu_details.html?key=1&nums=' + data[i]['company'] + '" target="_blank">' + company + '</a></td>' +
 								'</tr>';
 						} else {
+							//省
 							var province = data[i]['province'] == null ? '无' : data[i]['province'];
+							//区
 							var districts = data[i]['districts'] == null ? '无' : data[i]['districts'];
+							//县
 							var county = data[i]['county'] == null ? '无' : data[i]['county'];
+							//苗圃
 							var nurseryName = data[i]['nurseryName'] == null ? '无' : data[i]['nurseryName'];
 
 							html += '<tr>' +
@@ -302,7 +314,6 @@ $(function() {
 				console.log(e.status)
 			}
 		});
-
 	}
 	/***************动态省份**********************/
 	//苗圃省份弹出与收起
@@ -330,10 +341,8 @@ $(function() {
 		$(this).css({
 			"border-color": "#399d34"
 		}).children("span").css("color", "#399d34");
-
 	});
 	//苗圃省份选择
-
 	$(".An-item span input").click(function() {
 		var aa = $(".An-item span input");
 		var ss = "";
@@ -378,5 +387,4 @@ $(function() {
 			});
 		});
 	});
-
 })

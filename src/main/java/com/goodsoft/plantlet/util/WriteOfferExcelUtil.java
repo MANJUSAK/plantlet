@@ -381,7 +381,7 @@ public class WriteOfferExcelUtil {
         // 设置字体颜色
         font.setColor(HSSFColor.BLACK.index);
         // 设置字体样式
-        font.setFontName("微软雅黑");
+        font.setFontName("宋体");
         // 设置字体大小
         font.setFontHeightInPoints((short) 9);
         // 设置字体粗细

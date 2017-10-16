@@ -105,7 +105,8 @@ $(function() {
 			getdata(urlx[0], mydata, show_page[0], false, false);
 
 		}
-
+		//清除导出数据显示的内容
+		$('#export_show').html(' ');
 	})
 	//按 月/期筛选
 	$('#month').change(function() {
@@ -158,9 +159,9 @@ $(function() {
 			getdata(urlx[0], mydata, show_page[0], false, false);
 			$("#zjFenqi").show();
 			$("#zaojiaAll").hide();
-
 		}
-
+		//清除导出数据显示的内容
+		$('#export_show').html(' ');
 	})
 	//选择全部时 显示二级菜单（作分页功能
 	//此应该动态获取服务器数据来动态生成的
@@ -211,7 +212,8 @@ $(function() {
 				});
 				break;
 		}
-
+		//清除导出数据显示的内容
+		$('#export_show').html(' ');
 	});
 	/**
 	 * 
@@ -331,7 +333,10 @@ $(function() {
 		if(!isexport) {
 			alert('请求正在执行中')
 			return 0;
-		}
+		}	
+		//显示正在加载
+		$(".t_div").show()
+		//显示正在加载
 		isexport = false;
 		///////////////////分割线
 		//重置下载地址显示
@@ -370,10 +375,14 @@ $(function() {
 					$(htm).html('<span style="color: red;">'+result.msg+'</span>');
 				}
 				isexport = true;
+				//隐藏正在加载
+				$(".t_div").hide()
 			},
 			error: function(e) {
 				console.log(e.status)
 				isexport = true;
+				//隐藏正在加载
+				$(".t_div").hide()
 			}
 		});
 

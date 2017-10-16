@@ -80,7 +80,8 @@
         <result property="sdName" column="seedling_name"/>
         <result property="numOut" column="num_out"/>
         <result property="num" column="num"/>
-        <result property="maxPrice" column="price"/>
+        <result property="minPrice" column="price_min"/>
+        <result property="maxPrice" column="price_max"/>
         <result property="year" column="year"/>
         <result property="month" column="month"/>
         <result property="unit" column="unit"/>
@@ -90,8 +91,10 @@
     <select id="querySeedlingStatisticsDao"
             parameterType="com.goodsoft.plantlet.domain.entity.param.SeedlingStatisticsParam"
             resultMap="SeedlingStatisticsMap">
-        SELECT `num`,`num_out`,`seedling_name`,`spec`,`spec_min`,`spec_max`,`seedling_offer`,`year`,`month`,
-        `seedling_offer`* #{percent} `price`,`unit`
+        SELECT
+        `num`,`num_out`,`seedling_name`,`spec`,`spec_min`,`spec_max`,`seedling_offer`,`year`,`month`,
+        TRUNCATE(`seedling_offer`* (1-#{percent}),3) AS `price_min`,TRUNCATE(`seedling_offer`* (1+#{percent}),3) AS
+        `price_max`,`unit`
         FROM `gs_seedling_statistics_view`
         <where>
             <if test="keyWord !=null and keyWord != ''">

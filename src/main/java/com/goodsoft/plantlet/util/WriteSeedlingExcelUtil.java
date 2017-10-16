@@ -253,7 +253,7 @@ public class WriteSeedlingExcelUtil {
         // 设置字体颜色
         font.setColor(HSSFColor.BLACK.index);
         // 设置字体样式
-        font.setFontName("微软雅黑");
+        font.setFontName("宋体");
         // 设置字体大小
         font.setFontHeightInPoints((short) 9);
         // 设置字体粗细
@@ -322,19 +322,33 @@ public class WriteSeedlingExcelUtil {
         cell.setCellValue(data.getOffer());
         cell.setCellStyle(style);
         cell = row.createCell(4);
-        cell.setCellValue(data.getMaxPrice());
+        sb.delete(0, sb.length());
+        sb.append(data.getMinPrice());
+        sb.append(" - ");
+        sb.append(data.getMaxPrice());
+        cell.setCellValue(sb.toString());
         cell.setCellStyle(style);
         cell = row.createCell(5);
-        cell.setCellValue(data.getMaxPrice());
+        sb.delete(0, sb.length());
+        sb.append(data.getMinPrice());
+        sb.append(" - ");
+        sb.append(data.getMaxPrice());
+        cell.setCellValue(sb.toString());
         cell.setCellStyle(style);
         cell = row.createCell(6);
         cell.setCellValue(data.getMarketPrice());
         cell.setCellStyle(style);
         cell = row.createCell(7);
-        cell.setCellValue(data.getNum() + data.getUnit());
+        sb.delete(0, sb.length());
+        sb.append(data.getNum());
+        sb.append(data.getUnit());
+        cell.setCellValue(sb.toString());
         cell.setCellStyle(style);
         cell = row.createCell(8);
-        cell.setCellValue(data.getNumOut() + data.getUnit());
+        sb.delete(0, sb.length());
+        sb.append(data.getNumOut());
+        sb.append(data.getUnit());
+        cell.setCellValue(sb.toString());
         cell.setCellStyle(style);
         cell = row.createCell(9);
         cell.setCellValue(data.getYear());

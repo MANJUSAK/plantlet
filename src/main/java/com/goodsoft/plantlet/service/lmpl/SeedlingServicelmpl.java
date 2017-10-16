@@ -357,6 +357,7 @@ public class SeedlingServicelmpl implements SeedlingService {
                     ns.setSpecMin(msg.getSpecMin());
                     ns.setSpecMax(msg.getSpecMax());
                     ns.setNum(msg.getNum());
+                    ns.setUnit(msg.getUnit());
                     ns.setTel(msg.getTel());
                     this.suppDao.addNurseryOneDao(ns);
                 } else {
@@ -375,6 +376,7 @@ public class SeedlingServicelmpl implements SeedlingService {
                     ns.setSpecMax(msg.getSpecMax());
                     ns.setPrice(msg.getPrice());
                     ns.setPlantName(msg.getSdName());
+                    ns.setUnit(msg.getUnit());
                     ns.setCounty("");
                     ns.setProLicenseNum("");
                     ns.setOperLicenseNum("");

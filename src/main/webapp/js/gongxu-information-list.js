@@ -2,12 +2,11 @@
 var html = '';
 //设置初始化页码
 var numberx = 0;
-//数据导出状态		true 可执行	false不可执行
+//数据导出状态	true 可执行	false不可执行
 var isexport = true;
 $(function() {
 	//设置请求路径
 	var url_gx = window.sessionStorage.getItem('host') + '/plantlet/plant/find/supply/seedling.action.do';
-
 	//设置初始请求参数
 	var mydata = {
 		num: numberx
@@ -29,7 +28,6 @@ $(function() {
 
 	$('.gx-title-one span').click(function() {
 		var index = $(this).index();
-
 		switch(index) {
 			case 0:
 				mydata.stp != undefined ? delete mydata.stp : '';
@@ -54,6 +52,7 @@ $(function() {
 	 */
 	function getdata(url_, mydata, showpage, ismore) {
 		//加载更多为false时 清空原数据
+		//???????
 		html = ismore ? html : '';
 		$.ajax({
 			type: "get",
@@ -61,10 +60,8 @@ $(function() {
 			data: mydata,
 			async: true,
 			success: function(result) {
-
 				if(result.errorCode == 0) {
-
-					var data = result.data
+					var data = result.data;
 					$.each(data, function(i) {
 						var img = data[i]['picture'] == null ? '' : data[i]['picture'][0];
 						html += '<div class="gxc-text">' +
@@ -80,6 +77,7 @@ $(function() {
 							'</div>';
 					});
 					$(showpage).html(html);
+					//
 					$('.gxc-text').click(function() {
 						var num = $(this).index();
 						var id = num < 20 ? num : num / 20;
@@ -89,6 +87,7 @@ $(function() {
 						} else {
 							index = Math.ceil((num - (num % 20)) / 20);
 						}
+						//console.log("这里的下标为："+num);
 						var test = index + ',' + id;
 						window.sessionStorage.setItem('gx_detail', test);
 						//console.log(test)
@@ -96,7 +95,7 @@ $(function() {
 					})
 				} else {
 					if(ismore) {
-						alert('已经没有更多数据了')
+						alert('已经没有更多数据了');
 					} else {
 						$(showpage).html('非常抱歉，暂时没此项数据');
 					}
@@ -109,6 +108,8 @@ $(function() {
 	}
 	//文件导出
 	$('#export').click(function() {
+		//显示正在加载
+		$(".t_div").show()
 		if(!isexport) {
 			alert('请求正在执行中');
 			return 0;
@@ -131,12 +132,16 @@ $(function() {
 					$('#export_show').html('<span style="color: red;">' + result.msg + '</span>')
 					isexport = true;
 				}
+				//隐藏正在加载
+				$(".t_div").hide()
 			},
 			error: function(e) {
 				console.log(e.status)
 				isexport = true;
+				//隐藏正在加载
+				$(".t_div").hide()
 			}
+			
 		});
 	})
-
 })

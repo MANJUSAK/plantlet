@@ -4,7 +4,8 @@ var numberx = 0;
 $(function() {
 	//var para = window.sessionStorage.getItem('seeding_detail');
 	var url_host = window.sessionStorage.getItem('host');
-	var urls = [url_host + '/plantlet/nursery/province/find/seedling.action.do', url_host + '/plantlet/nursery/outside/find/seedling.action.do'];
+	//var urls = [url_host + '/plantlet/nursery/province/find/seedling.action.do', url_host + '/plantlet/nursery/outside/find/seedling.action.do'];
+	var urls = [url_host + '/plantlet/nursery/province/find/seedling.action.do', url_host + '/plantlet/nursery/outside/find/index/seedling.action.do'];
 	var isall = GetQueryString('isall');
 	var mydata = {
 		num: numberx,
@@ -19,22 +20,19 @@ $(function() {
 		spec: GetQueryString('spec'),
 		specMin: GetQueryString('specMin'),
 		specMax: GetQueryString('specMax')
-
 	};
 
 	var show_page = ['#show_page_n', '#show_page_w'];
 	//第一次进入，默认
-	if(isall == 2) {
+	if(isall == 2) {//省内
 		getdata(urls[0], mydata, show_page[0], false, false);
-	} else if(isall == 3) {
+	} else if(isall == 3) {//省外
 		getdata(urls[1], mydata, show_page[1], true, false);
-	} else if(isall == 0) {
+	} else if(isall == 0) {//全部
 		getdata(urls[0], mydata, show_page[0], false, false);
 	}
-
 	//省内	市
 	$('#shi li').click(function() {
-
 		mydata.city = $(this).text();
 		mydata.num = numberx;
 		getdata(urls[0], mydata, show_page[0], false, false);
@@ -68,13 +66,13 @@ $(function() {
 	function getdata(url_, mydata, showpage, isn, ismore) {
 		html = ismore ? html : '';
 		htmlx = ismore ? htmlx : '';
-
 		$.ajax({
 			type: "get",
 			url: url_,
 			data: mydata,
 			async: true,
 			success: function(result) {
+				console.log(result);
 				if(result.errorCode == 0) {
 					var data = result.data;
 					$.each(data, function(i) {
@@ -90,7 +88,7 @@ $(function() {
 								'<td class="MMcPc_teb1_td1">' + data[i]['nurseryName'] + '</td>' +
 								'<td class="MMcPc_teb1_td2">' + data[i]['spec'] + data[i]['specMin'] + '-' + data[i]['specMax'] + '</td>' +
 								'<td class="MMcPc_teb1_td3">' + data[i]['num'] + '</td>' +
-								'<td class="MMcPc_teb1_td4">' + data[i]['price'] + '元' + '</td>' +
+								'<td class="MMcPc_teb1_td4">' + data[i]['price']  + '</td>' +
 								'</tr>';
 						}
 					});
@@ -102,7 +100,7 @@ $(function() {
 					}
 				} else {
 					if(mydata.num > 0) {
-						alert('已经没有更多数据了')
+						alert('已经没有更多数据了');
 					} else {
 						var address = '';
 						if(mydata.city !== undefined) {
@@ -123,7 +121,6 @@ $(function() {
 			}
 		});
 	}
-
 	function GetQueryString(name) {
 		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
 		var r = window.location.search.substr(1).match(reg);

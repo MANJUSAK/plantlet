@@ -49,6 +49,7 @@ $(function() {
 							mydata.spec = spec;
 						}
 						getdata(url_, mydata, show_page, false);
+						$('#export_show').html(' ');
 					})
 				}
 			},
@@ -81,7 +82,7 @@ $(function() {
 			getdata(url_, mydata, show_page, false);
 
 		}
-
+		$('#export_show').html(' ');
 	})
 	//苗木规格	最小规格
 	$('input[name="specMin"]').keyup(function() {
@@ -117,7 +118,7 @@ $(function() {
 				getdata(url_, mydata, show_page, false);
 			}
 		}
-
+		$('#export_show').html(' ');
 	})
 	//最大规格
 	$('input[name="specMax"]').keyup(function() {
@@ -155,7 +156,6 @@ $(function() {
 				}
 			}
 		}
-
 	})
 	//加载更多
 	$('.jzm-center').click(function() {
@@ -163,7 +163,6 @@ $(function() {
 		getdata(url_, mydata, show_page, true);
 	})
 	/**
-	 * 
 	 * @param {Object} url_	请求地址
 	 * @param {Object} mydata	请求参数
 	 * @param {Object} show_page	呈现位置
@@ -177,13 +176,17 @@ $(function() {
 			data: mydata,
 			async: true,
 			success: function(result) {
-				console.log(result)
 				if(result.errorCode == 0) {
 					var data = result.data;
 					$.each(data, function(i) {
 						data[i]['comment'] = data[i]['comment'] == null ? '' : data[i]['comment'];
 						var price = data[i]['maxPrice'] == 0 ? '' : data[i]['maxPrice'] == data[i]['maxPrice'] ? data[i]['maxPrice'] : data[i]['maxPrice'] + '-' + data[i]['maxPrice'];
 						var priceOut = data[i]['maxPrice'] == 0 ? '' : data[i]['maxPrice'] == data[i]['maxPrice'] ? data[i]['maxPrice'] : data[i]['maxPrice'] + '-' + data[i]['maxPrice'];
+						//省内最小价格
+						var minPrice = data[i]['minPrice'] == 0 ? '' : data[i]['minPrice'] == data[i]['minPrice'] ? data[i]['minPrice'] : data[i]['minPrice'] + '-' + data[i]['minPrice'];
+						//省外最小价格
+						var minPriceOut = data[i]['minPrice'] == 0 ? '' : data[i]['minPrice'] == data[i]['minPrice'] ? data[i]['minPrice'] : data[i]['minPrice'] + '-' + data[i]['minPrice'];
+
 						var marketPrice = data[i]['marketPrice'] == 0 ? '' : data[i]['marketPrice'] + '';
 						var specs = Number(data[i]['specMax']) == 0 ? data[i]['spec'] + data[i]['specMin'] : data[i]['spec'] + data[i]['specMin'] + '-' + data[i]['specMax'];
 						var numOut = data[i]['numOut'] == 0 ? '' : data[i]['numOut'];
@@ -196,9 +199,9 @@ $(function() {
 							'<li class="sx-jg">' +
 							'<div class="jg-li">' + offer + '</div>' +
 							'<div class="jg-li"><a target="_blank" href="seeding_details.html?sdName=' + data[i]['sdName'] + '&spec=' + data[i]['spec'] + '&specMin=' + data[i]['specMin'] + '&specMax=' + data[i]['specMax'] + '&isall=2">' +
-							'' + price + '</a></div>' +
+							'' + minPrice + '-' + price + '</a></div>' +
 							'<div class="jg-li"><a target="_blank" href="seeding_details.html?sdName=' + data[i]['sdName'] + '&spec=' + data[i]['spec'] + '&specMin=' + data[i]['specMin'] + '&specMax=' + data[i]['specMax'] + '&isall=3">' +
-							'' + priceOut + '</a></div>' +
+							'' + minPriceOut + '-' + priceOut + '</a></div>' +
 							'<div class="jg-li">' + marketPrice + '</div>' +
 							'</li>' +
 							'<li class="sx-sl">' +
@@ -231,6 +234,9 @@ $(function() {
 			alert('请求正在执行中')
 			return 0;
 		}
+		//显示正在加载
+		$(".t_div").show()
+		
 		var mydatax = {};
 		//条件筛选
 		mydata.keyWord == undefined ? '' : mydatax.keyWord = mydata.keyWord;
@@ -253,11 +259,15 @@ $(function() {
 				}
 				//更新状态 表可以重新执行
 				isexport = true;
+				//隐藏正在加载
+				$(".t_div").hide()
 			},
 			error: function(e) {
 				console.log(e.status)
 				//更新状态 表可以重新执行
 				isexport = true;
+				//隐藏正在加载
+				$(".t_div").hide()
 			}
 		});
 

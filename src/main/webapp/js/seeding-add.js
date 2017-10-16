@@ -13,8 +13,8 @@ $(function(){
 				if(result.errorCode==0){
 					window.location.href="Seeding-information/gongxu-information.html";
 				}else{
-					alert(result.msg)
-					console.log(result)
+					alert(result.msg);
+					console.log(result);
 				}
 			},
 			error:function(e){

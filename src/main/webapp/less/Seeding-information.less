@@ -674,9 +674,11 @@ section {
                                         td {
                                             cursor: pointer;
                                             word-break: break-word;
-                                            a{
+                                            padding: 0 5px;
+                                            box-sizing: border-box;
+                                            a {
                                                 color: #555;
-                                                &:hover{
+                                                &:hover {
                                                     color: red;
                                                 }
                                             }
@@ -709,20 +711,20 @@ section {
                         width: 100%;
                         height: 40px;
                         border-bottom: 1px dashed #4CD242;
-                        .gx-title-one{
+                        .gx-title-one {
                             float: left;
                             margin-left: 20px;
                             line-height: 41px;
-                            span{
+                            span {
                                 margin: 0 5px;
                                 cursor: pointer;
                                 padding: 4px 10px;
-                                box-sizing: border-box;f
-                                &:hover{
+                                box-sizing: border-box;
+                                f &:hover {
                                     color: #1F9952;
                                 }
                             }
-                            .gx-title-oneSpan{
+                            .gx-title-oneSpan {
                                 border: 1px solid #1F9952;
                                 color: #1F9952;
                                 border-radius: 2px;
@@ -948,7 +950,7 @@ section {
             .jzmore {
                 width: 100%;
                 height: 60px;
-                margin-top: 100px;
+                margin-top: 60px;
                 margin-bottom: 20px;
                 .jzm-box {
                     width: 60%;
@@ -956,19 +958,19 @@ section {
                     margin: 0 auto;
                     .jzm-aisde {
                         width: 28%;
-                        height: 60px;
+                        height: 40px;
                         float: left;
                         ul li {
                             width: 100%;
                         }
                         ul li:first-child {
-                            height: 24px;
+                            height: 21px;
                             border-bottom: 1px solid #4CD242;
                         }
                     }
                     .jzm-center {
                         width: 250px;
-                        height: 46px;
+                        height: 40px;
                         float: left;
                         border: 1px solid #4CD242;
                         cursor: pointer;
@@ -976,7 +978,7 @@ section {
                         margin-right: 2%;
                         span {
                             display: block;
-                            line-height: 46px;
+                            line-height: 40px;
                             text-align: center;
                             color: #adadad;
                             font-size: 24px;
@@ -1001,15 +1003,18 @@ section {
                 width: 100%;
                 height: 30px;
                 .Siy-cloose {
-                    width: 30px;
-                    height: 30px;
+                    width: 50px;
+                    height: 50px;
                     float: right;
                     cursor: pointer;
+                    border-radius:0 0 0 5px;
+                    //filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99F8F8FF,endColorstr=#99F8F8FF);
+                    background-color: rgba(0,0,0,0.8);
                     i {
                         display: block;
                         text-align: center;
-                        line-height: 30px;
-                        font-size: 20px;
+                        line-height: 50px;
+                        font-size: 30px;
                         color: white;
                     }
                 }
@@ -1084,12 +1089,12 @@ section {
                                         padding-left: 10px;
                                         border-radius: 4px;
                                     }
-                                    .fi-right-radio{
+                                    .fi-right-radio {
                                         width: 150px;
                                         font-size: 14px;
                                         color: #555;
                                         margin-right: 5px;
-                                        input{
+                                        input {
                                             vertical-align: middle;
                                             margin-top: -3px;
                                             width: 13px;
@@ -1188,4 +1193,62 @@ section {
             }
         }
     }
+}
+
+.t_div {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    display: none;
+}
+
+.div {
+    margin: auto;
+    width: 500px;
+    height: 250px;
+    background: rgba(235, 235, 235, 0.6);
+    border-radius: 20px;
+    position: absolute;
+    left: 50%;
+    margin-left: -250px;
+    top: 50%;
+    margin-top: -125px;
+}
+
+.div_1 {
+    width: 50px;
+    height: 50px;
+    margin: auto;
+}
+
+.img {
+    width: 50px;
+    height: 50px;
+    margin-top: 80px;
+    position: relative;
+}
+
+.div_2 {
+    width: 500px;
+    height: 80px;
+    margin: auto;
+    line-height: 80px;
+}
+
+.div_2 p {
+    width: 500px;
+    height: 80px;
+}
+
+.fnt {
+    width: 500px;
+    height: 80px;
+    font-size: 18px;
+    color: red;
+    position: absolute;
+    margin-top: 80px;
+    margin-left: -250px;
+    font-weight: bold;
 }
