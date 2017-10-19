@@ -31,7 +31,7 @@ public class FileServicelmpl implements FileService {
     //实例化获取操作系统类型工具类
     private GetOsNameUtil getOsNameUtil = GetOsNameUtil.getInstance();
     //实例化日志管理
-    private Logger logger = LoggerFactory.getLogger(FileServicelmpl.class);
+    private final Logger logger = LoggerFactory.getLogger(FileServicelmpl.class);
 
     /**
      * 文件上传业务处理方法

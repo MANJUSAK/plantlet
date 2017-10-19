@@ -40,7 +40,7 @@ public class SeedlingOutputServicelmpl implements SeedlingOutputService {
     @Resource
     private FileDao fileDao;
     //实例化日志管理工具类
-    private Logger logger = LoggerFactory.getLogger(SeedlingOutputServicelmpl.class);
+    private final Logger logger = LoggerFactory.getLogger(SeedlingOutputServicelmpl.class);
     //实例化导出excel工具类
     private ExcelSeedlingUtil excelSeedlingUtil = ExcelSeedlingUtil.getInstance();
     //实例化获取服务器域名工具类

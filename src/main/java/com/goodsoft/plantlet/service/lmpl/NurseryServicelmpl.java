@@ -44,7 +44,7 @@ public class NurseryServicelmpl implements NurseryService {
     @Resource
     ServicelmplGetFileSupp getFileSupp;
     //实例化日志管理工具类
-    private Logger logger = LoggerFactory.getLogger(SeedlingServicelmpl.class);
+    private final Logger logger = LoggerFactory.getLogger(SeedlingServicelmpl.class);
     //实例化UUID工具类
     private UUIDUtil uuid = UUIDUtil.getInstance();
     //实例化excel工具类

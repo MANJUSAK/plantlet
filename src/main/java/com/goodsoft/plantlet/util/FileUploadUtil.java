@@ -30,7 +30,7 @@ public class FileUploadUtil {
      * @param savePath 文件保存截取服务器根目录。
      * @return 文件保存相对路径
      */
-    public List fileUpload(MultipartFile[] files, String fileType, String savePath) throws IOException {
+    public List<String> fileUpload(MultipartFile[] files, String fileType, String savePath) throws IOException {
         StringBuilder sb = new StringBuilder();
         sb.append(savePath);
         //自定义文件保存路径 start

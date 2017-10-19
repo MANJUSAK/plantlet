@@ -4,6 +4,11 @@
 <!--@author 严彬荣，version v1.0-->
 <!--文件管理mapper start-->
 <mapper namespace="com.goodsoft.plantlet.domain.dao.FileDao">
+    <!--使用mybatis二级缓存-->
+    <!--mybatis缓存-->
+    <!--<cache eviction="FIFO" flushInterval="60000" readOnly="false" size="1024"/>-->
+    <!--第三方缓存技术 ehcache-->
+    <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
     <!--文件查询结果映射 start-->
     <resultMap id="fileData" type="com.goodsoft.plantlet.domain.entity.file.FileData">
         <result property="path" column="path"/>

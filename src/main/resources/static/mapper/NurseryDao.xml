@@ -4,6 +4,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!--suppress ALL -->
 <mapper namespace="com.goodsoft.plantlet.domain.dao.NurseryDao">
+    <!--使用mybatis二级缓存-->
+    <!--mybatis缓存-->
+    <!--<cache eviction="FIFO" flushInterval="60000" readOnly="false" size="1024"/>-->
+    <!--第三方缓存技术 ehcache-->
+    <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
     <!--数据查询 start-->
     <!--省内苗圃数据主页显示结果映射 start-->
     <resultMap id="nurseryMap_index" type="com.goodsoft.plantlet.domain.entity.nursery.Nursery">
@@ -68,10 +73,10 @@
             <if test="spec !=null and spec != ''">
                 AND spec = #{spec}
             </if>
-            <if test="specMin !=null and specMin != ''">
+            <if test="specMin != null and specMin !=''">
                 AND spec_min &lt;= #{specMin}
             </if>
-            <if test="specMax !=null and specMax != ''">
+            <if test="specMax != null and specMax != ''">
                 AND spec_max &gt;= #{specMax}
             </if>
         </where>
@@ -107,10 +112,10 @@
             <if test="spec !=null and spec != ''">
                 AND spec = #{spec}
             </if>
-            <if test="specMin !=null and specMin != ''">
+            <if test="specMin != null and specMin !=''">
                 AND spec_min &lt;= #{specMin}
             </if>
-            <if test="specMax !=null and specMax != ''">
+            <if test="specMax != null and specMax != ''">
                 AND spec_max &gt;= #{specMax}
             </if>
         </where>
@@ -196,11 +201,11 @@
             <if test="spec != null and spec != ''">
                 AND spec = #{spec}
             </if>
-            <if test="specMin != null and specMin != ''">
-                AND spec_min &gt;= #{specMin}
+            <if test="specMin != null and specMin !=''">
+                AND spec_min &lt;= #{specMin}
             </if>
             <if test="specMax != null and specMax != ''">
-                AND spec_max &lt;= #{specMax}
+                AND spec_max &gt;= #{specMax}
             </if>
         </where>
         limit #{num},20;
@@ -234,11 +239,11 @@
             <if test="spec != null and spec != ''">
                 AND spec = #{spec}
             </if>
-            <if test="specMin != null and specMin != ''">
-                AND spec_min &gt;= #{specMin}
+            <if test="specMin != null and specMin !=''">
+                AND spec_min &lt;= #{specMin}
             </if>
             <if test="specMax != null and specMax != ''">
-                AND spec_max &lt;= #{specMax}
+                AND spec_max &gt;= #{specMax}
             </if>
         </where>
         ORDER BY nid DESC limit #{num},20;

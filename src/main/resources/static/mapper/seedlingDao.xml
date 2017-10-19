@@ -4,6 +4,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!--suppress ALL -->
 <mapper namespace="com.goodsoft.plantlet.domain.dao.SeedlingDao">
+    <!--使用mybatis二级缓存-->
+    <!--mybatis缓存-->
+    <!--<cache eviction="FIFO" flushInterval="60000" readOnly="false" size="1024"/>-->
+    <!--第三方缓存技术 ehcache-->
+    <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
     <!--数据查询sql start-->
     <!--查询苗木信息数据结果映射 start-->
     <resultMap id="seedlingInfoMap"
@@ -71,13 +76,14 @@
     <!--供需信息数据sql start-->
     <select id="querySeedlingSupplyDao" parameterType="com.goodsoft.plantlet.domain.entity.param.SupplyParam"
             resultMap="seedlingSupplyMap">
+        <bind name="_keyWord" value="'%'+keyWord+'%'"/>
         SELECT `id`,`seedling_name`,`seedling_type`,`spec`,
         `spec_min`,`spec_max`,`unit`,`quantity`,`price`,`s_type`,
         `contact`, `tel`,`seedling_add`,`seedling_comp`,`seedling_intro`
         FROM `gs_seedling_supply_info`
         <where>
             <if test="keyWord !=null and keyWord !=''">
-                AND seedling_name LIKE '%${keyWord}%'
+                AND seedling_name LIKE #{_keyWord}
             </if>
             <if test="tp != null and tp != ''">
                 AND seedling_type = #{tp}
@@ -228,11 +234,11 @@
             <if test="spec != null and spec != ''">
                 AND spec= #{spec}
             </if>
-            <if test="specMin != null and specMin != ''">
-                AND spec_min &gt;= #{specMin}
+            <if test="specMin != null and specMin !=''">
+                AND spec_min &lt;= #{specMin}
             </if>
             <if test="specMax != null and specMax != ''">
-                AND spec_max &lt;= #{specMax}
+                AND spec_max &gt;= #{specMax}
             </if>
             <if test="year != null and year != ''">
                 AND `year`= #{year}
@@ -252,7 +258,7 @@
         FROM
         gs_seedling_offer
         <where>
-            <if test="year !=0 and year !=''">
+            <if test="year != 0">
                 `year`=#{year}
             </if>
         </where>
@@ -312,10 +318,10 @@
         UPDATE `gs_nursery_province_info`
         <set>
             <if test="spec !=null and spec !=''">`spec` = #{spec},</if>
-            <if test="specMin !=null and specMin !=''">`spec_min` = #{specMin},</if>
-            <if test="specMax !=null and specMax !=''">`spec_max` = #{specMax},</if>
-            <if test="price !=null and price !=''">`price` = #{price},</if>
-            <if test="num !=null and num !=''">`quantity` = #{num}</if>
+            <if test="specMin != 0">`spec_min` = #{specMin},</if>
+            <if test="specMax != 0">`spec_max` = #{specMax},</if>
+            <if test="price != 0">`price` = #{price},</if>
+            <if test="num != 0">`quantity` = #{num}</if>
         </set>
         WHERE
         `plant_name`=#{sdName} and `nursery_name`=#{seedlingComp} and `spec` = #{spec} and `spec_min`=#{specMin} and

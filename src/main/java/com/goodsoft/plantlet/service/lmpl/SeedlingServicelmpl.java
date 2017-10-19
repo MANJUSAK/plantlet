@@ -50,7 +50,7 @@ public class SeedlingServicelmpl implements SeedlingService {
     @Resource
     private SeedlingServiceSupp serviceSupp;
     //实例化日志管理工具类
-    private Logger logger = Logger.getLogger(SeedlingServicelmpl.class);
+    private final Logger logger = Logger.getLogger(SeedlingServicelmpl.class);
     //实例化UUID工具类
     private UUIDUtil uuid = UUIDUtil.getInstance();
     //实例化excel工具类

@@ -4,6 +4,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!--suppress ALL -->
 <mapper namespace="com.goodsoft.plantlet.domain.dao.SeedlingOutputDao">
+    <!--使用mybatis二级缓存-->
+    <!--mybatis缓存-->
+    <!--<cache eviction="FIFO" flushInterval="60000" readOnly="false" size="1024"/>-->
+    <!--第三方缓存技术 ehcache-->
+    <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
     <!--苗木造价统计年月查询结果映射 start-->
     <resultMap id="seedlingOfferStatisticsMap"
                type="com.goodsoft.plantlet.domain.entity.seedlinginfo.SeedlingOfferStatistics">
@@ -36,7 +41,7 @@
         `April`,`May`,`June`,`July`,`August`,`September`,`October`,`November`,`December`
         FROM `gs_seedling_offer_view`
         <where>
-            <if test="year != null and year != ''">
+            <if test="year != 0">
                 AND `year` = #{year}
             </if>
         </where>
@@ -61,10 +66,10 @@
         SELECT `id`,`seedling_name`,`spec`,`spec_min`,`spec_max`,`unit`,`seedling_offer`,`comment`,`year`,`month`
         FROM `gs_seedling_offer`
         <where>
-            <if test="year != null and year != ''">
+            <if test="year != 0">
                 AND `year` = #{year}
             </if>
-            <if test="month != null and month != ''">
+            <if test="month != 0">
                 AND `month` = #{month}
             </if>
         </where>

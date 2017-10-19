@@ -27,7 +27,7 @@ public class UserServcielmpl implements UserService {
     @Resource
     private UserDao dao;
     //实例化日志管理类
-    private Logger logger = LoggerFactory.getLogger(UserServcielmpl.class);
+    private final Logger logger = LoggerFactory.getLogger(UserServcielmpl.class);
     //实例化UUID工具类
     private UUIDUtil uuid = UUIDUtil.getInstance();
 

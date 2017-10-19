@@ -12,7 +12,7 @@ public class SupplyParam implements java.io.Serializable {
     private static final long serialVersionUID = -1022682616976182762L;
     private String keyWord;//关键字
     private String tp;//种类
-    private int stp;//供需类型（1为供应，2为需求）
+    private String stp;//供需类型（1为供应，2为需求）
     private String specMin;//规格范围第一位
     private String specMax;//规格范围第二位
     private String sdAdd;//供货地址
@@ -34,11 +34,11 @@ public class SupplyParam implements java.io.Serializable {
         this.tp = tp;
     }
 
-    public int getStp() {
+    public String getStp() {
         return stp;
     }
 
-    public void setStp(int stp) {
+    public void setStp(String stp) {
         this.stp = stp;
     }
 
@@ -79,10 +79,10 @@ public class SupplyParam implements java.io.Serializable {
         if (this == o) return true;
         if (!(o instanceof SupplyParam)) return false;
         SupplyParam that = (SupplyParam) o;
-        return stp == that.stp &&
-                num == that.num &&
+        return num == that.num &&
                 Objects.equals(keyWord, that.keyWord) &&
                 Objects.equals(tp, that.tp) &&
+                Objects.equals(stp, that.stp) &&
                 Objects.equals(specMin, that.specMin) &&
                 Objects.equals(specMax, that.specMax) &&
                 Objects.equals(sdAdd, that.sdAdd);

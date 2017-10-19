@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletRequest;
 @Aspect
 public class ControllerAop {
 
-    private Logger logger = LoggerFactory.getLogger(ControllerAop.class);
+    private final Logger logger = LoggerFactory.getLogger(ControllerAop.class);
 
     //匹配com.goodsoft.plantlet.controller包及其子包下的所有类的所有方法
     @Pointcut("execution(* com.goodsoft.plantlet.controller.*..*(..))")
