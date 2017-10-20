@@ -15,6 +15,17 @@ public class User implements java.io.Serializable {
     private String passWord;//密码
     private long tel;//手机号
 
+    public User() {
+        super();
+    }
+
+    public User(String uid, String userName, String passWord, long tel) {
+        this.uid = uid;
+        this.userName = userName;
+        this.passWord = passWord;
+        this.tel = tel;
+    }
+
     public String getUid() {
         return uid;
     }

@@ -1,6 +1,8 @@
 package com.goodsoft.plantlet.config.mybatis;
 
 import com.alibaba.druid.pool.DruidDataSource;
+import com.github.pagehelper.PageInterceptor;
+import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.type.JdbcType;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.springframework.context.ApplicationContext;
@@ -9,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.annotation.Resource;
+import java.util.Properties;
 
 /**
  * function mybatis配置属性
@@ -54,10 +57,21 @@ public class MybatisConfig {
         sqlSessionFactory.setDataSource(druidDataSource);
         sqlSessionFactory.setConfiguration(configuration);
         sqlSessionFactory.setMapperLocations(applicationContext.getResources("classpath*:static/mapper/*.xml"));
+        //分页插件
+        PageInterceptor pageHelper = new PageInterceptor();
+        Properties properties = new Properties();
+        properties.setProperty("offsetAsPageNum", "true");
+        properties.setProperty("rowBoundsWithCount", "true");
+        properties.setProperty("reasonable", "true");
+        properties.setProperty("helperDialect", "mysql");
+        properties.setProperty("pageSizeZero", "true");
+        pageHelper.setProperties(properties);
+        sqlSessionFactory.setPlugins(new Interceptor[]{pageHelper});
         //设置映射对象别名
         /*sqlSessionFactory.setTypeAliasesPackage("com.goodsoft.plantlet.domain.entity");*/
         //设置数据库厂商标识
        /* sqlSessionFactory.setDatabaseIdProvider();*/
         return sqlSessionFactory;
     }
+
 }
