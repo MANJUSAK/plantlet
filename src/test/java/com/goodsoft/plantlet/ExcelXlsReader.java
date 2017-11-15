@@ -53,7 +53,7 @@ public class ExcelXlsReader implements HSSFListener {
     private FormatTrackingHSSFListener formatListener;
 
     // 表索引
-    private int sheetIndex = -1;
+    private int sheetIndex = 0;
 
     private BoundSheetRecord[] orderedBSRs;
 
@@ -76,12 +76,6 @@ public class ExcelXlsReader implements HSSFListener {
 
     @SuppressWarnings("unused")
     private String sheetName;
-
-    private IExcelRowReader rowReader;
-
-    public void setRowReader(IExcelRowReader rowReader) {
-        this.rowReader = rowReader;
-    }
 
     /**
      * 遍历excel下所有的sheet
@@ -123,8 +117,6 @@ public class ExcelXlsReader implements HSSFListener {
                     if (workbookBuildingListener != null && stubWorkbook == null) {
                         stubWorkbook = workbookBuildingListener.getStubHSSFWorkbook();
                     }
-
-                    sheetIndex++;
                     if (orderedBSRs == null) {
                         orderedBSRs = BoundSheetRecord.orderByBofPosition(boundSheetRecords);
                     }
@@ -212,12 +204,10 @@ public class ExcelXlsReader implements HSSFListener {
             default:
                 break;
         }
-
         // 遇到新行的操作
         if (thisRow != -1 && thisRow != lastRowNumber) {
             lastColumnNumber = -1;
         }
-
         // 空值的操作
         if (record instanceof MissingCellDummyRecord) {
             MissingCellDummyRecord mc = (MissingCellDummyRecord) record;
@@ -241,21 +231,26 @@ public class ExcelXlsReader implements HSSFListener {
                 }
             }
             lastColumnNumber = -1;
-
             // 每行结束时， 调用getRows() 方法
-            rowReader.getRows(sheetIndex, curRow, rowlist);
+           /* rowReader.getRows(sheetIndex, curRow, rowlist);*/
+            getRows(rowlist);
             // 清空容器
             rowlist.clear();
         }
     }
 
+    private void getRows(List list) {
+        System.out.println(list);
+
+    }
+
     public static void main(String[] args) {
-        IExcelRowReader rowReader = new ExcelRowReader();
+        ExcelXlsReader excel = new ExcelXlsReader();
         try {
-            // ExcelReaderUtil.readExcel(rowReader,
-            // "E://2016-07-04-011940a.xls");
             System.out.println("**********************************************");
-            ExcelReaderUtil.readExcel(rowReader, "C:\\Users\\ASUS\\Desktop\\乔木类.xlsx");
+            for (int i = 0; i < 2; ++i) {
+                excel.process("C:\\Users\\ASUS\\Desktop\\就医信息 .xls");
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

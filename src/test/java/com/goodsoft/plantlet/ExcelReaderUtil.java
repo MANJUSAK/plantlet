@@ -26,7 +26,7 @@ public class ExcelReaderUtil {
         // 处理excel2003文件
         if (fileName.endsWith(EXCEL03_EXTENSION)) {
             ExcelXlsReader exceXls = new ExcelXlsReader();
-            exceXls.setRowReader(reader);
+            /*exceXls.setRowReader(reader);*/
             exceXls.process(fileName);
             // 处理excel2007文件
         } else if (fileName.endsWith(EXCEL07_EXTENSION)) {

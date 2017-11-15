@@ -94,6 +94,7 @@ public class ReadExcelOutUtil extends DefaultHandler {
             parser.parse(sheetSource);
             sheet.close();
         }
+        pkg.close();
     }
 
     /**
@@ -123,7 +124,7 @@ public class ReadExcelOutUtil extends DefaultHandler {
         return parser;
     }
 
-    public void startElement(String uri, String localName, String name,Attributes attributes) throws SAXException {
+    public void startElement(String uri, String localName, String name, Attributes attributes) throws SAXException {
         // c => 单元格
         if ("c".equals(name)) {
             // 如果下一个元素是 SST 的索引，则将nextIsString标记为true
@@ -228,19 +229,19 @@ public class ReadExcelOutUtil extends DefaultHandler {
         for (int i = 0, len = rowList.size(); i < len; ++i) {
             this.str = rowList.get(i);
             switch (i) {
-                case 1:
+                case 0:
                     sd.setId(this.uuid.getUUID().toString());
                     break;
-                case 2:
+                case 1:
                     sd.setProvince(this.str);
                     break;
-                case 3:
+                case 2:
                     sd.setCompany(this.str);
                     break;
-                case 4:
+                case 3:
                     sd.setAddress(this.str);
                     break;
-                case 5:
+                case 4:
                     try {
                         if (this.str != "") {
                             long tel = Long.parseLong(this.str);
@@ -249,19 +250,19 @@ public class ReadExcelOutUtil extends DefaultHandler {
                     } catch (Exception e) {
                     }
                     break;
-                case 6:
+                case 5:
                     sd.setFax(this.str);
                     break;
-                case 7:
+                case 6:
                     sd.setWebSite(this.str);
                     break;
-                case 8:
+                case 7:
                     sd.setEmail(this.str);
                     break;
-                case 9:
+                case 8:
                     sd.setSeedlingName(this.str);
                     break;
-                case 10:
+                case 9:
                     if (this.str != "") {
                         try {
                             AnalysisParam var = this.analysisUtil.getSpecAnalysis(this.str);
@@ -275,10 +276,10 @@ public class ReadExcelOutUtil extends DefaultHandler {
                         sd.setSpec("");
                     }
                     break;
-                case 11:
+                case 10:
                     sd.setUnit(this.str);
                     break;
-                case 12:
+                case 11:
                     try {
                         if (this.str != "") {
                             int num = Integer.parseInt(this.str);
@@ -287,7 +288,7 @@ public class ReadExcelOutUtil extends DefaultHandler {
                     } catch (Exception e) {
                     }
                     break;
-                case 13:
+                case 12:
                     try {
                         if (this.str != "") {
                             double price = Double.parseDouble(this.str);
@@ -296,10 +297,10 @@ public class ReadExcelOutUtil extends DefaultHandler {
                     } catch (Exception e) {
                     }
                     break;
-                case 14:
+                case 13:
                     sd.setTypes(this.str);
                     break;
-                case 15:
+                case 14:
                     try {
                         if (this.str != "") {
                             Date data = HSSFDateUtil.getJavaDate(Double.parseDouble(this.str));
@@ -311,7 +312,7 @@ public class ReadExcelOutUtil extends DefaultHandler {
                         sd.setDate(this.str);
                     }
                     break;
-                case 16:
+                case 15:
                     sd.setComment(this.str);
                     break;
                 default:

@@ -88,6 +88,7 @@ public class ReadExcelOfferUtil extends DefaultHandler {
             parser.parse(sheetSource);
             sheet.close();
         }
+        pkg.close();
     }
 
     /**

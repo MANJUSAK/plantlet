@@ -30,6 +30,10 @@ public class NurseryOut implements java.io.Serializable {
     private int num;//数量
     private String fileId;//文件编号
 
+    public NurseryOut() {
+        this.fileId = "";
+        this.city = "";
+    }
 
     public String getId() {
         return id;
