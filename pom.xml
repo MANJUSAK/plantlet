@@ -75,17 +75,17 @@
             <version>1.1.4</version>
         </dependency>
         <!--jdk1.7-->
-        <!--<dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.43</version>
-        </dependency>-->
-        <!--jdk1.8-->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>6.0.5</version>
+            <version>5.1.43</version>
         </dependency>
+        <!--jdk1.8-->
+       <!-- <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>6.0.5</version>
+        </dependency>-->
         <!--mysql end-->
         <!-- excel组件支持 start-->
         <!--泛型jar start-->

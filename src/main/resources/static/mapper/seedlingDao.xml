@@ -76,13 +76,13 @@
     <!--供需信息数据sql start-->
     <select id="querySeedlingSupplyDao" parameterType="com.goodsoft.plantlet.domain.entity.param.SupplyParam"
             resultMap="seedlingSupplyMap">
-        <bind name="_keyWord" value="'%'+keyWord+'%'"/>
         SELECT `id`,`seedling_name`,`seedling_type`,`spec`,
         `spec_min`,`spec_max`,`unit`,`quantity`,`price`,`s_type`,
         `contact`, `tel`,`seedling_add`,`seedling_comp`,`seedling_intro`
         FROM `gs_seedling_supply_info`
         <where>
             <if test="keyWord !=null and keyWord !=''">
+                <bind name="_keyWord" value="'%'+keyWord+'%'"/>
                 AND seedling_name LIKE #{_keyWord}
             </if>
             <if test="tp != null and tp != ''">
@@ -266,7 +266,7 @@
     <!--查询苗木造价最新年月份数据sql end-->
     <!--查询苗木信息统计数据所有植物名称sql start-->
     <select id="querySeedlingAllNameDao" resultType="java.lang.String">
-   SELECT DISTINCT `plant_name` FROM gs_nursery_province_info
+    SELECT DISTINCT `plant_name` FROM gs_nursery_province_info
     </select>
     <!--查询苗木信息统计数据所有植物名称sql end-->
     <!--数据查询sql end-->
@@ -284,12 +284,12 @@
     <!--苗木信息数据录入sql end-->
     <!--供需信息数据录入sql start-->
     <insert id="addSeedlingSupplyDao" parameterType="com.goodsoft.plantlet.domain.entity.seedlinginfo.SupplyInfo">
-    INSERT INTO `gs_seedling_supply_info`
-    (`id`,`seedling_name`,`seedling_type`,`spec`,`spec_min`,`spec_max`,`unit`,`quantity`,
-    `contact`,`tel`,`seedling_add`,`seedling_comp`,`seedling_intro`,`price`,`s_type`)
-    VALUES
-    (#{id},#{sdName},#{sdType},#{spec},#{specMin},#{specMax},
-    #{unit},#{num},#{contact},#{tel},#{sdAdd},#{seedlingComp},#{seedlingIntro},#{price},#{type});
+        INSERT INTO `gs_seedling_supply_info`
+        (`id`,`seedling_name`,`seedling_type`,`spec`,`spec_min`,`spec_max`,`unit`,`quantity`,
+        `contact`,`tel`,`seedling_add`,`seedling_comp`,`seedling_intro`,`price`,`s_type`)
+        VALUES
+        (#{id},#{sdName},#{sdType},#{spec},#{specMin},#{specMax},
+        #{unit},#{num},#{contact},#{tel},#{sdAdd},#{seedlingComp},#{seedlingIntro},#{price},#{type});
     </insert>
     <!--供需信息数据录入sql end-->
     <!--苗木造价单条数据添加sql start-->
