@@ -123,7 +123,7 @@ public class WriteSupplyPdfUtil {
                 if (image != null) {
                     // 加入图片
                     try {
-                        Image jpg = Image.getInstance(data.get(i).getDirectory());
+                        Image jpg = Image.getInstance(image);
                         jpg.scaleAbsolute(200, 150);// 直接设定显示尺寸
                         jpg.setAbsolutePosition(338, 618);//设置图片位置
                         doc.add(jpg);

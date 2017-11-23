@@ -88,7 +88,7 @@ public class NurseryOut implements java.io.Serializable {
     }
 
     public void setSpec(String spec) {
-        this.spec = spec;
+        this.spec = spec == null ? " " : spec.trim();
     }
 
     public double getSpecMin() {

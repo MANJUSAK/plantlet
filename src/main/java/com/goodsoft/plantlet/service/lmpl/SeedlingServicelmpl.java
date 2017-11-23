@@ -445,10 +445,8 @@ public class SeedlingServicelmpl implements SeedlingService {
             //判断读取数据是否满足正确格式数据，是存库，否删除原始文件
             if (len > 0) {
                 this.dao.addSeedlingOfferDao(sdData);
-                sdData.clear();
                 return new Status(StatusEnum.SUCCESS.getCODE(), StatusEnum.SUCCESS.getEXPLAIN());
             } else {
-                sdData.clear();
                 //删除硬盘上的文件
                 this.deleteFile.deleteFile(file);
                 //删除数据库文件数据
@@ -456,7 +454,6 @@ public class SeedlingServicelmpl implements SeedlingService {
                 return new Status(StatusEnum.EXCEL_NO_DATA.getCODE(), StatusEnum.EXCEL_NO_DATA.getEXPLAIN());
             }
         } catch (Exception e) {
-            this.readExcel.list.clear();
             //代码异常删除原始文件，避免数据冗余
             try {
                 //删除硬盘上的文件

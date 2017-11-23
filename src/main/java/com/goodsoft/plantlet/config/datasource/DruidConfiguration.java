@@ -17,7 +17,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class DruidConfiguration {
     /**
-     * 注册一个StatViewServlet
+     * 注册一个StartViewServlet
      *
      * @return servletRegistrationBean（数据源监控配置）
      */

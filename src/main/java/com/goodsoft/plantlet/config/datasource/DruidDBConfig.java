@@ -102,7 +102,7 @@ public class DruidDBConfig {
         datasource.setRemoveAbandonedTimeout(this.removeAbandonedTimeout);
         datasource.setLogAbandoned(this.logAbandoned);
         datasource.setConnectionProperties(connectionProperties);
-        //添加druid过滤器 设置运行批量更新
+        //添加druid过滤器 设置允许批量更新
         List filter = Arrays.asList(wallFilter);
         datasource.setProxyFilters(filter);
         try {

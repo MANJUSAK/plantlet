@@ -81,6 +81,8 @@ public class ReadExcelOutUtil extends DefaultHandler {
      * @throws Exception
      */
     public void process(String filename) throws Exception {
+        //由于容器为全局容器，每次封装excel数据时都清空一次容器里的数据。
+        this.list.clear();
         OPCPackage pkg = OPCPackage.open(filename);
         XSSFReader r = new XSSFReader(pkg);
         SharedStringsTable sst = r.getSharedStringsTable();
